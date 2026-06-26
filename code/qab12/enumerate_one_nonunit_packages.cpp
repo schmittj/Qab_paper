@@ -119,7 +119,10 @@ int main(int argc,char**argv){
                 for(const Core* cp:active){const Core& c=*cp;uint64_t d=(uint64_t)c.t*e;uint32_t nlim=(uint32_t)std::min<uint64_t>(Dcap/c.r,(uint64_t)C*d/c.r);if(n>nlim)continue;++state_tests[tid];bool ok=true;std::array<uint32_t,3> sigma{};
                     for(size_t j=0;j<uf.size();++j){uint32_t lam=c.lambda[j],kap=kappas[j];if(lam>kap){ok=false;break;}uint64_t num=(uint64_t)b*lam;if(num%kap){ok=false;break;}uint32_t w=(uint32_t)(num/kap);if(w<1||w>b||w>e){ok=false;break;}uint32_t p=uf[j].p;if(e%p!=w%p && e%p!=(w+p-2)%p){ok=false;break;}uint64_t sig=(uint64_t)c.t*w;if(sig>UINT32_MAX){ok=false;break;}sigma[j]=(uint32_t)sig;}
                     if(!ok)continue;
-                    for(uint32_t q:c.good_defect)if(a%q==0||b%q==0||n%q==0){ok=false;break;}if(!ok)continue;
+                    for(uint32_t q:c.good_defect){
+                        if(a%q==0||b%q==0||n%q==0){ok=false;break;}
+                    }
+                    if(!ok)continue;
                     for(uint32_t q:c.endpoint_defect){uint32_t kap=valuation(a,q);if(kap<q||((uint64_t)e*kap)%((uint64_t)q*b)!=0){ok=false;break;}}if(!ok)continue;
                     ++state_kept[tid];Record rec;rec.U=U;rec.r=c.r;rec.t=c.t;rec.e=e;rec.d=(uint32_t)d;rec.a=a;rec.b=b;rec.n=n;rec.sigma_len=(uint8_t)uf.size();rec.sigma=sigma;local[tid].push_back(rec);
                 }

@@ -40,7 +40,9 @@ static void choices_rec(const std::vector<PE>&pf,size_t i,uint32_t endpoint,uint
  if(!deficient && (e%p==0 || e%p==(p-2)%p))choices_rec(pf,i+1,endpoint,other,e,c,leading,coeff,sig,len,out);
  // Put p into the endpoint coefficient. lambda is the exponent in the primitive factor coefficient.
  for(uint32_t lambda=1;lambda<=kappa;++lambda){
-   if(((uint64_t)c.t*lambda)%c.r)continue;uint32_t A=(uint32_t)(((uint64_t)c.t*lambda)/c.r);if(A==0||A>kappa)continue;
+   if(((uint64_t)c.t*lambda)%c.r)continue;
+   uint32_t A=(uint32_t)(((uint64_t)c.t*lambda)/c.r);
+   if(A==0||A>kappa)continue;
    uint64_t num=(uint64_t)other*lambda;if(num%kappa)continue;uint32_t w=(uint32_t)(num/kappa);if(w<1||w>other||w>e)continue;
    if((e-w)%p!=0 && (e-w)%p!=(p-2)%p)continue;
    if(deficient){if(p>7||kappa<p||((uint64_t)e*kappa)%((uint64_t)p*other))continue;}

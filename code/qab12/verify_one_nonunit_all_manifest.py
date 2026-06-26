@@ -43,11 +43,13 @@ def parse_log(path: Path) -> dict[str, int]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--root', type=Path, default=Path('.'))
-    ap.add_argument('--manifest', type=Path, default=Path('data/one_nonunit_all_manifest.json'))
+    ap.add_argument('--data-dir', type=Path, default=Path('data/qab12'))
+    ap.add_argument('--manifest', type=Path, default=Path('data/qab12/one_nonunit_all_manifest.json'))
     args = ap.parse_args()
     root = args.root
-    data = root / 'data'
-    manifest = json.loads((root / args.manifest).read_text())
+    data = args.data_dir if args.data_dir.is_absolute() else root / args.data_dir
+    manifest_path = args.manifest if args.manifest.is_absolute() else root / args.manifest
+    manifest = json.loads(manifest_path.read_text())
     if manifest.get('schema') != 'qab12-one-nonunit-all-v1':
         raise RuntimeError('bad manifest schema')
     aggregate = {k: 0 for k in COUNTER_KEYS}
@@ -84,7 +86,7 @@ def main() -> int:
     def family_hash(paths):
         h = hashlib.sha256()
         for p in paths:
-            h.update(p.read_bytes())
+            h.update(p.name.encode() + b'\0' + p.read_bytes() + b'\0')
         return h.hexdigest()
     got_pkg = family_hash(pkg_paths)
     got_log = family_hash(log_paths)

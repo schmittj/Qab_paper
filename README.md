@@ -1,6 +1,6 @@
 # Qab12 review bundle
 
-This bundle is a reviewable progress package for the `Q_{a,b}` reciprocal-package project.
+This bundle is a reviewable proof package for the `Q_{a,b}` reciprocal-package project.
 
 ## Current proof status
 
@@ -23,7 +23,8 @@ modular gcd certificates at `p = 1009`.
 - `code/qab12/`: current Qab12 source code and verification scripts.
 - `data/qab12/`: deterministic outputs and proof artifacts from the current work round.
 - `archive/Qab9_upper_bundle/`: audited upper-range code/data retained for self-containment.
-- `docs/audits/`: independent audit reports supplied by the user.
+- `Qab12_audit_report.md`, `Qab13_audit.md`: current-stage external audit reports.
+- `docs/audits/`: earlier independent audit reports supplied by the user.
 - `SHA256SUMS`: hashes of every file in this bundle, excluding itself.
 
 ## Quick verification commands
@@ -35,6 +36,11 @@ make q12-verify-light
 make q12-verify-modular     # requires python-flint
 make q12-verify-upper       # verifies archived upper rows
 ```
+
+The C++ tools are intended for GCC or Clang with OpenMP and GNU `__int128`
+support; the default Makefile uses `-std=gnu++20`. Optional Python
+dependencies for the modular and irreducibility replays are pinned in
+`requirements-optional.txt`.
 
 The corrected residual branch can be regenerated with
 

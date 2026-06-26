@@ -8,8 +8,8 @@
     "sha256": "ae6f6c87c30f499ab13819baf51d863a77bc2346cd4460d70599937a690f9099"
   },
   "Makefile": {
-    "bytes": 3206,
-    "sha256": "95059f7f3a9f197edbc96fa2722d93a9be7872d225ef8ec6eb6a5c79ab66a681"
+    "bytes": 3252,
+    "sha256": "78a0a69478b77f5dd7f56d840e595413bf668a676ed0150646837e0dfbba0eaa"
   },
   "Qab12.pdf": {
     "bytes": 762115,
@@ -23,13 +23,17 @@
     "bytes": 15650,
     "sha256": "40fdde5249c29e4205ca62447c8774b0e1211af5000b771ad5979545c2047661"
   },
+  "Qab13_audit.md": {
+    "bytes": 21135,
+    "sha256": "9a7edd13d69b2699edc1633ab649afa886a8c20a456d2994c50cc5a0ab373e66"
+  },
   "README.md": {
-    "bytes": 1663,
-    "sha256": "29afa3f48b81e306513e1c25204548b1780ca9d33110a948f9ae1ae103078c3a"
+    "bytes": 1993,
+    "sha256": "d7b7184454153cad06d62106699d492b5e9606a8200a11317eb2a3af8f0b0053"
   },
   "SHA256SUMS": {
-    "bytes": 165795,
-    "sha256": "dd2a04a4872163f44aed4f7b5dae0975a08eb9796eee46fba43f769005ef3bda"
+    "bytes": 165876,
+    "sha256": "d439c81143740df06af521dc12bca1ba425dbd6f8d7820dc83cb252bfe611057"
   },
   "archive/Qab10.pdf": {
     "bytes": 747348,
@@ -192,8 +196,8 @@
     "sha256": "8729270a287968d3dd65693c3e5441c48af31ab31560a773f859a767c636c2d5"
   },
   "code/qab12/build_one_nonunit_all_manifest.py": {
-    "bytes": 3387,
-    "sha256": "a3c4e5119159b806f86634431233efdf490b12db9d0954b51dcd5108baedbed8"
+    "bytes": 3557,
+    "sha256": "3671d4f76ad307c615914ef5c6ac06a654a1f0ef78271331653b0afa3b02cda0"
   },
   "code/qab12/build_one_nonunit_residual_modular_certificates.py": {
     "bytes": 3601,
@@ -208,16 +212,16 @@
     "sha256": "b3134a96b89524a7fddef7724e58245e799c5668f545c3664646b624263e9974"
   },
   "code/qab12/enumerate_one_nonunit_packages.cpp": {
-    "bytes": 9942,
-    "sha256": "58d2ca5144f1969a29e08a9d947fa6b03a07707201db201887c3ed4383b003d7"
+    "bytes": 10011,
+    "sha256": "caac855be4afd1c1cad5978622f355b2bd40f8bd46b20520e6c7bdfefb016fca"
   },
   "code/qab12/enumerate_one_nonunit_residual_packages.cpp": {
     "bytes": 11677,
     "sha256": "2cc4163fc3184e3cbd487773d1ce7867dbe821367b4f20a80df7d7ab52c13fc9"
   },
   "code/qab12/enumerate_two_nonunit_packages.cpp": {
-    "bytes": 8005,
-    "sha256": "601a04f7a7b6a03c82320ac450ee8a310e8d36bd536a45d9658990070956c2c1"
+    "bytes": 8013,
+    "sha256": "ebcf1270930c6dc0d2cd1cd189668f3f1d0f19c3dc697cdc7f84c9c79e7c0770"
   },
   "code/qab12/enumerate_unit_defect_counterparts.cpp": {
     "bytes": 5451,
@@ -244,8 +248,8 @@
     "sha256": "fb7c4e941334b35eb71bf128541e0f0f860ec3531e97bb48d87ff769fc2e023d"
   },
   "code/qab12/pair_one_nonunit.cpp": {
-    "bytes": 8286,
-    "sha256": "333fc34d6983626d5caf9e0cdd817ce75fa42c8afc83d213cc07b155b58c5a7a"
+    "bytes": 8306,
+    "sha256": "a9e0461dc7dc8bd623ea1e0a71d74083da4d8747792944a4338d4f8dd2ab121b"
   },
   "code/qab12/pair_one_nonunit_residual.cpp": {
     "bytes": 10010,
@@ -264,16 +268,16 @@
     "sha256": "bf11b294eeb881a4a9f17e5a4f82c0bed433f32ef8797b0f71c34abc9c91fb58"
   },
   "code/qab12/pair_unit_small.cpp": {
-    "bytes": 6617,
-    "sha256": "b4cafa11d4382f9bfba97131f1b00a3c399e0d48b7624f0fd34ecd7663280956"
+    "bytes": 6751,
+    "sha256": "c57445f24601a0d40d36f055814393c817ca18a1324537fac05013f014ab8749"
   },
   "code/qab12/run_all_one_nonunit.sh": {
-    "bytes": 1097,
-    "sha256": "e5409eb0d7334843f5251fa443364b58663bbdbb0bc92596a4eb38b163d05472"
+    "bytes": 140,
+    "sha256": "df111518309532c180224d0330738ad0c66d41091a3d0d22a0c5401812180077"
   },
   "code/qab12/run_all_one_nonunit_unfiltered.sh": {
-    "bytes": 1670,
-    "sha256": "3f702a2ff4ee9ff652b505eca80081353d5e36b78d8640f8ac9cd5059529dc13"
+    "bytes": 1689,
+    "sha256": "ae695630f4fbb81f9f7a3ad6da9f0767e5736e7010296d89b65120c58a2d40ce"
   },
   "code/qab12/test_one_nonunit_residual_small.py": {
     "bytes": 5869,
@@ -308,8 +312,8 @@
     "sha256": "63eb23c062d7de7e09c2c42ec15d1143dbbdfed554d675fa506656c6a4c79d0f"
   },
   "code/qab12/verify_one_nonunit_all_manifest.py": {
-    "bytes": 4282,
-    "sha256": "54e132e5403d73d2eb4ac1b9a8f27453aedc0d30e3158dc8c98bb08168732e5b"
+    "bytes": 4534,
+    "sha256": "08ef983ef5a8a41d3ab3286023fb30ea4eb28ced656a359fe937bed7542f7994"
   },
   "code/qab12/verify_one_nonunit_package_rows.py": {
     "bytes": 2969,
@@ -328,8 +332,8 @@
     "sha256": "fbb85b2891f43bbf72983ac7e1018deffeb03ba81f47afb9dbebe5c0f9c25925"
   },
   "data/qab12/QAB12_BRANCH_MANIFEST.json": {
-    "bytes": 3402,
-    "sha256": "eec808c493143cb2011f44f6e28db15d16fd977fde86ec30de4898da920efa32"
+    "bytes": 5169,
+    "sha256": "5849fed54cb1716b590a8b443ef6fb3490e3c419bc46a67b4f6d73292e67c2f7"
   },
   "data/qab12/QAB12_SUMMARY.json": {
     "bytes": 4214,
@@ -5256,8 +5260,8 @@
     "sha256": "d4484a702d78d5e52213d3c408c9c723087c2a14756a9fc7683c76ca0f0ffc10"
   },
   "data/qab12/qab12_branch_summary.json": {
-    "bytes": 20810,
-    "sha256": "bf8cb288d2d4fd96f65904d57333cddd01050bf62280df4ae2c1251584fc1179"
+    "bytes": 28541,
+    "sha256": "f52e9f0c839d9fa2a5009a64536fc3efd09fa2ccd37872556459dac2a3d145ae"
   },
   "data/qab12/qab12_constants_output.rerun.txt": {
     "bytes": 744,
@@ -5652,8 +5656,8 @@
     "sha256": "83b9666486e3f801930ddc403b79c649282ada99ee51ed52e508adef3b7b4512"
   },
   "docs/RUNBOOK.md": {
-    "bytes": 1156,
-    "sha256": "7ebed950634aade6550170272d2282ea6dbf846ecee4e7732a2301611bcb9753"
+    "bytes": 1397,
+    "sha256": "7e1311eb38c4ae3388d8501d9d3dd0cdf165e577fe655504333c686e39bdd0ee"
   },
   "docs/audits/Qab10_audit_report.md": {
     "bytes": 40942,
@@ -5720,7 +5724,7 @@
     "sha256": "5f6e298c62b4392905764a6ccc99e8c944b712fb9d46e76b19007e6aaf6ac3b5"
   },
   "requirements-optional.txt": {
-    "bytes": 30,
-    "sha256": "d3e70f2778c5c81755aaeb45e67c9de5735af612961a083353fda67eb94ebc5d"
+    "bytes": 53,
+    "sha256": "cd18217cae25ec3568070494f3de2b98b622215c13ffac1a089093491f2f807d"
   }
 }

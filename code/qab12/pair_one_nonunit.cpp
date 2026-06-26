@@ -45,16 +45,20 @@ static uint32_t linear_factor(uint32_t U){
 }
 static uint32_t role_value(uint32_t p,const Rec& z){
     uint32_t hits=0,v=0;for(uint32_t q:{z.a,z.b,z.n})if(q%p==0){++hits;v=q;}
-    if(hits!=1)throw std::runtime_error("primitive role invariant failed");return v;
+    if(hits!=1)throw std::runtime_error("primitive role invariant failed");
+    return v;
 }
 static bool disjoint(const Rec& x,const Rec& y){
     std::array<uint64_t,3>A={(uint64_t)x.r*x.a,(uint64_t)x.r*x.b,(uint64_t)x.r*x.n};
     std::array<uint64_t,3>B={(uint64_t)y.r*y.a,(uint64_t)y.r*y.b,(uint64_t)y.r*y.n};
-    for(auto a:A)for(auto b:B)if(a==b)return false;return true;
+    for(auto a:A)for(auto b:B)if(a==b)return false;
+    return true;
 }
 static bool same_package(const Rec&x,const Rec&y){
     uint64_t xa=(uint64_t)x.r*x.a, xb=(uint64_t)x.r*x.b, ya=(uint64_t)y.r*y.a,yb=(uint64_t)y.r*y.b;
-    if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+    if(xa>xb)std::swap(xa,xb);
+    if(ya>yb)std::swap(ya,yb);
+    return xa==ya&&xb==yb;
 }
 static uint64_t correspondence_bound(const Rec&x,const Rec&y){
     uint64_t g0=std::gcd((uint64_t)x.r*x.b,(uint64_t)y.r*y.b);

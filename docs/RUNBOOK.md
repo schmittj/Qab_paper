@@ -6,6 +6,9 @@
 make q12-build
 ```
 
+The default build expects GCC or Clang with OpenMP and GNU `__int128`
+support (`-std=gnu++20`).
+
 ## Light verification
 
 ```bash
@@ -23,6 +26,11 @@ make q12-verify-modular
 ```
 
 Requires `python-flint`. It recomputes the modular gcd certificates for the unit large and small terminal pairs.
+Install the pinned optional environment with:
+
+```bash
+python3 -m pip install -r requirements-optional.txt
+```
 
 ## Direct irreducibility verification
 
@@ -38,7 +46,8 @@ Requires `python-flint`. It recomputes the modular factorization degrees for the
 make q12-one-nonunit-all THREADS=25
 ```
 
-This reruns the `U=2,...,26` branch for `D >= 16,584`. It is not the remaining small branch.
+This reruns the `U=2,...,26` branch for `D >= 16,584`. The corrected small
+branch is reproduced by the residual target below.
 
 ## Reproduce the residual one-nonunit run
 

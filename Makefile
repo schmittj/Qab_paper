@@ -1,5 +1,5 @@
 CXX ?= g++
-CXXFLAGS ?= -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic
+CXXFLAGS ?= -O3 -std=gnu++20 -fopenmp -Wall -Wextra
 THREADS ?= 25
 
 .PHONY: q12-build q12-verify-light q12-verify-modular q12-verify-irreducibility-direct q12-verify-upper q12-one-nonunit-all q12-one-nonunit-residual clean
@@ -19,6 +19,7 @@ q12-verify-light: q12-build
 	python3 code/qab12/certify_qab12_constants.py
 	python3 code/qab12/verify_two_nonunit.py --packages data/qab12/two_nonunit_packages.csv --state-pairs data/qab12/two_nonunit_state_pairs.csv
 	python3 code/qab12/verify_one_nonunit.py --data-dir data/qab12
+	python3 code/qab12/verify_one_nonunit_all_manifest.py
 	python3 code/qab12/verify_one_nonunit_residual.py --manifest data/qab12/one_nonunit_residual_manifest.json
 	python3 code/qab12/test_one_nonunit_small.py
 	python3 code/qab12/test_one_nonunit_residual_small.py

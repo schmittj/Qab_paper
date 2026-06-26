@@ -28,21 +28,26 @@ static std::vector<uint32_t> support(uint32_t x){
     std::vector<uint32_t> out;
     if(x%2==0){out.push_back(2);while(x%2==0)x/=2;}
     for(uint32_t p=3;(uint64_t)p*p<=x;p+=2)if(x%p==0){out.push_back(p);while(x%p==0)x/=p;}
-    if(x>1)out.push_back(x);return out;
+    if(x>1)out.push_back(x);
+    return out;
 }
 static Rec parse(const std::string& line){
     std::stringstream ss(line);std::string s;std::vector<uint32_t> v;
     while(std::getline(ss,s,','))v.push_back((uint32_t)std::stoul(s));
-    if(v.size()!=6)throw std::runtime_error("bad row");return {v[0],v[1],v[2],v[3],v[4],v[5]};
+    if(v.size()!=6)throw std::runtime_error("bad row");
+    return {v[0],v[1],v[2],v[3],v[4],v[5]};
 }
 static bool same_package(const Rec&x,const Rec&y){
     uint64_t xa=(uint64_t)x.r*x.a,xb=(uint64_t)x.r*x.b,ya=(uint64_t)y.r*y.a,yb=(uint64_t)y.r*y.b;
-    if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+    if(xa>xb)std::swap(xa,xb);
+    if(ya>yb)std::swap(ya,yb);
+    return xa==ya&&xb==yb;
 }
 static bool disjoint(const Rec&x,const Rec&y){
     std::array<uint64_t,3>A={(uint64_t)x.r*x.a,(uint64_t)x.r*x.b,(uint64_t)x.r*x.n};
     std::array<uint64_t,3>B={(uint64_t)y.r*y.a,(uint64_t)y.r*y.b,(uint64_t)y.r*y.n};
-    for(uint64_t a:A)for(uint64_t b:B)if(a==b)return false;return true;
+    for(uint64_t a:A)for(uint64_t b:B)if(a==b)return false;
+    return true;
 }
 static std::set<uint32_t> shape_support(const Rec&x){
     std::set<uint32_t>S;for(uint32_t v:{x.a,x.b,x.n}){auto q=support(v);S.insert(q.begin(),q.end());}return S;
@@ -55,7 +60,8 @@ static bool support_compatible(const Rec&x,const Rec&y){
 }
 static uint32_t role_value(uint32_t p,const Rec&x){
     uint32_t hits=0,v=0;for(uint32_t q:{x.a,x.b,x.n})if(q%p==0){++hits;v=q;}
-    if(hits!=1)throw std::runtime_error("primitive role invariant");return v;
+    if(hits!=1)throw std::runtime_error("primitive role invariant");
+    return v;
 }
 static uint32_t role_bound(const Rec&x,const Rec&y){
     auto X=shape_support(x),Y=shape_support(y),P=X;P.insert(Y.begin(),Y.end());
@@ -96,16 +102,24 @@ int main(int argc,char**argv){
     for(auto&kv:groups){auto&g=kv.second;
         for(size_t i=0;i<g.size();++i)for(size_t j=i+1;j<g.size();++j){
             ++raw;Rec x=g[i],y=g[j];
-            if(std::gcd(x.r,y.r)!=1)continue;++after_gcd;
-            if(same_package(x,y))continue;++after_distinct;
-            if(!disjoint(x,y))continue;++after_disjoint;
-            if(!support_compatible(x,y))continue;++after_support;
+            if(std::gcd(x.r,y.r)!=1)continue;
+            ++after_gcd;
+            if(same_package(x,y))continue;
+            ++after_distinct;
+            if(!disjoint(x,y))continue;
+            ++after_disjoint;
+            if(!support_compatible(x,y))continue;
+            ++after_support;
             uint32_t D=std::max(x.r*x.n,y.r*y.n),d=x.d;
-            if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;++after_toric;
-            uint32_t rb=role_bound(x,y);if(d>rb)continue;++after_role;
+            if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;
+            ++after_toric;
+            uint32_t rb=role_bound(x,y);
+            if(d>rb)continue;
+            ++after_role;
             uint64_t cb=correspondence_bound(x,y);
             if(same_unordered_shape(x,y))cb=std::min<uint64_t>(cb,(uint64_t)2*x.r*y.r);
-            if(d>cb)continue;++after_corr;
+            if(d>cb)continue;
+            ++after_corr;
             if(std::tie(y.r,y.a,y.b)<std::tie(x.r,x.a,x.b))std::swap(x,y);
             rows.push_back({x,y,D,rb,(uint32_t)std::min<uint64_t>(cb,UINT32_MAX)});
         }
