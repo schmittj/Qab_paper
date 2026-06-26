@@ -35,7 +35,7 @@
 \title{Explicit Boundedness and Nonunit Branch Reductions\\
 for the Polynomials \(Q_{a,b}\)}
 \author{}
-\date{25 June 2026}
+\date{26 June 2026}
 
 \begin{document}
 \maketitle
@@ -76,15 +76,16 @@ occupancies, and the repaired exceptional fourth-power analysis.  The new
 code includes independent row/count verifiers for the nonunit catalogues and
 recomputing verifiers for the unit terminal certificates.
 
-The package is close to a complete computer-assisted proof, but it still does
-not claim the full conjecture.  The remaining production gap is now the small
-one-nonunit endpoint range
+The final residual computation uses the corrected safe degree envelope for
+the small one-nonunit endpoint range
 \[
  D\leq16\,583,\qquad |V|=1,\qquad 2\leq U\leq D,
 \]
-where the degree is at most \(224\).  The bundle records this boundary
-explicitly so that the partial proof artifacts and the final small-range
-enumerator can be independently audited.
+where the degree is at most \(2601\).  It enumerates \(233\,278\) conservative
+package states, reduces them to four terminal state pairs and two package
+pairs, and eliminates all terminal orientations by modular gcd certificates.
+Together with the earlier upper, unit, and nonunit computations, this
+eliminates every normalized reciprocal-package counterexample.
 \end{abstract}
 
 \tableofcontents
@@ -187,14 +188,16 @@ remaining box whose primitive minimal polynomial has unit leading and
 constant coefficients.  Therefore every counterexample is genuinely
 nonunit.
 
-\item The new nonunit computations eliminate the both-nonunit branch and the
-one-nonunit branch with \(D\geq16\,584\).  Consequently every remaining
-candidate, if any, lies in the small one-nonunit range
+\item The new nonunit computations eliminate the both-nonunit branch, the
+one-nonunit branch with \(D\geq16\,584\), and the corrected residual
+one-nonunit branch
 \[
- D\leq16\,583,\qquad |V|=1,
- \qquad 2\leq U\leq D,
+ D\leq16\,583,\qquad |V|=1,\qquad 2\leq U\leq D,\qquad d\leq2601.
 \]
-after reciprocal normalization.
+The residual branch produces \(233\,278\) conservative package states, four
+terminal state pairs, two package pairs, and eight modular gcd certificates,
+all replayed by the bundled verifier.  Consequently no normalized
+counterexample remains.
 
 \item If a primitive irreducible polynomial \(h\), of degree \(e\) and
 Mahler measure \(M(h)\), divides selected orientations of two primitive
@@ -4933,7 +4936,7 @@ row conditions, confirms the per-\(U\) pair counts, and verifies that every
 survivor file is header-only.
 \end{proof}
 
-\begin{corollary}[Current residual envelope]
+\begin{corollary}[Residual envelope before the final small computation]
 \label{cor:q12residualenvelope}
 If a normalized counterexample remains after the computations in this
 bundle, then after replacing \(\alpha\) by \(\alpha^{-1}\) and reversing both
@@ -4944,29 +4947,73 @@ selected orientations if necessary, its primitive minimal polynomial has
  \qquad D\leq16\,583.
 \]
 Moreover \(U\mid a\), hence \(2\leq U\leq D\), every endpoint valuation is at
-most \(14\), the degree satisfies \(d\leq224\), and every deficient endpoint
-prime lies in \(\{2,3,5,7\}\).
+most \(14\), the safe degree bound
+\[
+ d^3<64D^2
+\]
+gives \(d\leq2601\), and every deficient endpoint prime that lies in the
+nonunit endpoint block lies in \(\{2,3,5,7\}\).
 \end{corollary}
+
+\begin{theorem}[Residual one-nonunit elimination]
+\label{thm:onenonunitresidualelimination}
+There is no normalized counterexample with exactly one nonunit endpoint
+coefficient and \(D\leq16\,583\).
+\end{theorem}
+
+\begin{proof}[Computer-assisted proof]
+By Corollary~\ref{cor:q12residualenvelope}, after reciprocal normalization it
+is enough to enumerate
+\[
+ D\leq16\,583,\qquad |V|=1,\qquad 2\leq U\leq D,\qquad d\leq2601.
+\]
+The residual generator uses five slope-signature slots, enough because an
+integer at most \(16\,583\) has at most five distinct prime factors.  It
+enumerates every one-package state satisfying the norm-transfer exponent
+integrality, endpoint divisibility, packet occupancy, slope congruence,
+deficient-prime, total-radical, extraction-degree, and size conditions.  It
+is conservative and keeps rows that later degree filters can remove.  The
+output is
+\[
+\begin{array}{rcl}
+233\,278 && \text{package records},\\
+212\,369 && \text{common-factor keys},\\
+ 29\,611 && \text{raw same-key state pairs},\\
+  5\,680 && \text{after coprime scales and the residual range},\\
+  5\,679 && \text{after extraction-degree checks},\\
+  2\,345 && \text{after disjointness},\\
+    428 && \text{after support compatibility},\\
+    234 && \text{after the global degree bounds},\\
+      4 && \text{after the local role-binomial bound},\\
+      4 && \text{after the reduced correspondence bound}.
+\end{array}
+\]
+The four terminal state pairs collapse to two package pairs:
+\[
+\begin{array}{ccl}
+U=8,  & d=99:  &(3;440,1,441)\ \text{vs.}\ (4;3024,1,3025),\\
+U=32, & d=123,205,285: &(1;6560,1,6561)\ \text{vs.}\ (2;1024,1,1025).
+\end{array}
+\]
+For each of these two package pairs and each of the four selected
+orientations, the certificate file
+\path{data/qab12/one_nonunit_residual_modular_certificates.csv} records the
+prime \(p=1009\) and modular gcd degree \(2\).  The verifier
+\path{code/qab12/verify_one_nonunit_residual.py} recomputes every package
+row, reruns the pair sieve, compares the terminal CSV files exactly, and
+recomputes all eight modular gcds over \(\mathbf F_{1009}\).  Degree \(2\) is
+accounted for by the forced double root at \(x=1\), so no noncyclotomic
+common factor remains in any terminal orientation.
+\end{proof}
 
 \subsection*{Assurance status of the Qab12 bundle}
 
 The bundled Qab12 artifacts now eliminate the audited upper range, the full
-unit branch, the both-nonunit branch, and the one-nonunit branch with
-\(D\geq16\,584\).  The package therefore moves the project very close to a
-complete computer-assisted proof, but it does not yet present the final
-small-range production enumeration of Corollary~\ref{cor:q12residualenvelope}.
-The required next step is a generator allowing \(2\leq U\leq16\,583\) and
-\(d\leq224\), followed by the same independent coverage and terminal
-certificate checks used above.
-
-\begin{conjecture}[Residual four-index lemma]\label{conj:fourindex}
-For \(|z|\neq1\),
-\[
- L_m(z)=L_n(z),\qquad L_p(z)=L_q(z),
- \qquad m<n,\ p<q,
-\]
-implies \(\{m,n\}=\{p,q\}\).
-\end{conjecture}
+unit branch, the both-nonunit branch, the one-nonunit branch with
+\(D\geq16\,584\), and the corrected residual one-nonunit branch with
+\(D\leq16\,583\).  The light verifier replays the nonunit row/count checks,
+the residual pair sieve, the residual modular gcd certificates, and the small
+brute-force oracle for the residual generator.
 
 \section*{Conclusion}
 
@@ -4981,18 +5028,14 @@ common factor.  The new nonunit artifacts eliminate both endpoint coefficients
 being nonunit and also eliminate the whole one-nonunit branch above
 \(16\,583\).
 
-Consequently the only unresolved production computation is the small
-one-nonunit range
-\[
- D\leq16\,583,
- \qquad |V|=1,
- \qquad 2\leq U\leq D,
- \qquad d\leq224.
-\]
-This is much smaller than the original finite box and should be suitable for
-a direct state enumeration plus modular certificate pass.  The present bundle
-is therefore a reviewable Qab12 progress package, not yet a claim that the
-full conjecture has been proved.
+The corrected residual one-nonunit computation then eliminates the remaining
+range \(D\leq16\,583\), \(2\leq U\leq D\), \(d\leq2601\), using four terminal
+state pairs and eight modular gcd certificates.
+
+Consequently no normalized reciprocal-package counterexample remains in the
+finite box reached by the mathematical reductions.  The present bundle is
+therefore a reviewable computer-assisted proof package for the
+reciprocal-package coprimality statement.
 
 \begin{thebibliography}{99}
 

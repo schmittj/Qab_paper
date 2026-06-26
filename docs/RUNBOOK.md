@@ -12,7 +12,9 @@ make q12-build
 make q12-verify-light
 ```
 
-This reruns exact constant checks, the two-nonunit row verifier, the one-nonunit row/count verifier, and the small brute-force oracles.
+This reruns exact constant checks, the two-nonunit row verifier, the
+one-nonunit row/count verifier, the residual one-nonunit verifier, and the
+small brute-force oracles.
 
 ## Modular certificate verification
 
@@ -37,3 +39,13 @@ make q12-one-nonunit-all THREADS=25
 ```
 
 This reruns the `U=2,...,26` branch for `D >= 16,584`. It is not the remaining small branch.
+
+## Reproduce the residual one-nonunit run
+
+```bash
+make q12-one-nonunit-residual THREADS=25
+```
+
+This reruns the corrected residual branch
+`D <= 16,583`, `|V| = 1`, `2 <= U <= D`, `d <= 2601`,
+builds the terminal modular certificates, and verifies the resulting manifest.

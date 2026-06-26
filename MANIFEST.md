@@ -10,8 +10,16 @@ Key deterministic outputs:
 - `data/qab12/two_nonunit_state_pairs.csv`
 - `data/qab12/one_nonunit_all_packages_U*.csv`
 - `data/qab12/one_nonunit_all_state_pairs_U*.csv`
+- `data/qab12/one_nonunit_residual_packages.csv`
+- `data/qab12/one_nonunit_residual_state_pairs.csv`
+- `data/qab12/one_nonunit_residual_orientation_pairs.csv`
+- `data/qab12/one_nonunit_residual_modular_certificates.csv`
+- `data/qab12/one_nonunit_residual_manifest.json`
 - `data/qab12/unit_large_modular_certificates.csv`
 - `data/qab12/unit_small_modular_certificates.csv`
 - `data/qab12/unit_defect_irreducibility_certificates.jsonl`
 
 The one-nonunit `D >= 16,584` branch is intentionally represented by per-coefficient files `U=2,...,26`; all state-pair and orientation-pair CSVs are header-only.
+The corrected residual one-nonunit branch is represented by a single
+five-signature-slot package catalogue, four terminal state pairs, two terminal
+package pairs, and eight modular gcd certificates.

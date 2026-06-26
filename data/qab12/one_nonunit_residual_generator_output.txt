@@ -1,0 +1,1 @@
+smooth_totals=355651 shape_tests=4509052 core_tests=23887460 coefficient_choices=233278 raw_states=233278 unique_states=233278 seconds=0.489104

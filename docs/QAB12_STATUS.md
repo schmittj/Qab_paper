@@ -32,12 +32,36 @@ unique_state_pairs=0
 
 The row/count verifier recomputes these totals and confirms all survivor CSVs are empty.
 
-## Remaining production branch
+### Residual one nonunit endpoint coefficient, D <= 16,583
 
-Only the small one-nonunit branch remains:
+The corrected residual branch uses the safe degree bound from `d^3 < 64D^2`:
 
 ```text
-D <= 16,583, |V| = 1, 2 <= U <= D, d <= 224.
+D <= 16,583, |V| = 1, 2 <= U <= D, d <= 2601.
 ```
 
-A proof-grade completion should add a production generator for `2 <= U <= 16,583`, a structurally independent coverage checker, and terminal modular certificates or a proof that all state-pair files are empty.
+The production residual run produces:
+
+```text
+package_records=233278
+groups=212369
+raw_state_pairs=29611
+after_coprime_scales=5680
+after_range=5680
+after_extraction=5679
+after_disjoint=2345
+after_support=428
+after_degree=234
+after_role=4
+after_correspondence=4
+unique_state_pairs=4
+unique_orientation_pairs=2
+```
+
+The two terminal package pairs are eliminated by eight modular gcd
+certificates at `p = 1009`, replayed by `verify_one_nonunit_residual.py`.
+
+## Current proof status
+
+All branches isolated in Qab12 are now eliminated by the bundled mathematical
+reductions and computational artifacts.

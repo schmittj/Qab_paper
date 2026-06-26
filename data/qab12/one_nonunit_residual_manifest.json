@@ -1,0 +1,37 @@
+{
+  "modular_certificates": {
+    "orientation_certificates": 8,
+    "package_pairs": 2,
+    "required_gcd_degree": 2
+  },
+  "pair_counts": {
+    "after_coprime_scales": 5680,
+    "after_correspondence": 4,
+    "after_degree": 234,
+    "after_disjoint": 2345,
+    "after_extraction": 5679,
+    "after_range": 5680,
+    "after_role": 4,
+    "after_support": 428,
+    "groups": 212369,
+    "package_records": 233278,
+    "raw_state_pairs": 29611,
+    "unique_orientation_pairs": 2,
+    "unique_state_pairs": 4
+  },
+  "range": {
+    "D_max": 16583,
+    "U_max": 16583,
+    "U_min": 2,
+    "d_max": 2601
+  },
+  "schema": "qab12-one-nonunit-residual-v1",
+  "sha256": {
+    "certificates": "61358a0a628bf64573493a064fd3ea31ffca638af14294d0dbe510d289ceac5e",
+    "orientation_pairs": "c3bb0afeed72c5a7411d9a6e733bce8b0f47170c914a066cc0d351f403adaf14",
+    "packages": "c44c53dd0389db7e77ab722d0d373f649764dcd3b614cfb5a5b5bcdf783bfbd2",
+    "pair_log": "6c5365bbc71eedde343c3e129d225cd57ba311a47cc11b6776d4928e23968354",
+    "state_pairs": "1829f96fe2fc05eb48d5085778c25db83459d9d9ed50d2499fef1bef2d76f582"
+  },
+  "status": "PASS"
+}

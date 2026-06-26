@@ -9,13 +9,13 @@ The bundle contains artifacts supporting the following eliminations:
 1. the previously audited upper range `6,816,242 <= D <= 175,394,637`;
 2. the complete unit-coefficient lower branch;
 3. the both-coefficients-nonunit branch;
-4. the one-nonunit branch with `D >= 16,584`.
+4. the one-nonunit branch with `D >= 16,584`;
+5. the corrected residual one-nonunit branch
+   `D <= 16,583`, `|V| = 1`, `2 <= U <= D`, `d <= 2601`.
 
-The bundle does **not** yet claim the full conjecture. The remaining production computation is the small one-nonunit branch
-
-```text
-D <= 16,583,   |V| = 1,   2 <= U <= D,   d <= 224.
-```
+The residual run enumerates 233,278 conservative package states, leaves four
+terminal state pairs, and eliminates the two terminal package pairs by eight
+modular gcd certificates at `p = 1009`.
 
 ## Main files
 
@@ -34,6 +34,12 @@ From the bundle root:
 make q12-verify-light
 make q12-verify-modular     # requires python-flint
 make q12-verify-upper       # verifies archived upper rows
+```
+
+The corrected residual branch can be regenerated with
+
+```bash
+make q12-one-nonunit-residual THREADS=25
 ```
 
 The long direct modular irreducibility verifier can be run with
