@@ -3,9 +3,11 @@
 \ifdefined\pdftrailerid\pdftrailerid{}\fi
 \usepackage[margin=1.05in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\numberwithin{equation}{section}
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{array}
 \usepackage{enumitem}
 \usepackage[hidelinks,hypertexnames=false]{hyperref}
 \usepackage{xcolor}
@@ -55,12 +57,11 @@ over \(\Q\): if \(\{a,b\}\neq\{c,d\}\) and both pairs are unequal, then
 The proof converts a hypothetical common factor into an off-unit-circle
 collision among the divided differences \(L_k(x)=(1-x^k)/k\).  Analytic
 rigidity, local power sieves, height bounds, and endpoint arithmetic then
-reduce every collision to a finite list of exact package states.  The final
-step is computer-assisted but deterministic: the bundled verifiers replay the
-upper-range elimination, the complete unit-coefficient branch, the
-both-nonunit branch, the large one-nonunit branch, and the corrected residual
-one-nonunit branch \(D\leq16\,583\), \(2\leq U\leq D\), \(d\leq2601\).  The
-only terminal residual pairs are eliminated by modular gcd certificates.
+force every such collision into an explicit finite list of arithmetic
+configurations.  The remaining case analysis is computer-assisted but fully
+deterministic: bundled verification scripts, which any reader can replay,
+eliminate every configuration on the list, the few terminal cases being
+settled by modular gcd certificates.
 \end{abstract}
 
 \tableofcontents
@@ -116,7 +117,8 @@ additive triples, and finite support for any fixed factor orbit.
 algebraic rigidity.  The tail-conjugacy identity, sign law, phase bounds,
 Schur deformation, and rational-root classification are used later as
 structural sieves rather than as a direct contradiction.
-\item Sections~12--17 build the arithmetic reduction: prime separation,
+\item Sections~\ref{sec:padic}--\ref{sec:wronskian} build the arithmetic
+reduction: prime separation,
 \(S\)-unit finiteness, proper-divisibility rigidity, self-power rigidity, local
 power sieves, resultant information, sparse Wronskians, and explicit
 height--degree bounds.
@@ -137,14 +139,21 @@ scripts recompute the arithmetic conditions and terminal finite-field
 certificates from the recorded data.  Thus the trust boundary is the usual one
 for a reproducible computer-assisted proof package: exact source code,
 deterministic data files, checksums, and independent replayers, not a formal
-proof-assistant certificate.
+proof-assistant certificate.  Table~\ref{tab:code} gives the paper-to-code
+correspondence: the generator and the independent re-checker behind each
+computational result.
 
-For reference, the following summary lists the main mathematical and
-computational outputs in the order in which they are used.  It is an index to
-the proof rather than a substitute for the later arguments.
-
-\begin{theorem}[Summary]\label{thm:summary}
-\leavevmode
+For reference, the following roadmap lists the main mathematical and
+computational outputs in the order they are used; it is an index to the proof,
+not a substitute for the later arguments.  Each symbol is defined where it
+first arises; in brief, \(\{a,b\}\) and \(\{c,d\}\) are the two packages, a
+counterexample is a shared irreducible factor whose normalization yields
+integers \(0<m<n\) and \(0<p<q\) with \(\gcd(m,n,p,q)=1\) and
+\(D=\max\{m,n,p,q\}\); the integers \(r,s\) are the scales of the two
+primitive shapes; \(d\) is the degree over \(\Q\) of a common root; \(e\) a
+factor degree; \(U\) and \(V\) the leading and constant coefficients of the
+primitive minimal polynomial of a common root; and \(M(\cdot)\) the Mahler
+measure.
 \begin{enumerate}[label=(\roman*)]
 \item Every noncyclotomic irreducible reciprocal factor orbit occurs in only
 finitely many packages.  Hence the package-sharing graph is locally finite.
@@ -215,8 +224,8 @@ remaining box whose primitive minimal polynomial has unit leading and
 constant coefficients.  Therefore every counterexample is genuinely
 nonunit.
 
-\item The new nonunit computations eliminate the both-nonunit branch, the
-one-nonunit branch with \(D\geq16\,584\), and the corrected residual
+\item The nonunit computations eliminate the both-nonunit branch, the
+one-nonunit branch with \(D\geq16\,584\), and the residual
 one-nonunit branch
 \[
  D\leq16\,583,\qquad |V|=1,\qquad 2\leq U\leq D,\qquad d\leq2601.
@@ -235,17 +244,16 @@ entries is at most
 \]
 and at most \(2eM(h)^{2-1/e}\) in the monic, unit-constant case.  The
 leading and constant coefficients also satisfy the four endpoint
-divisibilities \((17.24)\), and their prime divisors force the exact slope
-matching \((17.25)\)--\((17.26)\).
+divisibilities \eqref{eq:17-24}, and their prime divisors force the exact slope
+matching \eqref{eq:17-25}--\eqref{eq:17-26}.
 \end{enumerate}
-\end{theorem}
 
 Items (viii)--(xi) are the completion path for Theorem~\ref{thm:main}.  The
 height--degree argument and the computation in Section~\ref{sec:computation}
 eliminate the upper unit-normalized range; Section~\ref{sec:unitlowercomputation}
 eliminates all unit factors in the remaining box; and
 Section~\ref{sec:nonunitcomputation} eliminates the both-nonunit branch, the
-one-nonunit branch with \(D\geq16\,584\), and the corrected residual
+one-nonunit branch with \(D\geq16\,584\), and the residual
 one-nonunit range \(D\leq16\,583\).  Thus no residual branch remains after the
 finite arithmetic eliminations.
 
@@ -265,13 +273,13 @@ Then
  H_{m,n}(z)=0
  \quad\Longleftrightarrow\quad
  L_m(z)=L_n(z),
- \tag{2.1}
+ \label{eq:2-1}
 \end{equation}
 and
 \begin{equation}
  Q_{a,b}(x)=
  \frac{H_{a,a+b}(x)}{(x^{\gcd(a,b)}-1)^2}.
- \tag{2.2}
+ \label{eq:2-2}
 \end{equation}
 
 \subsection{Reciprocal packages}
@@ -279,9 +287,9 @@ and
 Let \(g=\gcd(a,b)\) and \(N=a+b\).  Direct calculation gives
 \begin{equation}
  x^{N-2g}Q_{a,b}(1/x)=Q_{b,a}(x).
- \tag{2.3}
+ \label{eq:2-3}
 \end{equation}
-The monomial in \((2.3)\) is harmless because \(Q_{a,b}(0)=b\neq0\).
+The monomial in \eqref{eq:2-3} is harmless because \(Q_{a,b}(0)=b\neq0\).
 
 \begin{definition}
 The reciprocal package of the unordered pair \(\{a,b\}\) is
@@ -296,13 +304,14 @@ unordered package \(\{m,n-m\}\).  The two orientations of that package are the
 complementary edges
 \[
  \{m,n\},\qquad \{n-m,n\}.
- \tag{2.4}
+ \label{eq:2-4}
 \]
 
 \subsection{The unit circle is completely removed}
 
-The following elementary lemma closes the first logical gap identified in the
-audit.
+We first show that dividing out the double cyclotomic factor removes every
+unit-circle root, so that all collisions of interest occur off the unit
+circle.
 
 \begin{lemma}[Unit-circle roots]\label{lem:unitcircle}
 Let \(e=\gcd(m,n)\).  If \(H_{m,n}(z)=0\) and \(|z|=1\), then
@@ -358,7 +367,7 @@ so an off-unit-circle collision always corresponds to an unequal pair.
 If \(a=gA\), \(b=gB\), and \(\gcd(A,B)=1\), then
 \begin{equation}
  Q_{a,b}(x)=gQ_{A,B}(x^g).
- \tag{2.5}
+ \label{eq:2-5}
 \end{equation}
 Likewise, if a common-root configuration contains the edges \(\{m,n\}\) and
 \(\{p,q\}\), and
@@ -368,12 +377,12 @@ Likewise, if a common-root configuration contains the edges \(\{m,n\}\) and
 then
 \begin{equation}
  L_{sk}(z)=\frac1sL_k(w).
- \tag{2.6}
+ \label{eq:2-6}
 \end{equation}
 Thus a minimal counterexample may be normalized by
 \[
  \gcd(m,n,p,q)=1.
- \tag{2.7}
+ \label{eq:2-7}
 \]
 In that normalization,
 \(\gcd(\gcd(m,n),\gcd(p,q))=1\), exactly the coprime-gcd regime occurring in
@@ -410,10 +419,10 @@ It vanishes at the four distinct real points \(0,i,j,k\), whereas
 never vanishes.  Three applications of Rolle's theorem give a contradiction.
 \end{proof}
 
-Because the two complementary edges in \((2.4)\) share their upper endpoint,
+Because the two complementary edges in \eqref{eq:2-4} share their upper endpoint,
 Theorem~\ref{thm:nothree} rules out their simultaneous occurrence at an
-off-unit-circle root.  We may therefore state the exact equivalence that was too early
-in the first attack.
+off-unit-circle root.  With this in hand, we can state the exact equivalence
+between package coprimality and the collision graph.
 
 \begin{proposition}[Exact collision reformulation]\label{prop:equivalence}
 The reciprocal packages of distinct unordered pairs are pairwise coprime if
@@ -421,7 +430,7 @@ and only if
 \[
  |E(\mathcal G_z)|\leq1
  \qquad\text{for every }z\in\C^\times,\ \lvert z\rvert\neq1.
- \tag{3.1}
+ \label{eq:3-1}
 \]
 \end{proposition}
 
@@ -433,7 +442,7 @@ Conversely, an edge equation has rational coefficients, so a common root of
 two edges is algebraic; because it is off the unit circle, its minimal
 polynomial divides the corresponding two \(Q\)-polynomials.  Finally, two
 edges representing the same unordered package would be the complementary
-edges in \((2.4)\), which share their upper endpoint and are forbidden by
+edges in \eqref{eq:2-4}, which share their upper endpoint and are forbidden by
 Theorem~\ref{thm:nothree}.  Thus two distinct graph edges are exactly a common
 factor between two distinct packages.
 \end{proof}
@@ -441,7 +450,7 @@ factor between two distinct packages.
 The addition law
 \begin{equation}
  (u+v)L_{u+v}(z)=uL_u(z)+vz^uL_v(z)
- \tag{3.2}
+ \label{eq:3-2}
 \end{equation}
 is fundamental.
 
@@ -460,7 +469,7 @@ If \(w\neq v\), this contradicts Theorem~\ref{thm:nothree}.
 \end{lemma}
 
 \begin{proof}
-The first equality and \((3.2)\) give \(L_u=z^uL_v\).  Hence
+The first equality and \eqref{eq:3-2} give \(L_u=z^uL_v\).  Hence
 \[
  (u+w)L_{u+w}=uL_u+wz^uL_w
  =uL_u+wz^uL_v=(u+w)L_u.
@@ -476,7 +485,7 @@ For an unordered pair define its additive triple
 If two distinct packages occur in a hypothetical common-root collision, then
 \begin{equation}
  \T(a,b)\cap\T(c,d)=\varnothing.
- \tag{3.3}
+ \label{eq:3-3}
 \end{equation}
 Thus all six integers
 \[
@@ -519,8 +528,8 @@ write \([h]=\{h,h^\vee\}\) for its reciprocal orbit.  Since a package
 product is reciprocal, occurrence of either member implies occurrence of both
 in the product.
 
-The following elementary estimate is independent of the \(p\)-adic theory.
-It is the strongest global finiteness statement obtained in this round.
+The following elementary estimate is independent of the \(p\)-adic theory
+developed in the later sections.
 
 \begin{theorem}[Finite collision support of a fixed point]
 \label{thm:pointfinite}
@@ -529,12 +538,12 @@ Fix \(z\in\C^\times\) with \(0<r=|z|<1\).  If
 \begin{equation}
  \frac{k}{m}
  \leq \frac{2r^m}{1-r^m},
- \tag{4.1}
+ \label{eq:4-1}
 \end{equation}
 and
 \begin{equation}
  n\leq\frac{2m}{1-r^m}.
- \tag{4.2}
+ \label{eq:4-2}
 \end{equation}
 In particular, \(\mathcal G_z\) has only finitely many edges, and those edges
 are effectively bounded in terms of \(r\).
@@ -553,13 +562,13 @@ Taking absolute values yields
  \leq r^m\frac{1+r^k}{1-r^m}
  \leq\frac{2r^m}{1-r^m},
 \]
-which is \((4.1)\).  Since \(k\geq1\), this forces
+which is \eqref{eq:4-1}.  Since \(k\geq1\), this forces
 \(1\leq2mr^m/(1-r^m)\); the right side tends to zero, so only finitely
 many \(m\) occur.  The original equality also gives
 \[
  n|1-z^m|=m|1-z^n|\leq2m,
 \]
-and \((4.2)\) follows from \(|1-z^m|\geq1-r^m\).
+and \eqref{eq:4-2} follows from \(|1-z^m|\geq1-r^m\).
 \end{proof}
 
 For example, one may take
@@ -567,7 +576,7 @@ For example, one may take
  M(r)=\max\left\{m\geq1:\frac{2mr^m}{1-r^m}\geq1\right\},
 \]
 with the convention \(M(r)=0\) when the set is empty.  Then every edge has
-\(m\leq M(r)\), followed by the explicit bound \((4.2)\).
+\(m\leq M(r)\), followed by the explicit bound \eqref{eq:4-2}.
 
 For a fixed package \(\{c,d\}\), define
 \[
@@ -631,7 +640,7 @@ real \(t\notin\{0,m,n\}\),
 \[
  \operatorname{sgn}\bigl(|1-tA|^2-R^t\bigr)
  =\operatorname{sgn}\bigl(t(t-m)(t-n)\bigr).
- \tag{5.1}
+ \label{eq:5-1}
 \]
 \end{theorem}
 
@@ -658,8 +667,6 @@ circle \(|w|=|z|^t\) for \(m<t<n\), and strictly outside it for
 
 Here the sign law becomes a geometric obstruction.  A first collision conjugates the later tail of the sequence \(L_k(z)\) to a rescaled copy centered at the gap; a second collision must therefore satisfy a strict chord condition.  This is the main analytic mechanism used in the early reductions.
 
-This section contains the main analytic advance of the second attack.
-
 \begin{theorem}[Exact tail-conjugacy identity]\label{thm:tail}
 Assume
 \[
@@ -669,29 +676,29 @@ Assume
 Then
 \begin{equation}
  A=z^mL_a(z),
- \tag{6.1}
+ \label{eq:6-1}
 \end{equation}
 and, for every integer \(j\geq1\),
 \begin{equation}
  L_{m+j}(z)-A
  =\frac{j}{m+j}z^m\bigl(L_j(z)-L_a(z)\bigr).
- \tag{6.2}
+ \label{eq:6-2}
 \end{equation}
 The identity extends to every positive real \(j\) after choosing a logarithm
 of \(z\) and defining \(z^j\) continuously.
 \end{theorem}
 
 \begin{proof}
-Apply \((3.2)\) with \((u,v)=(m,a)\):
+Apply \eqref{eq:3-2} with \((u,v)=(m,a)\):
 \[
  (m+a)L_{m+a}=mL_m+az^mL_a.
 \]
-Since \(L_{m+a}=L_m\), this yields \((6.1)\).  Applying \((3.2)\) with
-\((u,v)=(m,j)\), subtracting \((m+j)A\), and using \((6.1)\), gives
+Since \(L_{m+a}=L_m\), this yields \eqref{eq:6-1}.  Applying \eqref{eq:3-2} with
+\((u,v)=(m,j)\), subtracting \((m+j)A\), and using \eqref{eq:6-1}, gives
 \[
  (m+j)(L_{m+j}-A)=jz^m(L_j-L_a),
 \]
-which is \((6.2)\).
+which is \eqref{eq:6-2}.
 \end{proof}
 
 Thus a loop on the interval \([m,m+a]\) conjugates the entire tail, after an
@@ -704,12 +711,12 @@ Under the hypotheses of Theorem~\ref{thm:tail}, for every real \(j>0\),
  \operatorname{sgn}
  \left(|1-jL_a(z)|^2-|z|^{2j}\right)
  =\operatorname{sgn}(j-a).
- \tag{6.3}
+ \label{eq:6-3}
 \end{equation}
 \end{corollary}
 
 \begin{proof}
-From \((6.1)\),
+From \eqref{eq:6-1},
 \[
  1-(m+j)A=z^m(1-jL_a).
 \]
@@ -719,7 +726,7 @@ Therefore
  \left(|1-jL_a|^2-|z|^{2j}\right).
 \]
 For \(j\neq a\), Theorem~\ref{thm:sign}, with \(n=m+a\), gives
-\((6.3)\).  At \(j=a\), both sides are zero directly; here
+\eqref{eq:6-3}.  At \(j=a\), both sides are zero directly; here
 \(\operatorname{sgn}(0)=0\).
 \end{proof}
 
@@ -730,31 +737,31 @@ we may choose the smallest endpoint and write the configuration as
  \qquad
  L_{m+s}=L_{m+t},
  \qquad 0<s<t.
- \tag{6.4}
+ \label{eq:6-4}
 \end{equation}
 
 \begin{corollary}[Strict chord constraint]\label{cor:chord}
-Every configuration \((6.4)\) satisfies
+Every configuration \eqref{eq:6-4} satisfies
 \begin{equation}
  \frac{s}{m+s}(L_s-L_a)
  =\frac{t}{m+t}(L_t-L_a),
- \tag{6.5}
+ \label{eq:6-5}
 \end{equation}
 and therefore
 \begin{equation}
  L_t=(1-\lambda)L_a+\lambda L_s,
  \qquad
  \lambda=\frac{s(m+t)}{t(m+s)}\in(0,1).
- \tag{6.6}
+ \label{eq:6-6}
 \end{equation}
 Moreover, \(L_s\neq L_a\), so \(L_t\) lies in the open line segment joining
 \(L_a\) and \(L_s\).
 \end{corollary}
 
 \begin{proof}
-Apply \((6.2)\) with \(j=s,t\), then use
-\(L_{m+s}=L_{m+t}\).  This gives \((6.5)\), and solving it gives
-\((6.6)\).  The inequalities \(0<\lambda<1\) are equivalent to \(0<s<t\).
+Apply \eqref{eq:6-2} with \(j=s,t\), then use
+\(L_{m+s}=L_{m+t}\).  This gives \eqref{eq:6-5}, and solving it gives
+\eqref{eq:6-6}.  The inequalities \(0<\lambda<1\) are equivalent to \(0<s<t\).
 The four edge endpoints are distinct, so \(s\neq a\).  If
 \(L_s=L_a\), Lemma~\ref{lem:propagation} produces
 \(L_m=L_{m+s}\); together with \(L_m=L_{m+a}\) this gives three
@@ -766,21 +773,21 @@ collisions imply
 \begin{equation}
  z^sL_b
  =\frac{m}{m+s}L_a+\frac{s}{m+s}L_s.
- \tag{6.7}
+ \label{eq:6-7}
 \end{equation}
 Thus the average of the geometric block of length \(b\) beginning at \(s\)
 lies strictly between the two prefix averages \(L_a\) and \(L_s\), after the
 common factor \(1-z\) is removed.
 
-Clearing denominators in \((6.5)\) gives a useful sparse algebraic residue of
+Clearing denominators in \eqref{eq:6-5} gives a useful sparse algebraic residue of
 the two-loop problem:
 \begin{equation}
  a(m+s)z^t-a(m+t)z^s-m(t-s)z^a+(a+m)(t-s)=0.
- \tag{6.8}
+ \label{eq:6-8}
 \end{equation}
 Any surviving counterexample must satisfy both the original trinomial
-\(H_{m,m+a}(z)=0\) and the quadrinomial \((6.8)\), as well as the strict
-segment condition \((6.6)\) and the shifted sign law \((6.3)\).
+\(H_{m,m+a}(z)=0\) and the quadrinomial \eqref{eq:6-8}, as well as the strict
+segment condition \eqref{eq:6-6} and the shifted sign law \eqref{eq:6-3}.
 
 \section{Phase localization, a positive cone, and the real-root subproblem}
 \label{sec:phase}
@@ -792,7 +799,7 @@ Write a collision as \(L_m=L_{m+a}\), and let
 The trinomial equation has the exact form
 \begin{equation}
  z^m\bigl(m+a-mz^a\bigr)=a.
- \tag{7.1}
+ \label{eq:7-1}
 \end{equation}
 The denominator on the right of
 \(z^m=a/(m+a-mz^a)\) lies in a disk centered at the positive real number
@@ -804,7 +811,7 @@ For every collision \(L_m=L_{m+a}\) with \(0<|z|=r<1\),
  \operatorname{dist}(m\theta,2\pi\Z)
  \leq
  \arcsin\!\left(\frac{mr^a}{m+a}\right).
- \tag{7.2}
+ \label{eq:7-2}
 \end{equation}
 If a second collision is written as
 \[
@@ -815,12 +822,12 @@ then, with \(b=t-s\),
  \operatorname{dist}((m+s)\theta,2\pi\Z)
  &\leq
  \arcsin\!\left(\frac{(m+s)r^b}{m+t}\right),
- \tag{7.3}\\
+ \label{eq:7-3}\\
  \operatorname{dist}(s\theta,2\pi\Z)
  &\leq
  \arcsin\!\left(\frac{mr^a}{m+a}\right)
  +\arcsin\!\left(\frac{(m+s)r^b}{m+t}\right).
- \tag{7.4}
+ \label{eq:7-4}
 \end{align}
 If in addition \(m<a\), the first bound is strictly smaller than \(\pi/6\).
 \end{theorem}
@@ -828,12 +835,12 @@ If in addition \(m<a\), the first bound is strictly smaller than \(\pi/6\).
 \begin{proof}
 The largest possible argument of a point in a disk centered at a positive real
 number \(R\) with radius \(\rho<R\) is
-\(\arcsin(\rho/R)\).  Apply this to \((7.1)\).  The second collision gives
+\(\arcsin(\rho/R)\).  Apply this to \eqref{eq:7-1}.  The second collision gives
 \[
  z^{m+s}\bigl(m+t-(m+s)z^{t-s}\bigr)=t-s,
 \]
-which proves \((7.3)\).  Circular distance to \(2\pi\Z\) is subadditive,
-so subtracting the two multiples of \(\theta\) gives \((7.4)\).  If
+which proves \eqref{eq:7-3}.  Circular distance to \(2\pi\Z\) is subadditive,
+so subtracting the two multiples of \(\theta\) gives \eqref{eq:7-4}.  If
 \(m<a\), then \(mr^a/(m+a)<1/2\).
 \end{proof}
 
@@ -847,7 +854,7 @@ and \(|z|<1\).  The stronger \(\pi/6\) estimate is therefore conditional on
 \(m<a\) in the inside orientation, not an automatic global normalization.
 \end{remark}
 
-The quadrinomial in \((6.8)\) has a useful decomposition.  Continue to write
+The quadrinomial in \eqref{eq:6-8} has a useful decomposition.  Continue to write
 \(b=t-s\), and let its left side be \(R_{m,a;s,t}(x)\).
 
 \begin{proposition}[Positive-cone decomposition]\label{prop:positivecone}
@@ -856,7 +863,7 @@ One has the exact identity
  R_{m,a;s,t}(x)=
  \frac{a(m+t)}{t}H_{s,t}(x)
  +\frac{m(t-s)}{t}H_{a,t}(x).
- \tag{7.5}
+ \label{eq:7-5}
 \end{equation}
 If \(t>a\), then
 \[
@@ -867,29 +874,29 @@ surviving common root,
 \begin{equation}
  \frac{H_{s,t}(z)}{H_{a,t}(z)}
  =-\frac{m(t-s)}{a(m+t)}\in\mathbb R_{<0}.
- \tag{7.6}
+ \label{eq:7-6}
 \end{equation}
 \end{proposition}
 
 \begin{proof}
-Expanding the right side of \((7.5)\) gives \((6.8)\).  For \(0<u<v\),
+Expanding the right side of \eqref{eq:7-5} gives \eqref{eq:6-8}.  For \(0<u<v\),
 \begin{equation}
  \frac{H_{u,v}(x)}{(x-1)^2}
  =\sum_{j=0}^{u-1}(v-u)(j+1)x^j
   +\sum_{j=u}^{v-2}u(v-j-1)x^j,
- \tag{7.7}
+ \label{eq:7-7}
 \end{equation}
 so all coefficients are positive.  When \(t>a\), both kernels in
-\((7.5)\) are of this form and both scalar coefficients are positive.
+\eqref{eq:7-5} are of this form and both scalar coefficients are positive.
 At a root of \(R_{m,a;s,t}\), neither kernel value can vanish:
 otherwise both would vanish and \(L_a=L_s=L_t\), contrary to the
 no-three theorem (the indices are distinct in a genuine configuration).
-Dividing \((7.5)\) therefore gives \((7.6)\).
+Dividing \eqref{eq:7-5} therefore gives \eqref{eq:7-6}.
 \end{proof}
 
 Thus the disjoint and interlacing interval patterns reduce to a concrete
 sector problem: conditional on \(H_{m,m+a}(z)=0\), the two kernel values in
-\((7.6)\) would have to lie on opposite rays.  The nested case \(t<a\)
+\eqref{eq:7-6} would have to lie on opposite rays.  The nested case \(t<a\)
 remains algebraically different.
 
 There is a further ordering theorem when the common root is real.
@@ -901,7 +908,7 @@ Let \(z=-r\), \(0<r<1\).  Every collision edge \(\{m,n\}\) has
 \(m<p\), then
 \begin{equation}
  m<p,\qquad n<q,\qquad n-m>q-p.
- \tag{7.8}
+ \label{eq:7-8}
 \end{equation}
 In particular, the later edge has larger total and smaller gap; the nested
 interval pattern is impossible.
@@ -941,10 +948,13 @@ the last inequality is equivalent to
 This does not yet exclude two negative-real loops, but it reduces them to a
 strictly ordered tradeoff that is invisible in the general complex case.
 
-\section{Schur, Casoratian, and contraction formulations}
+\section{The Schur deformation}
 \label{sec:schur}
 
-The same collision equation has several equivalent forms.  The Schur, Casoratian, and contraction viewpoints below are included because each exposes a different obstruction; together they clarify why the tail-conjugacy identity is the usable output of this approach.
+The trinomial \(H_{m,n}\) extends to a two-variable Schur deformation, whose
+\(t=1\) specialization recovers \(H_{m,n}/(x-1)^2\).  We record that
+deformation here; the next section expands it to second order in \(t\) to
+compare the root branches of two colliding edges.
 
 Define the bivariate deformation
 \begin{align}
@@ -955,7 +965,7 @@ Define the bivariate deformation
  1&t^m&x^m\\
  1&1&1
  \end{pmatrix}.
- \tag{8.1}
+ \label{eq:8-1}
 \end{align}
 It is divisible by \((t-1)(x-1)(x-t)\).  Put
 \[
@@ -966,103 +976,39 @@ The alternant formula for Schur polynomials gives
 \begin{equation}
  \mathcal R_{m,n}(x,t)
  =-s_{(n-2,m-1)}(1,t,x).
- \tag{8.2}
+ \label{eq:8-2}
 \end{equation}
 At \(t=1\),
 \begin{equation}
  \mathcal R_{m,n}(x,1)
  =-\frac{H_{m,n}(x)}{(x-1)^2}.
- \tag{8.3}
+ \label{eq:8-3}
 \end{equation}
 If \(e=\gcd(m,n)\) and \([e](x)=(x^e-1)/(x-1)\), the exact relation to our
 polynomial is
 \begin{equation}
  \mathcal R_{m,n}(x,1)
  =-Q_{m,n-m}(x)[e](x)^2.
- \tag{8.4}
+ \label{eq:8-4}
 \end{equation}
 Thus the specialization is literally \(-Q\) in the primitive case and differs
 from it only by an explicit cyclotomic square in general.
 
-For the one-variable specialization put
-\begin{equation}
- u_k(x)=h_k(1,1,x)
- =\sum_{j=0}^k(k-j+1)x^j
- =\frac{x^{k+2}-(k+2)x+k+1}{(x-1)^2},
- \tag{8.5}
-\end{equation}
-with \(u_{-1}=0\).  Jacobi--Trudi gives
-\begin{equation}
- \frac{H_{m,n}(x)}{(x-1)^2}
- =u_{n-2}u_{m-1}-u_{n-1}u_{m-2}.
- \tag{8.6}
-\end{equation}
-The sequence satisfies
-\begin{equation}
- u_{k+1}=xu_k+k+2\quad(k\geq-1),
- \qquad
- u_k-2u_{k-1}+u_{k-2}=x^k\quad(k\geq1).
- \tag{8.7}
-\end{equation}
-If \(v_k=(u_k,u_{k+1})\), then
-\begin{equation}
- \det(v_i,v_j)=(j+2)u_i-(i+2)u_j.
- \tag{8.8}
-\end{equation}
-Hence a collision is a repeated projective value in the sequence \([v_k]\).
-
-Equivalently, let
-\[
- r_k(x)=\frac{u_{k-2}(x)}k,
- \qquad r_1=0.
-\]
-Then
-\begin{equation}
- r_{k+1}=\frac{k}{k+1}\bigl(1+xr_k\bigr),
- \tag{8.9}
-\end{equation}
-and
-\begin{equation}
- x\neq1:\qquad
- H_{m,n}(x)=0
- \quad\Longleftrightarrow\quad
- r_m(x)=r_n(x).
- \tag{8.10}
-\end{equation}
-Indeed,
-\begin{equation}
- r_k(x)=-\frac{L_k(x)}{(x-1)^2}-\frac1{x-1}.
- \tag{8.11}
-\end{equation}
-For \(|x|<1\), every map
-\[
- T_k(w)=\frac{k}{k+1}(1+xw)
-\]
-is a strict affine contraction.  A collision says that the orbit beginning at
-\(r_1=0\) hits the unique fixed point of an interval composition.  Formula
-\((6.2)\) is the exact affine conjugacy of the tail induced by such a hit.
-
-Pl\"ucker relations by themselves only turn two vanishing minors into a product
-identity.  The recurrences \((8.7)\) do not yet yield the desired descent to a
-third vanishing minor.  The strict chord identity \((6.6)\) is the strongest
-closed consequence obtained from this route in the present round.
-
-\section{The correct second jet of the Schur deformation}
+\section{The second jet of the Schur deformation}
 \label{sec:secondjet}
 
 A tempting first-order transversality argument is false, because the relevant Schur curves have the same tangent at the specialization.  The replacement is a second-order computation in symmetric coordinates; the explicit second jet is what survives for later use.
 
-A first-order transversality argument cannot work: all reduced Schur curves
-have the same tangent at \(t=1\).  The correct coordinates are
+Concretely, the common tangent occurs at \(t=1\).  The correct coordinates are
 \[
  t=e^\tau,
  \qquad
  x=e^{\tau/2}y.
 \]
-If $D=|\lambda|$ denotes the size of the partition, homogeneity and symmetry
+Writing $|\lambda|$ for the size of the partition, homogeneity and symmetry
 in the first two variables give
 \[
- e^{-D\tau/2}s_\lambda(1,e^\tau,e^{\tau/2}y)
+ e^{-|\lambda|\tau/2}s_\lambda(1,e^\tau,e^{\tau/2}y)
  =s_\lambda(e^{-\tau/2},e^{\tau/2},y),
 \]
 and the right side is even in \(\tau\).
@@ -1083,7 +1029,7 @@ The bialternant formula yields
  \sinh(\tau/2)
  \bigl(y^2-2\cosh(\tau/2)y+1\bigr)
  }.
- \tag{9.1}
+ \label{eq:9-1}
 \end{equation}
 At \(\tau=0\), this is \(H_{m,n}(y)/(y-1)^2\).
 
@@ -1097,23 +1043,23 @@ form
 \begin{equation}
  y_{m,n}(\tau)=z+
  \frac z{24}\left(m+n-\frac3A\right)\tau^2+O(\tau^4).
- \tag{9.2}
+ \label{eq:9-2}
 \end{equation}
 \end{proposition}
 
 \begin{proof}
-Expanding \((9.1)\) at \(\tau=0\) and using \(H_{m,n}(z)=0\) gives
+Expanding \eqref{eq:9-1} at \(\tau=0\) and using \(H_{m,n}(z)=0\) gives
 \begin{equation}
  S_{m,n}(z,\tau)
  =\frac{\tau^2}{24(z-1)^2}
  \bigl(m^3z^n-n^3z^m+(n-m)^3\bigr)
  +O(\tau^4).
- \tag{9.3}
+ \label{eq:9-3}
 \end{equation}
 Since \(z^m=1-mA\) and \(z^n=1-nA\), the bracket equals
 \begin{equation}
  mn(n-m)\bigl((m+n)A-3\bigr).
- \tag{9.4}
+ \label{eq:9-4}
 \end{equation}
 On the other hand,
 \begin{align}
@@ -1121,14 +1067,14 @@ On the other hand,
  \frac{H_{m,n}(y)}{(y-1)^2}\right|_{y=z}
  &=\frac{mnz^{m-1}(z^{n-m}-1)}{(z-1)^2} \notag\\
  &=-\frac{mn(n-m)A}{z(z-1)^2}.
- \tag{9.5}
+ \label{eq:9-5}
 \end{align}
 Here \(A\neq0\), because \(A=0\) would give \(z^m=1\), contrary to
 \(|z|\neq1\).  Hence the derivative is nonzero.  The implicit-function
 theorem gives a unique local root branch.  Since
 \(S_{m,n}(y,\tau)=S_{m,n}(y,-\tau)\), uniqueness forces
 \(y_{m,n}(\tau)=y_{m,n}(-\tau)\); the branch is even.  Combining this with
-\((9.3)--(9.5)\) gives \((9.2)\) with remainder \(O(\tau^4)\).
+\eqref{eq:9-3}--\eqref{eq:9-5} gives \eqref{eq:9-2} with remainder \(O(\tau^4)\).
 \end{proof}
 
 If two edges \(\{m,n\}\), \(\{p,q\}\) share a root \(z\), with collision
@@ -1138,14 +1084,14 @@ values \(A\), \(B\), their comoving branches therefore separate as
  =\frac z{24}
  \left(m+n-p-q-3\left(\frac1A-\frac1B\right)\right)\tau^2
  +O(\tau^4).
- \tag{9.6}
+ \label{eq:9-6}
 \end{equation}
 In the comoving local parameter \(\tau\), the two root branches therefore
 differ by \(O(\tau^2)\), and the order is exactly two unless the explicit
-bracket in \((9.6)\) vanishes.
+bracket in \eqref{eq:9-6} vanishes.
 For example, if \(m+n=p+q\), higher contact would force \(A=B\), contradicting
-the no-three theorem for disjoint edges.  This is the correct second-order
-replacement for the incorrect first-order ``transversality'' formulation.
+the no-three theorem for disjoint edges.  This second-order computation is the
+substitute for the failed first-order transversality argument.
 
 \section{A complete classification of rational roots}
 \label{sec:rational}
@@ -1157,7 +1103,7 @@ We first record the coefficient expansion, valid when \(\gcd(a,b)=1\):
  Q_{a,b}(x)=
  b\sum_{j=0}^{a-1}(j+1)x^j
  +a\sum_{j=a}^{a+b-2}(a+b-1-j)x^j.
- \tag{10.1}
+ \label{eq:10-1}
 \end{equation}
 In particular, the constant term is \(b\), the leading coefficient is \(a\),
 and all coefficients are positive.
@@ -1191,54 +1137,54 @@ its derivative is \(aN y^{a-1}(y^{N-a}-1)<0\), and it decreases from
 \(b\) to \(0\).  Hence only \(a\) even and \(N\) odd can remain; in
 particular \(b\) is odd.
 
-The rational-root theorem applied to \((10.1)\) gives
+The rational-root theorem applied to \eqref{eq:10-1} gives
 \[
  r\mid b,\qquad s\mid a.
 \]
 Writing \(N=a+b\), the equation \(H_{a,N}(-r/s)=0\) becomes
 \begin{equation}
  b s^{a+b}=(a+b)r^a s^b+a r^{a+b}.
- \tag{10.2}
+ \label{eq:10-2}
 \end{equation}
 Let \(\ell\mid s\), and put \(t=v_\ell(s)\).  Since
-\(\ell\nmid b(a+b)r\), the two terms on the right of \((10.2)\) have
+\(\ell\nmid b(a+b)r\), the two terms on the right of \eqref{eq:10-2} have
 valuations \(bt\) and \(v_\ell(a)\), whereas the left side has valuation
 \((a+b)t>bt\).  If the two right-hand valuations were unequal, the
 valuation of their sum would be their smaller value, strictly below that of
 the left side.  They must therefore coincide, giving
 \begin{equation}
  v_\ell(a)=b\,v_\ell(s).
- \tag{10.3}
+ \label{eq:10-3}
 \end{equation}
 Likewise, if \(\ell\mid r\) and \(t=v_\ell(r)\), then the two right-hand
 valuations are \(at\) and \((a+b)t\), while the left side has valuation
 \(v_\ell(b)\).  Hence
 \begin{equation}
  v_\ell(b)=a\,v_\ell(r).
- \tag{10.4}
+ \label{eq:10-4}
 \end{equation}
 Consequently,
 \begin{equation}
  s^b\mid a,
  \qquad
  r^a\mid b.
- \tag{10.5}
+ \label{eq:10-5}
 \end{equation}
-If \(r\geq2\), then \(b\geq2^a>a\), while \(s\geq2\) and \((10.5)\) give
+If \(r\geq2\), then \(b\geq2^a>a\), while \(s\geq2\) and \eqref{eq:10-5} give
 \(a\geq2^b>b\), a contradiction.  Hence \(r=1\).
 
-Write \(a=s^bA\) with \(\gcd(A,s)=1\).  Dividing \((10.2)\) by \(s^b\)
+Write \(a=s^bA\) with \(\gcd(A,s)=1\).  Dividing \eqref{eq:10-2} by \(s^b\)
 gives
 \begin{equation}
  b(s^a-1)=A(s^b+1)=a+A\leq\frac{3a}{2}.
- \tag{10.6}
+ \label{eq:10-6}
 \end{equation}
 For \(a\geq3\), the left side is at least \(2^a-1>3a/2\).  Therefore
-\(a=2\), and \((10.5)\) gives \(s=2\), \(b=1\), \(A=1\).  Thus the only
+\(a=2\), and \eqref{eq:10-5} gives \(s=2\), \(b=1\), \(A=1\).  Thus the only
 primitive root in the open unit disk is \(-1/2\) for \(Q_{2,1}\).  Reciprocity
 gives \(-2\) for \(Q_{1,2}\).
 
-Finally, for a nonprimitive pair write \(a=gA\), \(b=gB\).  By \((2.5)\), a
+Finally, for a nonprimitive pair write \(a=gA\), \(b=gB\).  By \eqref{eq:2-5}, a
 rational root \(x\) would make \(x^g\) a rational root of a primitive
 \(Q_{A,B}\).  The only possibilities are \(-1/2\) and \(-2\).  If \(g>1\), then \(g\)
 must be odd, and the equality \(g\,v_2(x)=\pm1\) is impossible for rational
@@ -1297,7 +1243,7 @@ Furthermore,
 \]
 At a root modulo \(p\), one has \(x\neq0\), \(p\nmid h\), and the last
 factor is nonzero because the primitive reduction is square-free.  Thus
-\(Q_{C,D}(x^h)\) also has square-free reduction.  Equation \((2.5)\) differs
+\(Q_{C,D}(x^h)\) also has square-free reduction.  Equation \eqref{eq:2-5} differs
 from this composition only by a scalar.  Lemma~\ref{lem:localcriteria}(b)
 applies, and the reciprocal orientation is identical.
 \end{proof}
@@ -1342,12 +1288,12 @@ analysis applies after interchanging the two orientations.
 Write \(a=gA,b=gB\), with \(\gcd(A,B)=1\).  Suppose
 \begin{equation}
  p\mid AB(A+B),\qquad p\nmid cd(c+d).
- \tag{11.1}
+ \label{eq:11-1}
 \end{equation}
 If \(p\geq5\), then
 \begin{equation}
  \gcd_{\Q[x]}(P_{a,b},P_{c,d})=1.
- \tag{11.2}
+ \label{eq:11-2}
 \end{equation}
 If \(g=1\), the same conclusion holds for \(p=3\).
 \end{theorem}
@@ -1382,7 +1328,7 @@ If \(P_{a,b}\) shares a factor with \(P_{c,d}\), and
 \(a=gA,b=gB\) is its primitive reduction, then
 \begin{equation}
  \operatorname{Supp}(AB(A+B))\subseteq S.
- \tag{11.3}
+ \label{eq:11-3}
 \end{equation}
 If both packages are primitive, their primitive additive-triple products have
 the same prime support outside \(\{2,3\}\).
@@ -1411,7 +1357,7 @@ ordered primitive pairs \((A,B)\) that can occur as primitive reductions of
 sharing partners.  If \(s=|S|\), their number is at most
 \begin{equation}
  2^{16s+8}.
- \tag{12.1}
+ \label{eq:12-1}
 \end{equation}
 \end{theorem}
 
@@ -1420,12 +1366,12 @@ Let \(N=A+B\), and put
 \[
  u=\frac{A}{N},\qquad v=\frac{B}{N}.
 \]
-By \((11.3)\), both \(u\) and \(v\) belong to the rational \(S\)-unit
+By \eqref{eq:11-3}, both \(u\) and \(v\) belong to the rational \(S\)-unit
 group \(U_S\), and \(u+v=1\).  The group
 \(U_S\times U_S\) has rank \(2s\).  The theorem of
 Beukers--Schlickewei \cite{BeukersSchlickewei1996} bounds the number of
 solutions of \(x+y=1\) in a multiplicative subgroup of
-\((\C^\times)^2\) of rank \(r\) by \(2^{8r+8}\), giving \((12.1)\).
+\((\C^\times)^2\) of rank \(r\) by \(2^{8r+8}\), giving \eqref{eq:12-1}.
 The map \((A,B)\mapsto(A/N,B/N)\) is injective on primitive ordered pairs,
 because each fraction is already in lowest terms.
 \end{proof}
@@ -1458,7 +1404,7 @@ constrained \(S\)-unit shapes and finitely many scalings.
 A special danger is that one package might divide another after a composition.  The results in this section rule out that kind of proper divisibility for primitive unequal pairs, preparing the self-power arguments that follow.
 \label{sec:nodivision}
 
-The next theorem now includes the boundary primitive shapes.  Its principal
+The next theorem also covers the boundary primitive shapes.  Its principal
 algebraic input is an exact denominator calculation.
 
 \begin{lemma}[Exact diagonal denominators]\label{lem:diagonaldenominator}
@@ -1469,16 +1415,16 @@ Let \(a,b\) be coprime positive integers, put \(N=a+b\), and set
 For every \(k\geq0\),
 \begin{equation}
  [x^{ka}]F(x)^{-1}=\frac{C_k}{b^k},
- \tag{13.1}
+ \label{eq:13-1}
 \end{equation}
 where
 \begin{equation}
  C_k=N^k+
  \sum_{1\leq r\leq\lfloor k/N\rfloor}
  \binom{k-br}{ar}N^{k-Nr}(-a)^{ar}b^{br}.
- \tag{13.2}
+ \label{eq:13-2}
 \end{equation}
-In particular, \(\gcd(C_k,b)=1\), so the coefficient in \((13.1)\) has
+In particular, \(\gcd(C_k,b)=1\), so the coefficient in \eqref{eq:13-1} has
 denominator exactly \(b^k\).
 \end{lemma}
 
@@ -1499,7 +1445,7 @@ The corresponding contribution is
 \[
  \binom{k-br}{ar}\frac{N^{k-Nr}(-a)^{ar}}{b^{k-br}}.
 \]
-Putting all terms over \(b^k\) gives \((13.2)\).  Every term with \(r\geq1\)
+Putting all terms over \(b^k\) gives \eqref{eq:13-2}.  Every term with \(r\geq1\)
 is divisible by every prime dividing \(b\), whereas
 \(N^k\equiv a^k\not\equiv0\pmod p\) for \(p\mid b\).  Thus \(C_k\) is
 coprime to \(b\).
@@ -1511,7 +1457,7 @@ positive \(c,d\),
 \begin{equation}
  Q_{a,b}(x)\mid Q_{c,d}(x)\quad\text{in }\Q[x]
  \qquad\Longrightarrow\qquad(c,d)=(a,b).
- \tag{13.3}
+ \label{eq:13-3}
 \end{equation}
 \end{theorem}
 
@@ -1520,7 +1466,7 @@ If \(c=d\), then \(Q_{c,c}=c\) is constant and cannot be divisible by the
 nonconstant polynomial \(Q_{a,b}\).  If the unordered packages agree, the
 no-three theorem applied to the two
 complementary edges shows that the two orientations are coprime; hence the
-orientations in \((13.3)\) must agree.  We therefore assume that the packages
+orientations in \eqref{eq:13-3} must agree.  We therefore assume that the packages
 are distinct, so Corollary~\ref{cor:triples} gives disjoint additive triples.
 
 First suppose \(a,b>1\).  The polynomial \(Q_{a,b}\) is primitive in
@@ -1532,7 +1478,7 @@ integers \(a,b\).  Gauss's lemma gives
 Comparison of leading and constant coefficients gives
 \begin{equation}
  c=au,\qquad d=bv,\qquad u,v\in\Z_{>0}.
- \tag{13.4}
+ \label{eq:13-4}
 \end{equation}
 Disjointness of the additive triples gives \(u,v\geq2\).
 
@@ -1553,19 +1499,19 @@ and hence
  S(x)\equiv
  v\left(1-\frac Nb x^a+\frac ab x^N\right)^{-1}
  \pmod{x^{au}}.
- \tag{13.5}
+ \label{eq:13-5}
 \end{equation}
 For \(0\leq k<u\), the coefficient of \(x^{ka}\) on the left is integral.
 Lemma~\ref{lem:diagonaldenominator} therefore gives \(b^k\mid v\), and at
 \(k=u-1\),
 \begin{equation}
  b^{u-1}\mid v.
- \tag{13.6}
+ \label{eq:13-6}
 \end{equation}
 Reciprocating the divisibility and repeating the argument gives
 \begin{equation}
  a^{v-1}\mid u.
- \tag{13.7}
+ \label{eq:13-7}
 \end{equation}
 Thus \(v\geq2^{u-1}\) and \(u\geq2^{v-1}\).  If, say,
 \(u\leq v\), then \(u\geq2^{v-1}\geq2^{u-1}\); for \(u\geq3\) this is
@@ -1581,7 +1527,7 @@ It remains to treat a boundary shape.  By reciprocity it is enough to assume
 \(b=1\) and \(a>1\).  Comparison of leading coefficients gives
 \begin{equation}
  c=au\qquad(u\in\Z_{>0}).
- \tag{13.8}
+ \label{eq:13-8}
 \end{equation}
 Since the packages are distinct, additive-triple separation gives \(d\geq2\).
 Reciprocating yields
@@ -1595,7 +1541,7 @@ with \(k=d-1\) gives
 \begin{equation}
  a^{d-1}\mid u,
  \qquad\text{hence}\qquad c=au\geq a^d.
- \tag{13.9}
+ \label{eq:13-9}
 \end{equation}
 
 Now
@@ -1606,19 +1552,19 @@ By the Enestr\"om--Kakeya coefficient-ratio bound
 \cite{AndersonSaffVarga1979}, every root \(\alpha\) satisfies
 \begin{equation}
  r:=|\alpha|\leq\frac{a-1}{a}\leq e^{-1/a}<1.
- \tag{13.10}
+ \label{eq:13-10}
 \end{equation}
 The same \(\alpha\) is a root of \(Q_{c,d}\), so the collision estimate
-\((4.1)\), applied to the edge \(\{c,c+d\}\), gives
+\eqref{eq:4-1}, applied to the edge \(\{c,c+d\}\), gives
 \[
  \frac dc\leq\frac{2r^c}{1-r^c},
  \qquad
  d\leq\frac{2c}{e^{c/a}-1}.
- \tag{13.11}
+ \label{eq:13-11}
 \]
 The function \(x/(e^{x/a}-1)\) is decreasing for \(x>0\): with
 \(y=x/a\), the numerator of its derivative is
-\(e^y(1-y)-1<0\).  Using \((13.9)\) in \((13.11)\), and then
+\(e^y(1-y)-1<0\).  Using \eqref{eq:13-9} in \eqref{eq:13-11}, and then
 \(e^y-1>y^2\) for \(y\geq2\), yields
 \[
  d\leq\frac{2a^d}{e^{a^{d-1}}-1}<2a^{2-d}.
@@ -1689,7 +1635,7 @@ Since \(X^n=Y^m\), one obtains the master identity
 \begin{equation}
  m^m r^r(\zeta^n-1)^n
  =n^n\zeta^{mr}(\zeta^m-1)^m(\zeta^r-1)^r.
- \tag{14.F1}\label{eq:fibre-master}
+ \label{eq:fibre-master}
 \end{equation}
 None of \(\zeta^m,\zeta^n,\zeta^r\) is \(1\), by the displayed formulas
 and \(\alpha\neq0\).
@@ -1715,7 +1661,7 @@ valuations in \eqref{eq:fibre-master} gives
 \begin{equation}
  mt+n v_\ell(1-\zeta^n)
  =m v_\ell(1-\zeta^m)+r v_\ell(1-\zeta^r).
- \tag{14.F2}\label{eq:fibre-valuation}
+ \label{eq:fibre-valuation}
 \end{equation}
 If \(s=1\), then \(a>t\), because \(\zeta^m\neq1\), and the valuation
 identity becomes
@@ -1786,14 +1732,14 @@ If \(\gcd(d_1,d_2)=1\), then
  \deg\gcd\bigl(H_{m,n},H_{p,q}\bigr)
  \leq
  \min\left\{\frac n{d_1},\frac q{d_2}\right\}.
- \tag{14.1}
+ \label{eq:14-1}
 \end{equation}
 Consequently, if a noncyclotomic irreducible polynomial \(h\) of degree
 \(e\) divides both trinomials, then
 \begin{equation}
  e\leq
  \min\left\{\frac n{d_1},\frac q{d_2}\right\}-2.
- \tag{14.2}
+ \label{eq:14-2}
 \end{equation}
 \end{theorem}
 
@@ -1813,10 +1759,12 @@ and hence
  \deg\gcd(H_{m,n},x^{d_2}-c_j)
  \leq q'=\frac q{d_2}.
 \]
-Interchanging the two trinomials gives the other half of \((14.1)\).  Their
+Interchanging the two trinomials gives the other half of \eqref{eq:14-1}.  Their
 only common roots of unity are at \(1\), with multiplicity two in each.
 Thus a common noncyclotomic factor of degree \(e\), together with
-\((x-1)^2\), lies in the gcd, proving \((14.2)\).  The only external input in this proof has therefore been removed: the fibre estimate is the elementary Lemma~\ref{lem:schinzelfibre}.
+\((x-1)^2\), lies in the gcd, proving \eqref{eq:14-2}.  Here the fibre estimate is
+the elementary Lemma~\ref{lem:schinzelfibre}, so the bound relies on no
+external result.
 \end{proof}
 
 \subsection{Two internal-power obstructions}
@@ -1908,7 +1856,7 @@ a root of \(h\).  If \(p\) is an odd prime with
 and \(\beta\in\Q(\beta)^p\), then
 \begin{equation}
  e\leq p-2.
- \tag{14.3}
+ \label{eq:14-3}
 \end{equation}
 \end{theorem}
 
@@ -2025,7 +1973,7 @@ Using \(V=N-U\) gives
 \begin{equation}
  \alpha^{-pA}\overline{\Phi_p(H)}(\alpha)
  =T_{p,A,B}(U),
- \tag{14.6}
+ \label{eq:14-6}
 \end{equation}
 where
 \begin{equation}
@@ -2035,7 +1983,7 @@ where
  +\frac{q_p(B)}B(N-U)^p
  -q_p(N)
  \in\mathbb F_p[U].
- \tag{14.7}
+ \label{eq:14-7}
 \end{equation}
 The hypothesis \(p\nmid ABN\) is essential here.  The polynomial has degree
 at most \(p\), and the identity
@@ -2070,7 +2018,7 @@ is injective on roots of \(F\): equality of \(U\) also gives equality of
 \(\alpha^A=\alpha^B=1\), hence \(\alpha=1\), which is not a root.
 Consequently the \(e\) roots of \(\overline h\) give \(e\) distinct roots
 of \(T_{p,A,B}\) outside the exactly double root \(A\).  The remaining
-root-multiplicity budget is at most \(p-2\), proving \((14.3)\).
+root-multiplicity budget is at most \(p-2\), proving \eqref{eq:14-3}.
 \end{proof}
 
 \begin{theorem}[Self-power rigidity]\label{thm:selfpower}
@@ -2080,7 +2028,7 @@ Let \(A,B\) be coprime positive integers with \(A\neq B\), and suppose
 \begin{equation}
  \beta\notin K^p
  \qquad\text{for every prime }p.
- \tag{14.8}
+ \label{eq:14-8}
 \end{equation}
 \end{theorem}
 
@@ -2091,13 +2039,13 @@ Suppose \(\beta=w^p\) with \(w\in K\).  Put \(N=A+B\) and
  \operatorname N_{K/\Q}(w)^p
  =\operatorname N_{K/\Q}(\beta)
  =(-1)^D\frac BA.
- \tag{14.9}
+ \label{eq:14-9}
 \end{equation}
 For odd \(p\), coprimality implies
 \[
  A=u^p,\qquad B=v^p
 \]
-for coprime positive integers \(u,v\).  For \(p=2\), equation \((14.9)\)
+for coprime positive integers \(u,v\).  For \(p=2\), equation \eqref{eq:14-9}
 forces \(D\) even and \(A,B\) to be coprime squares; hence both are odd and
 \(v_2(N)=1\).
 
@@ -2130,7 +2078,7 @@ of degree \(D\), gives \(D\leq p-2\).  But \(A=u^p\), \(B=v^p\), and
 \[
  D=A+B-2\geq1+2^p-2=2^p-1>p-2,
 \]
-a contradiction.  This proves \((14.8)\).
+a contradiction.  This proves \eqref{eq:14-8}.
 \end{proof}
 
 \subsection{Kummer reduction and its complete elimination}
@@ -2229,7 +2177,7 @@ Let \(I(X)\) denote the number of unordered pairs \(1\leq a<b\),
 \(a+b\leq X\), whose reciprocal packages are not globally isolated.  Then
 \begin{equation}
  I(X)\ll X^{20/11}\log(2X).
- \tag{14.10}
+ \label{eq:14-10}
 \end{equation}
 \end{theorem}
 
@@ -2256,7 +2204,7 @@ small totals are absorbed into the constant.  Thus the number \(R(Y)\) of
 reducible primitive shapes of total at most \(Y\) satisfies
 \begin{equation}
  R(Y)\ll Y^{20/11}\log(2Y).
- \tag{14.11}
+ \label{eq:14-11}
 \end{equation}
 Therefore
 \[
@@ -2279,7 +2227,7 @@ theorem does not assert that its members actually share factors.
 
 \section{Factor-level power sieves, residual splitting, and exact signatures}
 
-The previous section handles irreducible primitive bases.  For reducible bases, the same power questions must be tracked factor by factor.  The purpose here is to record exactly where endpoint primes can still create internal powers and which congruence signatures survive.
+Section~\ref{sec:kummer} handles irreducible primitive bases.  For reducible bases, the same power questions must be tracked factor by factor.  The purpose here is to record exactly where endpoint primes can still create internal powers and which congruence signatures survive.
 \label{sec:degreesieve}
 
 The local cluster argument constrains proper factors without assuming
@@ -2294,12 +2242,12 @@ Let \(A,B\) be coprime positive integers, put \(N=A+B\), and let
 For every prime \(p\mid N\),
 \begin{equation}
  e\equiv0\quad\text{or}\quad-2\pmod p.
- \tag{15.1}
+ \label{eq:15-1}
 \end{equation}
 Consequently,
 \begin{equation}
  \operatorname{rad}(N)\mid e(e+2).
- \tag{15.2}
+ \label{eq:15-2}
 \end{equation}
 If the same reciprocal irreducible orbit occurs in primitive packages of
 totals \(N\) and \(M\), then
@@ -2307,7 +2255,7 @@ totals \(N\) and \(M\), then
  \operatorname{lcm}\bigl(\operatorname{rad}N,
                           \operatorname{rad}M\bigr)
  \mid e(e+2).
- \tag{15.3}
+ \label{eq:15-3}
 \end{equation}
 \end{theorem}
 
@@ -2330,7 +2278,7 @@ contribution on an edge of reduced slope denominator \(\ell\) is divisible
 by \(\ell\); here \(\ell\) equals the full edge length, so the factor takes
 that edge wholly or not at all.  Contributions at nontrivial centers are
 divisible by \(p\), while the center \(1\) contributes either \(0\) or
-\(p-2\) modulo \(p\).  This proves \((15.1)\) for odd \(p\).
+\(p-2\) modulo \(p\).  This proves \eqref{eq:15-1} for odd \(p\).
 
 For \(p=2\), one must not separate Borisov's first two formal layers when
 \(k\geq2\): both have slope \(1/2\) and form a single canonical side of
@@ -2338,12 +2286,12 @@ length four.  Its reduced slope denominator is nevertheless \(2\), so any
 local factor takes an even number of roots from that side.  Every later
 nontrivial side has even reduced slope denominator, and the same is true for
 every nonhorizontal side at the center \(1\).  Hence every factor degree is
-even.  This is precisely \((15.1)\) modulo \(2\).
+even.  This is precisely \eqref{eq:15-1} modulo \(2\).
 
-Thus every \(p\mid N\) divides \(e(e+2)\), proving \((15.2)\).  For a
+Thus every \(p\mid N\) divides \(e(e+2)\), proving \eqref{eq:15-2}.  For a
 common reciprocal orbit, apply the result to whichever of \(h,h^\vee\)
 divides the second orientation; the reciprocal has the same degree.  This
-gives \((15.3)\).
+gives \eqref{eq:15-3}.
 \end{proof}
 
 \begin{corollary}[A numerical coprimality criterion]
@@ -2357,7 +2305,7 @@ Let two primitive packages have totals \(N,M\), put
 If
 \begin{equation}
  \rho>\nu(\nu-2),
- \tag{15.4}
+ \label{eq:15-4}
 \end{equation}
 then the packages are coprime.  In particular, distinct primitive packages
 with coprime squarefree totals are coprime.
@@ -2365,7 +2313,7 @@ with coprime squarefree totals are coprime.
 
 \begin{proof}
 A common factor has degree \(1\leq e\leq\nu-2\), so
-\(e(e+2)\leq\nu(\nu-2)\), contradicting \((15.3)\)--\((15.4)\).
+\(e(e+2)\leq\nu(\nu-2)\), contradicting \eqref{eq:15-3}--\eqref{eq:15-4}.
 For coprime squarefree totals, \(\rho=NM>\nu(\nu-2)\).
 \end{proof}
 
@@ -2516,13 +2464,13 @@ Let \(h\) be an irreducible factor of primitive \(Q_{A,B}\), of degree
 \(\beta\in\Q(\beta)^p\), then
 \begin{equation}
  e\leq A,\qquad pA\mid e\kappa.
- \tag{15.5}
+ \label{eq:15-5}
 \end{equation}
 \item Suppose \(p^\kappa\Vert A\).  Then an internal \(p\)-th power
 forces
 \begin{equation}
  e\leq B,\qquad pB\mid e\kappa.
- \tag{15.6}
+ \label{eq:15-6}
 \end{equation}
 \end{enumerate}
 Equivalently, in (a),
@@ -2591,16 +2539,16 @@ and \((C,D)\), scaling factors \(r,s\), and a common root \(\alpha\).  Put
 \[
  g=\gcd(r,s),\quad r_0=r/g,\quad s_0=s/g,
  \quad w=\alpha^g,
- \quad L=\min(A+B,C+D)-2.
+ \quad \mu=\min(A+B,C+D)-2.
 \]
 Let \(\beta=w^{r_0}\) be a root of an irreducible factor
 \(h\mid Q_{A,B}\) of degree \(e\).  For every prime \(p\mid r_0\), at
 least one of the following holds:
 \begin{enumerate}[label=(\roman*)]
-\item \(pe\leq L\);
+\item \(pe\leq\mu\);
 \item \(\beta\in\Q(\beta)^p\).
 \end{enumerate}
-If \(pe>L\), the second alternative holds and hence all applicable
+If \(pe>\mu\), the second alternative holds and hence all applicable
 conclusions of Corollary~\ref{cor:totalprimepower},
 Theorem~\ref{thm:endpointpower}, and
 Theorem~\ref{thm:frobeniusfactor} apply.
@@ -2612,7 +2560,7 @@ The minimal polynomial \(k_w\) is noncyclotomic because
 \(Q_{A,B}(x^{r_0})\) and \(Q_{C,D}(x^{s_0})\), whose exponent-pair gcds
 are coprime.  Theorem~\ref{thm:schinzelbound} gives
 \[
- [\Q(w):\Q]\leq L.
+ [\Q(w):\Q]\leq\mu.
 \]
 Fix \(p\mid r_0\), put \(u=w^{r_0/p}\), and set
 \(K=\Q(\beta)\).  If \(\beta\notin K^p\), Capelli's criterion makes
@@ -2621,12 +2569,12 @@ Fix \(p\mid r_0\), put \(u=w^{r_0/p}\), and set
  [K(u):K]=p.
 \]
 Since \(K(u)\subseteq\Q(w)\), it follows that
-\(pe\leq[\Q(w):\Q]\leq L\).  The contrapositive gives the second
-alternative when \(pe>L\).
+\(pe\leq[\Q(w):\Q]\leq\mu\).  The contrapositive gives the second
+alternative when \(pe>\mu\).
 \end{proof}
 
 \begin{remark}
-The former condition \(2e>L\) is the special case in which the
+The former condition \(2e>\mu\) is the special case in which the
 internal-power alternative is forced simultaneously for every prime divisor
 of \(r_0\).  The prime-by-prime form is stronger when the relative scaling
 exponent has a large prime divisor.
@@ -2649,7 +2597,7 @@ Then there is a unique factorization
  \qquad (U,V)=1,
  \qquad U\mid e,
  \qquad V\mid e+2,
- \tag{15.7}
+ \label{eq:15-7}
 \end{equation}
 obtained by assigning each odd prime divisor of \(\rho_{\mathrm{odd}}\) to
 exactly one of the two roles \(e\equiv0\) or \(e\equiv-2\).  If
@@ -2660,7 +2608,7 @@ exactly one of the two roles \(e\equiv0\) or \(e\equiv-2\).  If
 For every odd \(q\mid\rho_{\mathrm{odd}}\),
 Theorem~\ref{thm:radicalsieve} says that \(q\mid e(e+2)\).  Since
 \(\gcd(e,e+2)\mid2\), the prime \(q\) divides exactly one of the two
-integers.  Multiplying the primes in their two roles gives \((15.7)\).  The
+integers.  Multiplying the primes in their two roles gives \eqref{eq:15-7}.  The
 assertion at \(2\) is the parity part of the same theorem.
 \end{proof}
 
@@ -2680,7 +2628,7 @@ and put \(t_q=\sum_i\varepsilon_i\).  Then for an integer \(j\geq0\),
  \sum_i a_i=k+2j,
  \qquad
  (q-2)j\leq k-1.
- \tag{15.8}
+ \label{eq:15-8}
 \end{equation}
 In particular, if \(q>k+1\), then \(j=0\): exactly one factor has the
 \(-2\)-role at \(q\), and the total number of irreducible factors is at
@@ -2700,7 +2648,7 @@ index counted by \(t_q\) contributes at least one to \(\sum_i a_i\),
 \[
  1+qj=t_q\leq\sum_i a_i=k+2j,
 \]
-which is the final inequality in \((15.8)\).  If \(q>k+1\), then
+which is the final inequality in \eqref{eq:15-8}.  If \(q>k+1\), then
 \(q-2>k-1\), forcing \(j=0\).  For \(k=2\), reducibility forces two
 positive \(a_i\)'s summing to two, and exactly one \(\varepsilon_i\) is
 one; the degrees are therefore \(q-2\) and \(q\).
@@ -2743,7 +2691,7 @@ prime with \(p>e+2\), and suppose \(p^\kappa\Vert B\).  Then
  \frac{A}{\gcd(A,\kappa)}\mid e,
  \qquad
  \frac{C}{\gcd(C,\lambda)}\mid e.
- \tag{15.9}
+ \label{eq:15-9}
 \end{equation}
 In particular, \(\kappa=\lambda=1\) is impossible for two distinct
 packages.
@@ -2762,7 +2710,7 @@ nonunit block.  In \(Q_{A,B}\) these valuations are positive and equal to
 \(\kappa/A\); therefore the second orientation must also put \(p\) in its
 constant endpoint, namely \(D\), rather than in its leading endpoint
 \(C\), whose nonunit valuations have the opposite sign.  Equality of the
-valuations gives the first relation in \((15.9)\).  Integrality of the
+valuations gives the first relation in \eqref{eq:15-9}.  Integrality of the
 valuation of the norm gives the two denominator divisibilities.
 
 If \(\kappa=\lambda=1\), then \(A\mid e\) and \(C\mid e\).  The two
@@ -2774,7 +2722,7 @@ The merged \(2\)-adic slope is therefore no longer an unresolved local
 case.  The remaining bad-endpoint room is precise: an internal \(p\)-th
 power must lie entirely in a nonunit endpoint block and requires an endpoint
 valuation exponent at least \(p\), together with the divisibilities in
-\((15.5)\)--\((15.6)\).
+\eqref{eq:15-5}--\eqref{eq:15-6}.
 
 \section{Reciprocal resultants as a supplementary sieve}
 
@@ -2784,7 +2732,7 @@ For primitive \(a,b\), put \([k]=1+x+\cdots+x^{k-1}\).  Reciprocal
 polynomials are normalized as in Section~\ref{sec:finite-support}.  One has
 \begin{equation}
  Q_{a,b}(x)+Q_{b,a}(x)=(a+b)[a](x)[b](x).
- \tag{16.1}
+ \label{eq:16-1}
 \end{equation}
 
 \begin{proposition}[Exact reciprocal resultant]
@@ -2792,13 +2740,13 @@ If \(\gcd(a,b)=1\), then
 \begin{equation}
  \left|\Res(Q_{a,b},Q_{b,a})\right|
  =a^{a-2}b^{b-2}(a+b)^{a+b-2},
- \tag{16.2}
+ \label{eq:16-2}
 \end{equation}
 where a factor \(1^{-1}\) is interpreted as \(1\).
 \end{proposition}
 
 \begin{proof}
-At a root \(\alpha\) of \(Q_{a,b}\), equation \((16.1)\) gives
+At a root \(\alpha\) of \(Q_{a,b}\), equation \eqref{eq:16-1} gives
 \[
  Q_{b,a}(\alpha)=(a+b)[a](\alpha)[b](\alpha).
 \]
@@ -2825,7 +2773,7 @@ If \(a=gA\), \(b=gB\), \(\gcd(A,B)=1\), then composition and scaling give
  \left|\Res(Q_{a,b},Q_{b,a})\right|
  =g^{2g(A+B-2)}
  \left(A^{A-2}B^{B-2}(A+B)^{A+B-2}\right)^g.
- \tag{16.3}
+ \label{eq:16-3}
 \end{equation}
 These formulas are useful as a sieve for a proposed common irreducible factor,
 but cannot by themselves prove coprimality: a nonreciprocal irreducible
@@ -2847,7 +2795,7 @@ If a noncyclotomic irreducible polynomial \(h\) divides both
 \(H_{m,n}\) and \(H_{p,q}\), then
 \begin{equation}
  h(x)^2\mid \frac{W_{m,n;p,q}(x)}{(x-1)^4}.
- \tag{17.1}
+ \label{eq:17-1}
 \end{equation}
 Moreover the numerator has at most eight monomials before equal exponents are
 merged:
@@ -2858,7 +2806,7 @@ merged:
  +nq(m-p)x^{m+p-1} \notag\\
  &+mn(q-p)(x^{n-1}-x^{m-1}) \notag\\
  &-pq(n-m)(x^{q-1}-x^{p-1}).
- \tag{17.2}
+ \label{eq:17-2}
 \end{align}
 If the ordered edges are distinct, then \(W_{m,n;p,q}\not\equiv0\).
 \end{proposition}
@@ -2873,7 +2821,7 @@ If \(K_1=hA\) and \(K_2=hB\), the terms containing \(h'\) cancel:
 \[
  K_1'K_2-K_1K_2'=h^2(A'B-AB').
 \]
-This proves \((17.1)\), and direct expansion gives \((17.2)\).
+This proves \eqref{eq:17-1}, and direct expansion gives \eqref{eq:17-2}.
 If the Wronskian vanished identically, then
 \((H_{m,n}/H_{p,q})'=0\), so the two trinomials would be scalar multiples.
 Comparison of their three nonzero supports \(\{0,m,n\}\) and
@@ -3095,7 +3043,7 @@ Let \(B_4=B'(4,1)\) be the effective constant in Theorem~2.6 of
 \cite{AmorosoSombraZannier2017}.  If
 \begin{equation}
  D^{1/6}>B_4\bigl(1+\log(2D)\bigr),
- \tag{17.3}
+ \label{eq:17-3}
 \end{equation}
 then there are \(0\leq k\leq3\), an injective torus homomorphism
 \[
@@ -3118,7 +3066,7 @@ one has \(G(y_0)=0\).
 
 \begin{proof}
 The coefficient height is at most \(\log(2D)\), and the exponent vector is
-primitive, so Theorem~2.6 applies under \((17.3)\).  It gives the displayed
+primitive, so Theorem~2.6 applies under \eqref{eq:17-3}.  It gives the displayed
 factorization and says that \(g\mid\gcd(H_{m,n},H_{p,q})\).  Moreover, a
 root of the quotient of this gcd by \(g\) is either torsion or is a common
 root of the two proper-subsum equations obtained by retaining a nonempty
@@ -3160,7 +3108,7 @@ Proposition~\ref{prop:aszspecial}, define
  \right),
  \qquad
  D_0=\max\{\lceil B_4\rceil,D_{\mathrm{ASZ}}\}.
- \tag{17.4}
+ \label{eq:17-4}
 \end{equation}
 Then this \(D_0\) has the stated property.
 \end{theorem}
@@ -3237,7 +3185,7 @@ coprimality conjecture is reduced to an effective finite exact computation.
 
 \begin{proof}
 Divide the four edge endpoints by their common gcd and replace the common
-root \(z\) by the corresponding power, as in \((2.6)\).  The normalized
+root \(z\) by the corresponding power, as in \eqref{eq:2-6}.  The normalized
 configuration is bounded by Theorem~\ref{thm:hyperplane}.  Conversely, the
 original configuration is its simultaneous dilation.
 \end{proof}
@@ -3265,12 +3213,12 @@ Let \(0<u<v\), and suppose \(H_{u,v}(\alpha)=0\).  Then
  (v-u)\,\mathrm h(\alpha)\leq\log(2v),
  \qquad
  u\,\mathrm h(\alpha)\leq\log(2v).
- \tag{17.5}
+ \label{eq:17-5}
 \end{equation}
 Consequently,
 \begin{equation}
  v\,\mathrm h(\alpha)\leq2\log(2v).
- \tag{17.6}
+ \label{eq:17-6}
 \end{equation}
 \end{lemma}
 
@@ -3292,7 +3240,7 @@ and hence
  v\,\mathrm h(\alpha)
  \leq u\,\mathrm h(\alpha)+\log(2v),
 \]
-which is the first inequality in \((17.5)\).
+which is the first inequality in \eqref{eq:17-5}.
 
 The reciprocal identity
 \[
@@ -3301,7 +3249,7 @@ The reciprocal identity
 shows that \(\alpha^{-1}\) is a root of \(H_{v-u,v}\).  Applying the first
 inequality to that edge and using
 \(\mathrm h(\alpha^{-1})=\mathrm h(\alpha)\) gives the second inequality.
-Adding them proves \((17.6)\).
+Adding them proves \eqref{eq:17-6}.
 \end{proof}
 
 For a Euclidean lattice \(\Lambda\), write \(\det\Lambda\) for its
@@ -3319,7 +3267,7 @@ Let \(R\subset\Z^4\) be a saturated rank-two lattice, and let
 the projective closure \(\overline T\) satisfies
 \begin{equation}
  \deg\overline T\leq2\det R.
- \tag{17.7}
+ \label{eq:17-7}
 \end{equation}
 \end{lemma}
 
@@ -3361,13 +3309,13 @@ rows of \(U\) form a basis of \(S\), so Cauchy--Binet gives
 \begin{equation}
  (\det R)^2=(\det S)^2=\det(UU^{\mathsf T})
  =\sum_{1\leq i<j\leq4}\det(u_i,u_j)^2.
- \tag{17.8}
+ \label{eq:17-8}
 \end{equation}
 
 Order the vertices of \(P\) cyclically.  In the shoelace sum, every edge
 incident with the vertex \(0\) contributes zero.  All other vertices belong
 to \(\{u_1,\ldots,u_4\}\), so at most four nonzero determinant terms
-remain.  Therefore Cauchy--Schwarz and \((17.8)\) give
+remain.  Therefore Cauchy--Schwarz and \eqref{eq:17-8} give
 \[
  \deg\overline T
  \leq2\left(\sum_{i<j}\det(u_i,u_j)^2\right)^{1/2}
@@ -3389,7 +3337,7 @@ one-parameter subgroup
 and satisfying
 \begin{equation}
  \deg\overline T<4D^{2/3}.
- \tag{17.9}
+ \label{eq:17-9}
 \end{equation}
 \end{proposition}
 
@@ -3472,7 +3420,7 @@ let the two packages be distinct, and suppose that
 Then
 \begin{equation}
  d<4D^{2/3}.
- \tag{17.10}
+ \label{eq:17-10}
 \end{equation}
 \end{proposition}
 
@@ -3517,7 +3465,7 @@ Finally, choose integers \(r_1,r_2,r_3,r_4\) with
  \alpha=(\alpha^m)^{r_1}(\alpha^n)^{r_2}
          (\alpha^p)^{r_3}(\alpha^q)^{r_4}.
 \]
-Thus \(\Q(P_\alpha)=\Q(\alpha)\), proving \((17.10)\).
+Thus \(\Q(P_\alpha)=\Q(\alpha)\), proving \eqref{eq:17-10}.
 \end{proof}
 
 Let
@@ -3533,14 +3481,14 @@ leading coefficient, of a noncyclotomic common root of two collision
 trinomials.  Then \(h\) is nonreciprocal and
 \begin{equation}
  M(h)\geq\theta_0.
- \tag{17.11}
+ \label{eq:17-11}
 \end{equation}
 \end{proposition}
 
 \begin{proof}
 The polynomial \(h\) divides an orientation \(Q_{a,b}\).  If it were
 self-reciprocal, it would also divide the reciprocal orientation
-\(Q_{b,a}\), contradicting the nonzero reciprocal resultant \((16.3)\).
+\(Q_{b,a}\), contradicting the nonzero reciprocal resultant \eqref{eq:16-3}.
 Thus \(h\) is nonreciprocal.
 
 If \(h\) is monic, Smyth's theorem \cite{Smyth1971} gives
@@ -3558,7 +3506,7 @@ Every normalized four-index counterexample
 satisfies
 \begin{equation}
  \boxed{\max\{m,n,p,q\}\leq175\,394\,637.}
- \tag{17.12}
+ \label{eq:17-12}
 \end{equation}
 \end{theorem}
 
@@ -3569,7 +3517,7 @@ polynomial, let \(d=\deg h\), and put
 \(D\).  Lemma~\ref{lem:collisionheight} gives
 \begin{equation}
  \mathrm h(\alpha)\leq\frac{2\log(2D)}D.
- \tag{17.13}
+ \label{eq:17-13}
 \end{equation}
 By Proposition~\ref{prop:fielddegree},
 \(d<4D^{2/3}\).  Since
@@ -3579,7 +3527,7 @@ Proposition~\ref{prop:mahlergap} yields
  \log\theta_0
  \leq\log M(h)
  <\frac{8\log(2D)}{D^{1/3}}.
- \tag{17.14}
+ \label{eq:17-14}
 \end{equation}
 The function on the right is strictly decreasing for \(D\geq11\).  Certified
 real-ball arithmetic gives
@@ -3592,7 +3540,7 @@ whereas
  \frac{8\log(2\cdot175394638)}{175394638^{1/3}}
    <\log\theta_0.
 \]
-Thus \((17.14)\) is impossible for \(D\geq175394638\).  The smaller values
+Thus \eqref{eq:17-14} is impossible for \(D\geq175394638\).  The smaller values
 \(D<11\) are already below the asserted bound.
 \end{proof}
 
@@ -3610,7 +3558,7 @@ The same decreasing function satisfies
 \[
  \frac{8\log(2\cdot6816242)}{6816242^{1/3}}<\log2.
 \]
-Hence \((17.13)\) and Proposition~\ref{prop:fielddegree} give
+Hence \eqref{eq:17-13} and Proposition~\ref{prop:fielddegree} give
 \(M(h)<2\).  Both the absolute leading coefficient and the absolute constant
 coefficient of a primitive polynomial are at most its Mahler measure.  They
 are nonzero integers, so both equal one.
@@ -3642,7 +3590,7 @@ multiplicity, put
 \begin{equation}
  A_j(h)=\sum_{h(\beta)=0}(1-\beta)\beta^j
  \qquad(j\geq0).
- \tag{17.15}
+ \label{eq:17-15}
 \end{equation}
 
 \begin{proposition}[All-moment congruence]\label{prop:momentcongruence}
@@ -3657,7 +3605,7 @@ If a prime \(\ell\) divides \(ABNCDM\) but does not divide \(uv\), then
 \begin{equation}
  A_j(h)\in\ell\Z_{(\ell)}
  \qquad\text{for every }j\geq0.
- \tag{17.16}
+ \label{eq:17-16}
 \end{equation}
 \end{proposition}
 
@@ -3670,12 +3618,12 @@ so all roots of \(h\) are \(\ell\)-adic units.
 Borisov's cluster argument \cite[Lemma~3.1 and Remark~3.5]{Borisov1998}
 shows that, at every nontrivial prime-to-\(\ell\) root-of-unity center, the
 number of roots belonging to a rational factor is divisible by \(\ell\).
-Modulo \(\ell\), the summand in \((17.15)\) is constant on such a cluster,
+Modulo \(\ell\), the summand in \eqref{eq:17-15} is constant on such a cluster,
 namely \((1-\zeta)\zeta^j\), so the cluster contribution vanishes.  At the
 center \(1\), every summand already vanishes modulo \(\ell\).  If \(\ell\)
 is an endpoint prime, the nonunit endpoint block is absent because every root
 of \(h\) is a unit.  These contributions exhaust the roots and prove
-\((17.16)\).  The argument also covers \(\ell=2\); the merged side still
+\eqref{eq:17-16}.  The argument also covers \(\ell=2\); the merged side still
 contributes an even number of roots to every rational factor, as in
 Proposition~\ref{prop:mergedtwo}.
 \end{proof}
@@ -3697,14 +3645,14 @@ Under the hypotheses of Proposition~\ref{prop:momentcongruence}, put
 Then every coefficient of
 \begin{equation}
  (1-t)\widetilde h'(t)+e\widetilde h(t)
- \tag{17.17}
+ \label{eq:17-17}
 \end{equation}
 is divisible by \(\mathcal R\).  In particular,
 \begin{equation}
  \mathcal R\mid eu+c_{e-1},
  \qquad
  \mathcal R\mid ev+c_1.
- \tag{17.18}
+ \label{eq:17-18}
 \end{equation}
 \end{corollary}
 
@@ -3716,8 +3664,8 @@ For each prime in \(\mathcal R\), the constant coefficient
  =e+(1-t)\frac{\widetilde h'(t)}{\widetilde h(t)}.
 \]
 Proposition~\ref{prop:momentcongruence} makes the left side zero modulo the
-prime.  Multiplication by \(\widetilde h(t)\) gives \((17.17)\), and the
-constant and \(t^{e-1}\) coefficients give \((17.18)\).
+prime.  Multiplication by \(\widetilde h(t)\) gives \eqref{eq:17-17}, and the
+constant and \(t^{e-1}\) coefficients give \eqref{eq:17-18}.
 \end{proof}
 
 \begin{proposition}[Hankel--discriminant divisibility]
@@ -3725,12 +3673,12 @@ constant and \(t^{e-1}\) coefficients give \((17.18)\).
 With the same notation,
 \begin{equation}
  \boxed{\mathcal R^e\mid h(1)\Disc(h).}
- \tag{17.19}
+ \label{eq:17-19}
 \end{equation}
 Consequently,
 \begin{equation}
  \mathcal R\leq2eM(h)^{2-1/e}.
- \tag{17.20}
+ \label{eq:17-20}
 \end{equation}
 \end{proposition}
 
@@ -3749,10 +3697,10 @@ Hence, up to sign,
  =\prod_k(1-\beta_k)
   \prod_{i<j}(\beta_i-\beta_j)^2
  =\frac{h(1)\Disc(h)}{u^{2e-1}}.
- \tag{17.21}
+ \label{eq:17-21}
 \end{equation}
 Every entry is divisible by every prime in \(\mathcal R\), while \(u\) is a
-unit at those primes.  Thus \((17.19)\) follows.
+unit at those primes.  Thus \eqref{eq:17-19} follows.
 
 The elementary estimates
 \[
@@ -3765,7 +3713,7 @@ The elementary estimates
  \mathcal R^e
  \leq2^ee^eM(h)^{2e-1}.
 \]
-Taking \(e\)-th roots proves \((17.20)\).
+Taking \(e\)-th roots proves \eqref{eq:17-20}.
 \end{proof}
 
 \begin{corollary}[Support bound for two colliding primitive packages]
@@ -3773,12 +3721,12 @@ Taking \(e\)-th roots proves \((17.20)\).
 Under the same hypotheses,
 \begin{equation}
  \mathcal S\leq2eM(h)^{4-1/e}.
- \tag{17.22}
+ \label{eq:17-22}
 \end{equation}
 If \(h\) is monic with constant coefficient \(\pm1\), then
 \begin{equation}
  \mathcal S\leq2eM(h)^{2-1/e}.
- \tag{17.23}
+ \label{eq:17-23}
 \end{equation}
 \end{corollary}
 
@@ -3788,8 +3736,8 @@ Since
 \[
  \operatorname{rad}(uv)\leq|uv|\leq M(h)^2,
 \]
-formula \((17.20)\) gives \((17.22)\).  In the unit-normalized case no prime
-is omitted, so \(\mathcal S=\mathcal R\), giving \((17.23)\).
+formula \eqref{eq:17-20} gives \eqref{eq:17-22}.  In the unit-normalized case no prime
+is omitted, so \(\mathcal S=\mathcal R\), giving \eqref{eq:17-23}.
 \end{proof}
 
 \begin{proposition}[Endpoint divisibilities and slope matching]
@@ -3800,17 +3748,17 @@ Under the same hypotheses,
  \qquad u^B\mid A^e,
  \qquad |v|^C\mid D^e,
  \qquad u^D\mid C^e.
- \tag{17.24}
+ \label{eq:17-24}
 \end{equation}
 Moreover, for every prime \(\ell\mid u\),
 \begin{equation}
  \frac{v_\ell(A)}B=\frac{v_\ell(C)}D,
- \tag{17.25}
+ \label{eq:17-25}
 \end{equation}
 and, for every prime \(\ell\mid v\),
 \begin{equation}
  \frac{v_\ell(B)}A=\frac{v_\ell(D)}C.
- \tag{17.26}
+ \label{eq:17-26}
 \end{equation}
 \end{proposition}
 
@@ -3826,7 +3774,7 @@ Taking the resultant with \(h\) gives
 \begin{equation}
  \Res(h,N-Ax^B)
  =\pm\frac{B^eu^N}{v^A}\in\Z.
- \tag{17.27}
+ \label{eq:17-27}
 \end{equation}
 Since \((u,v)=1\), this proves \(|v|^A\mid B^e\).  Applying the same
 argument to the reciprocal factor in \(Q_{B,A}\) proves
@@ -3838,8 +3786,8 @@ at least one root is nonunit.  Borisov's endpoint polygons say that every
 negative-valuation root of \(Q_{A,B}\) has valuation
 \(-v_\ell(A)/B\), and every such root of \(Q_{C,D}\) has valuation
 \(-v_\ell(C)/D\).  The same root lies in both polynomials, proving
-\((17.25)\).  The positive-valuation endpoint description gives
-\((17.26)\) in exactly the same way when \(\ell\mid v\).
+\eqref{eq:17-25}.  The positive-valuation endpoint description gives
+\eqref{eq:17-26} in exactly the same way when \(\ell\mid v\).
 \end{proof}
 
 \begin{remark}
@@ -3860,6 +3808,38 @@ a square factor can disappear after reduction.
 \label{sec:computation}
 
 This is the first decisive computational section.  All filters used here are exact integer filters derived above; the computation does not rely on numerical root finding or on factoring the large collision polynomials.
+
+Table~\ref{tab:code} lists, for each computer-assisted result in
+Sections~\ref{sec:computation}--\ref{sec:nonunitcomputation}, the generator
+that produces its data and the independent script that re-checks it.
+
+\begin{table}[ht]
+\centering\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.64\textwidth}@{}}
+\hline
+Result & Generator \(\to\) independent verifier\\
+\hline
+Upper range, Thm~\ref{thm:upperelimination}
+ & \path{archive/Qab9_upper_bundle} pipeline \(\to\) \path{verify_upper_safe.py}; constants \path{certify_constants.py}, \path{certify_thresholds.sage}\\
+Unit branch, Thm~\ref{thm:unitelimination}
+ & \path{enumerate_unit_*.cpp}, \path{pair_unit_*.cpp} \(\to\) \path{verify_modular_gcd_certificates.py}, \path{verify_irreducibility_certificates_direct.py}\\
+Both-nonunit, Thm~\ref{thm:twononunitelimination}
+ & \path{enumerate_two_nonunit_packages.cpp}, \path{pair_two_nonunit.cpp} \(\to\) \path{verify_two_nonunit.py}\\
+One-nonunit \(D\ge16\,584\), Thm~\ref{thm:onenonunitlargeelimination}
+ & \path{enumerate_one_nonunit_packages.cpp}, \path{pair_one_nonunit.cpp} \(\to\) \path{verify_one_nonunit.py}\\
+Residual one-nonunit, Thm~\ref{thm:onenonunitresidualelimination}
+ & \path{enumerate_one_nonunit_residual_packages.cpp}, \path{pair_one_nonunit_residual.cpp} \(\to\) \path{verify_one_nonunit_residual.py}\\
+Analytic constants
+ & \path{certify_qab12_constants.py}\\
+\hline
+\end{tabular}
+\caption{Paper-to-code correspondence for the computer-assisted steps.  Scripts
+live in \protect\path{code/qab12} and data in \protect\path{data/qab12}, except
+the upper-range pipeline in \protect\path{archive/Qab9_upper_bundle};
+reproduction commands are in Section~\ref{sec:computation}.}
+\label{tab:code}
+\end{table}
 
 Put
 \[
@@ -3899,7 +3879,7 @@ Let \(\theta_0\) be the real root greater than one of \(T^3-T-1\).  Then
  =62\,608\,681+109\,870\,576\theta_0
    +82\,938\,844\theta_0^2
  >2D_1.
- \tag{18.1}
+ \label{eq:18-1}
 \end{equation}
 \end{lemma}
 
@@ -3911,7 +3891,7 @@ The polynomial \(T^3-T-1\) is strictly increasing for \(T\geq1\), and
  =-\frac{313}{15625}<0.
 \]
 Hence \(\theta_0>33/25\).  Substitution in the positive-coefficient
-right-hand side of \((18.1)\) gives the exact rational lower bound
+right-hand side of \eqref{eq:18-1} gives the exact rational lower bound
 \[
  \theta_0^{70}>
  \frac{220\,094\,051\,941}{625}
@@ -3924,12 +3904,12 @@ right-hand side of \((18.1)\) gives the exact rational lower bound
 For a normalized counterexample with \(D\leq D_1\),
 \begin{equation}
  d>\frac D{140}.
- \tag{18.2}
+ \label{eq:18-2}
 \end{equation}
 In the primitive decomposition above,
 \begin{equation}
  1\leq r,s\leq139.
- \tag{18.3}
+ \label{eq:18-3}
 \end{equation}
 In particular, throughout the unit range \(D\geq D_0\),
 \[
@@ -3938,12 +3918,12 @@ In particular, throughout the unit range \(D\geq D_0\),
 \end{proposition}
 
 \begin{proof}
-The height estimate \((17.13)\) and the Mahler gap \((17.11)\) give
+The height estimate \eqref{eq:17-13} and the Mahler gap \eqref{eq:17-11} give
 \[
  d\geq\frac{D\log\theta_0}{2\log(2D)}.
 \]
 Lemma~\ref{lem:plasticpower} gives
-\(70\log\theta_0>\log(2D_1)\geq\log(2D)\), proving \((18.2)\).
+\(70\log\theta_0>\log(2D_1)\geq\log(2D)\), proving \eqref{eq:18-2}.
 The confluent degree bound, Theorem~\ref{thm:schinzelbound}, gives
 \[
  d\leq\min(N,M)-2<N,M.
@@ -3975,7 +3955,7 @@ Consequently there is an integer \(k\geq1\) such that
  d=re_1=se_2=rsk,
  \qquad e_1=sk,
  \qquad e_2=rk.
- \tag{18.4}
+ \label{eq:18-4}
 \end{equation}
 \end{proposition}
 
@@ -4020,7 +4000,7 @@ Capelli's criterion now proves the irreducibility of \(X^r-\beta\).
 The proof for \(X^s-\gamma\) is identical.
 
 It follows that \(d=re_1=se_2\).  Since \(\gcd(r,s)=1\), one has
-\(s\mid e_1\) and \(r\mid e_2\), giving \((18.4)\).
+\(s\mid e_1\) and \(r\mid e_2\), giving \eqref{eq:18-4}.
 \end{proof}
 
 \subsection{One-package support and full-radical congruences}
@@ -4033,7 +4013,7 @@ orientation of shape \((A,B)\), let \(e=\deg f\), and suppose
 \begin{equation}
  \operatorname{rad}(AB(A+B))
  \leq2eM(f)^{2-1/e}.
- \tag{18.5}
+ \label{eq:18-5}
 \end{equation}
 \end{proposition}
 
@@ -4044,7 +4024,7 @@ containing that prime.  Since the leading and constant coefficients of \(f\)
 are units, its endpoint nonunit block is absent.  The same all-moment
 congruence, Hankel determinant, and Mahler discriminant estimate as in
 Proposition~\ref{prop:hankeldisc} therefore apply with
-\(\mathcal R=\operatorname{rad}(AB(A+B))\), giving \((18.5)\).
+\(\mathcal R=\operatorname{rad}(AB(A+B))\), giving \eqref{eq:18-5}.
 \end{proof}
 
 \begin{corollary}[The exact support cap used by the computation]
@@ -4054,12 +4034,12 @@ Under the hypotheses of Proposition~\ref{prop:unitkummer},
  r\operatorname{rad}(ABN)<4\,398\,937,
  \qquad
  s\operatorname{rad}(CEM)<4\,398\,937.
- \tag{18.6}
+ \label{eq:18-6}
 \end{equation}
 \end{corollary}
 
 \begin{proof}
-Let \(f_\beta\) be the minimal polynomial of \(\beta\).  From \((18.4)\),
+Let \(f_\beta\) be the minimal polynomial of \(\beta\).  From \eqref{eq:18-4},
 \[
  \log M(f_\beta)
  =e_1\,\mathrm h(\beta)
@@ -4069,7 +4049,7 @@ Let \(f_\beta\) be the minimal polynomial of \(\beta\).  From \((18.4)\),
 \]
 Since \(\beta\) is noncyclotomic, \(M(f_\beta)>1\).  By
 Propositions~\ref{prop:fielddegree} and \ref{prop:onepackagesupport}, and
-using \(e_1<4D^{2/3}/r\) together with \((17.13)\), we obtain
+using \(e_1<4D^{2/3}/r\) together with \eqref{eq:17-13}, we obtain
 \[
  \begin{aligned}
  r\operatorname{rad}(ABN)
@@ -4088,8 +4068,8 @@ Indeed, \(\log M(f_\beta)=\log M(h_\alpha)\) and
 \]
 throughout \(D_0\leq D\leq D_1\): here \(x>189\) and
 \(\log(2D)<20\), so the numerator is greater than \(106\).  Thus it is
-enough to bound \(C(D_1)\).  The exact rational certificate in
-\path{archive/Qab9_upper_bundle/code/certify_constants.py} uses
+enough to bound \(C(D_1)\).  The exact rational certificate listed in
+Table~\ref{tab:code} uses
 \[
  \frac{559\,764\,608}{10^6}<D_1^{1/3}
  <\frac{559\,764\,609}{10^6}
@@ -4108,7 +4088,7 @@ Under the hypotheses of Proposition~\ref{prop:onepackagesupport}, for every
 prime \(p\mid AB(A+B)\),
 \begin{equation}
  e\equiv0\quad\text{or}\quad-2\pmod p.
- \tag{18.7}
+ \label{eq:18-7}
 \end{equation}
 Thus \(\operatorname{rad}(AB(A+B))\mid e(e+2)\).
 \end{proposition}
@@ -4119,7 +4099,7 @@ prime the unit hypothesis removes the endpoint nonunit block.  Borisov's
 remaining root-of-unity clusters have contributions divisible by \(p\),
 except that the center-\(1\) packet contributes either \(0\) or \(p-2\)
 modulo odd \(p\).  For \(p=2\), every packet contribution is even, including
-the residual-split merged side.  This proves \((18.7)\) in every role.
+the residual-split merged side.  This proves \eqref{eq:18-7} in every role.
 \end{proof}
 
 \subsection{Role-binomial degree bounds}
@@ -4134,7 +4114,7 @@ Let \(p\) divide exactly one member \(R\) of the primitive triple
  \overline{h_\alpha}\mid X^{rR}-1
  \quad\text{in }\mathbb F_p[X],
  \qquad d\leq rR.
- \tag{18.8}
+ \label{eq:18-8}
 \end{equation}
 If the same prime occupies role \(S\) in the second primitive triple, then
 \[
@@ -4168,7 +4148,7 @@ Suppose distinct normalized packages have the same primitive shape
 irreducible factor of degree \(d\).  Then
 \begin{equation}
  d\leq2rs.
- \tag{18.9}
+ \label{eq:18-9}
 \end{equation}
 \end{proposition}
 
@@ -4244,7 +4224,7 @@ zero-dimensional.
 The \(d\) conjugates of \(\alpha\) give \(d\) distinct intersection points.
 Indeed equality of the corresponding \((u,v)\) recovers both
 \(\alpha^r\) and \(\alpha^{\pm s}\), and \(\gcd(r,s)=1\) recovers
-\(\alpha\).  Bezout's theorem now gives \((18.9)\).
+\(\alpha\).  Bezout's theorem now gives \eqref{eq:18-9}.
 \end{proof}
 
 \subsection{The exact enumeration}
@@ -4275,7 +4255,7 @@ then applies, in order:
 \item the support compatibility of Corollary~\ref{cor:supportcompatibility}
 outside \(\{2,3\}\), allowing a missing prime only when it divides the
 opposite scale;
-\item the two support caps \((18.6)\), the range \(D_0\leq D\leq D_1\),
+\item the two support caps \eqref{eq:18-6}, the range \(D_0\leq D\leq D_1\),
 and disjointness of the two scaled additive triples;
 \item the exact integer bounds \(d>D/140\), \(d^3<64D^2\),
 Theorem~\ref{thm:schinzelbound}, and the proper-factor inequalities
@@ -4320,7 +4300,7 @@ There is no normalized counterexample with
 Consequently every normalized counterexample satisfies
 \begin{equation}
  \boxed{\max\{m,n,p,q\}\leq6\,816\,241.}
- \tag{18.10}
+ \label{eq:18-10}
 \end{equation}
 \end{theorem}
 
@@ -4334,7 +4314,7 @@ Proposition~\ref{prop:sameshapebezout} gives
 \]
 whereas Proposition~\ref{prop:uniformdegree} gives \(d\geq48\,688\).  Thus
 all rows are impossible.  Combining this with
-Theorem~\ref{thm:explicitbound} proves \((18.10)\).
+Theorem~\ref{thm:explicitbound} proves \eqref{eq:18-10}.
 \end{proof}
 
 \begin{remark}[Certificate boundary]
@@ -4350,7 +4330,7 @@ coverage certificates; no large polynomial arithmetic would be required.
 
 \subsection{Certified constants and reproduction commands}
 
-The archived upper-range verifier is replayed from the current bundle by
+The archived upper-range verifier is replayed from this bundle by
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
 make q12-verify-upper
 \end{lstlisting}
@@ -4450,13 +4430,13 @@ print(count, reducible, collisions, globally_certified)
 \section{Lower-range extraction degrees and endpoint states}
 \label{sec:lowerstates}
 
-The audited upper computation gives
+The upper computation of Section~\ref{sec:computation} gives
 \[
  D:=\max\{m,n,p,q\}\leq6\,816\,241.
 \]
-This section repairs the exceptional fourth-power branch in the preceding
-revision and records the lower-range identities in a form suitable for exact
-enumeration.  Write the two normalized packages as
+This section records the lower-range identities in a form suitable for exact
+enumeration, and treats in full the exceptional fourth-power case of Capelli's
+criterion.  Write the two normalized packages as
 \[
  \{ra,rb\},\qquad \{sc,se\},
  \qquad \gcd(a,b)=\gcd(c,e)=1,
@@ -4464,11 +4444,11 @@ enumeration.  Write the two normalized packages as
 \]
 and let \(\alpha\) be a common root of selected ordered orientations.  Put
 \[
- E=\Q(\alpha),\quad K=\Q(\alpha^r),\quad L=\Q(\alpha^s),
+ F=\Q(\alpha),\quad K=\Q(\alpha^r),\quad K'=\Q(\alpha^s),
 \]
 \[
- d=[E:\Q],\quad e_1=[K:\Q],\quad e_2=[L:\Q],
- \quad t=[E:K],\quad u=[E:L].
+ d=[F:\Q],\quad e_1=[K:\Q],\quad e_2=[K':\Q],
+ \quad t=[F:K],\quad u=[F:K'].
 \]
 
 \subsection{Extraction degrees and the reduced correspondence}
@@ -4479,17 +4459,17 @@ One has
  1\leq t\leq r,\qquad 1\leq u\leq s,
  \qquad d=te_1=ue_2,
  \qquad d\leq e_1e_2.
- \tag{19.1}
+ \label{eq:19-1}
 \end{equation}
-Moreover \(E=KL\).
+Moreover \(F=KK'\).
 \end{lemma}
 
 \begin{proof}
 The element \(\alpha\) satisfies \(X^r-\alpha^r\) over \(K\), and similarly
 on the second side.  The tower law gives the first identities.  An integral
 B\'ezout combination of the coprime integers \(r,s\) recovers \(\alpha\)
-from \(\alpha^r,\alpha^s\), so \(E=KL\).  Finally
-\([KL:\Q]\leq[K:\Q][L:\Q]\).
+from \(\alpha^r,\alpha^s\), so \(F=KK'\).  Finally
+\([KK':\Q]\leq[K:\Q][K':\Q]\).
 \end{proof}
 
 \begin{proposition}[General reduced correspondence]
@@ -4507,7 +4487,7 @@ Unless the normalized packages are identical,
 \begin{equation}
  \boxed{d\leq E_0A_0+B_0C_0
  =\frac{rs(ae+bc)}{\gcd(rb,se)\gcd(ra,sc)}.}
- \tag{19.2}
+ \label{eq:19-2}
 \end{equation}
 \end{proposition}
 
@@ -4538,7 +4518,7 @@ conjugates give \(d\) distinct intersection points, and B\'ezout proves the
 bound.
 \end{proof}
 
-For equal \emph{selected ordered} orientations, (19.2) gives \(d\leq2rs\).
+For equal \emph{selected ordered} orientations, \eqref{eq:19-2} gives \(d\leq2rs\).
 When the unordered primitive shapes agree but the selected orientations are
 opposite, Proposition~\ref{prop:sameshapebezout} still gives the stronger
 bound \(d\leq2rs\); the two statements should not be conflated.
@@ -4559,7 +4539,7 @@ One has
  u_1^t=U^r,\qquad |v_1|^t=|V|^r,
  \qquad
  u_2^u=U^s,\qquad |v_2|^u=|V|^s.
- \tag{19.3}
+ \label{eq:19-3}
 \end{equation}
 \end{lemma}
 
@@ -4570,7 +4550,7 @@ coefficients divide the coprime integers \(a,b\).  Hence the leading and
 constant coefficients of each primitive irreducible factor are coprime; in
 particular \(V/U\) and \(v_1/u_1\) are reduced fractions.  The norm identity
 \[
- N_{E/\Q}(\alpha^r)=N_{K/\Q}(\beta)^t
+ N_{F/\Q}(\alpha^r)=N_{K/\Q}(\beta)^t
 \]
 then reads \((V/U)^r=(v_1/u_1)^t\), up to sign.  Comparing numerator and
 denominator valuations gives the first pair of identities; the second is
@@ -4582,22 +4562,22 @@ identical.
 For the first selected orientation,
 \begin{equation}
  |V|^{ra}\mid b^d,\qquad U^{rb}\mid a^d;
- \tag{19.4}
+ \label{eq:19-4}
 \end{equation}
 for the second,
 \begin{equation}
  |V|^{sc}\mid e^d,\qquad U^{se}\mid c^d.
- \tag{19.5}
+ \label{eq:19-5}
 \end{equation}
 If \(p\mid U\), then
 \begin{equation}
  \frac{v_p(a)}{rb}=\frac{v_p(c)}{se};
- \tag{19.6}
+ \label{eq:19-6}
 \end{equation}
 and if \(q\mid V\), then
 \begin{equation}
  \frac{v_q(b)}{ra}=\frac{v_q(e)}{sc}.
- \tag{19.7}
+ \label{eq:19-7}
 \end{equation}
 In particular \(U\mid a,c\) and \(|V|\mid b,e\).
 \end{proposition}
@@ -4623,7 +4603,7 @@ of roots in the negative-valuation endpoint block is
  w_p=\frac{b\lambda}{\kappa}\in\Z,
  \qquad 1\leq w_p\leq\min\{b,e_1\},
  \qquad e_1-w_p\equiv0\text{ or }-2\pmod p.
- \tag{19.8}
+ \label{eq:19-8}
 \end{equation}
 There is a reciprocal statement for \(p^\kappa\Vert b\) and \(p\mid V\).
 \end{proposition}
@@ -4645,13 +4625,13 @@ clusters contribute multiples of \(p\), proving the congruence.
 If \(U>1\) and \(|V|>1\), then
 \begin{equation}
  \boxed{D\leq16\,583.}
- \tag{19.9}
+ \label{eq:19-9}
 \end{equation}
 \end{proposition}
 
 \begin{proof}
 Choose distinct primes \(p\mid U\), \(q\mid V\).  Equations
-(19.6)--(19.7) and Proposition~\ref{prop:reducedcorrespondence} give
+\eqref{eq:19-6}--\eqref{eq:19-7} and Proposition~\ref{prop:reducedcorrespondence} give
 \[
  d\leq v_p(c)v_q(b)+v_p(a)v_q(e)
  \leq2\lfloor\log_2D\rfloor\lfloor\log_3D\rfloor.
@@ -4666,8 +4646,8 @@ The plastic number \(\theta_0\) exceeds
 On each interval on which the two logarithmic floors are constant, the right
 side is increasing.  Exact Arb interval comparisons at the finitely many
 power-of-two and power-of-three boundaries show that the two bounds are
-incompatible for every \(D\geq16\,584\).  The certificate is
-\texttt{code/qab12/certify\_qab12\_constants.py}.
+incompatible for every \(D\geq16\,584\); the comparison is certified by the
+analytic-constants verifier listed in Table~\ref{tab:code}.
 \end{proof}
 
 \begin{corollary}[Coefficient trichotomy]\label{cor:coefftrichotomy}
@@ -4699,7 +4679,7 @@ Then the exceptional branch cannot occur in a total-role packet or in a
 endpoint block of \(Q_{a,b}\), where \(2^\kappa\Vert a\), then
 \begin{equation}
  e_1\leq b,\qquad 2b\mid e_1\kappa.
- \tag{19.10}
+ \label{eq:19-10}
 \end{equation}
 The reciprocal assertion holds for the constant endpoint.
 \end{lemma}
@@ -4751,7 +4731,7 @@ In particular every unit-coefficient Kummer-defect counterexample satisfies
 \begin{equation}
  D<140\cdot139\cdot137=2\,666\,020,
  \qquad d\leq139\cdot137=19\,043.
- \tag{19.11}
+ \label{eq:19-11}
 \end{equation}
 \end{proposition}
 
@@ -4763,7 +4743,7 @@ give (a)--(d).  Lemma~\ref{lem:exceptionalfourth} supplies exactly the
 missing exceptional \(p=2\) case.  The endpoint condition implies
 \(\kappa\geq p\); since \(p^\kappa\leq6\,816\,241\), only
 \(2,3,5,7\) remain.  For a unit factor every deficient prime is therefore
-good, so \(e_1\leq p-2\leq137\), and (19.11) follows from
+good, so \(e_1\leq p-2\leq137\), and \eqref{eq:19-11} follows from
 \(d=te_1\leq re_1\), \(r\leq139\), and \(d>D/140\).
 \end{proof}
 
@@ -4777,12 +4757,12 @@ A package state records
 together with every deficient scale prime, its valuations in \(r,t\), its
 role, and its endpoint exponent \(\kappa\).  A pair of package states is
 \emph{admissible} if it has common \((d,U,V)\), satisfies
-\begin{gather*}
+\begin{gather}
  d=te_1=ue_2,\qquad d\leq e_1e_2,
  \qquad 140d>D,
  \qquad d^3<64D^2,
- \qquad d\leq\min\{a+b,c+e\}-2,\tag{19.12}
-\end{gather*}
+ \qquad d\leq\min\{a+b,c+e\}-2,\label{eq:19-12}
+\end{gather}
 all norm-transfer, endpoint, slope, packet-occupancy, radical-signature, and
 correspondence conditions above, the coefficient trichotomy of
 Corollary~\ref{cor:coefftrichotomy}, the alternatives of
@@ -4790,10 +4770,10 @@ Proposition~\ref{prop:defectlocalization}, coprime scales, and disjoint scaled
 additive triples.
 \end{definition}
 
-In the current Qab12 bundle these fields are represented by typed CSV rows
-under \path{data/qab12}.  The separate verifiers in \path{code/qab12}
-recompute the global integer conditions from those rows, and the small-box
-generators supply coverage regressions for the enumeration logic.
+In the Qab12 bundle these fields are represented by typed CSV rows.  The
+separate verifiers listed in Table~\ref{tab:code} recompute the global integer
+conditions from those rows, and the small-box generators supply coverage
+regressions for the enumeration logic.
 
 \begin{theorem}[Finite lower-state envelope]\label{thm:lowerstatereduction}
 Every normalized counterexample with \(D\leq6\,816\,241\) determines an
@@ -4811,7 +4791,7 @@ with the endpoint divisibilities, leave only finitely many integer tuples.
 
 After the upper range is gone, a normalized counterexample in the lower box has either unit endpoint coefficients or at least one nonunit endpoint coefficient.  This section completes the unit branch by combining full-Kummer searches, modular gcd certificates, and modular factor-degree certificates.
 
-This section records a new production computation.  It covers the whole
+This section covers the whole
 remaining box under the hypothesis
 \[
  U=|V|=1,
@@ -4889,9 +4869,9 @@ factorizations.  The global isolation theorem for irreducible primitive bases
 then excludes every row in this branch.
 
 The branch generators, output tables, certificates, and independent
-recomputers are in \path{code/qab12} and \path{data/qab12}.  The bundled
-checksums and branch-specific verifier outputs provide the row counts and
-SHA-256 bindings used for replay.
+recomputers are listed in Table~\ref{tab:code}.  The bundled checksums and
+branch-specific verifier outputs provide the row counts and SHA-256 bindings
+used for replay.
 \end{proof}
 
 \begin{table}[ht]
@@ -4920,7 +4900,7 @@ Moreover:
 \item if \(D\geq16\,584\), then \(2\leq U\leq26\);
 \item if \(D\geq50\,000\), then \(2\leq U\leq12\);
 \item every deficient endpoint prime lies in \(\{2,3,5,7\}\) and satisfies
-(19.8), (19.10), and the slope identities.
+\eqref{eq:19-8}, \eqref{eq:19-10}, and the slope identities.
 \end{enumerate}
 \end{corollary}
 
@@ -4930,8 +4910,8 @@ Moreover:
 
 The final branch keeps the endpoint coefficient data instead of collapsing to full Kummer degree.  The state records here are designed so that the verifiers can recompute norm transfer, endpoint occupancy, slope signatures, and terminal modular gcd certificates from explicit rows.
 
-This section records the current nonunit computation.  It is deliberately
-separated from the unit proof because the nonunit package states retain exact
+This section presents the nonunit computation.  It is kept
+separate from the unit proof because the nonunit package states retain exact
 extraction degrees and endpoint packet occupancies rather than full Kummer
 multiplicity.
 
@@ -4955,8 +4935,8 @@ checks that the common-factor keys
  (U,V,d;\sigma_U,\sigma_V)
 \]
 are all distinct.  Hence two packages cannot share the same factor data; the
-state-pair file is empty.  The verification output is
-\path{data/qab12/two_nonunit_verification_output.txt}.
+state-pair file is empty, as confirmed by the independent verifier listed in
+Table~\ref{tab:code}.
 \end{proof}
 
 \begin{theorem}[One-nonunit elimination above \(16\,583\)]
@@ -4973,8 +4953,7 @@ coefficient-transition certificate gives \(2\leq U\leq26\).  For each such
  \log U<\frac{8\log(2D)}{D^{1/3}}
 \]
 gives the sharp coefficient-specific cap shown in the bundled table
-\path{data/qab12/qab12_constants_output.txt}.  The largest cap is
-\(6\,816\,241\) for \(U=2\), and the cap for \(U=26\) is \(16\,743\).
+\(6\,816\,241\) for \(U=2\), and \(16\,743\) for \(U=26\).
 The same certificate supplies an integer \(C(U)\) such that \(D<C(U)d\)
 throughout the corresponding coefficient range.
 
@@ -4994,8 +4973,8 @@ same-key package pairs.  The successive exact filters leave
 \end{array}
 \]
 Thus no terminal modular gcd computation is needed in this branch.  The
-script \path{code/qab12/verify_one_nonunit.py} independently recomputes the
-row conditions, confirms the per-\(U\) pair counts, and verifies that every
+independent verifier listed in Table~\ref{tab:code} recomputes the row
+conditions, confirms the per-\(U\) pair counts, and verifies that every
 survivor file is header-only.
 \end{proof}
 
@@ -5059,39 +5038,38 @@ U=32, & d=123,205,285: &(1;6560,1,6561)\ \text{vs.}\ (2;1024,1,1025).
 \end{array}
 \]
 For each of these two package pairs and each of the four selected
-orientations, the certificate file
-\path{data/qab12/one_nonunit_residual_modular_certificates.csv} records the
-prime \(p=1009\) and modular gcd degree \(2\).  The verifier
-\path{code/qab12/verify_one_nonunit_residual.py} recomputes every package
-row, reruns the pair sieve, compares the terminal CSV files exactly, and
-recomputes all eight modular gcds over \(\mathbf F_{1009}\).  Degree \(2\) is
-accounted for by the forced double root at \(x=1\), so no noncyclotomic
-common factor remains in any terminal orientation.
+orientations, the residual certificate table records the prime \(p=1009\) and
+modular gcd degree \(2\).  The independent residual verifier listed in
+Table~\ref{tab:code} recomputes every package row, reruns the pair sieve,
+compares the terminal CSV files exactly, and recomputes all eight modular
+gcds over \(\mathbf F_{1009}\).  Degree \(2\) is accounted for by the forced
+double root at \(x=1\), so no noncyclotomic common factor remains in any
+terminal orientation.
 \end{proof}
 
 \subsection*{Assurance status of the Qab12 bundle}
 
-The bundled Qab12 artifacts now eliminate the audited upper range, the full
+The bundled Qab12 artifacts eliminate the upper range, the full
 unit branch, the both-nonunit branch, the one-nonunit branch with
-\(D\geq16\,584\), and the corrected residual one-nonunit branch with
+\(D\geq16\,584\), and the residual one-nonunit branch with
 \(D\leq16\,583\).  The light verifier replays the nonunit row/count checks,
 the residual pair sieve, the residual modular gcd certificates, and the small
 brute-force oracle for the residual generator.
 
 \section*{Conclusion}
 
-The mathematical reduction and the audited upper computation first give
+The mathematical reduction and the upper computation first give
 \[
  D\leq6\,816\,241.
 \]
 The exceptional \(-4K^4\) branch is handled separately, so deficient scale
 primes are localized without citing an ordinary internal-power theorem outside
 its hypotheses.  The exact unit computation eliminates every unit-coefficient
-common factor.  The new nonunit artifacts eliminate both endpoint coefficients
+common factor.  The nonunit artifacts eliminate both endpoint coefficients
 being nonunit and also eliminate the whole one-nonunit branch above
 \(16\,583\).
 
-The corrected residual one-nonunit computation then eliminates the remaining
+The residual one-nonunit computation then eliminates the remaining
 range \(D\leq16\,583\), \(2\leq U\leq D\), \(d\leq2601\), using four terminal
 state pairs and eight modular gcd certificates.
 

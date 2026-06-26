@@ -29,6 +29,7 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
 (/usr/share/texmf/tex/latex/lm/lmodern.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
@@ -85,695 +86,1115 @@ No file Qab12.aux.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
 No file Qab12.toc.
 
-LaTeX Warning: Reference `lem:unitcircle' on page 1 undefined on input line 84.
+LaTeX Warning: Reference `lem:unitcircle' on page 1 undefined on input line 85.
 
 
 
-LaTeX Warning: Citation `Borisov1998' on page 1 undefined on input line 101.
+LaTeX Warning: Citation `Borisov1998' on page 1 undefined on input line 102.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm
 -mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}]
 
-LaTeX Warning: Reference `sec:dictionary' on page 2 undefined on input line 111
+LaTeX Warning: Reference `sec:dictionary' on page 2 undefined on input line 112
 .
 
 
 LaTeX Warning: Reference `sec:finite-support' on page 2 undefined on input line
- 111.
+ 112.
 
 
-LaTeX Warning: Reference `sec:tail' on page 2 undefined on input line 115.
+LaTeX Warning: Reference `sec:tail' on page 2 undefined on input line 116.
 
 
-LaTeX Warning: Reference `sec:rational' on page 2 undefined on input line 115.
+LaTeX Warning: Reference `sec:rational' on page 2 undefined on input line 116.
+
+
+LaTeX Warning: Reference `sec:padic' on page 2 undefined on input line 120.
+
+
+LaTeX Warning: Reference `sec:wronskian' on page 2 undefined on input line 120.
+
 
 
 LaTeX Warning: Reference `sec:computation' on page 2 undefined on input line 12
-3.
+5.
 
 
 LaTeX Warning: Reference `sec:lowerstates' on page 2 undefined on input line 12
-4.
+6.
 
 
 LaTeX Warning: Reference `sec:unitlowercomputation' on page 2 undefined on inpu
-t line 127.
+t line 129.
 
 
 LaTeX Warning: Reference `sec:nonunitcomputation' on page 2 undefined on input
-line 128.
+line 130.
+
+
+LaTeX Warning: Reference `tab:code' on page 2 undefined on input line 142.
 
 [2]
 
 LaTeX Warning: Reference `cor:partitionsignature' on page 3 undefined on input
-line 192.
+line 201.
 
 [3]
 
-LaTeX Warning: Reference `thm:main' on page 4 undefined on input line 243.
+LaTeX Warning: Reference `eq:17-24' on page 4 undefined on input line 247.
 
 
-LaTeX Warning: Reference `sec:computation' on page 4 undefined on input line 24
-4.
+LaTeX Warning: Reference `eq:17-25' on page 4 undefined on input line 248.
+
+
+LaTeX Warning: Reference `eq:17-26' on page 4 undefined on input line 248.
+
+
+LaTeX Warning: Reference `thm:main' on page 4 undefined on input line 251.
+
+
+LaTeX Warning: Reference `sec:computation' on page 4 undefined on input line 25
+2.
 
 
 LaTeX Warning: Reference `sec:unitlowercomputation' on page 4 undefined on inpu
-t line 245.
+t line 253.
 
 
 LaTeX Warning: Reference `sec:nonunitcomputation' on page 4 undefined on input
-line 247.
-
-[4]
-
-LaTeX Warning: Reference `sec:dictionary' on page 5 undefined on input line 384
-.
-
-[5]
-
-LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 414.
+line 255.
 
 
-LaTeX Warning: Reference `lem:unitcircle' on page 6 undefined on input line 430
+LaTeX Warning: Reference `eq:2-3' on page 4 undefined on input line 292.
+
+[4] [5]
+
+LaTeX Warning: Reference `sec:dictionary' on page 6 undefined on input line 393
 .
 
 
-LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 437.
+LaTeX Warning: Reference `eq:2-4' on page 6 undefined on input line 422.
 
 
-LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 459.
+LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 423.
+
+
+LaTeX Warning: Reference `lem:unitcircle' on page 6 undefined on input line 439
+.
+
+
+LaTeX Warning: Reference `eq:2-4' on page 6 undefined on input line 445.
+
+
+LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 446.
 
 [6]
 
-LaTeX Warning: Reference `thm:nothree' on page 7 undefined on input line 491.
+LaTeX Warning: Reference `thm:nothree' on page 7 undefined on input line 468.
 
 
-LaTeX Warning: Reference `lem:propagation' on page 7 undefined on input line 49
-9.
+LaTeX Warning: Reference `eq:3-2' on page 7 undefined on input line 472.
+
+
+LaTeX Warning: Reference `thm:nothree' on page 7 undefined on input line 500.
+
+
+LaTeX Warning: Reference `lem:propagation' on page 7 undefined on input line 50
+8.
 
 [7]
 
-LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 59
-5.
+LaTeX Warning: Reference `eq:4-1' on page 8 undefined on input line 565.
 
 
-LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 61
-0.
-
-[8] [9]
-
-LaTeX Warning: Reference `thm:tail' on page 10 undefined on input line 702.
+LaTeX Warning: Reference `eq:4-2' on page 8 undefined on input line 571.
 
 
-LaTeX Warning: Reference `thm:sign' on page 10 undefined on input line 721.
+LaTeX Warning: Reference `eq:4-2' on page 8 undefined on input line 579.
 
 
-LaTeX Warning: Reference `lem:propagation' on page 10 undefined on input line 7
-59.
+LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 60
+4.
+
+[8]
+
+LaTeX Warning: Reference `thm:pointfinite' on page 9 undefined on input line 61
+9.
+
+[9]
+
+LaTeX Warning: Reference `eq:3-2' on page 10 undefined on input line 692.
 
 
-LaTeX Warning: Reference `thm:nothree' on page 10 undefined on input line 761.
+LaTeX Warning: Reference `eq:6-1' on page 10 undefined on input line 696.
 
-[10] [11] [12] [13] [14] [15] [16]
+
+LaTeX Warning: Reference `eq:3-2' on page 10 undefined on input line 696.
+
+
+LaTeX Warning: Reference `eq:6-1' on page 10 undefined on input line 697.
+
+
+LaTeX Warning: Reference `eq:6-2' on page 10 undefined on input line 701.
+
+
+LaTeX Warning: Reference `thm:tail' on page 10 undefined on input line 709.
+
+
+LaTeX Warning: Reference `eq:6-1' on page 10 undefined on input line 719.
+
+
+LaTeX Warning: Reference `thm:sign' on page 10 undefined on input line 728.
+
+
+LaTeX Warning: Reference `eq:6-3' on page 10 undefined on input line 729.
+
+
+LaTeX Warning: Reference `eq:6-4' on page 10 undefined on input line 744.
+
+[10]
+
+LaTeX Warning: Reference `eq:6-2' on page 11 undefined on input line 762.
+
+
+LaTeX Warning: Reference `eq:6-5' on page 11 undefined on input line 763.
+
+
+LaTeX Warning: Reference `eq:6-6' on page 11 undefined on input line 764.
+
+
+LaTeX Warning: Reference `lem:propagation' on page 11 undefined on input line 7
+66.
+
+
+LaTeX Warning: Reference `thm:nothree' on page 11 undefined on input line 768.
+
+
+LaTeX Warning: Reference `eq:6-5' on page 11 undefined on input line 782.
+
+
+LaTeX Warning: Reference `eq:6-8' on page 11 undefined on input line 789.
+
+
+LaTeX Warning: Reference `eq:6-6' on page 11 undefined on input line 790.
+
+
+LaTeX Warning: Reference `eq:6-3' on page 11 undefined on input line 790.
+
+[11]
+
+LaTeX Warning: Reference `eq:7-1' on page 12 undefined on input line 838.
+
+
+LaTeX Warning: Reference `eq:7-3' on page 12 undefined on input line 842.
+
+
+LaTeX Warning: Reference `eq:7-4' on page 12 undefined on input line 843.
+
+
+LaTeX Warning: Reference `eq:6-8' on page 12 undefined on input line 857.
+
+
+LaTeX Warning: Reference `eq:7-5' on page 12 undefined on input line 882.
+
+
+LaTeX Warning: Reference `eq:6-8' on page 12 undefined on input line 882.
+
+
+LaTeX Warning: Reference `eq:7-5' on page 12 undefined on input line 890.
+
+
+LaTeX Warning: Reference `eq:7-5' on page 12 undefined on input line 894.
+
+
+LaTeX Warning: Reference `eq:7-6' on page 12 undefined on input line 894.
+
+
+LaTeX Warning: Reference `eq:7-6' on page 12 undefined on input line 899.
+
+[12] [13]
+
+LaTeX Warning: Reference `eq:9-1' on page 14 undefined on input line 1051.
+
+[14]
+
+LaTeX Warning: Reference `eq:9-3' on page 15 undefined on input line 1077.
+
+
+LaTeX Warning: Reference `eq:9-5' on page 15 undefined on input line 1077.
+
+
+LaTeX Warning: Reference `eq:9-2' on page 15 undefined on input line 1077.
+
+
+LaTeX Warning: Reference `eq:9-6' on page 15 undefined on input line 1091.
+
+[15]
+
+LaTeX Warning: Reference `eq:10-1' on page 16 undefined on input line 1140.
+
+
+LaTeX Warning: Reference `eq:10-2' on page 16 undefined on input line 1150.
+
+
+LaTeX Warning: Reference `eq:10-5' on page 16 undefined on input line 1173.
+
+
+LaTeX Warning: Reference `eq:10-2' on page 16 undefined on input line 1176.
+
+
+LaTeX Warning: Reference `eq:10-5' on page 16 undefined on input line 1183.
+
+
+LaTeX Warning: Reference `eq:2-5' on page 16 undefined on input line 1187.
+
+[16]
 
 LaTeX Warning: Citation `SerreLocalFields' on page 17 undefined on input line 1
-256.
+202.
 
 
-LaTeX Warning: Citation `Borisov1998' on page 17 undefined on input line 1291.
+LaTeX Warning: Citation `Borisov1998' on page 17 undefined on input line 1237.
+
+
+LaTeX Warning: Reference `eq:2-5' on page 17 undefined on input line 1246.
 
 
 LaTeX Warning: Reference `lem:localcriteria' on page 17 undefined on input line
- 1301.
+ 1247.
+
+
+LaTeX Warning: Citation `Borisov1998' on page 17 undefined on input line 1268.
 
 [17]
 
-LaTeX Warning: Citation `Borisov1998' on page 18 undefined on input line 1322.
-
-
 LaTeX Warning: Reference `lem:localcriteria' on page 18 undefined on input line
- 1335.
+ 1281.
 
 
 LaTeX Warning: Reference `lem:goodpackage' on page 18 undefined on input line 1
-358.
+304.
 
 
 LaTeX Warning: Reference `lem:borisovramification' on page 18 undefined on inpu
-t line 1363.
+t line 1309.
 
 
 LaTeX Warning: Reference `lem:borisovramification' on page 18 undefined on inpu
-t line 1368.
+t line 1314.
 
 
-LaTeX Warning: Reference `thm:rational' on page 18 undefined on input line 1370
+LaTeX Warning: Reference `thm:rational' on page 18 undefined on input line 1316
 .
+
+
+LaTeX Warning: Reference `thm:fullseparation' on page 18 undefined on input lin
+e 1339.
 
 [18]
 
-LaTeX Warning: Reference `thm:fullseparation' on page 19 undefined on input lin
-e 1393.
-
-
 LaTeX Warning: Reference `cor:supportcompatibility' on page 19 undefined on inp
-ut line 1409.
+ut line 1355.
+
+
+LaTeX Warning: Reference `eq:11-3' on page 19 undefined on input line 1369.
 
 
 LaTeX Warning: Citation `BeukersSchlickewei1996' on page 19 undefined on input
-line 1426.
+line 1372.
+
+
+LaTeX Warning: Reference `eq:12-1' on page 19 undefined on input line 1374.
 
 
 LaTeX Warning: Reference `thm:finiteshapes' on page 19 undefined on input line
-1449.
+1395.
 
 
 LaTeX Warning: Reference `prop:finitescaling' on page 19 undefined on input lin
-e 1449.
+e 1395.
 
 [19]
 
-LaTeX Warning: Reference `cor:triples' on page 20 undefined on input line 1524.
+LaTeX Warning: Reference `eq:13-1' on page 20 undefined on input line 1427.
 
+
+LaTeX Warning: Reference `eq:13-2' on page 20 undefined on input line 1448.
+
+
+LaTeX Warning: Reference `eq:13-3' on page 20 undefined on input line 1469.
+
+
+LaTeX Warning: Reference `cor:triples' on page 20 undefined on input line 1470.
+
+
+
+LaTeX Warning: Reference `lem:diagonaldenominator' on page 20 undefined on inpu
+t line 1505.
 
 [20]
 
-LaTeX Warning: Reference `lem:diagonaldenominator' on page 21 undefined on inpu
-t line 1559.
-
-
 LaTeX Warning: Reference `lem:unitcircle' on page 21 undefined on input line 15
-77.
+23.
 
 
 LaTeX Warning: Reference `lem:diagonaldenominator' on page 21 undefined on inpu
-t line 1591.
+t line 1537.
 
 
 LaTeX Warning: Citation `AndersonSaffVarga1979' on page 21 undefined on input l
-ine 1606.
+ine 1552.
+
+
+LaTeX Warning: Reference `eq:4-1' on page 21 undefined on input line 1558.
+
+
+LaTeX Warning: Reference `eq:13-9' on page 21 undefined on input line 1567.
+
+
+LaTeX Warning: Reference `eq:13-11' on page 21 undefined on input line 1567.
+
+
+LaTeX Warning: Reference `thm:nodivision' on page 21 undefined on input line 15
+87.
 
 [21]
 
-LaTeX Warning: Reference `thm:nodivision' on page 22 undefined on input line 16
-41.
+LaTeX Warning: Reference `eq:fibre-master' on page 22 undefined on input line 1
+660.
 
 [22]
 
 LaTeX Warning: Reference `eq:fibre-master' on page 23 undefined on input line 1
-714.
+693.
 
 
-LaTeX Warning: Reference `eq:fibre-master' on page 23 undefined on input line 1
-747.
+LaTeX Warning: Reference `lem:schinzelfibre' on page 23 undefined on input line
+ 1754.
 
 [23]
 
-LaTeX Warning: Reference `lem:schinzelfibre' on page 24 undefined on input line
- 1808.
+LaTeX Warning: Reference `eq:14-1' on page 24 undefined on input line 1762.
+
+
+LaTeX Warning: Reference `eq:14-2' on page 24 undefined on input line 1765.
 
 
 LaTeX Warning: Reference `lem:schinzelfibre' on page 24 undefined on input line
- 1819.
-
-[24]
-
-LaTeX Warning: Citation `Borisov1998' on page 25 undefined on input line 1880.
-
-[25] [26] [27]
-
-LaTeX Warning: Reference `lem:centeroneedge' on page 28 undefined on input line
- 2105.
+ 1766.
 
 
-LaTeX Warning: Reference `lem:edgepower' on page 28 undefined on input line 212
-3.
+LaTeX Warning: Citation `Borisov1998' on page 24 undefined on input line 1828.
 
+[24] [25] [26]
+
+LaTeX Warning: Reference `eq:14-3' on page 27 undefined on input line 2021.
+
+
+LaTeX Warning: Reference `eq:14-9' on page 27 undefined on input line 2048.
+
+
+LaTeX Warning: Reference `lem:centeroneedge' on page 27 undefined on input line
+ 2053.
+
+
+LaTeX Warning: Reference `lem:edgepower' on page 27 undefined on input line 207
+1.
+
+[27]
 
 LaTeX Warning: Reference `thm:frobeniusfactor' on page 28 undefined on input li
-ne 2127.
+ne 2075.
+
+
+LaTeX Warning: Reference `eq:14-8' on page 28 undefined on input line 2081.
+
+
+LaTeX Warning: Reference `thm:schinzelbound' on page 28 undefined on input line
+ 2129.
+
+
+LaTeX Warning: Reference `lem:kummerdegree' on page 28 undefined on input line
+2134.
+
+
+LaTeX Warning: Reference `thm:nodivision' on page 28 undefined on input line 21
+38.
+
+
+LaTeX Warning: Reference `thm:kummerreduction' on page 28 undefined on input li
+ne 2151.
+
+
+LaTeX Warning: Reference `thm:selfpower' on page 28 undefined on input line 215
+3.
 
 [28]
 
-LaTeX Warning: Reference `thm:schinzelbound' on page 29 undefined on input line
- 2181.
-
-
-LaTeX Warning: Reference `lem:kummerdegree' on page 29 undefined on input line
-2186.
-
-
-LaTeX Warning: Reference `thm:nodivision' on page 29 undefined on input line 21
-90.
-
-
-LaTeX Warning: Reference `thm:kummerreduction' on page 29 undefined on input li
-ne 2203.
-
-
-LaTeX Warning: Reference `thm:selfpower' on page 29 undefined on input line 220
-5.
-
-
 LaTeX Warning: Reference `thm:allliftsisolated' on page 29 undefined on input l
-ine 2243.
+ine 2191.
 
 
-LaTeX Warning: Citation `Borisov1998' on page 29 undefined on input line 2254.
+LaTeX Warning: Citation `Borisov1998' on page 29 undefined on input line 2202.
+
+
+LaTeX Warning: Reference `sec:kummer' on page 29 undefined on input line 2230.
 
 [29]
 
 LaTeX Warning: Reference `lem:centeroneedge' on page 30 undefined on input line
- 2325.
+ 2273.
+
+
+LaTeX Warning: Reference `eq:15-1' on page 30 undefined on input line 2281.
+
+
+LaTeX Warning: Reference `eq:15-1' on page 30 undefined on input line 2289.
+
+
+LaTeX Warning: Reference `eq:15-2' on page 30 undefined on input line 2291.
+
+
+LaTeX Warning: Reference `eq:15-3' on page 30 undefined on input line 2294.
+
+
+LaTeX Warning: Reference `eq:15-3' on page 30 undefined on input line 2316.
+
+
+LaTeX Warning: Reference `eq:15-4' on page 30 undefined on input line 2316.
 
 [30]
 
 LaTeX Warning: Citation `GuardiaMontesNart2008' on page 31 undefined on input l
-ine 2375.
+ine 2323.
 
 [31]
 
-LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 249
-5.
+LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 244
+3.
 
 
 LaTeX Warning: Reference `prop:mergedtwo' on page 32 undefined on input line 24
-99.
-
-
-LaTeX Warning: Reference `lem:oreresidual' on page 32 undefined on input line 2
-500.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 250
-1.
-
-[32]
-
-LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2538.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2541.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 33 undefined on input line 254
-4.
-
-
-LaTeX Warning: Reference `prop:mergedtwo' on page 33 undefined on input line 25
 47.
 
 
+LaTeX Warning: Reference `lem:oreresidual' on page 32 undefined on input line 2
+448.
+
+
+LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 244
+9.
+
+[32]
+
+LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2486.
+
+
+LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2489.
+
+
+LaTeX Warning: Reference `lem:edgepower' on page 33 undefined on input line 249
+2.
+
+
+LaTeX Warning: Reference `prop:mergedtwo' on page 33 undefined on input line 24
+95.
+
+
 LaTeX Warning: Reference `lem:oreresidual' on page 33 undefined on input line 2
-548.
+496.
 
 
 LaTeX Warning: Reference `thm:frobeniusfactor' on page 33 undefined on input li
-ne 2568.
+ne 2516.
 
 
 LaTeX Warning: Reference `thm:radicalsieve' on page 33 undefined on input line
-2577.
+2525.
 
 
 LaTeX Warning: Reference `thm:frobeniusfactor' on page 33 undefined on input li
-ne 2578.
+ne 2526.
 
 
-LaTeX Warning: Citation `LangAlgebra' on page 33 undefined on input line 2583.
+LaTeX Warning: Citation `LangAlgebra' on page 33 undefined on input line 2531.
+
+
+LaTeX Warning: Reference `cor:totalprimepower' on page 33 undefined on input li
+ne 2552.
+
+
+LaTeX Warning: Reference `thm:endpointpower' on page 33 undefined on input line
+ 2553.
+
+
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 33 undefined on input li
+ne 2554.
+
+
+LaTeX Warning: Reference `thm:schinzelbound' on page 33 undefined on input line
+ 2561.
 
 [33]
 
-LaTeX Warning: Reference `cor:totalprimepower' on page 34 undefined on input li
-ne 2604.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 34 undefined on input line
- 2605.
-
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 34 undefined on input li
-ne 2606.
-
-
-LaTeX Warning: Reference `thm:schinzelbound' on page 34 undefined on input line
- 2613.
-
-
 LaTeX Warning: Reference `thm:radicalsieve' on page 34 undefined on input line
-2661.
+2609.
+
+
+LaTeX Warning: Reference `eq:15-7' on page 34 undefined on input line 2611.
+
+
+LaTeX Warning: Reference `eq:15-8' on page 34 undefined on input line 2651.
 
 [34]
 
 LaTeX Warning: Reference `thm:radicalsieve' on page 35 undefined on input line
-2718.
+2666.
 
 
 LaTeX Warning: Reference `thm:allliftsisolated' on page 35 undefined on input l
-ine 2727.
+ine 2675.
 
 
 LaTeX Warning: Reference `cor:supportcompatibility' on page 35 undefined on inp
-ut line 2753.
+ut line 2701.
+
+
+LaTeX Warning: Reference `eq:15-9' on page 35 undefined on input line 2713.
+
+
+LaTeX Warning: Reference `eq:15-5' on page 35 undefined on input line 2725.
+
+
+LaTeX Warning: Reference `eq:15-6' on page 35 undefined on input line 2725.
 
 [35]
 
 LaTeX Warning: Reference `sec:finite-support' on page 36 undefined on input lin
-e 2784.
+e 2732.
 
-[36] [37] [38]
 
-LaTeX Warning: Reference `lem:fourunit' on page 39 undefined on input line 3036
+LaTeX Warning: Reference `eq:16-1' on page 36 undefined on input line 2749.
+
+[36]
+
+LaTeX Warning: Reference `eq:17-1' on page 37 undefined on input line 2824.
+
+
+LaTeX Warning: Reference `eq:17-2' on page 37 undefined on input line 2824.
+
+[37] [38]
+
+LaTeX Warning: Reference `lem:fourunit' on page 39 undefined on input line 2984
 .
+
+
+LaTeX Warning: Reference `lem:schinzelfibre' on page 39 undefined on input line
+ 3018.
+
+
+LaTeX Warning: Reference `thm:rational' on page 39 undefined on input line 3019
+.
+
+
+LaTeX Warning: Citation `AmorosoSombraZannier2017' on page 39 undefined on inpu
+t line 3043.
 
 [39]
 
-LaTeX Warning: Reference `lem:schinzelfibre' on page 40 undefined on input line
- 3070.
+LaTeX Warning: Reference `eq:17-3' on page 40 undefined on input line 3069.
 
 
-LaTeX Warning: Reference `thm:rational' on page 40 undefined on input line 3071
-.
+LaTeX Warning: Reference `prop:aszspecial' on page 40 undefined on input line 3
+101.
 
 
-LaTeX Warning: Citation `AmorosoSombraZannier2017' on page 40 undefined on inpu
-t line 3095.
+LaTeX Warning: Reference `prop:aszspecial' on page 40 undefined on input line 3
+117.
 
-[40]
-
-LaTeX Warning: Reference `prop:aszspecial' on page 41 undefined on input line 3
-153.
-
-
-LaTeX Warning: Reference `prop:aszspecial' on page 41 undefined on input line 3
-169.
-
-(/usr/share/texmf/tex/latex/lm/ot1lmss.fd)
+(/usr/share/texmf/tex/latex/lm/ot1lmss.fd) [40]
 
 LaTeX Warning: Reference `prop:ranktworigidity' on page 41 undefined on input l
-ine 3228.
+ine 3176.
+
+
+LaTeX Warning: Reference `eq:2-6' on page 41 undefined on input line 3188.
+
+
+LaTeX Warning: Reference `thm:hyperplane' on page 41 undefined on input line 31
+89.
+
+
+LaTeX Warning: Reference `thm:hyperplane' on page 41 undefined on input line 31
+95.
 
 [41]
 
-LaTeX Warning: Reference `thm:hyperplane' on page 42 undefined on input line 32
-41.
+LaTeX Warning: Reference `eq:17-5' on page 42 undefined on input line 3243.
 
 
-LaTeX Warning: Reference `thm:hyperplane' on page 42 undefined on input line 32
-47.
+LaTeX Warning: Reference `eq:17-6' on page 42 undefined on input line 3252.
+
+
+LaTeX Warning: Citation `CoxLittleSchenck2011' on page 42 undefined on input li
+ne 3295.
 
 [42]
 
-LaTeX Warning: Citation `CoxLittleSchenck2011' on page 43 undefined on input li
-ne 3347.
+LaTeX Warning: Reference `eq:17-8' on page 43 undefined on input line 3318.
+
+
+LaTeX Warning: Citation `Cassels1997' on page 43 undefined on input line 3361.
 
 [43]
 
-LaTeX Warning: Citation `Cassels1997' on page 44 undefined on input line 3413.
-
-
 LaTeX Warning: Reference `lem:toricdegree' on page 44 undefined on input line 3
-449.
+397.
 
 
 LaTeX Warning: Reference `prop:shorttorus' on page 44 undefined on input line 3
-480.
+428.
 
 
 LaTeX Warning: Reference `prop:ranktworigidity' on page 44 undefined on input l
-ine 3485.
+ine 3433.
+
+
+LaTeX Warning: Citation `Fulton1998' on page 44 undefined on input line 3451.
 
 [44]
 
-LaTeX Warning: Citation `Fulton1998' on page 45 undefined on input line 3503.
+LaTeX Warning: Reference `eq:17-10' on page 45 undefined on input line 3468.
 
 
-LaTeX Warning: Citation `Smyth1971' on page 45 undefined on input line 3546.
+LaTeX Warning: Reference `eq:16-3' on page 45 undefined on input line 3491.
+
+
+LaTeX Warning: Citation `Smyth1971' on page 45 undefined on input line 3494.
 
 
 LaTeX Warning: Reference `lem:collisionheight' on page 45 undefined on input li
-ne 3569.
+ne 3517.
 
 
 LaTeX Warning: Reference `prop:fielddegree' on page 45 undefined on input line
-3574.
+3522.
 
 
 LaTeX Warning: Reference `prop:mahlergap' on page 45 undefined on input line 35
-77.
+25.
+
+
+LaTeX Warning: Reference `eq:17-14' on page 45 undefined on input line 3543.
 
 [45]
 
+LaTeX Warning: Reference `eq:17-13' on page 46 undefined on input line 3561.
+
+
 LaTeX Warning: Reference `prop:fielddegree' on page 46 undefined on input line
-3613.
+3561.
 
 
 LaTeX Warning: Reference `thm:explicitbound' on page 46 undefined on input line
- 3620.
+ 3568.
 
 
 LaTeX Warning: Reference `sec:computation' on page 46 undefined on input line 3
-625.
+573.
+
+
+LaTeX Warning: Citation `Borisov1998' on page 46 undefined on input line 3618.
+
+
+LaTeX Warning: Reference `eq:17-15' on page 46 undefined on input line 3621.
+
+
+LaTeX Warning: Reference `eq:17-16' on page 46 undefined on input line 3626.
+
+
+LaTeX Warning: Reference `prop:mergedtwo' on page 46 undefined on input line 36
+28.
 
 [46]
 
-LaTeX Warning: Citation `Borisov1998' on page 47 undefined on input line 3670.
-
-
-LaTeX Warning: Reference `prop:mergedtwo' on page 47 undefined on input line 36
-80.
+LaTeX Warning: Reference `prop:momentcongruence' on page 47 undefined on input
+line 3639.
 
 
 LaTeX Warning: Reference `prop:momentcongruence' on page 47 undefined on input
-line 3691.
+line 3666.
 
 
-LaTeX Warning: Reference `prop:momentcongruence' on page 47 undefined on input
-line 3718.
+LaTeX Warning: Reference `eq:17-17' on page 47 undefined on input line 3667.
+
+
+LaTeX Warning: Reference `eq:17-18' on page 47 undefined on input line 3668.
+
+
+LaTeX Warning: Reference `eq:17-19' on page 47 undefined on input line 3703.
+
+
+LaTeX Warning: Citation `Mahler1964' on page 47 undefined on input line 3711.
+
+
+LaTeX Warning: Reference `eq:17-20' on page 47 undefined on input line 3716.
 
 [47]
 
-LaTeX Warning: Citation `Mahler1964' on page 48 undefined on input line 3763.
+LaTeX Warning: Reference `eq:17-20' on page 48 undefined on input line 3739.
+
+
+LaTeX Warning: Reference `eq:17-22' on page 48 undefined on input line 3739.
+
+
+LaTeX Warning: Reference `eq:17-23' on page 48 undefined on input line 3740.
+
+
+LaTeX Warning: Reference `eq:17-25' on page 48 undefined on input line 3789.
+
+
+LaTeX Warning: Reference `eq:17-26' on page 48 undefined on input line 3790.
+
+
+LaTeX Warning: Reference `prop:wronskian' on page 48 undefined on input line 37
+97.
 
 [48]
 
-LaTeX Warning: Reference `prop:wronskian' on page 49 undefined on input line 38
-49.
+LaTeX Warning: Reference `tab:code' on page 49 undefined on input line 3812.
+
+
+LaTeX Warning: Reference `sec:computation' on page 49 undefined on input line 3
+813.
+
+
+LaTeX Warning: Reference `sec:nonunitcomputation' on page 49 undefined on input
+ line 3813.
+
+
+LaTeX Warning: Reference `thm:upperelimination' on page 49 undefined on input l
+ine 3823.
+
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+
+LaTeX Warning: Reference `thm:unitelimination' on page 49 undefined on input li
+ne 3825.
+
+
+LaTeX Warning: Reference `thm:twononunitelimination' on page 49 undefined on in
+put line 3827.
+
+
+LaTeX Warning: Reference `thm:onenonunitlargeelimination' on page 49 undefined
+on input line 3829.
+
+
+LaTeX Warning: Reference `thm:onenonunitresidualelimination' on page 49 undefin
+ed on input line 3831.
+
+
+LaTeX Warning: Reference `sec:computation' on page 49 undefined on input line 3
+840.
+
+
+LaTeX Warning: Reference `sec:computation' on page 49 undefined on input line 3
+840.
 
 [49]
 
+LaTeX Warning: Reference `eq:18-1' on page 50 undefined on input line 3894.
+
+
+LaTeX Warning: Reference `eq:17-13' on page 50 undefined on input line 3921.
+
+
+LaTeX Warning: Reference `eq:17-11' on page 50 undefined on input line 3921.
+
+
 LaTeX Warning: Reference `lem:plasticpower' on page 50 undefined on input line
-3945.
+3925.
+
+
+LaTeX Warning: Reference `eq:18-2' on page 50 undefined on input line 3926.
 
 
 LaTeX Warning: Reference `thm:schinzelbound' on page 50 undefined on input line
- 3947.
+ 3927.
 
 
-LaTeX Warning: Citation `LangAlgebra' on page 50 undefined on input line 3962.
+LaTeX Warning: Citation `LangAlgebra' on page 50 undefined on input line 3942.
 
 
-LaTeX Warning: Reference `cor:unitrange' on page 50 undefined on input line 398
+LaTeX Warning: Reference `cor:unitrange' on page 50 undefined on input line 396
 3.
+
+
+LaTeX Warning: Reference `cor:totalprimepower' on page 50 undefined on input li
+ne 3967.
+
+
+LaTeX Warning: Reference `thm:endpointpower' on page 50 undefined on input line
+ 3969.
+
+
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 50 undefined on input li
+ne 3972.
 
 [50]
 
 LaTeX Warning: Reference `cor:totalprimepower' on page 51 undefined on input li
-ne 3987.
+ne 3982.
 
 
 LaTeX Warning: Reference `thm:endpointpower' on page 51 undefined on input line
- 3989.
+ 3983.
 
 
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 51 undefined on input li
-ne 3992.
-
-
-LaTeX Warning: Reference `cor:totalprimepower' on page 51 undefined on input li
-ne 4002.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 51 undefined on input line
- 4003.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 51 undefined on input line 401
+LaTeX Warning: Reference `lem:edgepower' on page 51 undefined on input line 399
 5.
 
 
+LaTeX Warning: Reference `eq:18-4' on page 51 undefined on input line 4003.
+
+
 LaTeX Warning: Reference `prop:momentcongruence' on page 51 undefined on input
-line 4042.
+line 4022.
 
 
 LaTeX Warning: Reference `prop:hankeldisc' on page 51 undefined on input line 4
-046.
+026.
+
+
+LaTeX Warning: Reference `eq:18-5' on page 51 undefined on input line 4027.
 
 
 LaTeX Warning: Reference `prop:unitkummer' on page 51 undefined on input line 4
-052.
+032.
+
+
+LaTeX Warning: Reference `eq:18-4' on page 51 undefined on input line 4042.
 
 
 LaTeX Warning: Reference `prop:fielddegree' on page 51 undefined on input line
-4071.
+4051.
 
 
 LaTeX Warning: Reference `prop:onepackagesupport' on page 51 undefined on input
- line 4071.
+ line 4051.
 
-[51] (/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+
+LaTeX Warning: Reference `eq:17-13' on page 51 undefined on input line 4052.
+
+[51]
+
+LaTeX Warning: Reference `tab:code' on page 52 undefined on input line 4072.
+
 
 LaTeX Warning: Reference `prop:onepackagesupport' on page 52 undefined on input
- line 4107.
+ line 4087.
 
 
 LaTeX Warning: Reference `thm:radicalsieve' on page 52 undefined on input line
-4117.
+4097.
+
+
+LaTeX Warning: Reference `eq:18-7' on page 52 undefined on input line 4102.
 
 [52]
 
-LaTeX Warning: Reference `lem:fourunit' on page 53 undefined on input line 4225
+LaTeX Warning: Reference `lem:fourunit' on page 53 undefined on input line 4205
 .
+
+
+LaTeX Warning: Reference `eq:18-9' on page 53 undefined on input line 4227.
+
+
+LaTeX Warning: Reference `cor:unitsupportcap' on page 53 undefined on input lin
+e 4233.
 
 [53]
 
-LaTeX Warning: Reference `cor:unitsupportcap' on page 54 undefined on input lin
-e 4253.
-
-
 LaTeX Warning: Reference `cor:supportcompatibility' on page 54 undefined on inp
-ut line 4275.
+ut line 4255.
+
+
+LaTeX Warning: Reference `eq:18-6' on page 54 undefined on input line 4258.
 
 
 LaTeX Warning: Reference `thm:schinzelbound' on page 54 undefined on input line
- 4281.
+ 4261.
 
 
-LaTeX Warning: Reference `thm:rational' on page 54 undefined on input line 4287
+LaTeX Warning: Reference `thm:rational' on page 54 undefined on input line 4267
 .
 
 
 LaTeX Warning: Reference `lem:rolebinomial' on page 54 undefined on input line
-4289.
+4269.
 
 
 LaTeX Warning: Reference `prop:sameshapebezout' on page 54 undefined on input l
-ine 4310.
+ine 4290.
 
 [54]
 
 LaTeX Warning: Reference `prop:sameshapebezout' on page 55 undefined on input l
-ine 4331.
+ine 4311.
 
 
 LaTeX Warning: Reference `prop:uniformdegree' on page 55 undefined on input lin
-e 4335.
+e 4315.
 
 
 LaTeX Warning: Reference `thm:explicitbound' on page 55 undefined on input line
- 4337.
+ 4317.
+
+
+LaTeX Warning: Reference `eq:18-10' on page 55 undefined on input line 4317.
 
 
 LaTeX Warning: Reference `thm:explicitbound' on page 55 undefined on input line
- 4373.
+ 4353.
 
 
-LaTeX Warning: Reference `cor:unitrange' on page 55 undefined on input line 437
+LaTeX Warning: Reference `cor:unitrange' on page 55 undefined on input line 435
 4.
 
 [55]
 
 LaTeX Warning: Reference `thm:allliftsisolated' on page 56 undefined on input l
-ine 4392.
+ine 4372.
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) [56] [57]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) [56]
 
-LaTeX Warning: Reference `lem:fourunit' on page 58 undefined on input line 4529
+LaTeX Warning: Reference `sec:computation' on page 57 undefined on input line 4
+433.
+
+
+LaTeX Warning: Reference `lem:fourunit' on page 57 undefined on input line 4509
 .
 
 
-LaTeX Warning: Reference `prop:sameshapebezout' on page 58 undefined on input l
-ine 4530.
+LaTeX Warning: Reference `prop:sameshapebezout' on page 57 undefined on input l
+ine 4510.
+
+[57]
+
+LaTeX Warning: Reference `eq:19-2' on page 58 undefined on input line 4521.
 
 
 LaTeX Warning: Reference `prop:sameshapebezout' on page 58 undefined on input l
-ine 4543.
+ine 4523.
 
 
 LaTeX Warning: Reference `prop:endpointarith' on page 58 undefined on input lin
-e 4606.
+e 4586.
 
 
 LaTeX Warning: Reference `lem:normtransfer' on page 58 undefined on input line
-4608.
+4588.
 
 [58]
 
+LaTeX Warning: Reference `eq:19-6' on page 59 undefined on input line 4634.
+
+
+LaTeX Warning: Reference `eq:19-7' on page 59 undefined on input line 4634.
+
+
 LaTeX Warning: Reference `prop:reducedcorrespondence' on page 59 undefined on i
-nput line 4654.
+nput line 4634.
+
+
+LaTeX Warning: Reference `tab:code' on page 59 undefined on input line 4650.
 
 
 LaTeX Warning: Reference `prop:twononunit' on page 59 undefined on input line 4
-687.
+667.
 
 [59]
 
 LaTeX Warning: Reference `thm:frobeniusfactor' on page 60 undefined on input li
-ne 4760.
+ne 4740.
 
 
 LaTeX Warning: Reference `cor:totalprimepower' on page 60 undefined on input li
-ne 4761.
+ne 4741.
 
 
 LaTeX Warning: Reference `thm:endpointpower' on page 60 undefined on input line
- 4761.
+ 4741.
 
 
 LaTeX Warning: Reference `lem:exceptionalfourth' on page 60 undefined on input
-line 4762.
+line 4742.
+
+
+LaTeX Warning: Reference `eq:19-11' on page 60 undefined on input line 4746.
 
 [60]
 
 LaTeX Warning: Reference `cor:coefftrichotomy' on page 61 undefined on input li
-ne 4788.
+ne 4768.
 
 
 LaTeX Warning: Reference `prop:defectlocalization' on page 61 undefined on inpu
-t line 4789.
+t line 4769.
+
+
+LaTeX Warning: Reference `tab:code' on page 61 undefined on input line 4774.
 
 [61]
 
 LaTeX Warning: Reference `prop:defectlocalization' on page 62 undefined on inpu
-t line 4877.
+t line 4857.
 
 
 LaTeX Warning: Reference `lem:subsetdegreecertificate' on page 62 undefined on
-input line 4884.
+input line 4864.
+
+
+LaTeX Warning: Reference `tab:code' on page 62 undefined on input line 4872.
+
+
+LaTeX Warning: Reference `eq:19-8' on page 62 undefined on input line 4903.
+
+
+LaTeX Warning: Reference `eq:19-10' on page 62 undefined on input line 4903.
 
 [62]
 
 LaTeX Warning: Reference `prop:twononunit' on page 63 undefined on input line 4
-946.
+926.
 
 
 LaTeX Warning: Reference `cor:remainingnonunit' on page 63 undefined on input l
-ine 4947.
+ine 4927.
+
+
+LaTeX Warning: Reference `tab:code' on page 63 undefined on input line 4939.
+
+
+LaTeX Warning: Reference `tab:code' on page 63 undefined on input line 4976.
 
 [63]
 
 LaTeX Warning: Reference `cor:q12residualenvelope' on page 64 undefined on inpu
-t line 5028.
+t line 5007.
+
+
+LaTeX Warning: Reference `tab:code' on page 64 undefined on input line 5043.
 
 [64]
 
-LaTeX Warning: Reference `sec:dictionary' on page 65 undefined on input line 51
-00.
+LaTeX Warning: Reference `sec:dictionary' on page 65 undefined on input line 50
+78.
 
 
-LaTeX Warning: Reference `thm:main' on page 65 undefined on input line 5101.
+LaTeX Warning: Reference `thm:main' on page 65 undefined on input line 5079.
 
 [65] [66] (./Qab12.aux)
 
@@ -788,21 +1209,24 @@ Package rerunfilecheck Warning: File `Qab12.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
  )</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/sha
-re/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/l
-m/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/tex
-mf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr1
-2.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts
-/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/publ
-ic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/f
-onts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.
-pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/share/texmf/fonts/t
-ype1/public/lm/lmtt9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Qab12.pdf (66 pages, 752651 bytes).
+pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx9.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmmi9.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib1
+0.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
+i10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fon
+ts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb
+></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmsy9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/
+share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/publ
+ic/lm/lmtt8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Qab12.pdf (66 pages, 808652 bytes).
 Transcript written on Qab12.log.
