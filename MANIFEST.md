@@ -1,6 +1,9 @@
 # Qab12 bundle manifest overview
 
-The authoritative byte-level manifest is `SHA256SUMS`.
+The main byte-level checksum list is `SHA256SUMS`; the broader JSON inventory
+is `ARTIFACT_MANIFEST.json`.  The checksum list intentionally excludes itself,
+`ARTIFACT_MANIFEST.json`, and the nested archived
+`archive/Qab9_upper_bundle/SHA256SUMS`.
 
 Key deterministic outputs:
 

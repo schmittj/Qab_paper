@@ -1,10 +1,12 @@
 mkdir -p build
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_one_nonunit_packages.cpp -o build/qab12_enumerate_one_nonunit_packages
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_one_nonunit.cpp -o build/qab12_pair_one_nonunit
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_two_nonunit_packages.cpp -o build/qab12_enumerate_two_nonunit_packages
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_two_nonunit.cpp -o build/qab12_pair_two_nonunit
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_unit_small_packages.cpp -o build/qab12_enumerate_unit_small_packages
-g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_unit_small.cpp -o build/qab12_pair_unit_small
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/enumerate_one_nonunit_packages.cpp -o build/qab12_enumerate_one_nonunit_packages
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/pair_one_nonunit.cpp -o build/qab12_pair_one_nonunit
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/enumerate_one_nonunit_residual_packages.cpp -o build/qab12_enumerate_one_nonunit_residual_packages
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/pair_one_nonunit_residual.cpp -o build/qab12_pair_one_nonunit_residual
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/enumerate_two_nonunit_packages.cpp -o build/qab12_enumerate_two_nonunit_packages
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/pair_two_nonunit.cpp -o build/qab12_pair_two_nonunit
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/enumerate_unit_small_packages.cpp -o build/qab12_enumerate_unit_small_packages
+g++ -O3 -std=gnu++20 -fopenmp -Wall -Wextra code/qab12/pair_unit_small.cpp -o build/qab12_pair_unit_small
 python3 code/qab12/certify_qab12_constants.py
 two_nonunit_cutoff_max_D=16583
 two_nonunit_degree_max=224
@@ -61,11 +63,48 @@ aggregate_unique_state_pairs=0
 aggregate_unique_orientation_pairs=0
 verified_one_nonunit_survivors=0
 status=PASS
+python3 code/qab12/verify_one_nonunit_all_manifest.py
+one_nonunit_all_manifest=PASS
+package_records=608490
+groups=514280
+raw_state_pairs=137530
+after_coprime_scales=10636
+after_range=7916
+after_extraction=7916
+after_disjoint=5430
+after_support=483
+after_degree=76
+after_role=0
+after_correspondence=0
+unique_state_pairs=0
+unique_orientation_pairs=0
+python3 code/qab12/verify_one_nonunit_residual.py --manifest data/qab12/one_nonunit_residual_manifest.json
+verified_one_nonunit_residual_package_states=233278
+residual_package_records=233278
+residual_groups=212369
+residual_raw_state_pairs=29611
+residual_after_coprime_scales=5680
+residual_after_range=5680
+residual_after_extraction=5679
+residual_after_disjoint=2345
+residual_after_support=428
+residual_after_degree=234
+residual_after_role=4
+residual_after_correspondence=4
+residual_unique_state_pairs=4
+residual_unique_orientation_pairs=2
+verified_residual_package_pairs=2
+verified_residual_orientation_certificates=8
+status=PASS
 python3 code/qab12/test_one_nonunit_small.py
 U=2 package_states=4 pair_states=0 PASS
 U=3 package_states=19 pair_states=0 PASS
 U=6 package_states=0 pair_states=0 PASS
 one_nonunit_small_oracle=PASS
+python3 code/qab12/test_one_nonunit_residual_small.py
+residual_small_oracle D=55 package_states=50 pair_states=0 PASS
+residual_small_oracle D=75 package_states=94 pair_states=0 PASS
+one_nonunit_residual_small_oracle=PASS
 python3 code/qab12/test_two_nonunit_small.py
 e=2-10 rmax=5 states=0 PASS
 e=11-18 rmax=4 states=2 PASS

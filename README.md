@@ -20,12 +20,17 @@ modular gcd certificates at `p = 1009`.
 ## Main files
 
 - `Qab12.tex`, `Qab12.pdf`: integrated manuscript.
+- `archive/revisions/`: source snapshots used in major manuscript revisions.
 - `code/qab12/`: current Qab12 source code and verification scripts.
 - `data/qab12/`: deterministic outputs and proof artifacts from the current work round.
 - `archive/Qab9_upper_bundle/`: audited upper-range code/data retained for self-containment.
-- `Qab12_audit_report.md`, `Qab13_audit.md`: current-stage external audit reports.
-- `docs/audits/`: earlier independent audit reports supplied by the user.
-- `SHA256SUMS`: hashes of every file in this bundle, excluding itself.
+- `Qab12_audit_report.md`, `Qab13_audit.md`: historical external audit reports; the blocking issues they identify are addressed by the current bundle.
+- `docs/WRITING_GUIDANCE_V2.md`: writing guidance used for the readability revision.
+- `docs/audits/`: earlier independent audit reports and historical nitpick notes.
+- `SHA256SUMS`: hashes of the listed tracked bundle files.  It excludes
+  itself, `ARTIFACT_MANIFEST.json`, and the nested archived
+  `archive/Qab9_upper_bundle/SHA256SUMS`; `ARTIFACT_MANIFEST.json` gives the
+  broader JSON inventory.
 
 ## Quick verification commands
 

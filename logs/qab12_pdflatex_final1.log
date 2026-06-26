@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex)
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
 (./Qab12.tex
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo))
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
@@ -38,11 +38,11 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
 (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
 (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
-(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
 (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
@@ -59,7 +59,6 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
 (/usr/share/texmf/tex/latex/lm/t1lmr.fd)
@@ -86,708 +85,697 @@ No file Qab12.aux.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
 No file Qab12.toc.
 
+LaTeX Warning: Reference `lem:unitcircle' on page 1 undefined on input line 84.
+
+
+
+LaTeX Warning: Citation `Borisov1998' on page 1 undefined on input line 101.
+
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm
--mathsy.enc}]
+-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}]
 
-LaTeX Warning: Citation `Borisov1998' on page 2 undefined on input line 101.
-
-
-LaTeX Warning: Reference `cor:partitionsignature' on page 2 undefined on input 
-line 164.
-
-
-[2{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}]
-
-LaTeX Warning: Reference `sec:computation' on page 3 undefined on input line 21
-8.
-
-
-LaTeX Warning: Reference `sec:unitlowercomputation' on page 3 undefined on inpu
-t line 219.
-
-
-LaTeX Warning: Reference `sec:nonunitcomputation' on page 3 undefined on input 
-line 220.
-
-
-[3]
-[4]
-
-LaTeX Warning: Reference `thm:nothree' on page 5 undefined on input line 382.
-
-
-[5]
-
-LaTeX Warning: Reference `lem:unitcircle' on page 6 undefined on input line 398
+LaTeX Warning: Reference `sec:dictionary' on page 2 undefined on input line 111
 .
 
 
-LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 405.
+LaTeX Warning: Reference `sec:finite-support' on page 2 undefined on input line
+ 111.
 
 
-LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 427.
+LaTeX Warning: Reference `sec:tail' on page 2 undefined on input line 115.
+
+
+LaTeX Warning: Reference `sec:rational' on page 2 undefined on input line 115.
+
+
+LaTeX Warning: Reference `sec:computation' on page 2 undefined on input line 12
+3.
+
+
+LaTeX Warning: Reference `sec:lowerstates' on page 2 undefined on input line 12
+4.
+
+
+LaTeX Warning: Reference `sec:unitlowercomputation' on page 2 undefined on inpu
+t line 127.
+
+
+LaTeX Warning: Reference `sec:nonunitcomputation' on page 2 undefined on input
+line 128.
+
+[2]
+
+LaTeX Warning: Reference `cor:partitionsignature' on page 3 undefined on input
+line 192.
+
+[3]
+
+LaTeX Warning: Reference `thm:main' on page 4 undefined on input line 243.
+
+
+LaTeX Warning: Reference `sec:computation' on page 4 undefined on input line 24
+4.
+
+
+LaTeX Warning: Reference `sec:unitlowercomputation' on page 4 undefined on inpu
+t line 245.
+
+
+LaTeX Warning: Reference `sec:nonunitcomputation' on page 4 undefined on input
+line 247.
+
+[4]
+
+LaTeX Warning: Reference `sec:dictionary' on page 5 undefined on input line 384
+.
+
+[5]
+
+LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 414.
+
+
+LaTeX Warning: Reference `lem:unitcircle' on page 6 undefined on input line 430
+.
+
+
+LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 437.
 
 
 LaTeX Warning: Reference `thm:nothree' on page 6 undefined on input line 459.
 
-
-LaTeX Warning: Reference `lem:propagation' on page 6 undefined on input line 46
-7.
-
-
 [6]
+
+LaTeX Warning: Reference `thm:nothree' on page 7 undefined on input line 491.
+
+
+LaTeX Warning: Reference `lem:propagation' on page 7 undefined on input line 49
+9.
+
 [7]
 
-LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 56
-1.
+LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 59
+5.
 
 
-LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 57
-6.
+LaTeX Warning: Reference `thm:pointfinite' on page 8 undefined on input line 61
+0.
+
+[8] [9]
+
+LaTeX Warning: Reference `thm:tail' on page 10 undefined on input line 702.
 
 
-[8]
+LaTeX Warning: Reference `thm:sign' on page 10 undefined on input line 721.
 
-LaTeX Warning: Reference `thm:tail' on page 9 undefined on input line 664.
-
-
-LaTeX Warning: Reference `thm:sign' on page 9 undefined on input line 683.
-
-
-[9]
 
 LaTeX Warning: Reference `lem:propagation' on page 10 undefined on input line 7
-21.
+59.
 
 
-LaTeX Warning: Reference `thm:nothree' on page 10 undefined on input line 723.
+LaTeX Warning: Reference `thm:nothree' on page 10 undefined on input line 761.
+
+[10] [11] [12] [13] [14] [15] [16]
+
+LaTeX Warning: Citation `SerreLocalFields' on page 17 undefined on input line 1
+256.
 
 
-[10]
-[11]
-[12]
-[13]
-[14]
-[15]
-
-LaTeX Warning: Citation `SerreLocalFields' on page 16 undefined on input line 1
-208.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 16 undefined on input line 1243.
-
-
-LaTeX Warning: Reference `lem:localcriteria' on page 16 undefined on input line
- 1253.
-
-
-[16]
-
-LaTeX Warning: Citation `Borisov1998' on page 17 undefined on input line 1274.
+LaTeX Warning: Citation `Borisov1998' on page 17 undefined on input line 1291.
 
 
 LaTeX Warning: Reference `lem:localcriteria' on page 17 undefined on input line
- 1287.
-
-
-LaTeX Warning: Reference `lem:goodpackage' on page 17 undefined on input line 1
-310.
-
-
-LaTeX Warning: Reference `lem:borisovramification' on page 17 undefined on inpu
-t line 1315.
-
-
-LaTeX Warning: Reference `lem:borisovramification' on page 17 undefined on inpu
-t line 1320.
-
-
-LaTeX Warning: Reference `thm:rational' on page 17 undefined on input line 1322
-.
-
-
-LaTeX Warning: Reference `thm:fullseparation' on page 17 undefined on input lin
-e 1345.
-
+ 1301.
 
 [17]
 
-LaTeX Warning: Reference `cor:supportcompatibility' on page 18 undefined on inp
-ut line 1359.
+LaTeX Warning: Citation `Borisov1998' on page 18 undefined on input line 1322.
 
 
-LaTeX Warning: Citation `BeukersSchlickewei1996' on page 18 undefined on input 
-line 1376.
+LaTeX Warning: Reference `lem:localcriteria' on page 18 undefined on input line
+ 1335.
 
 
-LaTeX Warning: Reference `thm:finiteshapes' on page 18 undefined on input line 
-1399.
+LaTeX Warning: Reference `lem:goodpackage' on page 18 undefined on input line 1
+358.
 
 
-LaTeX Warning: Reference `prop:finitescaling' on page 18 undefined on input lin
-e 1399.
+LaTeX Warning: Reference `lem:borisovramification' on page 18 undefined on inpu
+t line 1363.
 
+
+LaTeX Warning: Reference `lem:borisovramification' on page 18 undefined on inpu
+t line 1368.
+
+
+LaTeX Warning: Reference `thm:rational' on page 18 undefined on input line 1370
+.
 
 [18]
 
-LaTeX Warning: Reference `cor:triples' on page 19 undefined on input line 1472.
+LaTeX Warning: Reference `thm:fullseparation' on page 19 undefined on input lin
+e 1393.
 
 
+LaTeX Warning: Reference `cor:supportcompatibility' on page 19 undefined on inp
+ut line 1409.
 
-LaTeX Warning: Reference `lem:diagonaldenominator' on page 19 undefined on inpu
-t line 1507.
 
+LaTeX Warning: Citation `BeukersSchlickewei1996' on page 19 undefined on input
+line 1426.
+
+
+LaTeX Warning: Reference `thm:finiteshapes' on page 19 undefined on input line
+1449.
+
+
+LaTeX Warning: Reference `prop:finitescaling' on page 19 undefined on input lin
+e 1449.
 
 [19]
 
-LaTeX Warning: Reference `lem:unitcircle' on page 20 undefined on input line 15
-25.
-
-
-LaTeX Warning: Reference `lem:diagonaldenominator' on page 20 undefined on inpu
-t line 1539.
-
-
-LaTeX Warning: Citation `AndersonSaffVarga1979' on page 20 undefined on input l
-ine 1554.
-
-
-LaTeX Warning: Reference `thm:nodivision' on page 20 undefined on input line 15
-89.
+LaTeX Warning: Reference `cor:triples' on page 20 undefined on input line 1524.
 
 
 [20]
 
-LaTeX Warning: Reference `eq:fibre-master' on page 21 undefined on input line 1
-660.
+LaTeX Warning: Reference `lem:diagonaldenominator' on page 21 undefined on inpu
+t line 1559.
 
+
+LaTeX Warning: Reference `lem:unitcircle' on page 21 undefined on input line 15
+77.
+
+
+LaTeX Warning: Reference `lem:diagonaldenominator' on page 21 undefined on inpu
+t line 1591.
+
+
+LaTeX Warning: Citation `AndersonSaffVarga1979' on page 21 undefined on input l
+ine 1606.
 
 [21]
 
-LaTeX Warning: Reference `eq:fibre-master' on page 22 undefined on input line 1
-693.
-
+LaTeX Warning: Reference `thm:nodivision' on page 22 undefined on input line 16
+41.
 
 [22]
 
-LaTeX Warning: Reference `lem:schinzelfibre' on page 23 undefined on input line
- 1754.
+LaTeX Warning: Reference `eq:fibre-master' on page 23 undefined on input line 1
+714.
 
 
-LaTeX Warning: Reference `lem:schinzelfibre' on page 23 undefined on input line
- 1765.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 23 undefined on input line 1826.
-
+LaTeX Warning: Reference `eq:fibre-master' on page 23 undefined on input line 1
+747.
 
 [23]
+
+LaTeX Warning: Reference `lem:schinzelfibre' on page 24 undefined on input line
+ 1808.
+
+
+LaTeX Warning: Reference `lem:schinzelfibre' on page 24 undefined on input line
+ 1819.
+
 [24]
-[25]
 
-LaTeX Warning: Reference `lem:centeroneedge' on page 26 undefined on input line
- 2051.
+LaTeX Warning: Citation `Borisov1998' on page 25 undefined on input line 1880.
 
+[25] [26] [27]
 
-LaTeX Warning: Reference `lem:edgepower' on page 26 undefined on input line 206
-9.
+LaTeX Warning: Reference `lem:centeroneedge' on page 28 undefined on input line
+ 2105.
 
 
-[26]
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 27 undefined on input li
-ne 2073.
-
-
-LaTeX Warning: Reference `thm:schinzelbound' on page 27 undefined on input line
- 2127.
-
-
-LaTeX Warning: Reference `lem:kummerdegree' on page 27 undefined on input line 
-2132.
-
-
-LaTeX Warning: Reference `thm:nodivision' on page 27 undefined on input line 21
-36.
-
-
-LaTeX Warning: Reference `thm:kummerreduction' on page 27 undefined on input li
-ne 2149.
-
-
-LaTeX Warning: Reference `thm:selfpower' on page 27 undefined on input line 215
-1.
-
-
-[27]
-
-LaTeX Warning: Reference `thm:allliftsisolated' on page 28 undefined on input l
-ine 2189.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 28 undefined on input line 2200.
-
-
-[28]
-
-LaTeX Warning: Reference `lem:centeroneedge' on page 29 undefined on input line
- 2269.
-
-
-LaTeX Warning: Citation `GuardiaMontesNart2008' on page 29 undefined on input l
-ine 2319.
-
-
-[29]
-[30]
-
-LaTeX Warning: Reference `lem:edgepower' on page 31 undefined on input line 243
-9.
-
-
-LaTeX Warning: Reference `prop:mergedtwo' on page 31 undefined on input line 24
-43.
-
-
-LaTeX Warning: Reference `lem:oreresidual' on page 31 undefined on input line 2
-444.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 31 undefined on input line 244
-5.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 31 undefined on input line 2482.
-
-
-LaTeX Warning: Citation `Borisov1998' on page 31 undefined on input line 2485.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 31 undefined on input line 248
-8.
-
-
-LaTeX Warning: Reference `prop:mergedtwo' on page 31 undefined on input line 24
-91.
-
-
-LaTeX Warning: Reference `lem:oreresidual' on page 31 undefined on input line 2
-492.
-
-
-[31]
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 32 undefined on input li
-ne 2512.
-
-
-LaTeX Warning: Reference `thm:radicalsieve' on page 32 undefined on input line 
-2521.
-
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 32 undefined on input li
-ne 2522.
-
-
-LaTeX Warning: Citation `LangAlgebra' on page 32 undefined on input line 2527.
-
-
-LaTeX Warning: Reference `cor:totalprimepower' on page 32 undefined on input li
-ne 2548.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 32 undefined on input line
- 2549.
-
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 32 undefined on input li
-ne 2550.
-
-
-LaTeX Warning: Reference `thm:schinzelbound' on page 32 undefined on input line
- 2557.
-
-
-[32]
-
-LaTeX Warning: Reference `thm:radicalsieve' on page 33 undefined on input line 
-2605.
-
-
-LaTeX Warning: Reference `thm:radicalsieve' on page 33 undefined on input line 
-2662.
-
-
-LaTeX Warning: Reference `thm:allliftsisolated' on page 33 undefined on input l
-ine 2671.
-
-
-[33]
-
-LaTeX Warning: Reference `cor:supportcompatibility' on page 34 undefined on inp
-ut line 2697.
-
-
-LaTeX Warning: Reference `sec:finite-support' on page 34 undefined on input lin
-e 2726.
-
-
-[34]
-[35]
-[36]
-
-LaTeX Warning: Reference `lem:fourunit' on page 37 undefined on input line 2976
-.
-
-
-[37]
-
-LaTeX Warning: Reference `lem:schinzelfibre' on page 38 undefined on input line
- 3010.
-
-
-LaTeX Warning: Reference `thm:rational' on page 38 undefined on input line 3011
-.
-
-
-LaTeX Warning: Citation `AmorosoSombraZannier2017' on page 38 undefined on inpu
-t line 3035.
-
-
-[38]
-
-LaTeX Warning: Reference `prop:aszspecial' on page 39 undefined on input line 3
-093.
-
-
-LaTeX Warning: Reference `prop:aszspecial' on page 39 undefined on input line 3
-109.
-
-(/usr/share/texmf/tex/latex/lm/ot1lmss.fd)
-[39]
-
-LaTeX Warning: Reference `prop:ranktworigidity' on page 40 undefined on input l
-ine 3168.
-
-
-LaTeX Warning: Reference `thm:hyperplane' on page 40 undefined on input line 31
-81.
-
-
-LaTeX Warning: Reference `thm:hyperplane' on page 40 undefined on input line 31
-87.
-
-
-[40]
-
-LaTeX Warning: Citation `CoxLittleSchenck2011' on page 41 undefined on input li
-ne 3287.
-
-
-[41]
-
-LaTeX Warning: Citation `Cassels1997' on page 42 undefined on input line 3353.
-
-
-LaTeX Warning: Reference `lem:toricdegree' on page 42 undefined on input line 3
-389.
-
-
-[42]
-
-LaTeX Warning: Reference `prop:shorttorus' on page 43 undefined on input line 3
-420.
-
-
-LaTeX Warning: Reference `prop:ranktworigidity' on page 43 undefined on input l
-ine 3425.
-
-
-LaTeX Warning: Citation `Fulton1998' on page 43 undefined on input line 3443.
-
-
-[43]
-
-LaTeX Warning: Citation `Smyth1971' on page 44 undefined on input line 3486.
-
-
-LaTeX Warning: Reference `lem:collisionheight' on page 44 undefined on input li
-ne 3509.
-
-
-LaTeX Warning: Reference `prop:fielddegree' on page 44 undefined on input line 
-3514.
-
-
-LaTeX Warning: Reference `prop:mahlergap' on page 44 undefined on input line 35
-17.
-
-
-LaTeX Warning: Reference `prop:fielddegree' on page 44 undefined on input line 
-3553.
-
-
-LaTeX Warning: Reference `thm:explicitbound' on page 44 undefined on input line
- 3560.
-
-
-LaTeX Warning: Reference `sec:computation' on page 44 undefined on input line 3
-565.
-
-
-[44]
-
-LaTeX Warning: Citation `Borisov1998' on page 45 undefined on input line 3610.
-
-
-LaTeX Warning: Reference `prop:mergedtwo' on page 45 undefined on input line 36
-20.
-
-
-LaTeX Warning: Reference `prop:momentcongruence' on page 45 undefined on input 
-line 3631.
-
-
-[45]
-
-LaTeX Warning: Reference `prop:momentcongruence' on page 46 undefined on input 
-line 3658.
-
-
-LaTeX Warning: Citation `Mahler1964' on page 46 undefined on input line 3703.
-
-
-[46]
-
-LaTeX Warning: Reference `prop:wronskian' on page 47 undefined on input line 37
-89.
-
-
-[47]
-
-LaTeX Warning: Reference `lem:plasticpower' on page 48 undefined on input line 
-3883.
-
-
-LaTeX Warning: Reference `thm:schinzelbound' on page 48 undefined on input line
- 3885.
-
-
-[48]
-
-LaTeX Warning: Citation `LangAlgebra' on page 49 undefined on input line 3900.
-
-
-LaTeX Warning: Reference `cor:unitrange' on page 49 undefined on input line 392
-1.
-
-
-LaTeX Warning: Reference `cor:totalprimepower' on page 49 undefined on input li
-ne 3925.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 49 undefined on input line
- 3927.
-
-
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 49 undefined on input li
-ne 3930.
-
-
-LaTeX Warning: Reference `cor:totalprimepower' on page 49 undefined on input li
-ne 3940.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 49 undefined on input line
- 3941.
-
-
-LaTeX Warning: Reference `lem:edgepower' on page 49 undefined on input line 395
+LaTeX Warning: Reference `lem:edgepower' on page 28 undefined on input line 212
 3.
 
 
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 28 undefined on input li
+ne 2127.
+
+[28]
+
+LaTeX Warning: Reference `thm:schinzelbound' on page 29 undefined on input line
+ 2181.
+
+
+LaTeX Warning: Reference `lem:kummerdegree' on page 29 undefined on input line
+2186.
+
+
+LaTeX Warning: Reference `thm:nodivision' on page 29 undefined on input line 21
+90.
+
+
+LaTeX Warning: Reference `thm:kummerreduction' on page 29 undefined on input li
+ne 2203.
+
+
+LaTeX Warning: Reference `thm:selfpower' on page 29 undefined on input line 220
+5.
+
+
+LaTeX Warning: Reference `thm:allliftsisolated' on page 29 undefined on input l
+ine 2243.
+
+
+LaTeX Warning: Citation `Borisov1998' on page 29 undefined on input line 2254.
+
+[29]
+
+LaTeX Warning: Reference `lem:centeroneedge' on page 30 undefined on input line
+ 2325.
+
+[30]
+
+LaTeX Warning: Citation `GuardiaMontesNart2008' on page 31 undefined on input l
+ine 2375.
+
+[31]
+
+LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 249
+5.
+
+
+LaTeX Warning: Reference `prop:mergedtwo' on page 32 undefined on input line 24
+99.
+
+
+LaTeX Warning: Reference `lem:oreresidual' on page 32 undefined on input line 2
+500.
+
+
+LaTeX Warning: Reference `lem:edgepower' on page 32 undefined on input line 250
+1.
+
+[32]
+
+LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2538.
+
+
+LaTeX Warning: Citation `Borisov1998' on page 33 undefined on input line 2541.
+
+
+LaTeX Warning: Reference `lem:edgepower' on page 33 undefined on input line 254
+4.
+
+
+LaTeX Warning: Reference `prop:mergedtwo' on page 33 undefined on input line 25
+47.
+
+
+LaTeX Warning: Reference `lem:oreresidual' on page 33 undefined on input line 2
+548.
+
+
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 33 undefined on input li
+ne 2568.
+
+
+LaTeX Warning: Reference `thm:radicalsieve' on page 33 undefined on input line
+2577.
+
+
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 33 undefined on input li
+ne 2578.
+
+
+LaTeX Warning: Citation `LangAlgebra' on page 33 undefined on input line 2583.
+
+[33]
+
+LaTeX Warning: Reference `cor:totalprimepower' on page 34 undefined on input li
+ne 2604.
+
+
+LaTeX Warning: Reference `thm:endpointpower' on page 34 undefined on input line
+ 2605.
+
+
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 34 undefined on input li
+ne 2606.
+
+
+LaTeX Warning: Reference `thm:schinzelbound' on page 34 undefined on input line
+ 2613.
+
+
+LaTeX Warning: Reference `thm:radicalsieve' on page 34 undefined on input line
+2661.
+
+[34]
+
+LaTeX Warning: Reference `thm:radicalsieve' on page 35 undefined on input line
+2718.
+
+
+LaTeX Warning: Reference `thm:allliftsisolated' on page 35 undefined on input l
+ine 2727.
+
+
+LaTeX Warning: Reference `cor:supportcompatibility' on page 35 undefined on inp
+ut line 2753.
+
+[35]
+
+LaTeX Warning: Reference `sec:finite-support' on page 36 undefined on input lin
+e 2784.
+
+[36] [37] [38]
+
+LaTeX Warning: Reference `lem:fourunit' on page 39 undefined on input line 3036
+.
+
+[39]
+
+LaTeX Warning: Reference `lem:schinzelfibre' on page 40 undefined on input line
+ 3070.
+
+
+LaTeX Warning: Reference `thm:rational' on page 40 undefined on input line 3071
+.
+
+
+LaTeX Warning: Citation `AmorosoSombraZannier2017' on page 40 undefined on inpu
+t line 3095.
+
+[40]
+
+LaTeX Warning: Reference `prop:aszspecial' on page 41 undefined on input line 3
+153.
+
+
+LaTeX Warning: Reference `prop:aszspecial' on page 41 undefined on input line 3
+169.
+
+(/usr/share/texmf/tex/latex/lm/ot1lmss.fd)
+
+LaTeX Warning: Reference `prop:ranktworigidity' on page 41 undefined on input l
+ine 3228.
+
+[41]
+
+LaTeX Warning: Reference `thm:hyperplane' on page 42 undefined on input line 32
+41.
+
+
+LaTeX Warning: Reference `thm:hyperplane' on page 42 undefined on input line 32
+47.
+
+[42]
+
+LaTeX Warning: Citation `CoxLittleSchenck2011' on page 43 undefined on input li
+ne 3347.
+
+[43]
+
+LaTeX Warning: Citation `Cassels1997' on page 44 undefined on input line 3413.
+
+
+LaTeX Warning: Reference `lem:toricdegree' on page 44 undefined on input line 3
+449.
+
+
+LaTeX Warning: Reference `prop:shorttorus' on page 44 undefined on input line 3
+480.
+
+
+LaTeX Warning: Reference `prop:ranktworigidity' on page 44 undefined on input l
+ine 3485.
+
+[44]
+
+LaTeX Warning: Citation `Fulton1998' on page 45 undefined on input line 3503.
+
+
+LaTeX Warning: Citation `Smyth1971' on page 45 undefined on input line 3546.
+
+
+LaTeX Warning: Reference `lem:collisionheight' on page 45 undefined on input li
+ne 3569.
+
+
+LaTeX Warning: Reference `prop:fielddegree' on page 45 undefined on input line
+3574.
+
+
+LaTeX Warning: Reference `prop:mahlergap' on page 45 undefined on input line 35
+77.
+
+[45]
+
+LaTeX Warning: Reference `prop:fielddegree' on page 46 undefined on input line
+3613.
+
+
+LaTeX Warning: Reference `thm:explicitbound' on page 46 undefined on input line
+ 3620.
+
+
+LaTeX Warning: Reference `sec:computation' on page 46 undefined on input line 3
+625.
+
+[46]
+
+LaTeX Warning: Citation `Borisov1998' on page 47 undefined on input line 3670.
+
+
+LaTeX Warning: Reference `prop:mergedtwo' on page 47 undefined on input line 36
+80.
+
+
+LaTeX Warning: Reference `prop:momentcongruence' on page 47 undefined on input
+line 3691.
+
+
+LaTeX Warning: Reference `prop:momentcongruence' on page 47 undefined on input
+line 3718.
+
+[47]
+
+LaTeX Warning: Citation `Mahler1964' on page 48 undefined on input line 3763.
+
+[48]
+
+LaTeX Warning: Reference `prop:wronskian' on page 49 undefined on input line 38
+49.
+
 [49]
 
-LaTeX Warning: Reference `prop:momentcongruence' on page 50 undefined on input 
-line 3980.
+LaTeX Warning: Reference `lem:plasticpower' on page 50 undefined on input line
+3945.
 
 
-LaTeX Warning: Reference `prop:hankeldisc' on page 50 undefined on input line 3
-984.
+LaTeX Warning: Reference `thm:schinzelbound' on page 50 undefined on input line
+ 3947.
 
 
-LaTeX Warning: Reference `prop:unitkummer' on page 50 undefined on input line 3
-990.
+LaTeX Warning: Citation `LangAlgebra' on page 50 undefined on input line 3962.
 
 
-LaTeX Warning: Reference `prop:fielddegree' on page 50 undefined on input line 
-4009.
-
-
-LaTeX Warning: Reference `prop:onepackagesupport' on page 50 undefined on input
- line 4009.
-
-(/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
-
-LaTeX Warning: Reference `prop:onepackagesupport' on page 50 undefined on input
- line 4045.
-
-
-LaTeX Warning: Reference `thm:radicalsieve' on page 50 undefined on input line 
-4055.
-
+LaTeX Warning: Reference `cor:unitrange' on page 50 undefined on input line 398
+3.
 
 [50]
 
-LaTeX Warning: Reference `lem:fourunit' on page 51 undefined on input line 4163
-.
+LaTeX Warning: Reference `cor:totalprimepower' on page 51 undefined on input li
+ne 3987.
 
 
-[51]
-
-LaTeX Warning: Reference `cor:unitsupportcap' on page 52 undefined on input lin
-e 4191.
+LaTeX Warning: Reference `thm:endpointpower' on page 51 undefined on input line
+ 3989.
 
 
-LaTeX Warning: Reference `cor:supportcompatibility' on page 52 undefined on inp
-ut line 4213.
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 51 undefined on input li
+ne 3992.
 
 
-LaTeX Warning: Reference `thm:schinzelbound' on page 52 undefined on input line
- 4219.
+LaTeX Warning: Reference `cor:totalprimepower' on page 51 undefined on input li
+ne 4002.
 
 
-LaTeX Warning: Reference `thm:rational' on page 52 undefined on input line 4225
-.
+LaTeX Warning: Reference `thm:endpointpower' on page 51 undefined on input line
+ 4003.
 
 
-LaTeX Warning: Reference `lem:rolebinomial' on page 52 undefined on input line 
-4227.
+LaTeX Warning: Reference `lem:edgepower' on page 51 undefined on input line 401
+5.
 
+
+LaTeX Warning: Reference `prop:momentcongruence' on page 51 undefined on input
+line 4042.
+
+
+LaTeX Warning: Reference `prop:hankeldisc' on page 51 undefined on input line 4
+046.
+
+
+LaTeX Warning: Reference `prop:unitkummer' on page 51 undefined on input line 4
+052.
+
+
+LaTeX Warning: Reference `prop:fielddegree' on page 51 undefined on input line
+4071.
+
+
+LaTeX Warning: Reference `prop:onepackagesupport' on page 51 undefined on input
+ line 4071.
+
+[51] (/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+
+LaTeX Warning: Reference `prop:onepackagesupport' on page 52 undefined on input
+ line 4107.
+
+
+LaTeX Warning: Reference `thm:radicalsieve' on page 52 undefined on input line
+4117.
 
 [52]
 
-LaTeX Warning: Reference `prop:sameshapebezout' on page 53 undefined on input l
-ine 4248.
-
-
-LaTeX Warning: Reference `prop:sameshapebezout' on page 53 undefined on input l
-ine 4269.
-
-
-LaTeX Warning: Reference `prop:uniformdegree' on page 53 undefined on input lin
-e 4273.
-
-
-LaTeX Warning: Reference `thm:explicitbound' on page 53 undefined on input line
- 4275.
-
+LaTeX Warning: Reference `lem:fourunit' on page 53 undefined on input line 4225
+.
 
 [53]
 
-LaTeX Warning: Reference `thm:explicitbound' on page 54 undefined on input line
- 4311.
+LaTeX Warning: Reference `cor:unitsupportcap' on page 54 undefined on input lin
+e 4253.
 
 
-LaTeX Warning: Reference `cor:unitrange' on page 54 undefined on input line 431
-2.
+LaTeX Warning: Reference `cor:supportcompatibility' on page 54 undefined on inp
+ut line 4275.
 
 
-LaTeX Warning: Reference `thm:allliftsisolated' on page 54 undefined on input l
-ine 4330.
+LaTeX Warning: Reference `thm:schinzelbound' on page 54 undefined on input line
+ 4281.
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty)
-[54]
-[55]
 
-LaTeX Warning: Reference `lem:fourunit' on page 56 undefined on input line 4467
+LaTeX Warning: Reference `thm:rational' on page 54 undefined on input line 4287
 .
 
 
-LaTeX Warning: Reference `prop:sameshapebezout' on page 56 undefined on input l
-ine 4468.
+LaTeX Warning: Reference `lem:rolebinomial' on page 54 undefined on input line
+4289.
 
 
-LaTeX Warning: Reference `prop:sameshapebezout' on page 56 undefined on input l
-ine 4481.
+LaTeX Warning: Reference `prop:sameshapebezout' on page 54 undefined on input l
+ine 4310.
+
+[54]
+
+LaTeX Warning: Reference `prop:sameshapebezout' on page 55 undefined on input l
+ine 4331.
 
 
-[56]
-
-LaTeX Warning: Reference `prop:endpointarith' on page 57 undefined on input lin
-e 4544.
+LaTeX Warning: Reference `prop:uniformdegree' on page 55 undefined on input lin
+e 4335.
 
 
-LaTeX Warning: Reference `lem:normtransfer' on page 57 undefined on input line 
-4546.
+LaTeX Warning: Reference `thm:explicitbound' on page 55 undefined on input line
+ 4337.
 
 
-LaTeX Warning: Reference `prop:reducedcorrespondence' on page 57 undefined on i
-nput line 4592.
+LaTeX Warning: Reference `thm:explicitbound' on page 55 undefined on input line
+ 4373.
 
 
-[57]
+LaTeX Warning: Reference `cor:unitrange' on page 55 undefined on input line 437
+4.
 
-LaTeX Warning: Reference `prop:twononunit' on page 58 undefined on input line 4
-625.
+[55]
 
+LaTeX Warning: Reference `thm:allliftsisolated' on page 56 undefined on input l
+ine 4392.
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) [56] [57]
+
+LaTeX Warning: Reference `lem:fourunit' on page 58 undefined on input line 4529
+.
+
+
+LaTeX Warning: Reference `prop:sameshapebezout' on page 58 undefined on input l
+ine 4530.
+
+
+LaTeX Warning: Reference `prop:sameshapebezout' on page 58 undefined on input l
+ine 4543.
+
+
+LaTeX Warning: Reference `prop:endpointarith' on page 58 undefined on input lin
+e 4606.
+
+
+LaTeX Warning: Reference `lem:normtransfer' on page 58 undefined on input line
+4608.
 
 [58]
 
-LaTeX Warning: Reference `thm:frobeniusfactor' on page 59 undefined on input li
-ne 4698.
+LaTeX Warning: Reference `prop:reducedcorrespondence' on page 59 undefined on i
+nput line 4654.
 
 
-LaTeX Warning: Reference `cor:totalprimepower' on page 59 undefined on input li
-ne 4699.
-
-
-LaTeX Warning: Reference `thm:endpointpower' on page 59 undefined on input line
- 4699.
-
-
-LaTeX Warning: Reference `lem:exceptionalfourth' on page 59 undefined on input 
-line 4700.
-
-
-LaTeX Warning: Reference `cor:coefftrichotomy' on page 59 undefined on input li
-ne 4726.
-
-
-LaTeX Warning: Reference `prop:defectlocalization' on page 59 undefined on inpu
-t line 4727.
-
+LaTeX Warning: Reference `prop:twononunit' on page 59 undefined on input line 4
+687.
 
 [59]
 
-LaTeX Warning: Reference `prop:defectlocalization' on page 60 undefined on inpu
-t line 4814.
+LaTeX Warning: Reference `thm:frobeniusfactor' on page 60 undefined on input li
+ne 4760.
 
 
-LaTeX Warning: Reference `lem:subsetdegreecertificate' on page 60 undefined on 
-input line 4821.
+LaTeX Warning: Reference `cor:totalprimepower' on page 60 undefined on input li
+ne 4761.
 
+
+LaTeX Warning: Reference `thm:endpointpower' on page 60 undefined on input line
+ 4761.
+
+
+LaTeX Warning: Reference `lem:exceptionalfourth' on page 60 undefined on input
+line 4762.
 
 [60]
 
-LaTeX Warning: Reference `prop:twononunit' on page 61 undefined on input line 4
-880.
+LaTeX Warning: Reference `cor:coefftrichotomy' on page 61 undefined on input li
+ne 4788.
 
 
-LaTeX Warning: Reference `cor:remainingnonunit' on page 61 undefined on input l
-ine 4881.
-
+LaTeX Warning: Reference `prop:defectlocalization' on page 61 undefined on inpu
+t line 4789.
 
 [61]
 
-LaTeX Warning: Reference `cor:q12residualenvelope' on page 62 undefined on inpu
-t line 4957.
+LaTeX Warning: Reference `prop:defectlocalization' on page 62 undefined on inpu
+t line 4877.
 
+
+LaTeX Warning: Reference `lem:subsetdegreecertificate' on page 62 undefined on
+input line 4884.
 
 [62]
-[63] (./Qab12.aux)
+
+LaTeX Warning: Reference `prop:twononunit' on page 63 undefined on input line 4
+946.
+
+
+LaTeX Warning: Reference `cor:remainingnonunit' on page 63 undefined on input l
+ine 4947.
+
+[63]
+
+LaTeX Warning: Reference `cor:q12residualenvelope' on page 64 undefined on inpu
+t line 5028.
+
+[64]
+
+LaTeX Warning: Reference `sec:dictionary' on page 65 undefined on input line 51
+00.
+
+
+LaTeX Warning: Reference `thm:main' on page 65 undefined on input line 5101.
+
+[65] [66] (./Qab12.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -816,5 +804,5 @@ onts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmtt9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Qab12.pdf (63 pages, 741703 bytes).
+Output written on Qab12.pdf (66 pages, 752651 bytes).
 Transcript written on Qab12.log.

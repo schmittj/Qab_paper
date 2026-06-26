@@ -4,20 +4,20 @@
     "sha256": "44ff1337f4fe15660798b8e195be9c84682ffe74d8497ec235f54011f4eca623"
   },
   "MANIFEST.md": {
-    "bytes": 1177,
-    "sha256": "ae6f6c87c30f499ab13819baf51d863a77bc2346cd4460d70599937a690f9099"
+    "bytes": 1369,
+    "sha256": "096c7673175bac4930c8a1356c6522b7999b4c40680bfe81dcedd2b84d5895ff"
   },
   "Makefile": {
     "bytes": 3252,
     "sha256": "78a0a69478b77f5dd7f56d840e595413bf668a676ed0150646837e0dfbba0eaa"
   },
   "Qab12.pdf": {
-    "bytes": 762115,
-    "sha256": "c12c683a6e9574e612d100248cc2ea4cd3f21653ff63b66c5ff511f618d66f58"
+    "bytes": 770387,
+    "sha256": "9c421e44edfc6102f2137b1fb8454a9b0f1437f2a0ac917aeb860039572fde87"
   },
   "Qab12.tex": {
-    "bytes": 174485,
-    "sha256": "07025009cd1a1538b2e57a184a1c990cb31aacf0eefa12ec432bd50aaebba625"
+    "bytes": 181493,
+    "sha256": "37bf736b8fc249449b49e5500b4ebd73bfa4e90dd19aa89afe64edf1a4a7e27e"
   },
   "Qab12_audit_report.md": {
     "bytes": 15650,
@@ -28,12 +28,12 @@
     "sha256": "9a7edd13d69b2699edc1633ab649afa886a8c20a456d2994c50cc5a0ab373e66"
   },
   "README.md": {
-    "bytes": 1993,
-    "sha256": "d7b7184454153cad06d62106699d492b5e9606a8200a11317eb2a3af8f0b0053"
+    "bytes": 2395,
+    "sha256": "08305a99478017cc0b5aef10a3e6818eac5bbb3a1fed1bc9e79003270a8e01b1"
   },
   "SHA256SUMS": {
-    "bytes": 165876,
-    "sha256": "d439c81143740df06af521dc12bca1ba425dbd6f8d7820dc83cb252bfe611057"
+    "bytes": 166209,
+    "sha256": "c7cc83552ad209fc620254f5f71ff056bc27da9ccb7e140b447e7161a87cc8b8"
   },
   "archive/Qab10.pdf": {
     "bytes": 747348,
@@ -195,6 +195,10 @@
     "bytes": 20,
     "sha256": "8729270a287968d3dd65693c3e5441c48af31ab31560a773f859a767c636c2d5"
   },
+  "archive/revisions/Qab12_revised_promoted_2026-06-26.tex": {
+    "bytes": 181493,
+    "sha256": "37bf736b8fc249449b49e5500b4ebd73bfa4e90dd19aa89afe64edf1a4a7e27e"
+  },
   "code/qab12/build_one_nonunit_all_manifest.py": {
     "bytes": 3557,
     "sha256": "3671d4f76ad307c615914ef5c6ac06a654a1f0ef78271331653b0afa3b02cda0"
@@ -337,7 +341,7 @@
   },
   "data/qab12/QAB12_SUMMARY.json": {
     "bytes": 4214,
-    "sha256": "e016c94d4ac7adaf7a2612e20402d956c0bf118a256e053427e4ba7fe2c0fed0"
+    "sha256": "761d8f14232d2c0f39001ef735fcafeba68e4f0865cb5a437a3dfadaa74f394c"
   },
   "data/qab12/factor_probe_4374/p11.json": {
     "bytes": 158,
@@ -5659,9 +5663,17 @@
     "bytes": 1397,
     "sha256": "7e1311eb38c4ae3388d8501d9d3dd0cdf165e577fe655504333c686e39bdd0ee"
   },
+  "docs/WRITING_GUIDANCE_V2.md": {
+    "bytes": 31483,
+    "sha256": "acd9df3f2785633a0ef7f470b14433bab0bd9951fc77df0808f06ce9462deb0c"
+  },
   "docs/audits/Qab10_audit_report.md": {
     "bytes": 40942,
     "sha256": "338d4338cdd7259c1c2c867d08b7c54daedee95ba351e625e79d7b3b169c4a94"
+  },
+  "docs/audits/Qab12_remaining_nitpicks_2026-06-26.md": {
+    "bytes": 2885,
+    "sha256": "1852e419e0cec044f83426a4ae3d41e8c7f507cc56299c0fc5e576a10caaf772"
   },
   "docs/audits/Qab9_audit_report.md": {
     "bytes": 52649,
@@ -5672,16 +5684,16 @@
     "sha256": "539fd534a2b579d338acaf17cb02f794dc5ada1aed9d5cdbc77a1595c63098e2"
   },
   "logs/qab12_pdflatex_final1.log": {
-    "bytes": 21124,
-    "sha256": "6d6d670c89e25114951df21624ecb84592ebfd4faeff0fe88c419a13740affd0"
+    "bytes": 22094,
+    "sha256": "37dca5ac3d9bddd2e79b158804df2dc33fd3fff614fce8439eb46445993d0366"
   },
   "logs/qab12_pdflatex_final2.log": {
-    "bytes": 7495,
-    "sha256": "86e83b50caeaeba43f551a386652a7f41b5e229f75ccc098f64fea9fcb510bc2"
+    "bytes": 7431,
+    "sha256": "d5e28ff5760fb416358ca18ec3f250f7a7a3f94bc1c4ddbc81c15b69c51d958f"
   },
   "logs/qab12_pdflatex_final3.log": {
-    "bytes": 7414,
-    "sha256": "a978ebd75922c421691aea5be56e556d7a69aeef4ef3b9c86be92cab795a4ce4"
+    "bytes": 7350,
+    "sha256": "2aa07fa42d6d06b1e9f6a0277af7387c630cac57281bda02d08304a5db2876db"
   },
   "logs/qab12_verify_irreducibility_direct_final.time": {
     "bytes": 44,
@@ -5692,20 +5704,20 @@
     "sha256": "dbe59cd1dea837386aece3e34ff7cb1eb54696e4a92c8eb02be32a9bec96d6da"
   },
   "logs/qab12_verify_light_final.time": {
-    "bytes": 19197,
-    "sha256": "36c94cdf777887a31454f2a52f4596495e01281e7c1582069cab5cabff3e2b6c"
+    "bytes": 31,
+    "sha256": "51c1fddd1470b9a8326d4768ace1659d9624349ab68b1cb82a93e45387eaf2a9"
   },
   "logs/qab12_verify_light_final.txt": {
-    "bytes": 2729,
-    "sha256": "f645eaa8bb9945f94d8bf72be58ab0688920f8cdbf1e1d78586ee5bf05afdc2c"
+    "bytes": 4154,
+    "sha256": "6060d93f97508a7c960d2fb374c91c2ab57f6684e34e37dc8aedf49ed76ad219"
   },
   "logs/qab12_verify_light_rerun.time": {
-    "bytes": 19183,
-    "sha256": "30126ccd3a1595eb8c43b8f71ee5152357998f53673ba5e3b6a2acedfbd8e268"
+    "bytes": 31,
+    "sha256": "cba15d68d2077783e2e2918177cacfa706e2746866687f589daffd15e5dfc33c"
   },
   "logs/qab12_verify_light_rerun.txt": {
-    "bytes": 2729,
-    "sha256": "f645eaa8bb9945f94d8bf72be58ab0688920f8cdbf1e1d78586ee5bf05afdc2c"
+    "bytes": 4154,
+    "sha256": "6060d93f97508a7c960d2fb374c91c2ab57f6684e34e37dc8aedf49ed76ad219"
   },
   "logs/qab12_verify_modular_final.time": {
     "bytes": 44,
