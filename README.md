@@ -1,4 +1,4 @@
-# Qab12 review bundle
+# Qab proof bundle
 
 This bundle is a reviewable proof package for the `Q_{a,b}` reciprocal-package project.
 
@@ -19,14 +19,13 @@ modular gcd certificates at `p = 1009`.
 
 ## Main files
 
-- `Qab12.tex`, `Qab12.pdf`: integrated manuscript.
+- `Qab.tex`, `Qab.pdf`: integrated manuscript.
 - `archive/revisions/`: source snapshots used in major manuscript revisions.
-- `code/qab12/`: current Qab12 source code and verification scripts.
-- `data/qab12/`: deterministic outputs and proof artifacts from the current work round.
+- `code/qab12/`: source code and verification scripts for the current computation stage.
+- `data/qab12/`: deterministic outputs and proof artifacts from the current computation stage.
 - `archive/Qab9_upper_bundle/`: audited upper-range code/data retained for self-containment.
-- `Qab12_audit_report.md`, `Qab13_audit.md`: historical external audit reports; the blocking issues they identify are addressed by the current bundle.
+- `docs/audits/`: historical external audit reports and nitpick notes; the blocking issues they identify are addressed by the current bundle.
 - `docs/WRITING_GUIDANCE_V2.md`: writing guidance used for the readability revision.
-- `docs/audits/`: earlier independent audit reports and historical nitpick notes.
 - `SHA256SUMS`: hashes of the listed tracked bundle files.  It excludes
   itself, `ARTIFACT_MANIFEST.json`, and the nested archived
   `archive/Qab9_upper_bundle/SHA256SUMS`; `ARTIFACT_MANIFEST.json` gives the
@@ -37,9 +36,9 @@ modular gcd certificates at `p = 1009`.
 From the bundle root:
 
 ```bash
-make q12-verify-light
-make q12-verify-modular     # requires python-flint
-make q12-verify-upper       # verifies archived upper rows
+make verify-light
+make verify-modular     # requires python-flint
+make verify-upper       # verifies archived upper rows
 ```
 
 The C++ tools are intended for GCC or Clang with OpenMP and GNU `__int128`
@@ -50,13 +49,13 @@ dependencies for the modular and irreducibility replays are pinned in
 The corrected residual branch can be regenerated with
 
 ```bash
-make q12-one-nonunit-residual THREADS=25
+make one-nonunit-residual THREADS=25
 ```
 
 The long direct modular irreducibility verifier can be run with
 
 ```bash
-make q12-verify-irreducibility-direct
+make verify-irreducibility-direct
 ```
 
 This last command may take longer depending on the local FLINT build.

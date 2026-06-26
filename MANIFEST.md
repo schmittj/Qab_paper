@@ -1,4 +1,4 @@
-# Qab12 bundle manifest overview
+# Qab bundle manifest overview
 
 The main byte-level checksum list is `SHA256SUMS`; the broader JSON inventory
 is `ARTIFACT_MANIFEST.json`.  The checksum list intentionally excludes itself,

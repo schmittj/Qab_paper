@@ -1,4 +1,4 @@
-# Qab12 status and branch boundary
+# Proof status and branch boundary
 
 ## Eliminated in this bundle
 
@@ -63,5 +63,5 @@ certificates at `p = 1009`, replayed by `verify_one_nonunit_residual.py`.
 
 ## Current proof status
 
-All branches isolated in Qab12 are now eliminated by the bundled mathematical
-reductions and computational artifacts.
+All branches isolated in the current bundle are now eliminated by the bundled
+mathematical reductions and computational artifacts.

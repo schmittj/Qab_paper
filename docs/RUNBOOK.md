@@ -1,9 +1,9 @@
-# Qab12 runbook
+# Verification runbook
 
 ## Build C++ tools
 
 ```bash
-make q12-build
+make build
 ```
 
 The default build expects GCC or Clang with OpenMP and GNU `__int128`
@@ -12,7 +12,7 @@ support (`-std=gnu++20`).
 ## Light verification
 
 ```bash
-make q12-verify-light
+make verify-light
 ```
 
 This reruns exact constant checks, the two-nonunit row verifier, the
@@ -22,7 +22,7 @@ small brute-force oracles.
 ## Modular certificate verification
 
 ```bash
-make q12-verify-modular
+make verify-modular
 ```
 
 Requires `python-flint`. It recomputes the modular gcd certificates for the unit large and small terminal pairs.
@@ -35,7 +35,7 @@ python3 -m pip install -r requirements-optional.txt
 ## Direct irreducibility verification
 
 ```bash
-make q12-verify-irreducibility-direct
+make verify-irreducibility-direct
 ```
 
 Requires `python-flint`. It recomputes the modular factorization degrees for the unit-defect irreducibility certificates.
@@ -43,7 +43,7 @@ Requires `python-flint`. It recomputes the modular factorization degrees for the
 ## Reproduce the all-shapes one-nonunit run
 
 ```bash
-make q12-one-nonunit-all THREADS=25
+make one-nonunit-all THREADS=25
 ```
 
 This reruns the `U=2,...,26` branch for `D >= 16,584`. The corrected small
@@ -52,7 +52,7 @@ branch is reproduced by the residual target below.
 ## Reproduce the residual one-nonunit run
 
 ```bash
-make q12-one-nonunit-residual THREADS=25
+make one-nonunit-residual THREADS=25
 ```
 
 This reruns the corrected residual branch

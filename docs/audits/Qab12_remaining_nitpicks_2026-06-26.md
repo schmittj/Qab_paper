@@ -2,7 +2,8 @@ Historical Qab12 nitpicks, 26 June 2026
 
 These comments were written against the previous version of `Qab12.tex` and
 the then-current auxiliary files.  The live items were addressed in the
-subsequent revision that promoted `Qab12_revised.tex` to `Qab12.tex`.
+subsequent revision that promoted `Qab12_revised.tex` to the current
+manuscript source, now named `Qab.tex`.
 
 Remaining non-blocking cleanup issues
 
@@ -10,7 +11,8 @@ These do not appear to undermine the proof, but I would fix them before treating
 
 1. The paper still references a few stale paths
 
-Qab12.tex still refers to paths that are not present at the root of the current bundle:
+The then-current manuscript still referred to paths that were not present at
+the root of the current bundle:
 
 code/certify_constants.py
 code/certify_thresholds.sage
@@ -68,7 +70,7 @@ The active Makefile and verifiers are correct; the logs just need regeneration o
 
 The package includes older audit files such as:
 
-Qab12_audit_report.md
-Qab13_audit.md
+docs/audits/Qab12_audit_report.md
+docs/audits/Qab13_audit.md
 
 These contain now-obsolete statements about the residual branch remaining or manifests being stale. That is fine as audit history, but the README currently calls them “current-stage external audit reports,” which could confuse a referee. I would relabel them as historical audits, or add a short note saying their issues have been addressed in the current archive.

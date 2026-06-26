@@ -2,7 +2,28 @@ CXX ?= g++
 CXXFLAGS ?= -O3 -std=gnu++20 -fopenmp -Wall -Wextra
 THREADS ?= 25
 
-.PHONY: q12-build q12-verify-light q12-verify-modular q12-verify-irreducibility-direct q12-verify-upper q12-one-nonunit-all q12-one-nonunit-residual clean
+.PHONY: paper build verify-light verify-modular verify-irreducibility-direct
+.PHONY: verify-upper one-nonunit-all one-nonunit-residual
+.PHONY: q12-build q12-verify-light q12-verify-modular
+.PHONY: q12-verify-irreducibility-direct q12-verify-upper
+.PHONY: q12-one-nonunit-all q12-one-nonunit-residual clean
+
+paper:
+	latexmk -pdf Qab.tex
+
+build: q12-build
+
+verify-light: q12-verify-light
+
+verify-modular: q12-verify-modular
+
+verify-irreducibility-direct: q12-verify-irreducibility-direct
+
+verify-upper: q12-verify-upper
+
+one-nonunit-all: q12-one-nonunit-all
+
+one-nonunit-residual: q12-one-nonunit-residual
 
 q12-build:
 	mkdir -p build
