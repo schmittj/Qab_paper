@@ -1,0 +1,18 @@
+unique_pairs=3 selected_pairs=3 pending_orientations=12 workers=12
+certified pair=1 orientation=2 prime=1009 attempts=1
+certified pair=1 orientation=3 prime=1009 attempts=1
+certified pair=1 orientation=1 prime=1009 attempts=1
+certified pair=2 orientation=0 prime=1009 attempts=1
+certified pair=0 orientation=1 prime=1009 attempts=1
+certified pair=2 orientation=1 prime=1009 attempts=1
+certified pair=2 orientation=2 prime=1009 attempts=1
+certified pair=1 orientation=0 prime=1009 attempts=1
+certified pair=2 orientation=3 prime=1009 attempts=1
+certified pair=0 orientation=2 prime=1009 attempts=1
+certified pair=0 orientation=0 prime=997 attempts=2
+certified pair=0 orientation=3 prime=997 attempts=2
+certified_orientations=12
+unresolved_orientations=0
+elapsed_seconds=21.422940092999852
+certificates=data/unit_small_modular_certificates.csv
+unresolved=data/unit_small_modular_unresolved.jsonl

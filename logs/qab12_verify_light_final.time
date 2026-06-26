@@ -1,0 +1,144 @@
+code/qab12/enumerate_one_nonunit_packages.cpp: In function 'uint32_t degree_upper(uint32_t)':
+code/qab12/enumerate_one_nonunit_packages.cpp:62:105: warning: ISO C++ does not support '__int128' for 'lhs' [-Wpedantic]
+   62 | static uint32_t degree_upper(uint32_t D){uint32_t lo=0,hi=200000;while(lo<hi){uint32_t m=lo+(hi-lo+1)/2;__int128 lhs=(__int128)m*m*m,rhs=(__int128)64*D*D;if(lhs<rhs)lo=m;else hi=m-1;}return lo;}
+      |                                                                                                         ^~~~~~~~
+code/qab12/enumerate_one_nonunit_packages.cpp:62:119: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   62 | static uint32_t degree_upper(uint32_t D){uint32_t lo=0,hi=200000;while(lo<hi){uint32_t m=lo+(hi-lo+1)/2;__int128 lhs=(__int128)m*m*m,rhs=(__int128)64*D*D;if(lhs<rhs)lo=m;else hi=m-1;}return lo;}
+      |                                                                                                                       ^~~~~~~~
+code/qab12/enumerate_one_nonunit_packages.cpp:62:105: warning: ISO C++ does not support '__int128' for 'rhs' [-Wpedantic]
+   62 | static uint32_t degree_upper(uint32_t D){uint32_t lo=0,hi=200000;while(lo<hi){uint32_t m=lo+(hi-lo+1)/2;__int128 lhs=(__int128)m*m*m,rhs=(__int128)64*D*D;if(lhs<rhs)lo=m;else hi=m-1;}return lo;}
+      |                                                                                                         ^~~~~~~~
+code/qab12/enumerate_one_nonunit_packages.cpp:62:139: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   62 | static uint32_t degree_upper(uint32_t D){uint32_t lo=0,hi=200000;while(lo<hi){uint32_t m=lo+(hi-lo+1)/2;__int128 lhs=(__int128)m*m*m,rhs=(__int128)64*D*D;if(lhs<rhs)lo=m;else hi=m-1;}return lo;}
+      |                                                                                                                                           ^~~~~~~~
+code/qab12/enumerate_one_nonunit_packages.cpp: In function 'int main(int, char**)':
+code/qab12/enumerate_one_nonunit_packages.cpp:122:21: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  122 |                     for(uint32_t q:c.good_defect)if(a%q==0||b%q==0||n%q==0){ok=false;break;}if(!ok)continue;
+      |                     ^~~
+code/qab12/enumerate_one_nonunit_packages.cpp:122:93: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  122 |                     for(uint32_t q:c.good_defect)if(a%q==0||b%q==0||n%q==0){ok=false;break;}if(!ok)continue;
+      |                                                                                             ^~
+code/qab12/pair_one_nonunit.cpp: In function 'uint32_t role_value(uint32_t, const Rec&)':
+code/qab12/pair_one_nonunit.cpp:48:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   48 |     if(hits!=1)throw std::runtime_error("primitive role invariant failed");return v;
+      |     ^~
+code/qab12/pair_one_nonunit.cpp:48:76: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   48 |     if(hits!=1)throw std::runtime_error("primitive role invariant failed");return v;
+      |                                                                            ^~~~~~
+code/qab12/pair_one_nonunit.cpp: In function 'bool disjoint(const Rec&, const Rec&)':
+code/qab12/pair_one_nonunit.cpp:53:5: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+   53 |     for(auto a:A)for(auto b:B)if(a==b)return false;return true;
+      |     ^~~
+code/qab12/pair_one_nonunit.cpp:53:52: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+   53 |     for(auto a:A)for(auto b:B)if(a==b)return false;return true;
+      |                                                    ^~~~~~
+code/qab12/pair_one_nonunit.cpp: In function 'bool same_package(const Rec&, const Rec&)':
+code/qab12/pair_one_nonunit.cpp:57:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   57 |     if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+      |     ^~
+code/qab12/pair_one_nonunit.cpp:57:31: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   57 |     if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+      |                               ^~
+code/qab12/pair_one_nonunit.cpp: In function 'int main(int, char**)':
+code/qab12/pair_one_nonunit.cpp:90:523: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   90 |     for(auto&kv:groups){auto&g=kv.second;for(size_t i=0;i<g.size();++i)for(size_t j=i+1;j<g.size();++j){++raw;Rec x=g[i],y=g[j];if(std::gcd(x.r,y.r)!=1)continue;++after_gcd;if(same_package(x,y))continue;uint32_t D=std::max(x.r*x.n,y.r*y.n);if(D<Dmin||D>(Doverride?Doverride:D_cap(x.U))||D>=(uint64_t)(Coverride?Coverride:linear_factor(x.U))*x.d)continue;++after_range;if(x.d>(uint64_t)x.e*y.e)continue;++after_extraction;if(!disjoint(x,y))continue;++after_disjoint;if(!support_compatible(x,y))continue;++after_support;if((__int128)x.d*x.d*x.d>=(__int128)64*D*D||x.d>std::min(x.n,y.n)-2)continue;++after_degree;uint32_t rb=role_bound(x,y);if(rb!=UINT32_MAX&&x.d>rb)continue;++after_role;uint64_t cb=correspondence_bound(x,y);if(same_unordered_shape(x,y))cb=std::min<uint64_t>(cb,(uint64_t)2*x.r*y.r);if(x.d>cb)continue;++after_corr;if(std::tie(y.r,y.a,y.b,y.t,y.e)<std::tie(x.r,x.a,x.b,x.t,x.e))std::swap(x,y);out.push_back({x,y,D,(uint32_t)std::min<uint64_t>(cb,UINT32_MAX),rb});}}
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^~~~~~~~
+code/qab12/pair_one_nonunit.cpp:90:546: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   90 |     for(auto&kv:groups){auto&g=kv.second;for(size_t i=0;i<g.size();++i)for(size_t j=i+1;j<g.size();++j){++raw;Rec x=g[i],y=g[j];if(std::gcd(x.r,y.r)!=1)continue;++after_gcd;if(same_package(x,y))continue;uint32_t D=std::max(x.r*x.n,y.r*y.n);if(D<Dmin||D>(Doverride?Doverride:D_cap(x.U))||D>=(uint64_t)(Coverride?Coverride:linear_factor(x.U))*x.d)continue;++after_range;if(x.d>(uint64_t)x.e*y.e)continue;++after_extraction;if(!disjoint(x,y))continue;++after_disjoint;if(!support_compatible(x,y))continue;++after_support;if((__int128)x.d*x.d*x.d>=(__int128)64*D*D||x.d>std::min(x.n,y.n)-2)continue;++after_degree;uint32_t rb=role_bound(x,y);if(rb!=UINT32_MAX&&x.d>rb)continue;++after_role;uint64_t cb=correspondence_bound(x,y);if(same_unordered_shape(x,y))cb=std::min<uint64_t>(cb,(uint64_t)2*x.r*y.r);if(x.d>cb)continue;++after_corr;if(std::tie(y.r,y.a,y.b,y.t,y.e)<std::tie(x.r,x.a,x.b,x.t,x.e))std::swap(x,y);out.push_back({x,y,D,(uint32_t)std::min<uint64_t>(cb,UINT32_MAX),rb});}}
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^~~~~~~~
+code/qab12/enumerate_two_nonunit_packages.cpp: In function 'void choices_rec(const std::vector<PE>&, size_t, uint32_t, uint32_t, uint32_t, const Core&, bool, uint32_t, std::array<unsigned int, 5>, uint8_t, std::vector<Choice>&)':
+code/qab12/enumerate_two_nonunit_packages.cpp:43:4: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   43 |    if(((uint64_t)c.t*lambda)%c.r)continue;uint32_t A=(uint32_t)(((uint64_t)c.t*lambda)/c.r);if(A==0||A>kappa)continue;
+      |    ^~
+code/qab12/enumerate_two_nonunit_packages.cpp:43:43: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   43 |    if(((uint64_t)c.t*lambda)%c.r)continue;uint32_t A=(uint32_t)(((uint64_t)c.t*lambda)/c.r);if(A==0||A>kappa)continue;
+      |                                           ^~~~~~~~
+code/qab12/pair_two_nonunit.cpp: In function 'int main(int, char**)':
+code/qab12/pair_two_nonunit.cpp:29:601: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   29 |  for(auto&kv:G){auto&g=kv.second;for(size_t i=0;i<g.size();++i)for(size_t j=i+1;j<g.size();++j){++raw;Rec x=g[i],y=g[j];if(std::gcd(x.r,y.r)!=1)continue;++cg;if(same_pkg(x,y))continue;uint32_t D=std::max(x.r*x.n,y.r*y.n);if(D>16583||D>=19*x.d)continue;++rg;if(x.d>(uint64_t)x.e*y.e)continue;++eg;if(!disjoint(x,y))continue;++dg;auto X=shape_supp(x),Y=shape_supp(y);auto uv=supp(x.U*x.V);std::set<uint32_t>C(uv.begin(),uv.end());bool ok=true;for(uint32_t p:X)if(p>=5&&!Y.count(p)&&!C.count(p)&&y.r%p)ok=false;for(uint32_t p:Y)if(p>=5&&!X.count(p)&&!C.count(p)&&x.r%p)ok=false;if(!ok)continue;++sg;if((__int128)x.d*x.d*x.d>=(__int128)64*D*D||x.d>std::min(x.n,y.n)-2||x.d>2*flog(D,2)*flog(D,3))continue;++deg;uint64_t rb=UINT32_MAX;bool used=false;std::set<uint32_t>P=X;P.insert(Y.begin(),Y.end());for(uint32_t p:P){if(C.count(p))continue;uint64_t v;if(X.count(p)&&Y.count(p))v=std::gcd((uint64_t)x.r*role_value(p,x),(uint64_t)y.r*role_value(p,y));else if(X.count(p))v=(uint64_t)x.r*role_value(p,x);else v=(uint64_t)y.r*role_value(p,y);rb=std::min(rb,v);used=true;}if(used&&x.d>rb)continue;++rolec;uint64_t cb=corr(x,y);if(same_shape(x,y))cb=std::min<uint64_t>(cb,(uint64_t)2*x.r*y.r);if(x.d>cb)continue;++corrn;if(std::tie(y.r,y.a,y.b,y.t,y.e)<std::tie(x.r,x.a,x.b,x.t,x.e))std::swap(x,y);O.push_back({x,y,D,(uint32_t)cb,(uint32_t)rb});}}
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^~~~~~~~
+code/qab12/pair_two_nonunit.cpp:29:624: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+   29 |  for(auto&kv:G){auto&g=kv.second;for(size_t i=0;i<g.size();++i)for(size_t j=i+1;j<g.size();++j){++raw;Rec x=g[i],y=g[j];if(std::gcd(x.r,y.r)!=1)continue;++cg;if(same_pkg(x,y))continue;uint32_t D=std::max(x.r*x.n,y.r*y.n);if(D>16583||D>=19*x.d)continue;++rg;if(x.d>(uint64_t)x.e*y.e)continue;++eg;if(!disjoint(x,y))continue;++dg;auto X=shape_supp(x),Y=shape_supp(y);auto uv=supp(x.U*x.V);std::set<uint32_t>C(uv.begin(),uv.end());bool ok=true;for(uint32_t p:X)if(p>=5&&!Y.count(p)&&!C.count(p)&&y.r%p)ok=false;for(uint32_t p:Y)if(p>=5&&!X.count(p)&&!C.count(p)&&x.r%p)ok=false;if(!ok)continue;++sg;if((__int128)x.d*x.d*x.d>=(__int128)64*D*D||x.d>std::min(x.n,y.n)-2||x.d>2*flog(D,2)*flog(D,3))continue;++deg;uint64_t rb=UINT32_MAX;bool used=false;std::set<uint32_t>P=X;P.insert(Y.begin(),Y.end());for(uint32_t p:P){if(C.count(p))continue;uint64_t v;if(X.count(p)&&Y.count(p))v=std::gcd((uint64_t)x.r*role_value(p,x),(uint64_t)y.r*role_value(p,y));else if(X.count(p))v=(uint64_t)x.r*role_value(p,x);else v=(uint64_t)y.r*role_value(p,y);rb=std::min(rb,v);used=true;}if(used&&x.d>rb)continue;++rolec;uint64_t cb=corr(x,y);if(same_shape(x,y))cb=std::min<uint64_t>(cb,(uint64_t)2*x.r*y.r);if(x.d>cb)continue;++corrn;if(std::tie(y.r,y.a,y.b,y.t,y.e)<std::tie(x.r,x.a,x.b,x.t,x.e))std::swap(x,y);O.push_back({x,y,D,(uint32_t)cb,(uint32_t)rb});}}
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^~~~~~~~
+code/qab12/pair_unit_small.cpp: In function 'std::vector<unsigned int> support(uint32_t)':
+code/qab12/pair_unit_small.cpp:31:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   31 |     if(x>1)out.push_back(x);return out;
+      |     ^~
+code/qab12/pair_unit_small.cpp:31:29: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   31 |     if(x>1)out.push_back(x);return out;
+      |                             ^~~~~~
+code/qab12/pair_unit_small.cpp: In function 'Rec parse(const std::string&)':
+code/qab12/pair_unit_small.cpp:36:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   36 |     if(v.size()!=6)throw std::runtime_error("bad row");return {v[0],v[1],v[2],v[3],v[4],v[5]};
+      |     ^~
+code/qab12/pair_unit_small.cpp:36:56: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   36 |     if(v.size()!=6)throw std::runtime_error("bad row");return {v[0],v[1],v[2],v[3],v[4],v[5]};
+      |                                                        ^~~~~~
+code/qab12/pair_unit_small.cpp: In function 'bool same_package(const Rec&, const Rec&)':
+code/qab12/pair_unit_small.cpp:40:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   40 |     if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+      |     ^~
+code/qab12/pair_unit_small.cpp:40:31: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   40 |     if(xa>xb)std::swap(xa,xb);if(ya>yb)std::swap(ya,yb);return xa==ya&&xb==yb;
+      |                               ^~
+code/qab12/pair_unit_small.cpp: In function 'bool disjoint(const Rec&, const Rec&)':
+code/qab12/pair_unit_small.cpp:45:5: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+   45 |     for(uint64_t a:A)for(uint64_t b:B)if(a==b)return false;return true;
+      |     ^~~
+code/qab12/pair_unit_small.cpp:45:60: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+   45 |     for(uint64_t a:A)for(uint64_t b:B)if(a==b)return false;return true;
+      |                                                            ^~~~~~
+code/qab12/pair_unit_small.cpp: In function 'uint32_t role_value(uint32_t, const Rec&)':
+code/qab12/pair_unit_small.cpp:58:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   58 |     if(hits!=1)throw std::runtime_error("primitive role invariant");return v;
+      |     ^~
+code/qab12/pair_unit_small.cpp:58:69: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   58 |     if(hits!=1)throw std::runtime_error("primitive role invariant");return v;
+      |                                                                     ^~~~~~
+code/qab12/pair_unit_small.cpp: In function 'int main(int, char**)':
+code/qab12/pair_unit_small.cpp:99:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   99 |             if(std::gcd(x.r,y.r)!=1)continue;++after_gcd;
+      |             ^~
+code/qab12/pair_unit_small.cpp:99:46: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   99 |             if(std::gcd(x.r,y.r)!=1)continue;++after_gcd;
+      |                                              ^~
+code/qab12/pair_unit_small.cpp:100:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  100 |             if(same_package(x,y))continue;++after_distinct;
+      |             ^~
+code/qab12/pair_unit_small.cpp:100:43: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  100 |             if(same_package(x,y))continue;++after_distinct;
+      |                                           ^~
+code/qab12/pair_unit_small.cpp:101:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  101 |             if(!disjoint(x,y))continue;++after_disjoint;
+      |             ^~
+code/qab12/pair_unit_small.cpp:101:40: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  101 |             if(!disjoint(x,y))continue;++after_disjoint;
+      |                                        ^~
+code/qab12/pair_unit_small.cpp:102:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  102 |             if(!support_compatible(x,y))continue;++after_support;
+      |             ^~
+code/qab12/pair_unit_small.cpp:102:50: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  102 |             if(!support_compatible(x,y))continue;++after_support;
+      |                                                  ^~
+code/qab12/pair_unit_small.cpp:104:17: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+  104 |             if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;++after_toric;
+      |                 ^~~~~~~~
+code/qab12/pair_unit_small.cpp:104:34: warning: ISO C++ does not support '__int128' for 'type name' [-Wpedantic]
+  104 |             if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;++after_toric;
+      |                                  ^~~~~~~~
+code/qab12/pair_unit_small.cpp:104:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  104 |             if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;++after_toric;
+      |             ^~
+code/qab12/pair_unit_small.cpp:104:82: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  104 |             if((__int128)d*d*d>=(__int128)64*D*D||d>std::min(x.n,y.n)-2)continue;++after_toric;
+      |                                                                                  ^~
+code/qab12/pair_unit_small.cpp:108:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  108 |             if(d>cb)continue;++after_corr;
+      |             ^~
+code/qab12/pair_unit_small.cpp:108:30: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  108 |             if(d>cb)continue;++after_corr;
+      |                              ^~
+
+real	0m29.807s
+user	0m34.890s
+sys	0m2.740s

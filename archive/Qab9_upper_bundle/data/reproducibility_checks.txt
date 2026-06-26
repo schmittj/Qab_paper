@@ -1,0 +1,3 @@
+deterministic_shape_csv=PASS
+deterministic_pair_csv=PASS
+deterministic_residual_csv=PASS

@@ -1,0 +1,7 @@
+input_rows=826
+input_distinct_package_pairs=826
+same_shape_rows=824
+eliminated_by_degree_lower_gt_2rs=819
+residual_candidates=7
+minimum_uniform_degree_margin=-748
+output=data/unit_large_exactfilter_residual.csv

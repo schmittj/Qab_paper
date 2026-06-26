@@ -1,0 +1,12 @@
+shapes=63980
+scaled_records=643294
+scale_pairs=5952
+support_group_pairs=5023985
+shape_pairs_considered=334910032
+after_support_cap_and_disjointness=174191284
+after_degree_interval=20350751
+after_role_binomial_interval=680340
+after_full_radical_CRT=826
+seconds_read=0.05075
+seconds_group=0.121072
+seconds_pair=18.4495

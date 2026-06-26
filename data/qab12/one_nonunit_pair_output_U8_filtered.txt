@@ -1,0 +1,1 @@
+package_records=12249 groups=10482 raw_state_pairs=2117 after_coprime_scales=212 after_range=121 after_extraction=121 after_disjoint=79 after_support=16 after_degree=0 after_role=0 after_correspondence=0 unique_state_pairs=0 unique_orientation_pairs=0

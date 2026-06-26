@@ -1,0 +1,14 @@
+one_nonunit_all_manifest=PASS
+package_records=608490
+groups=514280
+raw_state_pairs=137530
+after_coprime_scales=10636
+after_range=7916
+after_extraction=7916
+after_disjoint=5430
+after_support=483
+after_degree=76
+after_role=0
+after_correspondence=0
+unique_state_pairs=0
+unique_orientation_pairs=0

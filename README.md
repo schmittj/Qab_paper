@@ -1,0 +1,45 @@
+# Qab12 review bundle
+
+This bundle is a reviewable progress package for the `Q_{a,b}` reciprocal-package project.
+
+## Current proof status
+
+The bundle contains artifacts supporting the following eliminations:
+
+1. the previously audited upper range `6,816,242 <= D <= 175,394,637`;
+2. the complete unit-coefficient lower branch;
+3. the both-coefficients-nonunit branch;
+4. the one-nonunit branch with `D >= 16,584`.
+
+The bundle does **not** yet claim the full conjecture. The remaining production computation is the small one-nonunit branch
+
+```text
+D <= 16,583,   |V| = 1,   2 <= U <= D,   d <= 224.
+```
+
+## Main files
+
+- `Qab12.tex`, `Qab12.pdf`: integrated manuscript.
+- `code/qab12/`: current Qab12 source code and verification scripts.
+- `data/qab12/`: deterministic outputs and proof artifacts from the current work round.
+- `archive/Qab9_upper_bundle/`: audited upper-range code/data retained for self-containment.
+- `docs/audits/`: independent audit reports supplied by the user.
+- `SHA256SUMS`: hashes of every file in this bundle, excluding itself.
+
+## Quick verification commands
+
+From the bundle root:
+
+```bash
+make q12-verify-light
+make q12-verify-modular     # requires python-flint
+make q12-verify-upper       # verifies archived upper rows
+```
+
+The long direct modular irreducibility verifier can be run with
+
+```bash
+make q12-verify-irreducibility-direct
+```
+
+This last command may take longer depending on the local FLINT build.

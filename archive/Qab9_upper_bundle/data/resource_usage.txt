@@ -1,0 +1,17 @@
+# Resource measurements from the current 25-thread environment.
+# Timings and peak memory are machine-dependent.
+
+upper_shape_generator:
+wall_seconds=8.80
+max_rss_kb=714264
+exit_status=0
+
+upper_pair_sieve_after_support_fix:
+wall_seconds=29.70
+max_rss_kb=158828
+exit_status=0
+
+total60_parallel_factorization:
+wall_seconds=12.83
+max_rss_kb=327920
+exit_status=0

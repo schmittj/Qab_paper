@@ -1,0 +1,3 @@
+wrote data/one_nonunit_all_manifest.json
+aggregate_unique_state_pairs=0
+aggregate_unique_orientation_pairs=0

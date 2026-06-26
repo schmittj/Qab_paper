@@ -1,0 +1,27 @@
+one_nonunit_U=2 verified_package_rows=300549
+one_nonunit_U=3 verified_package_rows=115518
+one_nonunit_U=4 verified_package_rows=57189
+one_nonunit_U=5 verified_package_rows=52689
+one_nonunit_U=6 verified_package_rows=1958
+one_nonunit_U=7 verified_package_rows=26437
+one_nonunit_U=8 verified_package_rows=16807
+one_nonunit_U=9 verified_package_rows=13132
+one_nonunit_U=10 verified_package_rows=1279
+one_nonunit_U=11 verified_package_rows=7165
+one_nonunit_U=12 verified_package_rows=515
+one_nonunit_U=13 verified_package_rows=4862
+one_nonunit_U=14 verified_package_rows=622
+one_nonunit_U=15 verified_package_rows=1260
+one_nonunit_U=16 verified_package_rows=3372
+one_nonunit_U=17 verified_package_rows=2000
+one_nonunit_U=18 verified_package_rows=171
+one_nonunit_U=19 verified_package_rows=1151
+one_nonunit_U=20 verified_package_rows=199
+one_nonunit_U=21 verified_package_rows=360
+one_nonunit_U=22 verified_package_rows=66
+one_nonunit_U=23 verified_package_rows=417
+one_nonunit_U=24 verified_package_rows=116
+one_nonunit_U=25 verified_package_rows=622
+one_nonunit_U=26 verified_package_rows=34
+verified_one_nonunit_package_rows=608490
+status=PASS

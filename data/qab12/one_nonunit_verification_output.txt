@@ -1,0 +1,16 @@
+verified_one_nonunit_package_states=608490
+aggregate_package_records=608490
+aggregate_groups=514280
+aggregate_raw_state_pairs=137530
+aggregate_after_coprime_scales=10636
+aggregate_after_range=7916
+aggregate_after_extraction=7916
+aggregate_after_disjoint=5430
+aggregate_after_support=483
+aggregate_after_degree=76
+aggregate_after_role=0
+aggregate_after_correspondence=0
+aggregate_unique_state_pairs=0
+aggregate_unique_orientation_pairs=0
+verified_one_nonunit_survivors=0
+status=PASS

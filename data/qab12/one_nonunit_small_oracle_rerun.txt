@@ -1,0 +1,4 @@
+U=2 package_states=4 pair_states=0 PASS
+U=3 package_states=19 pair_states=0 PASS
+U=6 package_states=0 pair_states=0 PASS
+one_nonunit_small_oracle=PASS

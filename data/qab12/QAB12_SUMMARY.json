@@ -1,0 +1,122 @@
+{
+  "one_nonunit_all": {
+    "after_coprime_scales": 10636,
+    "after_correspondence": 0,
+    "after_degree": 76,
+    "after_disjoint": 5430,
+    "after_extraction": 7916,
+    "after_range": 7916,
+    "after_role": 0,
+    "after_support": 483,
+    "groups": 514280,
+    "manifest_sha256": "0a462f9173364836cd245e39db485a6b207da5028edf4fc7b7a535df901c581d",
+    "package_records": 608490,
+    "raw_state_pairs": 137530,
+    "unique_orientation_pairs": 0,
+    "unique_state_pairs": 0
+  },
+  "one_nonunit_filtered": {
+    "after_coprime_scales": 5079,
+    "after_correspondence": 0,
+    "after_degree": 40,
+    "after_disjoint": 2222,
+    "after_extraction": 3577,
+    "after_range": 3577,
+    "after_role": 0,
+    "after_support": 272,
+    "groups": 384779,
+    "package_records": 437699,
+    "raw_state_pairs": 70505,
+    "unique_orientation_pairs": 0,
+    "unique_state_pairs": 0
+  },
+  "schema": "qab12-summary-v1",
+  "two_nonunit": {
+    "after_coprime_scales": 0,
+    "after_correspondence": 0,
+    "after_degree": 0,
+    "after_disjoint": 0,
+    "after_extraction": 0,
+    "after_range": 0,
+    "after_role": 0,
+    "after_support": 0,
+    "groups": 1054,
+    "package_states": 1054,
+    "packages_rows": 1054,
+    "raw_state_pairs": 0,
+    "state_pair_rows": 0,
+    "unique_orientation_pairs": 0,
+    "unique_state_pairs": 0,
+    "verification_output_sha256": "74b8f20238c8e42f63c7a9689e0cc6bd6172d3338d88fd9cbffc651760cca7ba"
+  },
+  "unit_defect": {
+    "certificates_sha256": "5577fc79f9bc904da8488fd14a42b5fd040f5f763dbc24f8fb17af2c3ddfeb30",
+    "irreducibility_certificates": 46,
+    "orientation_pair_rows": 9297,
+    "state_pair_rows": 21114
+  },
+  "unit_large": {
+    "certificates_sha256": "51ca5a1cfbc7fb87e983142156395240689a26267363d9e2a320a7524d6128b4",
+    "orientation_certificates": 28,
+    "terminal_package_pairs": 7
+  },
+  "unit_small": {
+    "certificates_sha256": "8951af90c1db6e826f56c0622cf0c4a6e80e32fb536e5651075d5088e528aac4",
+    "orientation_certificates": 12,
+    "terminal_package_pairs": 3
+  },
+  "verification_outputs": {
+    "one_nonunit_all_manifest_build_output.txt": {
+      "exists": true,
+      "sha256": "8e060c9db6a65a2fea4fa8dc8b96bdb4cbff171afde9cb35ac9a8b3527b2339a"
+    },
+    "one_nonunit_all_manifest_verification_output.txt": {
+      "exists": true,
+      "sha256": "ca52f3bcbe8ed1b772c68cc267ccc1edb719e6a380a5231a2ead4bb410540fad"
+    },
+    "one_nonunit_small_oracle_rerun2.txt": {
+      "exists": true,
+      "sha256": "3ae7e27261f0a3501e559fa89086976d55a00ad0aaa7623eac93db1783257dcd"
+    },
+    "qab12_constants_output.txt": {
+      "exists": true,
+      "sha256": "3f2135f46072fa5c5af70521ba14fea77327eb99a3f8314ce92326a5058f24c5"
+    },
+    "two_nonunit_small_oracle_rerun2.txt": {
+      "exists": true,
+      "sha256": "a4fc954006de7822d028e56b02d15f2814d3de28db7437ac0d3e442127f6c35e"
+    },
+    "two_nonunit_verification_output.txt": {
+      "exists": true,
+      "sha256": "74b8f20238c8e42f63c7a9689e0cc6bd6172d3338d88fd9cbffc651760cca7ba"
+    },
+    "two_nonunit_verification_output_rerun.txt": {
+      "exists": true,
+      "sha256": "74b8f20238c8e42f63c7a9689e0cc6bd6172d3338d88fd9cbffc651760cca7ba"
+    },
+    "unit_defect_irreducibility_direct_verification_output.txt": {
+      "exists": true,
+      "sha256": "6a977a5f71d7a9b448769b51fdb3dc51c3cd51e863ed4bbe54ab4a5dc014725d"
+    },
+    "unit_defect_irreducibility_direct_verification_output_rerun.txt": {
+      "exists": true,
+      "sha256": "41050a5bbfb986a852338eff30ba99a6f958dda4e0ba8966baca74c2b42b81b1"
+    },
+    "unit_large_modular_verification_output.txt": {
+      "exists": true,
+      "sha256": "55e41a81371d7276b175a0dc8848a52ffe880b9d5acb3f46f039b8657e9f5beb"
+    },
+    "unit_large_modular_verification_output_rerun2.txt": {
+      "exists": true,
+      "sha256": "55e41a81371d7276b175a0dc8848a52ffe880b9d5acb3f46f039b8657e9f5beb"
+    },
+    "unit_small_modular_verification_output.txt": {
+      "exists": true,
+      "sha256": "51a4530d4bf27decbf851e2e3d6068eeb2793fd720b62dd3b4db84dc620bd54b"
+    },
+    "unit_small_modular_verification_output_rerun2.txt": {
+      "exists": true,
+      "sha256": "51a4530d4bf27decbf851e2e3d6068eeb2793fd720b62dd3b4db84dc620bd54b"
+    }
+  }
+}

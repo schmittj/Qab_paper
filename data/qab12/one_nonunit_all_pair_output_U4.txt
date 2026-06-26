@@ -1,0 +1,1 @@
+package_records=57189 groups=50858 raw_state_pairs=8143 after_coprime_scales=755 after_range=578 after_extraction=578 after_disjoint=435 after_support=31 after_degree=5 after_role=0 after_correspondence=0 unique_state_pairs=0 unique_orientation_pairs=0

@@ -1,0 +1,646 @@
+{
+  "constants_output": [
+    "two_nonunit_cutoff_max_D=16583",
+    "two_nonunit_degree_max=224",
+    "two_nonunit_linear_bound=D<19d",
+    "two_nonunit_endpoint_valuation_max=14",
+    "coefficient_transition_table=PASS",
+    "envelope_monotone_for_D>=11=calculus",
+    "columns=U,D_cap,linear_D_over_d_bound,max_degree",
+    "2,6816241,48,143799",
+    "3,1230611,27,45934",
+    "4,508652,20,25488",
+    "5,286175,17,17370",
+    "6,188395,15,13145",
+    "7,136208,13,10589",
+    "8,104733,12,8887",
+    "9,84090,11,7677",
+    "10,69701,11,6774",
+    "11,59198,10,6075",
+    "12,51249,10,5518",
+    "13,45056,9,5064",
+    "14,40115,9,4687",
+    "15,36095,9,4368",
+    "16,32767,8,4095",
+    "17,29975,8,3859",
+    "18,27601,8,3653",
+    "19,25561,8,3470",
+    "20,23792,8,3308",
+    "21,22244,8,3163",
+    "22,20880,7,3033",
+    "23,19670,7,2914",
+    "24,18589,7,2806",
+    "25,17619,7,2708",
+    "26,16743,7,2617",
+    "table_sha256=85d4a9d5ea1284f42c1becd69386815e608237a1072f714ccf0740c531dbaa4f"
+  ],
+  "one_nonunit_D_ge_16584_U_2_to_26": {
+    "by_U": [
+      {
+        "U": 2,
+        "after_coprime_scales": 4670,
+        "after_correspondence": 0,
+        "after_degree": 51,
+        "after_disjoint": 3239,
+        "after_extraction": 4081,
+        "after_range": 4081,
+        "after_role": 0,
+        "after_support": 298,
+        "groups": 252620,
+        "package_records": 300549,
+        "packages_sha256": "3bb73d58b3b8925155616a0d1be183b17afc305a82e6a04b89f8dd4b23c98130",
+        "raw_state_pairs": 73479,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 3,
+        "after_coprime_scales": 1830,
+        "after_correspondence": 0,
+        "after_degree": 5,
+        "after_disjoint": 954,
+        "after_extraction": 1474,
+        "after_range": 1474,
+        "after_role": 0,
+        "after_support": 50,
+        "groups": 98480,
+        "package_records": 115518,
+        "packages_sha256": "de9fe7942a2ac6653cd58db775c368c19e4a9ff2424e78f71de21a89bdb3d1fc",
+        "raw_state_pairs": 23186,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 4,
+        "after_coprime_scales": 755,
+        "after_correspondence": 0,
+        "after_degree": 5,
+        "after_disjoint": 435,
+        "after_extraction": 578,
+        "after_range": 578,
+        "after_role": 0,
+        "after_support": 31,
+        "groups": 50858,
+        "package_records": 57189,
+        "packages_sha256": "0e7b769198e4c531eef89a9a5cbe627c2aef8dbce60b7f2c4df7d7176ff49ca6",
+        "raw_state_pairs": 8143,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 5,
+        "after_coprime_scales": 1327,
+        "after_correspondence": 0,
+        "after_degree": 5,
+        "after_disjoint": 359,
+        "after_extraction": 832,
+        "after_range": 832,
+        "after_role": 0,
+        "after_support": 30,
+        "groups": 42383,
+        "package_records": 52689,
+        "packages_sha256": "1164be1127e9bfc01407f7a0e6df79389fc9d57905a7c8873b91e5ded173c989",
+        "raw_state_pairs": 15494,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 6,
+        "after_coprime_scales": 1,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 1939,
+        "package_records": 1958,
+        "packages_sha256": "51637fa47e1ff6c5a1a61fc75aa619780716d072f283067f87c1ab4e9536e8ca",
+        "raw_state_pairs": 19,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 7,
+        "after_coprime_scales": 825,
+        "after_correspondence": 0,
+        "after_degree": 8,
+        "after_disjoint": 167,
+        "after_extraction": 442,
+        "after_range": 442,
+        "after_role": 0,
+        "after_support": 30,
+        "groups": 21260,
+        "package_records": 26437,
+        "packages_sha256": "c7719ea6fb9225dd25b2564f9e20afc0e1dfa55f776f78b3992c49c796292619",
+        "raw_state_pairs": 7361,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 8,
+        "after_coprime_scales": 380,
+        "after_correspondence": 0,
+        "after_degree": 2,
+        "after_disjoint": 143,
+        "after_extraction": 208,
+        "after_range": 208,
+        "after_role": 0,
+        "after_support": 24,
+        "groups": 14017,
+        "package_records": 16807,
+        "packages_sha256": "c85c698921095e1af254e5ab7f17d237f2b9a57fdba333f41638f66bd5dc28c9",
+        "raw_state_pairs": 3796,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 9,
+        "after_coprime_scales": 241,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 72,
+        "after_extraction": 111,
+        "after_range": 111,
+        "after_role": 0,
+        "after_support": 8,
+        "groups": 11750,
+        "package_records": 13132,
+        "packages_sha256": "6f4352304557f1dc9951cfc8df6fa70156f7d5a7b5dbfefcf0e6ddeb507a6e7f",
+        "raw_state_pairs": 1543,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 10,
+        "after_coprime_scales": 2,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 1,
+        "after_range": 1,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 1217,
+        "package_records": 1279,
+        "packages_sha256": "90ca701df4301e07913f51f665740211fedf9c07735905388ed9156fdcc0d8a4",
+        "raw_state_pairs": 66,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 11,
+        "after_coprime_scales": 260,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 34,
+        "after_extraction": 116,
+        "after_range": 116,
+        "after_role": 0,
+        "after_support": 5,
+        "groups": 5840,
+        "package_records": 7165,
+        "packages_sha256": "905cfb8ffa9577acd2d42e03941fc1ecfba47ea9e176812022d5b1749573bdec",
+        "raw_state_pairs": 1939,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 12,
+        "after_coprime_scales": 1,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 1,
+        "after_extraction": 1,
+        "after_range": 1,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 514,
+        "package_records": 515,
+        "packages_sha256": "d2727d92fcdd42e592ded014da6e0a1ef548b51abe4676d37142be250585a26c",
+        "raw_state_pairs": 1,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 13,
+        "after_coprime_scales": 149,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 17,
+        "after_extraction": 45,
+        "after_range": 45,
+        "after_role": 0,
+        "after_support": 4,
+        "groups": 3916,
+        "package_records": 4862,
+        "packages_sha256": "7d3c09e0c7d6999d6bef8d3aa925caa497458aecab5412944f345664cebfa4bc",
+        "raw_state_pairs": 1280,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 14,
+        "after_coprime_scales": 1,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 620,
+        "package_records": 622,
+        "packages_sha256": "5c9844a26268a77167c3555836a241a98a71d762be767771b9ff87a47c9e89c8",
+        "raw_state_pairs": 2,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 15,
+        "after_coprime_scales": 4,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 1248,
+        "package_records": 1260,
+        "packages_sha256": "94ba8d2f2fd8febe2969e37c69c02a47b8dcc376285c1efbe538b5a61c2aca60",
+        "raw_state_pairs": 12,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 16,
+        "after_coprime_scales": 27,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 3,
+        "after_extraction": 3,
+        "after_range": 3,
+        "after_role": 0,
+        "after_support": 1,
+        "groups": 3204,
+        "package_records": 3372,
+        "packages_sha256": "a4f607a6240d098caf65a0e09eb94a6f8496cf1e4a8f250c3fae29e769cd1e1f",
+        "raw_state_pairs": 173,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 17,
+        "after_coprime_scales": 83,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 4,
+        "after_extraction": 16,
+        "after_range": 16,
+        "after_role": 0,
+        "after_support": 2,
+        "groups": 1608,
+        "package_records": 2000,
+        "packages_sha256": "1ba79ceda1c5546984aa3562cabcc57451d27e37ab14333321ff9c0330b3c6bb",
+        "raw_state_pairs": 609,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 18,
+        "after_coprime_scales": 0,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 165,
+        "package_records": 171,
+        "packages_sha256": "2a83abc917637636ea08db67ce9bb02e10d7dd740a9616ea641b4b081980bd82",
+        "raw_state_pairs": 6,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 19,
+        "after_coprime_scales": 36,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 1,
+        "after_extraction": 4,
+        "after_range": 4,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 993,
+        "package_records": 1151,
+        "packages_sha256": "526a1809cb46909b091a20cb1673afaf87d4ec20bc30f300d7a21b1fbbc1070f",
+        "raw_state_pairs": 222,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 20,
+        "after_coprime_scales": 1,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 198,
+        "package_records": 199,
+        "packages_sha256": "6358d43394e2935d7f92a8a4bc7deb28d6053395e319930ce9d4a5f1ecfd4fb9",
+        "raw_state_pairs": 1,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 21,
+        "after_coprime_scales": 7,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 1,
+        "after_range": 1,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 351,
+        "package_records": 360,
+        "packages_sha256": "a1225325f6b7f94c0c4d2b0222ebd022d2f5d426513106a0b6e04d301b1b5987",
+        "raw_state_pairs": 12,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 22,
+        "after_coprime_scales": 1,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 65,
+        "package_records": 66,
+        "packages_sha256": "df064ac2ad73b086edf401abd7b668f35e898d0c10bd24d481430101c8a6a5be",
+        "raw_state_pairs": 1,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 23,
+        "after_coprime_scales": 22,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 1,
+        "after_extraction": 3,
+        "after_range": 3,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 353,
+        "package_records": 417,
+        "packages_sha256": "bf59687e0b155b980879e2d2747fb785c2f9f57f2b60e97bbc39c09e3ce7418f",
+        "raw_state_pairs": 84,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 24,
+        "after_coprime_scales": 0,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 106,
+        "package_records": 116,
+        "packages_sha256": "fe53a62aa9f8d18007448e55a7345dededa28a225d6f4431aa33850e7f48c837",
+        "raw_state_pairs": 10,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 25,
+        "after_coprime_scales": 13,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 541,
+        "package_records": 622,
+        "packages_sha256": "90a380a698e90372ed8bfb08a5cc98a73f673b2135734832920fd73a79051748",
+        "raw_state_pairs": 91,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      },
+      {
+        "U": 26,
+        "after_coprime_scales": 0,
+        "after_correspondence": 0,
+        "after_degree": 0,
+        "after_disjoint": 0,
+        "after_extraction": 0,
+        "after_range": 0,
+        "after_role": 0,
+        "after_support": 0,
+        "groups": 34,
+        "package_records": 34,
+        "packages_sha256": "5cfaae92f20746c059334fff5448577a3430071d2ddb8e9d3269d60a50150e88",
+        "raw_state_pairs": 0,
+        "unique_orientation_pairs": 0,
+        "unique_state_pairs": 0
+      }
+    ],
+    "totals": {
+      "after_coprime_scales": 10636,
+      "after_correspondence": 0,
+      "after_degree": 76,
+      "after_disjoint": 5430,
+      "after_extraction": 7916,
+      "after_range": 7916,
+      "after_role": 0,
+      "after_support": 483,
+      "groups": 514280,
+      "package_records": 608490,
+      "raw_state_pairs": 137530,
+      "unique_orientation_pairs": 0,
+      "unique_state_pairs": 0
+    },
+    "verification": "data/one_nonunit_all_verification_output.txt"
+  },
+  "selected_hashes": {
+    "code/build_one_nonunit_all_manifest.py": {
+      "bytes": 3387,
+      "sha256": "a3c4e5119159b806f86634431233efdf490b12db9d0954b51dcd5108baedbed8"
+    },
+    "code/certify_qab12_constants.py": {
+      "bytes": 5226,
+      "sha256": "cb3bb46bb3aabae45bbe7592ef0a44795730d063271f5f653eb41d8d0d06b032"
+    },
+    "code/certify_unit_defect_shapes.py": {
+      "bytes": 3501,
+      "sha256": "b3134a96b89524a7fddef7724e58245e799c5668f545c3664646b624263e9974"
+    },
+    "code/enumerate_one_nonunit_packages.cpp": {
+      "bytes": 9942,
+      "sha256": "58d2ca5144f1969a29e08a9d947fa6b03a07707201db201887c3ed4383b003d7"
+    },
+    "code/enumerate_two_nonunit_packages.cpp": {
+      "bytes": 8005,
+      "sha256": "601a04f7a7b6a03c82320ac450ee8a310e8d36bd536a45d9658990070956c2c1"
+    },
+    "code/enumerate_unit_defect_counterparts.cpp": {
+      "bytes": 5451,
+      "sha256": "f77c9182f99c1aff6531ee01d1edcf7fe0888a34068daf5cb67a8d9c95437780"
+    },
+    "code/enumerate_unit_defect_packages.cpp": {
+      "bytes": 5307,
+      "sha256": "d6babd497d3df69c706482395b1edda05edc771c4a18e4ddbdc060a688d83b81"
+    },
+    "code/enumerate_unit_small_packages.cpp": {
+      "bytes": 5056,
+      "sha256": "bc72a0aa692cd0875ed77f91696db06fe30ccf4c2f39f9f6a6d8eed64b0fc470"
+    },
+    "code/filter_known_irreducible_shapes.py": {
+      "bytes": 1329,
+      "sha256": "ea5ecc5a15abdbf523f1c427ba4350a0eda7db3593df3e7994627800c24dc152"
+    },
+    "code/merge_package_chunks.py": {
+      "bytes": 1205,
+      "sha256": "865f085eb2da9237fb1f8d4f1bb55159995f0898d586dafafb98c04382632e94"
+    },
+    "code/mod_factor_shape_worker.py": {
+      "bytes": 973,
+      "sha256": "fb7c4e941334b35eb71bf128541e0f0f860ec3531e97bb48d87ff769fc2e023d"
+    },
+    "code/pair_one_nonunit.cpp": {
+      "bytes": 8286,
+      "sha256": "333fc34d6983626d5caf9e0cdd817ce75fa42c8afc83d213cc07b155b58c5a7a"
+    },
+    "code/pair_two_nonunit.cpp": {
+      "bytes": 6242,
+      "sha256": "b7c8d534b79ec9ecb4a8b8fbe7db460dbf840402533ab4b60ae2c3bb34bd1b18"
+    },
+    "code/pair_unit_defect.cpp": {
+      "bytes": 6220,
+      "sha256": "623a0336785a2cfb7b3f494c3bd2186aa35bd9b8cbb341615321af1a7284a757"
+    },
+    "code/pair_unit_large.cpp": {
+      "bytes": 22107,
+      "sha256": "bf11b294eeb881a4a9f17e5a4f82c0bed433f32ef8797b0f71c34abc9c91fb58"
+    },
+    "code/pair_unit_small.cpp": {
+      "bytes": 6617,
+      "sha256": "b4cafa11d4382f9bfba97131f1b00a3c399e0d48b7624f0fd34ecd7663280956"
+    },
+    "code/test_one_nonunit_small.py": {
+      "bytes": 5650,
+      "sha256": "105d7441cfdaf71bcc34d58577012148c90a89bafc68a85ba894557728629ff6"
+    },
+    "code/test_two_nonunit_small.py": {
+      "bytes": 2847,
+      "sha256": "17bf256f9bb97502d3aa828b92225720944dee285ab2f4210383e0e938d0115a"
+    },
+    "code/verify_irreducibility_certificates.py": {
+      "bytes": 3087,
+      "sha256": "00f282f3fb7ce2dca057a8a634d1ea7747e1b572111b036d8ab81cd93b02ad6f"
+    },
+    "code/verify_irreducibility_certificates_direct.py": {
+      "bytes": 2057,
+      "sha256": "d7b4d7d59f9d2b187b1171c6f42bd9d857097d68b7521da757b0f7d194a712e1"
+    },
+    "code/verify_modular_gcd_certificates.py": {
+      "bytes": 3497,
+      "sha256": "9145a78a602c382dd2500a81c7be986c87ab7fb0781db1c0ade0085e39903101"
+    },
+    "code/verify_one_nonunit.py": {
+      "bytes": 6047,
+      "sha256": "6cd6d69d64a6f4dcb92189ad7eef68a56bcd21f93023db5ea269e03d8d3ec6b6"
+    },
+    "code/verify_one_nonunit_all.py": {
+      "bytes": 3494,
+      "sha256": "63eb23c062d7de7e09c2c42ec15d1143dbbdfed554d675fa506656c6a4c79d0f"
+    },
+    "code/verify_one_nonunit_all_manifest.py": {
+      "bytes": 4282,
+      "sha256": "54e132e5403d73d2eb4ac1b9a8f27453aedc0d30e3158dc8c98bb08168732e5b"
+    },
+    "code/verify_one_nonunit_package_rows.py": {
+      "bytes": 2969,
+      "sha256": "c1b40740777904b017f52c5237f9d9b141647480948b44c4bfae37de1072c1ee"
+    },
+    "code/verify_two_nonunit.py": {
+      "bytes": 3620,
+      "sha256": "152fd2bc28773151777fcdaf5d095d03b6b9ef8bc19c66ec1f657d709fddfb83"
+    },
+    "data/one_nonunit_all_verification_output.txt": {
+      "bytes": 482,
+      "sha256": "7c8398e0ae90e947b50a06167221d24feb0a9a5f0334021659f034505532579d"
+    },
+    "data/qab12_constants_output.txt": {
+      "bytes": 744,
+      "sha256": "3f2135f46072fa5c5af70521ba14fea77327eb99a3f8314ce92326a5058f24c5"
+    },
+    "data/two_nonunit_verification_output.txt": {
+      "bytes": 128,
+      "sha256": "74b8f20238c8e42f63c7a9689e0cc6bd6172d3338d88fd9cbffc651760cca7ba"
+    },
+    "run_all_one_nonunit.sh": {
+      "bytes": 1079,
+      "sha256": "078ad69fd51810a0ab68999992d8badbe541fa5ce7cc6fd66109be931cc4dcd8"
+    },
+    "run_all_one_nonunit_unfiltered.sh": {
+      "bytes": 1640,
+      "sha256": "e2d8ea332184c22e69bfc6fad55015df5bcea2a3f8069ebdeaab207ed9dca445"
+    }
+  },
+  "status": {
+    "proved_by_current_artifacts": "upper range, full unit branch, both-nonunit branch, and one-nonunit branch with D>=16584",
+    "remaining_not_yet_production_enumerated": "one-nonunit branch with D<=16583 (after reciprocal normalization, 2<=U<=D<=16583, |V|=1, degree <=224)"
+  },
+  "two_nonunit_D_le_16583": {
+    "after_coprime_scales": 0,
+    "after_correspondence": 0,
+    "after_degree": 0,
+    "after_disjoint": 0,
+    "after_extraction": 0,
+    "after_range": 0,
+    "after_role": 0,
+    "after_support": 0,
+    "groups": 1054,
+    "package_states": 1054,
+    "raw_state_pairs": 0,
+    "unique_orientation_pairs": 0,
+    "unique_state_pairs": 0,
+    "verification": "data/two_nonunit_verification_output.txt"
+  },
+  "unit_branch": {
+    "defect_irreducibility_direct_verification_tail": [
+      "verified_shapes=46",
+      "verified_modular_factorizations=106",
+      "elapsed_seconds=25.222974391999742",
+      "status=PASS"
+    ],
+    "large_modular_verification": [
+      "verified_package_pairs=7",
+      "verified_orientation_certificates=28",
+      "status=PASS"
+    ],
+    "small_modular_verification": [
+      "verified_package_pairs=3",
+      "verified_orientation_certificates=12",
+      "status=PASS"
+    ]
+  }
+}

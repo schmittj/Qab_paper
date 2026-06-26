@@ -1,0 +1,7 @@
+build/pair_upper --self-test-support
+support_target_generation=PASS
+python3 code/test_small.py --enumerator build/enumerate_shapes
+small_enumerator_vs_bruteforce=PASS
+factor_degree_reachability_vs_sympy=PASS
+exact_degree_upper=PASS
+constant_certificates=PASS

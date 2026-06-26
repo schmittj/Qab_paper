@@ -1,0 +1,107 @@
+{
+  "artifacts": {
+    "one_nonunit_all_manifest.json": {
+      "bytes": 22496,
+      "sha256": "1c3cb7a53691e6ff8829d16dbfd0ef28ba4d17944148b09eb162d518620216b4"
+    },
+    "one_nonunit_all_verification_output.txt": {
+      "bytes": 482,
+      "sha256": "7c8398e0ae90e947b50a06167221d24feb0a9a5f0334021659f034505532579d"
+    },
+    "two_nonunit_packages.csv": {
+      "bytes": 52572,
+      "sha256": "fd764d55ac7a84e6c002a613cb59c305d24d901a1c78de705c11189738b49d4d"
+    },
+    "two_nonunit_state_pairs.csv": {
+      "bytes": 106,
+      "sha256": "1adf18922fc74a08eeacfdf877cfd09f0c3e2595a54eb20fadfa2f1c5547b81c"
+    },
+    "two_nonunit_verification_output.txt": {
+      "bytes": 128,
+      "sha256": "74b8f20238c8e42f63c7a9689e0cc6bd6172d3338d88fd9cbffc651760cca7ba"
+    },
+    "unit_defect_irreducibility_certificates.jsonl": {
+      "bytes": 27911,
+      "sha256": "5577fc79f9bc904da8488fd14a42b5fd040f5f763dbc24f8fb17af2c3ddfeb30"
+    },
+    "unit_defect_irreducibility_direct_verification_output.txt": {
+      "bytes": 1794,
+      "sha256": "6a977a5f71d7a9b448769b51fdb3dc51c3cd51e863ed4bbe54ab4a5dc014725d"
+    },
+    "unit_defect_state_pairs.csv": {
+      "bytes": 1275291,
+      "sha256": "4e187c316d377d7143cbf6f8ebb449a3430f55b1957faa048c72c0ca40382538"
+    },
+    "unit_large_modular_certificates.csv": {
+      "bytes": 2538,
+      "sha256": "51ca5a1cfbc7fb87e983142156395240689a26267363d9e2a320a7524d6128b4"
+    },
+    "unit_large_modular_input.csv": {
+      "bytes": 256,
+      "sha256": "bbf52f21465e57984a141051b4ca01d4c841a2bf7c3f16394624acad04ec0aa3"
+    },
+    "unit_large_modular_verification_output.txt": {
+      "bytes": 74,
+      "sha256": "55e41a81371d7276b175a0dc8848a52ffe880b9d5acb3f46f039b8657e9f5beb"
+    },
+    "unit_small_modular_certificates.csv": {
+      "bytes": 1133,
+      "sha256": "8951af90c1db6e826f56c0622cf0c4a6e80e32fb536e5651075d5088e528aac4"
+    },
+    "unit_small_modular_input.csv": {
+      "bytes": 116,
+      "sha256": "66befbf3c0857994d55a0359d80cac61f1f90a9c6ad84fecd696a02bc60afecc"
+    },
+    "unit_small_modular_verification_output.txt": {
+      "bytes": 74,
+      "sha256": "51a4530d4bf27decbf851e2e3d6068eeb2793fd720b62dd3b4db84dc620bd54b"
+    }
+  },
+  "nonunit": {
+    "one_nonunit_D_ge_16584": {
+      "after_coprime_scales": 10636,
+      "after_correspondence": 0,
+      "after_degree": 76,
+      "after_disjoint": 5430,
+      "after_extraction": 7916,
+      "after_range": 7916,
+      "after_role": 0,
+      "after_support": 483,
+      "groups": 514280,
+      "package_records": 608490,
+      "raw_state_pairs": 137530,
+      "unique_orientation_pairs": 0,
+      "unique_state_pairs": 0
+    },
+    "two_nonunit": {
+      "package_states": 1054,
+      "state_pairs": 0
+    }
+  },
+  "remaining_branch": {
+    "conditions": {
+      "D_max": 16583,
+      "U_max": "D",
+      "U_min": 2,
+      "abs_V": 1,
+      "d_max": 224
+    },
+    "description": "small one-nonunit branch after reciprocal normalization"
+  },
+  "schema": "qab12-branch-manifest-v1",
+  "status": "eliminates_upper_unit_both_nonunit_and_one_nonunit_D_ge_16584; small_one_nonunit_D_le_16583_remains",
+  "unit": {
+    "defect": {
+      "irreducibility_certificates": 46,
+      "state_pairs": 21114
+    },
+    "large": {
+      "orientation_certificates": 28,
+      "package_pairs": 7
+    },
+    "small": {
+      "orientation_certificates": 12,
+      "package_pairs": 3
+    }
+  }
+}

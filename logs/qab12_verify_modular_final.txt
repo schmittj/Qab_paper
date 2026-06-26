@@ -1,0 +1,8 @@
+python3 code/qab12/verify_modular_gcd_certificates.py --pairs data/qab12/unit_large_modular_input.csv --certificates data/qab12/unit_large_modular_certificates.csv
+verified_package_pairs=7
+verified_orientation_certificates=28
+status=PASS
+python3 code/qab12/verify_modular_gcd_certificates.py --pairs data/qab12/unit_small_modular_input.csv --certificates data/qab12/unit_small_modular_certificates.csv
+verified_package_pairs=3
+verified_orientation_certificates=12
+status=PASS

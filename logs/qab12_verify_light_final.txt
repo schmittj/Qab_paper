@@ -1,0 +1,72 @@
+mkdir -p build
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_one_nonunit_packages.cpp -o build/qab12_enumerate_one_nonunit_packages
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_one_nonunit.cpp -o build/qab12_pair_one_nonunit
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_two_nonunit_packages.cpp -o build/qab12_enumerate_two_nonunit_packages
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_two_nonunit.cpp -o build/qab12_pair_two_nonunit
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/enumerate_unit_small_packages.cpp -o build/qab12_enumerate_unit_small_packages
+g++ -O3 -std=c++20 -fopenmp -Wall -Wextra -Wpedantic code/qab12/pair_unit_small.cpp -o build/qab12_pair_unit_small
+python3 code/qab12/certify_qab12_constants.py
+two_nonunit_cutoff_max_D=16583
+two_nonunit_degree_max=224
+two_nonunit_linear_bound=D<19d
+two_nonunit_endpoint_valuation_max=14
+coefficient_transition_table=PASS
+envelope_monotone_for_D>=11=calculus
+columns=U,D_cap,linear_D_over_d_bound,max_degree
+2,6816241,48,143799
+3,1230611,27,45934
+4,508652,20,25488
+5,286175,17,17370
+6,188395,15,13145
+7,136208,13,10589
+8,104733,12,8887
+9,84090,11,7677
+10,69701,11,6774
+11,59198,10,6075
+12,51249,10,5518
+13,45056,9,5064
+14,40115,9,4687
+15,36095,9,4368
+16,32767,8,4095
+17,29975,8,3859
+18,27601,8,3653
+19,25561,8,3470
+20,23792,8,3308
+21,22244,8,3163
+22,20880,7,3033
+23,19670,7,2914
+24,18589,7,2806
+25,17619,7,2708
+26,16743,7,2617
+table_sha256=85d4a9d5ea1284f42c1becd69386815e608237a1072f714ccf0740c531dbaa4f
+python3 code/qab12/verify_two_nonunit.py --packages data/qab12/two_nonunit_packages.csv --state-pairs data/qab12/two_nonunit_state_pairs.csv
+verified_two_nonunit_package_states=1054
+verified_unique_common_factor_keys=1054
+verified_two_nonunit_state_pairs=0
+status=PASS
+python3 code/qab12/verify_one_nonunit.py --data-dir data/qab12
+verified_one_nonunit_package_states=608490
+aggregate_package_records=608490
+aggregate_groups=514280
+aggregate_raw_state_pairs=137530
+aggregate_after_coprime_scales=10636
+aggregate_after_range=7916
+aggregate_after_extraction=7916
+aggregate_after_disjoint=5430
+aggregate_after_support=483
+aggregate_after_degree=76
+aggregate_after_role=0
+aggregate_after_correspondence=0
+aggregate_unique_state_pairs=0
+aggregate_unique_orientation_pairs=0
+verified_one_nonunit_survivors=0
+status=PASS
+python3 code/qab12/test_one_nonunit_small.py
+U=2 package_states=4 pair_states=0 PASS
+U=3 package_states=19 pair_states=0 PASS
+U=6 package_states=0 pair_states=0 PASS
+one_nonunit_small_oracle=PASS
+python3 code/qab12/test_two_nonunit_small.py
+e=2-10 rmax=5 states=0 PASS
+e=11-18 rmax=4 states=2 PASS
+two_nonunit_small_oracle=PASS

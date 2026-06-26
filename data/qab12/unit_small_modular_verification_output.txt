@@ -1,0 +1,3 @@
+verified_package_pairs=3
+verified_orientation_certificates=12
+status=PASS

@@ -1,0 +1,1 @@
+common_degrees=427 unique_factor_degrees=983 cores=84251 smooth_entries=496087 pair_tests=258572368 additive_triples=6996 state_tests=22563 raw_records=22563 unique_records=22563 seconds=6.45475

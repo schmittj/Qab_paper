@@ -1,0 +1,7 @@
+31001,32000,4.097,U=2 cores=707 smooth_entries=957012 generic_pairs=28397332 additive_hits=1684 reducible_hits=1169 state_tests=20808 state_kept_raw=580 unique_states=580 seconds=3.99027
+32001,33000,3.946,U=2 cores=707 smooth_entries=965485 generic_pairs=28792324 additive_hits=1751 reducible_hits=1228 state_tests=21924 state_kept_raw=524 unique_states=524 seconds=3.85598
+33001,34000,4.393,U=2 cores=707 smooth_entries=980538 generic_pairs=30552583 additive_hits=2094 reducible_hits=1468 state_tests=26548 state_kept_raw=796 unique_states=796 seconds=4.30424
+34001,35000,4.249,U=2 cores=707 smooth_entries=982583 generic_pairs=30039816 additive_hits=1806 reducible_hits=1258 state_tests=22480 state_kept_raw=608 unique_states=608 seconds=4.16169
+35001,36000,4.407,U=2 cores=707 smooth_entries=990428 generic_pairs=30301408 additive_hits=1693 reducible_hits=1201 state_tests=21168 state_kept_raw=499 unique_states=499 seconds=4.31709
+36001,37000,4.466,U=2 cores=707 smooth_entries=1000904 generic_pairs=31134657 additive_hits=1728 reducible_hits=1235 state_tests=16446 state_kept_raw=447 unique_states=447 seconds=4.37567
+37001,38000,4.463,U=2 cores=707 smooth_entries=1005347 generic_pairs=31109969 additive_hits=1573 reducible_hits=1098 state_tests=14730 state_kept_raw=396 unique_states=396 seconds=4.37381

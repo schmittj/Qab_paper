@@ -1,0 +1,1 @@
+package_records=22563 groups=427 raw_state_pairs=1177814 after_at_least_one_defect=617833 after_coprime_scales=579659 after_extraction=564481 after_distinct=564481 after_disjoint=564425 after_support=223358 after_toric=223358 after_role=23581 after_correspondence=21114 unique_state_pairs=21114 unique_orientation_pairs=9297

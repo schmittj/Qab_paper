@@ -1,0 +1,1 @@
+smooth_entries=1061388 pair_tests=216002672 additive_triples=13091 raw_records=24301 unique_records=24301 seconds=4.19965

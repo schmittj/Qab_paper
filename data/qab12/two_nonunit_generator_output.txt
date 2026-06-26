@@ -1,0 +1,1 @@
+smooth_totals=9031 reducible_shape_tests=3642190 core_tests=7727942 coefficient_choice_pairs=1054 raw_states=1054 unique_states=1054
