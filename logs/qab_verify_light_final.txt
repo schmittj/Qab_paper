@@ -14,6 +14,8 @@ two_nonunit_linear_bound=D<19d
 two_nonunit_endpoint_valuation_max=14
 coefficient_transition_table=PASS
 envelope_monotone_for_D>=11=calculus
+unit_large_support_cap_D_ge_50000=1612000
+global_support_cap_D_le_175394637=4398937
 columns=U,D_cap,linear_D_over_d_bound,max_degree
 2,6816241,48,143799
 3,1230611,27,45934
@@ -78,7 +80,7 @@ after_role=0
 after_correspondence=0
 unique_state_pairs=0
 unique_orientation_pairs=0
-python3 code/qab12/verify_one_nonunit_residual.py --manifest data/qab12/one_nonunit_residual_manifest.json
+python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json
 verified_one_nonunit_residual_package_states=233278
 residual_package_records=233278
 residual_groups=212369
@@ -95,6 +97,12 @@ residual_unique_state_pairs=4
 residual_unique_orientation_pairs=2
 verified_residual_package_pairs=2
 verified_residual_orientation_certificates=8
+status=PASS
+python3 code/qab12/verify_unit_branch_manifest.py --manifest data/qab12/unit_branch_manifest.json
+unit_manifest=data/qab12/unit_branch_manifest.json
+large_terminal_package_pairs=7
+small_terminal_package_pairs=3
+defect_irreducibility_shapes=46
 status=PASS
 python3 code/qab12/test_one_nonunit_small.py
 U=2 package_states=4 pair_states=0 PASS

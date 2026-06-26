@@ -3,11 +3,12 @@
 ## Build C++ tools
 
 ```bash
-make build
+make build-nonunit-light
 ```
 
-The default build expects GCC or Clang with OpenMP and GNU `__int128`
-support (`-std=gnu++20`).
+This builds the proof-critical nonunit C++ tools used by the light verifier.
+The default build expects GCC or Clang with OpenMP and GNU `__int128` support
+(`-std=gnu++20`).
 
 ## Light verification
 
@@ -16,8 +17,20 @@ make verify-light
 ```
 
 This reruns exact constant checks, the two-nonunit row verifier, the
-one-nonunit row/count verifier, the residual one-nonunit verifier, and the
+one-nonunit row/count verifier, the residual one-nonunit verifier in
+non-mutating manifest-check mode, the unit-branch manifest verifier, and the
 small brute-force oracles.
+
+## Full unit-branch verification
+
+```bash
+make verify-unit
+```
+
+Requires `python-flint`. It checks the stored unit-branch manifest, recomputes
+the modular gcd certificates for the unit large and small terminal pairs, and
+recomputes the modular factorization degrees for the unit-defect
+irreducibility certificates.
 
 ## Modular certificate verification
 

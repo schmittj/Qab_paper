@@ -45,14 +45,14 @@ From the repository root:
 ```bash
 make verify-light
 make verify-upper
-make verify-modular
-make verify-irreducibility-direct
+make verify-unit
 make one-nonunit-residual THREADS=25
 ```
 
 The modular and direct irreducibility verifiers require `python-flint`.  The
 light verifier rebuilds the main C++ tools and checks the constants,
-two-nonunit rows, one-nonunit `D >= 16584` rows, and small regression oracles.
+two-nonunit rows, one-nonunit `D >= 16584` rows, the residual manifest, the
+unit-branch manifest, and small regression oracles.
 
 ## Development Notes
 
@@ -60,6 +60,3 @@ Prefer preserving the existing proof-artifact style: C++ generators/pair
 sieves emit CSV/TXT artifacts under `data/qab12/`, and Python verifiers replay
 those artifacts from first principles as much as possible.  Do not remove or
 rewrite archived Qab9-Qab11 materials unless specifically asked.
-
-The private GitHub backup remote is `origin` at
-`git@github.com:schmittj/Qab_paper.git`.

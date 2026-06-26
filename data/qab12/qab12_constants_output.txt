@@ -4,6 +4,8 @@ two_nonunit_linear_bound=D<19d
 two_nonunit_endpoint_valuation_max=14
 coefficient_transition_table=PASS
 envelope_monotone_for_D>=11=calculus
+unit_large_support_cap_D_ge_50000=1612000
+global_support_cap_D_le_175394637=4398937
 columns=U,D_cap,linear_D_over_d_bound,max_degree
 2,6816241,48,143799
 3,1230611,27,45934

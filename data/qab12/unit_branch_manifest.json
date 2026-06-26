@@ -1,0 +1,261 @@
+{
+  "branches": {
+    "deficient_scale_prime": {
+      "generator_counts": {
+        "additive_triples": 6996,
+        "common_degrees": 427,
+        "cores": 84251,
+        "pair_tests": 258572368,
+        "raw_records": 22563,
+        "seconds": 6,
+        "smooth_entries": 496087,
+        "state_tests": 22563,
+        "unique_factor_degrees": 983,
+        "unique_records": 22563
+      },
+      "irreducibility_certificates": {
+        "shapes": 46,
+        "verified_modular_factorizations": 106
+      },
+      "package_rows": 22563,
+      "pair_counts": {
+        "after_at_least_one_defect": 617833,
+        "after_coprime_scales": 579659,
+        "after_correspondence": 21114,
+        "after_disjoint": 564425,
+        "after_distinct": 564481,
+        "after_extraction": 564481,
+        "after_role": 23581,
+        "after_support": 223358,
+        "after_toric": 223358,
+        "groups": 427,
+        "package_records": 22563,
+        "raw_state_pairs": 1177814,
+        "unique_orientation_pairs": 9297,
+        "unique_state_pairs": 21114
+      },
+      "terminal_orientation_pairs": 9297,
+      "terminal_state_pairs": 21114
+    },
+    "large_full_kummer": {
+      "modular_certificates": {
+        "orientation_certificates": 28,
+        "package_pairs": 7
+      },
+      "pair_counts": {
+        "after_degree_interval": 20350751,
+        "after_full_radical_CRT": 826,
+        "after_role_binomial_interval": 680340,
+        "after_support_cap_and_disjointness": 174191284,
+        "scale_pairs": 5952,
+        "scaled_records": 643294,
+        "seconds_group": 0,
+        "seconds_pair": 18,
+        "seconds_read": 0,
+        "shape_pairs_considered": 334910032,
+        "shapes": 63980,
+        "support_group_pairs": 5023985
+      },
+      "prefinal_rows": 826,
+      "range": {
+        "D_max": 6816241,
+        "D_min": 50000
+      },
+      "terminal_package_pairs": 7
+    },
+    "small_full_kummer": {
+      "generator_counts": {
+        "additive_triples": 13091,
+        "pair_tests": 216002672,
+        "raw_records": 24301,
+        "seconds": 4,
+        "smooth_entries": 1061388,
+        "unique_records": 24301
+      },
+      "modular_certificates": {
+        "orientation_certificates": 12,
+        "package_pairs": 3
+      },
+      "package_rows": 24301,
+      "pair_counts": {
+        "after_coprime_scales": 553314,
+        "after_correspondence": 4,
+        "after_disjoint": 531420,
+        "after_distinct_packages": 553314,
+        "after_role": 289,
+        "after_support": 88760,
+        "after_toric": 50975,
+        "groups": 1723,
+        "package_records": 24301,
+        "raw_state_pairs": 734084,
+        "unique_orientation_pairs": 3,
+        "unique_state_pairs": 4
+      },
+      "range": {
+        "D_max": 49999
+      },
+      "terminal_package_pairs": 3,
+      "terminal_state_pairs": 4
+    }
+  },
+  "contract": {
+    "non_flint_checks": [
+      "file hashes",
+      "CSV headers and row counts",
+      "generator and pair-sieve stage counters",
+      "terminal modular-certificate coverage",
+      "recorded PASS logs for FLINT-dependent arithmetic replays"
+    ],
+    "scope": "stored unit-branch artifacts and terminal certificates",
+    "separate_flint_replays": [
+      "make verify-modular",
+      "make verify-irreducibility-direct"
+    ]
+  },
+  "files": {
+    "defect_counterpart_log": {
+      "bytes": 195,
+      "path": "data/qab12/unit_defect_counterpart_output.txt",
+      "sha256": "58de2faa9db167dfb750c4da93934d4a27d54e7a60ee495a6d39509ca86fdd86"
+    },
+    "defect_irreducibility_certificates": {
+      "bytes": 27911,
+      "path": "data/qab12/unit_defect_irreducibility_certificates.jsonl",
+      "sha256": "5577fc79f9bc904da8488fd14a42b5fd040f5f763dbc24f8fb17af2c3ddfeb30"
+    },
+    "defect_irreducibility_verification_log": {
+      "bytes": 1794,
+      "path": "data/qab12/unit_defect_irreducibility_direct_verification_output.txt",
+      "sha256": "6a977a5f71d7a9b448769b51fdb3dc51c3cd51e863ed4bbe54ab4a5dc014725d"
+    },
+    "defect_orientation_pairs": {
+      "bytes": 230687,
+      "path": "data/qab12/unit_defect_orientation_pairs.csv",
+      "sha256": "49a8e156aa9359fd143c705edca0d2310b231ace5d8bc07d377f0d56e6c2395b"
+    },
+    "defect_packages": {
+      "bytes": 637214,
+      "path": "data/qab12/unit_defect_all_packages.csv",
+      "sha256": "44db1221832cd4d09341cc4b1d58f19b74120f2a4540b49360cde230096b5c6a"
+    },
+    "defect_pair_log": {
+      "bytes": 325,
+      "path": "data/qab12/unit_defect_pair_output.txt",
+      "sha256": "0b2c8a71c6c696e448b51443f667ce71044ef40865c9ba7def25feb380d5cedb"
+    },
+    "defect_state_pairs": {
+      "bytes": 1275291,
+      "path": "data/qab12/unit_defect_state_pairs.csv",
+      "sha256": "4e187c316d377d7143cbf6f8ebb449a3430f55b1957faa048c72c0ca40382538"
+    },
+    "large_modular_certificates": {
+      "bytes": 2538,
+      "path": "data/qab12/unit_large_modular_certificates.csv",
+      "sha256": "51ca5a1cfbc7fb87e983142156395240689a26267363d9e2a320a7524d6128b4"
+    },
+    "large_modular_input": {
+      "bytes": 256,
+      "path": "data/qab12/unit_large_modular_input.csv",
+      "sha256": "bbf52f21465e57984a141051b4ca01d4c841a2bf7c3f16394624acad04ec0aa3"
+    },
+    "large_modular_verification_log": {
+      "bytes": 74,
+      "path": "data/qab12/unit_large_modular_verification_output.txt",
+      "sha256": "55e41a81371d7276b175a0dc8848a52ffe880b9d5acb3f46f039b8657e9f5beb"
+    },
+    "large_pair_log": {
+      "bytes": 317,
+      "path": "data/qab12/unit_large_pair_output.txt",
+      "sha256": "de85def13c5617dad71373073d6ad2c23b5d1b3846561a76cdaba57329ce555d"
+    },
+    "large_prefinal": {
+      "bytes": 57426,
+      "path": "data/qab12/unit_large_prefinal.csv",
+      "sha256": "875121b23188a7942baae5601ead153c463615ef9f3333764d48d17481dc3aab"
+    },
+    "large_terminal_pairs": {
+      "bytes": 586,
+      "path": "data/qab12/unit_large_residual.csv",
+      "sha256": "02eafe9a9137ebc70ca9270fccec39a7676059fb01aa7ebf313e1f17545e6ae1"
+    },
+    "small_generator_log": {
+      "bytes": 122,
+      "path": "data/qab12/unit_small_generator_output.txt",
+      "sha256": "ba9d097e14bea0c601cdcc43d4303b2217a3562d5621929469d6fb0307197fc3"
+    },
+    "small_modular_certificates": {
+      "bytes": 1133,
+      "path": "data/qab12/unit_small_modular_certificates.csv",
+      "sha256": "8951af90c1db6e826f56c0622cf0c4a6e80e32fb536e5651075d5088e528aac4"
+    },
+    "small_modular_input": {
+      "bytes": 116,
+      "path": "data/qab12/unit_small_modular_input.csv",
+      "sha256": "66befbf3c0857994d55a0359d80cac61f1f90a9c6ad84fecd696a02bc60afecc"
+    },
+    "small_modular_verification_log": {
+      "bytes": 74,
+      "path": "data/qab12/unit_small_modular_verification_output.txt",
+      "sha256": "51a4530d4bf27decbf851e2e3d6068eeb2793fd720b62dd3b4db84dc620bd54b"
+    },
+    "small_orientation_pairs": {
+      "bytes": 103,
+      "path": "data/qab12/unit_small_orientation_pairs.csv",
+      "sha256": "16e427639d90bf3538e6ba40e9680794f8ed562c35a3d1adc15ff398bfb2c025"
+    },
+    "small_packages": {
+      "bytes": 610544,
+      "path": "data/qab12/unit_small_packages.csv",
+      "sha256": "e5f054676e8d6c9dd88ee82ee184d93c0012ea94bbbc9c65baa20404028713c0"
+    },
+    "small_pair_log": {
+      "bytes": 262,
+      "path": "data/qab12/unit_small_pair_output.txt",
+      "sha256": "dc9e8bed4ad65852bcea45875b1e85904294510d9517b67bd9053f62ee78fea6"
+    },
+    "small_state_pairs": {
+      "bytes": 265,
+      "path": "data/qab12/unit_small_state_pairs.csv",
+      "sha256": "5e43eb17b6ff22791d9155062623acb5eb1e6784481ae379402a696d6c6b4803"
+    }
+  },
+  "schema": "qab-unit-branch-manifest-v1",
+  "scripts": {
+    "enumerate_unit_defect_counterparts": {
+      "bytes": 5451,
+      "path": "code/qab12/enumerate_unit_defect_counterparts.cpp",
+      "sha256": "f77c9182f99c1aff6531ee01d1edcf7fe0888a34068daf5cb67a8d9c95437780"
+    },
+    "enumerate_unit_small": {
+      "bytes": 5056,
+      "path": "code/qab12/enumerate_unit_small_packages.cpp",
+      "sha256": "bc72a0aa692cd0875ed77f91696db06fe30ccf4c2f39f9f6a6d8eed64b0fc470"
+    },
+    "pair_unit_defect": {
+      "bytes": 6220,
+      "path": "code/qab12/pair_unit_defect.cpp",
+      "sha256": "623a0336785a2cfb7b3f494c3bd2186aa35bd9b8cbb341615321af1a7284a757"
+    },
+    "pair_unit_large": {
+      "bytes": 22099,
+      "path": "code/qab12/pair_unit_large.cpp",
+      "sha256": "a36d95ae746ae9bd3dcb9caaa7d039fd1002dcb281a37fd121e1e777b94195c9"
+    },
+    "pair_unit_small": {
+      "bytes": 6751,
+      "path": "code/qab12/pair_unit_small.cpp",
+      "sha256": "c57445f24601a0d40d36f055814393c817ca18a1324537fac05013f014ab8749"
+    },
+    "verify_irreducibility_certificates_direct": {
+      "bytes": 2057,
+      "path": "code/qab12/verify_irreducibility_certificates_direct.py",
+      "sha256": "d7b4d7d59f9d2b187b1171c6f42bd9d857097d68b7521da757b0f7d194a712e1"
+    },
+    "verify_modular_gcd_certificates": {
+      "bytes": 3497,
+      "path": "code/qab12/verify_modular_gcd_certificates.py",
+      "sha256": "9145a78a602c382dd2500a81c7be986c87ab7fb0781db1c0ade0085e39903101"
+    }
+  },
+  "status": "PASS"
+}

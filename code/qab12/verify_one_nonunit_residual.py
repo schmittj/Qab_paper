@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Verifier for the corrected residual one-nonunit Qab12 branch."""
+"""Verifier for the corrected residual one-nonunit branch.
+
+The default verification path is non-mutating.  Use --check-manifest to compare
+against a bundled manifest, or --write-manifest to regenerate it intentionally.
+"""
 from __future__ import annotations
 
 import argparse
@@ -408,6 +412,15 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def compare_manifest(path: Path, expected: dict[str, object]) -> None:
+    try:
+        got = json.loads(path.read_text())
+    except FileNotFoundError as exc:
+        fail(f"missing manifest: {path}")
+    if got != expected:
+        fail(f"manifest mismatch for {path}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--packages", type=Path, default=Path("data/qab12/one_nonunit_residual_packages.csv"))
@@ -415,11 +428,19 @@ def main() -> int:
     ap.add_argument("--orientation-pairs", type=Path, default=Path("data/qab12/one_nonunit_residual_orientation_pairs.csv"))
     ap.add_argument("--pair-log", type=Path, default=Path("data/qab12/one_nonunit_residual_pair_output.txt"))
     ap.add_argument("--certificates", type=Path, default=Path("data/qab12/one_nonunit_residual_modular_certificates.csv"))
-    ap.add_argument("--manifest", type=Path)
+    ap.add_argument("--manifest", type=Path, help="Deprecated alias for --check-manifest.")
+    ap.add_argument("--check-manifest", type=Path, help="Read and compare a bundled manifest without writing it.")
+    ap.add_argument("--write-manifest", type=Path, help="Regenerate the manifest intentionally.")
     ap.add_argument("--D-cap", type=int, default=16583)
     ap.add_argument("--d-max", type=int)
     ap.add_argument("--r-max", type=int, default=139)
     args = ap.parse_args()
+
+    check_manifest = args.check_manifest or args.manifest
+    if args.manifest:
+        print("warning=--manifest is deprecated; use --check-manifest", flush=True)
+    if check_manifest and args.write_manifest and check_manifest == args.write_manifest:
+        fail("--check-manifest and --write-manifest must name different paths")
 
     dmax = args.d_max if args.d_max is not None else degree_upper(args.D_cap)
     rows = read_package_rows(args.packages, args.D_cap, dmax, args.r_max)
@@ -455,9 +476,11 @@ def main() -> int:
             "certificates": sha256(args.certificates),
         },
     }
-    if args.manifest:
-        args.manifest.parent.mkdir(parents=True, exist_ok=True)
-        args.manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    if check_manifest:
+        compare_manifest(check_manifest, manifest)
+    if args.write_manifest:
+        args.write_manifest.parent.mkdir(parents=True, exist_ok=True)
+        args.write_manifest.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
 
     print(f"verified_one_nonunit_residual_package_states={len(rows)}")
     for k in STAGES:

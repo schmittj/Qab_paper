@@ -132,6 +132,25 @@ computer-assisted eliminations of, respectively, the unit-coefficient branch
 and all nonunit branches.
 \end{enumerate}
 
+The shortest dependency path to the final contradiction is:
+\[
+\begin{array}{c}
+\text{collision dictionary}
+\Longrightarrow
+\text{structural reductions and local packet sieves}\\[2mm]
+\Longrightarrow
+\text{upper-range computation}
+\Longrightarrow
+\text{lower-state envelope}\\[2mm]
+\Longrightarrow
+\text{unit branch and nonunit branches}
+\Longrightarrow
+\text{terminal modular certificates}
+\Longrightarrow
+\text{Theorem~\ref{thm:main}.}
+\end{array}
+\]
+
 The computational part is used only after the preceding sections have reduced
 a counterexample to explicit integer data.  Each search is conservative: rows
 are kept unless a stated mathematical filter removes them, and the verification
@@ -1573,6 +1592,16 @@ For \(d=2\) the right side is strictly smaller than \(2\), and for
 \(d\geq3\) it is at most \(1\), a contradiction.  Thus no distinct target
 exists.  Reciprocity treats the case \(a=1\).
 \end{proof}
+
+The orientation bookkeeping in the proof is as follows.  If the unordered
+packages agree, the two reciprocal orientations are coprime by the no-three
+theorem, so a divisibility relation must preserve the selected orientation.
+If the packages are distinct, Corollary~\ref{cor:triples} gives disjoint
+scaled triples, and the coefficient comparison fixes the leading and constant
+roles separately.  The boundary case is reduced by reciprocity before the
+diagonal-denominator argument is applied.  Thus no step identifies
+\((a,b)\) with \((b,a)\) unless that reciprocal orientation has first been
+handled explicitly.
 
 \begin{corollary}[Primitive irreducibility gives global isolation]
 \label{cor:primitiveisolation}
@@ -3823,7 +3852,9 @@ Result & Generator \(\to\) independent verifier\\
 Upper range, Thm~\ref{thm:upperelimination}
  & \path{archive/Qab9_upper_bundle} pipeline \(\to\) \path{verify_upper_safe.py}; constants \path{certify_constants.py}, \path{certify_thresholds.sage}\\
 Unit branch, Thm~\ref{thm:unitelimination}
- & \path{enumerate_unit_*.cpp}, \path{pair_unit_*.cpp} \(\to\) \path{verify_modular_gcd_certificates.py}, \path{verify_irreducibility_certificates_direct.py}\\
+ & \path{enumerate_unit_*.cpp}, \path{pair_unit_*.cpp} \(\to\)
+ \path{verify_unit_branch_manifest.py}, \path{verify_modular_gcd_certificates.py},
+ \path{verify_irreducibility_certificates_direct.py}\\
 Both-nonunit, Thm~\ref{thm:twononunitelimination}
  & \path{enumerate_two_nonunit_packages.cpp}, \path{pair_two_nonunit.cpp} \(\to\) \path{verify_two_nonunit.py}\\
 One-nonunit \(D\ge16\,584\), Thm~\ref{thm:onenonunitlargeelimination}
@@ -4834,8 +4865,14 @@ The one-package support estimate is bounded throughout this interval by
 \[
  r\,\operatorname{rad}(ab(a+b))<1\,612\,000.
 \]
-The generator finds \(59\,063\) reducible-candidate primitive shapes.  The
-scale-pair scan considers \(101\,752\,371\) indexed shape pairs and applies
+This is the same envelope \(C(D)\) as in Corollary~\ref{cor:unitsupportcap},
+but restricted to \(D\geq50\,000\); the analytic-constants verifier listed in
+Table~\ref{tab:code} prints the exact rational certificate
+\[
+ C(50\,000)<1\,612\,000.
+\]
+The generator keeps \(63\,980\) primitive shapes.  The scale-pair scan
+considers \(334\,910\,032\) indexed shape pairs and applies
 only the exact radical, height, role-binomial, modular factor-degree, and
 correspondence filters.  The conservative terminal list consists of seven
 package pairs.  For each of the four selected orientation pairs attached to
@@ -4847,9 +4884,10 @@ independent verifier reconstructs all twenty-eight modular computations.
 \noindent\textbf{(II) Full Kummer degree and \(D<50\,000\).}
 Here \(d\leq5428\).  For every primitive factor degree \(e\), the relation
 \(\operatorname{rad}(ab(a+b))\mid e(e+2)\) permits direct smooth-number
-enumeration.  It produces \(9491\) shape--degree records.  The exact pair scan
-reduces \(7\,366\,972\) raw pairs to three terminal package pairs.  Their
-twelve selected orientation pairs are certified by the same modular-gcd
+enumeration.  It produces \(24\,301\) shape--degree package records.  The
+exact pair scan reduces \(734\,084\) raw state pairs to four terminal state
+pairs and three terminal package pairs.  Their twelve selected orientation
+pairs are certified by the same modular-gcd
 criterion, and the verifier recomputes every claimed gcd degree.
 
 \smallskip
@@ -4870,8 +4908,8 @@ then excludes every row in this branch.
 
 The branch generators, output tables, certificates, and independent
 recomputers are listed in Table~\ref{tab:code}.  The bundled checksums and
-branch-specific verifier outputs provide the row counts and SHA-256 bindings
-used for replay.
+the unit-branch manifest provide the row counts, terminal counts, and
+SHA-256 bindings used for replay.
 \end{proof}
 
 \begin{table}[ht]
@@ -5081,14 +5119,106 @@ proves Theorem~\ref{thm:main}.  The present bundle is therefore a reviewable
 computer-assisted proof package for the reciprocal-package coprimality
 statement.
 
+\appendix
+
+\section{Computer-Assisted Proof Contract}
+\label{app:proofcontract}
+
+This appendix records the verification contract behind the finite computations.
+The scripts are deterministic and use exact integer or finite-field
+arithmetic.  A generator is trusted only for exhaustive coverage of the rows it
+emits; the corresponding verifier checks the row schema, recomputes all stated
+integer predicates or terminal certificates listed below, and compares bundled
+hashes or manifests.
+
+\begin{description}[leftmargin=1.8em,style=nextline]
+\item[Upper range.]
+The archived Qab9 pipeline enumerates all rows in the certified range.
+\path{verify_upper_safe.py} checks 237,418 shapes, 761 prefinal pairs, and no
+residual candidates.  The remaining trust is archived coverage.
+
+\item[One-nonunit \(D\ge16\,584\).]
+The per-\(U\) package generators enumerate all admissible rows for
+\(U=2,\ldots,26\).  \path{verify_one_nonunit.py} checks schemas, row
+predicates, counts, and empty terminal CSVs.  The remaining trust is generator
+coverage.
+
+\item[Residual one-nonunit.]
+The residual generator enumerates the corrected \(d\le2601\) range.
+\path{verify_one_nonunit_residual.py} reruns the pair sieve, compares terminal
+CSVs, and recomputes eight gcd certificates over \(\mathbf F_{1009}\).  The
+remaining trust is generator coverage.
+
+\item[Unit full-Kummer branches.]
+The unit generators enumerate the large and small unit package rows.
+\path{verify_unit_branch_manifest.py} checks stage counts, hashes, terminal
+pair counts, and certificate coverage; \path{verify_modular_gcd_certificates.py}
+recomputes the FLINT gcds.  The remaining trust is unit enumeration coverage.
+
+\item[Unit deficient-scale branch.]
+The defect generators enumerate the Kummer-defect rows.  The unit manifest
+checks the row and terminal counts, and
+\path{verify_irreducibility_certificates_direct.py} recomputes the 46
+irreducibility certificates.  The remaining trust is defect enumeration
+coverage.
+\end{description}
+
+The principal CSV schemas are:
+\begin{lstlisting}[basicstyle=\ttfamily\small,breaklines=true]
+residual packages:
+U,d,sigma1,...,sigma5,r,t,e,a,b,n
+
+residual state pairs:
+U,d,sigma1,...,sigma5,r,t,e1,a,b,n,s,u,e2,c,f,m,D,correspondence_bound,role_bound
+
+residual terminal orientations:
+U,r,a,b,n,s,c,f,m
+
+unit full-Kummer terminal orientations:
+r,a,b,n,s,c,f,m
+
+unit modular certificate extension:
+pair_index,orientation,low1,low2,prime,gcd_degree
+
+unit-defect state pairs:
+d,r,t,e1,a,b,n,defect1,s,u,e2,c,f,m,defect2,D,role_bound,correspondence_bound
+\end{lstlisting}
+
+The public non-mutating verification command is \texttt{make verify-light}.
+The FLINT-dependent arithmetic replay is \texttt{make verify-unit}.  The
+residual manifest is checked with \texttt{--check-manifest}; it is regenerated
+only with the explicit \texttt{--write-manifest} mode.
+
+\section{Local Packet Valuation Table}
+\label{app:localpackets}
+
+The local packet arguments use the following cases, all with the conventions
+translated from Borisov's notation in Sections~\ref{sec:padic} and
+\ref{sec:kummer}.  For a prime \(p\) dividing exactly one role of a primitive
+triple, Borisov's endpoint lemmas give the packet center and slope denominator.
+At a total prime \(p\mid A+B\), every unit root lies in a nontrivial
+root-of-unity packet, and the packet contribution is divisible by \(p\) except
+for the center-\(1\) residue already recorded in the role congruence.  At a
+leading endpoint prime \(p\mid A\), Lemma~2.10 of \cite{Borisov1998} gives the
+nonunit block of length \(B\) and the unit packet counted by Lemma~2.11; the
+constant endpoint is reciprocal.  If \(p=2\), the first two formal layers must
+be kept merged, producing the residual split used in
+Lemma~\ref{lem:oreresidual}.  This is the only place where Capelli's
+exceptional \(-4K^4\) branch can survive, and
+Lemma~\ref{lem:exceptionalfourth} shows that a survivor is forced into the
+nonunit endpoint block with \(e\leq B\) and the stated norm divisibility.
+
 \section*{Use of AI tools}
 
-This proof was found through multiple rounds of prompting to ChatGPT 5.5 Pro.
-The manuscript was refined with Claude Code (Opus 4.8 max) and edited and
-revised with the Codex CLI tool running gpt-5.5 xhigh; Codex also finalized
-the computer verification part.  A fuller account of the AI-assisted
-discovery, editing, and verification process will be added in a later
-revision.
+This project used AI tools in discovery, editing, and implementation.  The
+initial proof strategy was found through multiple rounds of prompting to
+ChatGPT 5.5 Pro.  Claude Code (Opus 4.8 max) was used for manuscript-level
+revision and audit-oriented cleanup.  The Codex CLI tool running gpt-5.5 xhigh
+edited the manuscript, implemented and revised verification scripts, finalized
+the computer-verification artifacts, and ran the reproducibility checks.  The
+mathematical claims in the paper are supported by the written arguments and by
+the deterministic proof artifacts described in Appendix~\ref{app:proofcontract};
+the AI transcripts themselves are not used as proof evidence.
 
 \begin{thebibliography}{99}
 

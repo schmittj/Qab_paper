@@ -26,6 +26,8 @@ modular gcd certificates at `p = 1009`.
 - `archive/Qab9_upper_bundle/`: audited upper-range code/data retained for self-containment.
 - `docs/audits/`: historical external audit reports and nitpick notes; the blocking issues they identify are addressed by the current bundle.
 - `docs/WRITING_GUIDANCE_V2.md`: writing guidance used for the readability revision.
+- `PUBLICATION_CHECKLIST.md`: release checklist with commands and expected terminal counts.
+- `Dockerfile`, `.github/workflows/verification.yml`: reproducible local and CI verification environments.
 - `SHA256SUMS`: hashes of the listed tracked bundle files.  It excludes
   itself, `ARTIFACT_MANIFEST.json`, and the nested archived
   `archive/Qab9_upper_bundle/SHA256SUMS`; `ARTIFACT_MANIFEST.json` gives the
@@ -37,6 +39,7 @@ From the bundle root:
 
 ```bash
 make verify-light
+make verify-unit        # requires python-flint
 make verify-modular     # requires python-flint
 make verify-upper       # verifies archived upper rows
 ```
@@ -45,6 +48,13 @@ The C++ tools are intended for GCC or Clang with OpenMP and GNU `__int128`
 support; the default Makefile uses `-std=gnu++20`. Optional Python
 dependencies for the modular and irreducibility replays are pinned in
 `requirements-optional.txt`.
+
+A containerized full replay is available with:
+
+```bash
+docker build -t qab-proof .
+docker run --rm qab-proof
+```
 
 The corrected residual branch can be regenerated with
 

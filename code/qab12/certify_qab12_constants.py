@@ -15,6 +15,7 @@ D_CAP = [0,0,6816241,1230611,508652,286175,188395,136208,104733,84090,69701,5919
 LINEAR = [0,0,48,27,20,17,15,13,12,11,11,10,10,9,9,9,8,8,8,8,8,8,7,7,7,7,7]
 TERMS = 120
 ROOT_DEN = 10**8
+EXP_TERMS = 160
 
 def integer_cuberoot(n: int) -> int:
     lo, hi = 0, 1
@@ -55,6 +56,25 @@ def envelope_interval(D:int)->tuple[Fraction,Fraction]:
     llo,lhi=log_interval(Fraction(2*D))
     rlo,rhi=cbrt_interval(D)
     return Fraction(8)*llo/rhi, Fraction(8)*lhi/rlo
+
+def exp_upper(x: Fraction) -> Fraction:
+    term = Fraction(1)
+    total = term
+    for k in range(1, EXP_TERMS + 1):
+        term *= x
+        term /= k
+        total += term
+    next_term = term * x / (EXP_TERMS + 1)
+    ratio = x / (EXP_TERMS + 2)
+    if ratio >= 1:
+        raise RuntimeError("exp tail bound not applicable")
+    return total + next_term / (1 - ratio)
+
+def support_cap_upper(D: int) -> Fraction:
+    _, log_hi = log_interval(Fraction(2 * D))
+    root_lo, root_hi = cbrt_interval(D)
+    exponent_hi = Fraction(16) * log_hi / root_lo
+    return Fraction(8) * root_hi * root_hi * exp_upper(exponent_hi)
 
 def degree_upper(D:int)->int:
     lo,hi=0,200_000
@@ -106,6 +126,10 @@ def floor_log(n:int,base:int)->int:
 
 def main()->int:
     check_two_nonunit_constants()
+    if not support_cap_upper(50_000) < 1_612_000:
+        raise RuntimeError("unit-large support cap certificate failed")
+    if not support_cap_upper(175_394_637) < 4_398_937:
+        raise RuntimeError("global support cap certificate failed")
     rows=[]
     for U in range(2,27):
         cap=D_CAP[U]
@@ -131,6 +155,8 @@ def main()->int:
     print('two_nonunit_endpoint_valuation_max=14')
     print('coefficient_transition_table=PASS')
     print('envelope_monotone_for_D>=11=calculus')
+    print('unit_large_support_cap_D_ge_50000=1612000')
+    print('global_support_cap_D_le_175394637=4398937')
     print('columns=U,D_cap,linear_D_over_d_bound,max_degree')
     for row in rows:print(','.join(map(str,row)))
     digest=hashlib.sha256(('\n'.join(','.join(map(str,r)) for r in rows)+'\n').encode()).hexdigest()

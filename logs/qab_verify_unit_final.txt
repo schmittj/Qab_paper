@@ -1,3 +1,22 @@
+python3 code/qab12/verify_unit_branch_manifest.py --manifest data/qab12/unit_branch_manifest.json
+unit_manifest=data/qab12/unit_branch_manifest.json
+large_terminal_package_pairs=7
+small_terminal_package_pairs=3
+defect_irreducibility_shapes=46
+status=PASS
+make verify-modular
+make[1]: Entering directory '/mnt/c/Users/jo314/Desktop/Qab_paper'
+python3 code/qab12/verify_modular_gcd_certificates.py --pairs data/qab12/unit_large_modular_input.csv --certificates data/qab12/unit_large_modular_certificates.csv
+verified_package_pairs=7
+verified_orientation_certificates=28
+status=PASS
+python3 code/qab12/verify_modular_gcd_certificates.py --pairs data/qab12/unit_small_modular_input.csv --certificates data/qab12/unit_small_modular_certificates.csv
+verified_package_pairs=3
+verified_orientation_certificates=12
+status=PASS
+make[1]: Leaving directory '/mnt/c/Users/jo314/Desktop/Qab_paper'
+make verify-irreducibility-direct
+make[1]: Entering directory '/mnt/c/Users/jo314/Desktop/Qab_paper'
 python3 code/qab12/verify_irreducibility_certificates_direct.py --states data/qab12/unit_defect_state_pairs.csv --certificates data/qab12/unit_defect_irreducibility_certificates.jsonl
 [1/46] verified_shape=1,8 steps=1
 [2/46] verified_shape=1,15 steps=1
@@ -47,5 +66,6 @@ python3 code/qab12/verify_irreducibility_certificates_direct.py --states data/qa
 [46/46] verified_shape=1,6655 steps=3
 verified_shapes=46
 verified_modular_factorizations=106
-elapsed_seconds=25.60265290500047
+elapsed_seconds=15.45130950299972
 status=PASS
+make[1]: Leaving directory '/mnt/c/Users/jo314/Desktop/Qab_paper'

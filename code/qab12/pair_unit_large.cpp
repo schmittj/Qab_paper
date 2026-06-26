@@ -21,8 +21,8 @@
 constexpr uint32_t DMAX = 175394637u;
 constexpr uint32_t DUNIT = 6816242u;
 constexpr uint32_t SCALE_MAX = 139u;
-// A deliberately conservative, entirely integer support cap.  Section 18
-// of Qab9 proves rad(A B (A+B))*scale < 4,398,937 in the unit range.
+// Exact unit-large support cap for 50,000 <= D <= 6,816,241, certified by
+// certify_qab12_constants.py and printed in the manuscript.
 constexpr uint64_t SUPPORT_PRODUCT_CAP = 1612000ull;
 
 struct Shape {
