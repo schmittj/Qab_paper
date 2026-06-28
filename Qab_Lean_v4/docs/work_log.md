@@ -172,3 +172,26 @@
   uncapped by this helper.
 - Made the web-search tool request `return_token_budget = "unlimited"` by
   default and documented this in `AGENTS.md` and `tools/ai_review/README.md`.
+
+## 2026-06-28T14:59:25+02:00
+
+- Submitted a replacement focused OpenAI background request for the primitive
+  closed-form identity after removing the output cap:
+  - response id: `resp_08059623444e6ed8006a411a9db8bc819da47cc15d79fef229`;
+  - uploaded bundle file id: `file-5MChKrhw6pyYLzdJMnJFGm`;
+  - saved request metadata confirmed `max_output_tokens` is absent and
+    `web_search.return_token_budget = "unlimited"`;
+  - initial status: `queued`.
+
+## 2026-06-28T15:08:49+02:00
+
+- Proved the primitive closed-form identity
+  `qPrimZ_mul_X_sub_one_sq`:
+  `((X - 1)^2) * qPrimZ P = a*X^(a+b) - (a+b)*X^a + b`.
+- Used private recursive triangular-sum helpers in
+  `Qab.Polynomials.Primitive` to avoid a brittle coefficient
+  second-difference proof.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Primitive`;
+  - `cd Qab_Lean_v4 && lake build`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.

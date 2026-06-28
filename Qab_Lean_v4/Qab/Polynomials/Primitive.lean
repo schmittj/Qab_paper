@@ -200,4 +200,175 @@ lemma qPrimQ_coeff (P : PosPair) (j : Nat) :
     (qPrimQ P).coeff j = (qPrimCoeffZ P j : Rat) := by
   simp [qPrimQ, qPrimZ_coeff]
 
+/-
+Triangular-sum helpers for the closed form of the primitive orientation
+polynomial.  They are kept private because the exported object is the final
+identity for `qPrimZ`.
+-/
+private noncomputable def qPrimAscZ : Nat → Polynomial Int
+  | 0 => 0
+  | n + 1 => qPrimAscZ n + Polynomial.C (((n + 1 : Nat) : Int)) * Polynomial.X ^ n
+
+@[simp]
+private lemma qPrimAscZ_zero : qPrimAscZ 0 = 0 := rfl
+
+@[simp]
+private lemma qPrimAscZ_succ (n : Nat) :
+    qPrimAscZ (n + 1) =
+      qPrimAscZ n + Polynomial.C (((n + 1 : Nat) : Int)) * Polynomial.X ^ n := rfl
+
+private noncomputable def qPrimDescZ : Nat → Polynomial Int
+  | 0 => 0
+  | n + 1 => Polynomial.C (((n + 1 : Nat) : Int)) + Polynomial.X * qPrimDescZ n
+
+@[simp]
+private lemma qPrimDescZ_zero : qPrimDescZ 0 = 0 := rfl
+
+@[simp]
+private lemma qPrimDescZ_succ (n : Nat) :
+    qPrimDescZ (n + 1) =
+      Polynomial.C (((n + 1 : Nat) : Int)) + Polynomial.X * qPrimDescZ n := rfl
+
+private lemma qPrimAscZ_closed (n : Nat) :
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimAscZ n =
+      1 - Polynomial.C (((n + 1 : Nat) : Int)) * Polynomial.X ^ n +
+        Polynomial.C ((n : Int)) * Polynomial.X ^ (n + 1) := by
+  induction n with
+  | zero =>
+      simp
+  | succ n ih =>
+      rw [qPrimAscZ_succ, mul_add, ih]
+      norm_num [Nat.cast_add, Nat.cast_one]
+      ring_nf
+
+private lemma qPrimDescZ_closed (n : Nat) :
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimDescZ n =
+      Polynomial.C ((n : Int)) -
+        Polynomial.C (((n + 1 : Nat) : Int)) * Polynomial.X +
+        Polynomial.X ^ (n + 1) := by
+  induction n with
+  | zero =>
+      simp
+  | succ n ih =>
+      rw [qPrimDescZ_succ, mul_add]
+      rw [show ((Polynomial.X - 1 : Polynomial Int) ^ 2) * (Polynomial.X * qPrimDescZ n) =
+          Polynomial.X * (((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimDescZ n) by
+        ring]
+      rw [ih]
+      norm_num [Nat.cast_add, Nat.cast_one]
+      ring_nf
+
+private lemma qPrimAscZ_coeff (n j : Nat) :
+    (qPrimAscZ n).coeff j = if j < n then ((j + 1 : Nat) : Int) else 0 := by
+  induction n generalizing j with
+  | zero =>
+      simp
+  | succ n ih =>
+      rw [qPrimAscZ_succ, coeff_add]
+      by_cases hjn : j = n
+      · subst j
+        rw [coeff_C_mul_X_pow]
+        simp [ih]
+      · have hcoeff :
+            (Polynomial.C (((n + 1 : Nat) : Int)) * Polynomial.X ^ n).coeff j = 0 := by
+          rw [coeff_C_mul_X_pow]
+          simp [hjn]
+        rw [hcoeff, add_zero, ih]
+        by_cases hj : j < n
+        · have hjs : j < n + 1 := by omega
+          simp [hj, hjs]
+        · have hnot : ¬ j < n + 1 := by omega
+          simp [hj, hnot]
+
+private lemma qPrimDescZ_coeff (n j : Nat) :
+    (qPrimDescZ n).coeff j = if j < n then ((n - j : Nat) : Int) else 0 := by
+  induction n generalizing j with
+  | zero =>
+      simp
+  | succ n ih =>
+      cases j with
+      | zero =>
+          simp [qPrimDescZ_succ]
+      | succ j =>
+          rw [qPrimDescZ_succ, coeff_add]
+          have hC :
+              (Polynomial.C (((n + 1 : Nat) : Int))).coeff (j + 1) = 0 := by
+            rw [coeff_C]
+            simp
+          rw [hC, zero_add]
+          have hx : (Polynomial.X * qPrimDescZ n).coeff (j + 1) =
+              (qPrimDescZ n).coeff j :=
+            coeff_X_mul (qPrimDescZ n) j
+          rw [hx, ih]
+          by_cases hj : j < n
+          · have hjs : j + 1 < n + 1 := by omega
+            have hsub : n + 1 - (j + 1) = n - j := by omega
+            simp [hj, hjs, hsub]
+          · have hnot : ¬ j + 1 < n + 1 := by omega
+            simp [hj, hnot]
+
+private lemma qPrimZ_eq_triangles (P : PosPair) :
+    qPrimZ P =
+      Polynomial.C (P.b : Int) * qPrimAscZ P.a +
+        Polynomial.C (P.a : Int) * (Polynomial.X ^ P.a * qPrimDescZ (P.b - 1)) := by
+  ext j
+  rw [qPrimZ_coeff, coeff_add, coeff_C_mul, coeff_C_mul, coeff_X_pow_mul',
+    qPrimAscZ_coeff, qPrimDescZ_coeff]
+  by_cases hjA : j < P.a
+  · have hnotAle : ¬ P.a ≤ j := by omega
+    simp [qPrimCoeffZ, hjA, hnotAle]
+  · have hAle : P.a ≤ j := by omega
+    simp [qPrimCoeffZ, hjA, hAle]
+    by_cases hdesc : j - P.a < P.b - 1
+    · have hTop : j ≤ P.a + P.b - 2 := by omega
+      have hidx : P.b - 1 - (j - P.a) = P.a + P.b - j - 1 := by omega
+      simp [hdesc, hTop, hidx]
+    · have hTopLt : P.a + P.b - 2 < j := by
+        have hApos : 0 < P.a := P.ha_pos
+        have hBpos : 0 < P.b := P.hb_pos
+        by_cases hb1 : P.b = 1
+        · omega
+        · have hdesc_le : P.b - 1 ≤ j - P.a := by omega
+          omega
+      have hnotTop : ¬ j ≤ P.a + P.b - 2 := by omega
+      simp [hdesc, hnotTop]
+
+/-- Closed form for the primitive orientation polynomial after clearing
+the double root at `1`. -/
+lemma qPrimZ_mul_X_sub_one_sq (P : PosPair) :
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimZ P =
+      Polynomial.C (P.a : Int) * Polynomial.X ^ (P.a + P.b) -
+        Polynomial.C (((P.a + P.b : Nat) : Int)) * Polynomial.X ^ P.a +
+        Polynomial.C (P.b : Int) := by
+  have hBpos : 0 < P.b := P.hb_pos
+  have hBpred : P.b - 1 + 1 = P.b := by omega
+  have hBpredCast : ((P.b - 1 : Nat) : Int) = (P.b : Int) - 1 := by omega
+  rw [qPrimZ_eq_triangles]
+  calc
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) *
+        (Polynomial.C (P.b : Int) * qPrimAscZ P.a +
+          Polynomial.C (P.a : Int) * (Polynomial.X ^ P.a * qPrimDescZ (P.b - 1)))
+        =
+          Polynomial.C (P.b : Int) *
+              (((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimAscZ P.a) +
+            Polynomial.C (P.a : Int) * Polynomial.X ^ P.a *
+              (((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimDescZ (P.b - 1)) := by
+            ring
+    _ =
+          Polynomial.C (P.b : Int) *
+              (1 - Polynomial.C (((P.a + 1 : Nat) : Int)) * Polynomial.X ^ P.a +
+                Polynomial.C (P.a : Int) * Polynomial.X ^ (P.a + 1)) +
+            Polynomial.C (P.a : Int) * Polynomial.X ^ P.a *
+              (Polynomial.C (((P.b - 1 : Nat) : Int)) -
+                Polynomial.C (((P.b - 1 + 1 : Nat) : Int)) * Polynomial.X +
+                Polynomial.X ^ (P.b - 1 + 1)) := by
+            rw [qPrimAscZ_closed, qPrimDescZ_closed]
+    _ =
+      Polynomial.C (P.a : Int) * Polynomial.X ^ (P.a + P.b) -
+        Polynomial.C (((P.a + P.b : Nat) : Int)) * Polynomial.X ^ P.a +
+        Polynomial.C (P.b : Int) := by
+            rw [hBpred, hBpredCast]
+            norm_num [Nat.cast_add, Nat.cast_one]
+            ring_nf
+
 end Qab

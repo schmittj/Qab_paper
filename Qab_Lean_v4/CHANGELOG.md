@@ -34,3 +34,5 @@
   artifacts.
 - Removed OpenAI review response-token caps from the helper and made web-search
   return budget unlimited by default for long review/guidance runs.
+- Proved the primitive closed-form identity
+  `qPrimZ_mul_X_sub_one_sq`, clearing the double root at `1`.
