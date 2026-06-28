@@ -182,6 +182,17 @@ lemma qOrientZ_coeff_natDegree (P : PosPair) :
     (qOrientZ P).coeff (P.a + P.b - 2 * P.gcd) = (P.a : Int) := by
   rw [← qOrientZ_natDegree, ← leadingCoeff, qOrientZ_leadingCoeff]
 
+lemma qOrientZ_eval_one_pos (P : PosPair) :
+    0 < (qOrientZ P).eval (1 : Int) := by
+  have hg_pos : (0 : Int) < (P.gcd : Int) := by
+    exact_mod_cast P.gcd_pos
+  rw [qOrientZ, eval_C_mul, expand_eval]
+  simpa using mul_pos hg_pos (qPrimZ_eval_one_pos P.primitivePart)
+
+lemma qOrientZ_eval_one_ne_zero (P : PosPair) :
+    (qOrientZ P).eval (1 : Int) ≠ 0 :=
+  ne_of_gt (qOrientZ_eval_one_pos P)
+
 /-- Full orientation polynomial mapped to `ℚ[x]`. -/
 noncomputable def qOrientQ (P : PosPair) : Polynomial Rat :=
   (qOrientZ P).map (Int.castRingHom Rat)
@@ -200,6 +211,18 @@ lemma qOrientQ_ne_zero (P : PosPair) : qOrientQ P ≠ 0 := by
   have hb_ne : (P.b : Rat) ≠ 0 := by
     exact_mod_cast (Nat.ne_of_gt P.hb_pos)
   exact hb_ne (by simpa using hcoeff)
+
+lemma qOrientQ_eval_one_ne_zero (P : PosPair) :
+    (qOrientQ P).eval (1 : Rat) ≠ 0 := by
+  have hInt : (Polynomial.eval (1 : Int) (qOrientZ P) : Int) ≠ 0 := by
+    simpa using qOrientZ_eval_one_ne_zero P
+  have hRat : ((Polynomial.eval (1 : Int) (qOrientZ P) : Int) : Rat) ≠ 0 := by
+    exact Int.cast_ne_zero.mpr hInt
+  rw [qOrientQ]
+  change ((qOrientZ P).map (Int.castRingHom Rat)).eval
+      ((Int.castRingHom Rat) (1 : Int)) ≠ 0
+  rw [Polynomial.eval_map_apply]
+  exact hRat
 
 lemma qOrientQ_closed_form_numerator (P : PosPair) :
     ((Polynomial.X ^ P.gcd - 1 : Polynomial Rat) ^ 2) * qOrientQ P =

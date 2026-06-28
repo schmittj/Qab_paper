@@ -314,3 +314,24 @@
   - `cd Qab_Lean_v4 && lake build Qab.Basic`;
   - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`;
   - `cd Qab_Lean_v4 && lake build`.
+
+## 2026-06-28T16:47:58+02:00
+
+- Added the shared Phase 2 collision prelude:
+  - `Qab.Polynomials.Collision.collisionTriZ`;
+  - `collisionQuotZ`;
+  - `collisionTriZ_eq_expand_qNumeratorZ`;
+  - forced-factor divisibility lemmas for `(X ^ scale - 1)^2` and `(X - 1)^2`.
+- Added evaluation-at-one nonvanishing lemmas for `qPrimZ`, `qOrientZ`, and
+  `qOrientQ`.
+- Added parallel subprocess instructions under
+  `Qab_Lean_v4/docs/parallel_tasks/` for:
+  - residual `ZMod 1009` modular-gcd checking;
+  - reusable good-reduction lemmas;
+  - the decidable interval-coverage kernel.
+- Added `.claude/` to `.gitignore`.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Primitive`;
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`;
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Collision`;
+  - `cd Qab_Lean_v4 && lake build`.

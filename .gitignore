@@ -1,4 +1,5 @@
 secrets.env
+.claude/
 build/
 Qab_Lean_v4/.lake/
 artifacts/ai_reviews/

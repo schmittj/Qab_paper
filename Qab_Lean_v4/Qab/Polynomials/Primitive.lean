@@ -55,6 +55,11 @@ lemma qPrimCoeffZ_of_top_lt {P : PosPair} {j : Nat}
     omega
   · simp [qPrimCoeffZ, hjA, hjTop']
 
+lemma qPrimCoeffZ_nonneg (P : PosPair) (j : Nat) :
+    0 ≤ qPrimCoeffZ P j := by
+  unfold qPrimCoeffZ
+  split_ifs <;> positivity
+
 @[simp]
 lemma qPrimCoeffZ_top (P : PosPair) :
     qPrimCoeffZ P (P.a + P.b - 2) = (P.a : Int) := by
@@ -192,6 +197,26 @@ lemma qPrimZ_natDegree (P : PosPair) :
 lemma qPrimZ_leadingCoeff (P : PosPair) :
     (qPrimZ P).leadingCoeff = (P.a : Int) := by
   rw [leadingCoeff, qPrimZ_natDegree, qPrimZ_coeff_top]
+
+lemma qPrimZ_eval_one_pos (P : PosPair) :
+    0 < (qPrimZ P).eval (1 : Int) := by
+  have hRange : 0 < P.a + P.b - 1 := by
+    have ha : 1 ≤ P.a := Nat.succ_le_of_lt P.ha_pos
+    have hb : 1 ≤ P.b := Nat.succ_le_of_lt P.hb_pos
+    omega
+  rw [qPrimZ, eval_finsetSum]
+  refine Finset.sum_pos' ?_ ?_
+  · intro j hj
+    rw [eval_monomial]
+    simpa using qPrimCoeffZ_nonneg P j
+  · refine ⟨0, Finset.mem_range.mpr hRange, ?_⟩
+    have hb : (0 : Int) < (P.b : Int) := by
+      exact_mod_cast P.hb_pos
+    simpa [eval_monomial, qPrimCoeffZ, P.ha_pos] using hb
+
+lemma qPrimZ_eval_one_ne_zero (P : PosPair) :
+    (qPrimZ P).eval (1 : Int) ≠ 0 :=
+  ne_of_gt (qPrimZ_eval_one_pos P)
 
 lemma qPrimZ_isPrimitive (P : PosPair) (hP : P.Primitive) :
     (qPrimZ P).IsPrimitive := by
