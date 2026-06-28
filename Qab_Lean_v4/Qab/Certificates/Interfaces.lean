@@ -1,3 +1,4 @@
+import Qab.Certificates.Coverage
 import Qab.Packs.LocalPacket
 
 namespace Qab
@@ -47,15 +48,6 @@ def WellFormed (row : TerminalRow) : Prop :=
 
 end TerminalRow
 
-/-- A typed interval used by coverage certificates.
-
-This is intentionally modest.  Phase 2 should replace broad coverage axioms by
-generated Lean terms built out of intervals, child-coverage proofs, and exact
-integer exclusions. -/
-structure CoverageInterval where
-  lo : Nat
-  hi : Nat
-
 /-- Schematic coverage certificate for finite searches.
 
 `auditId` may record an external filename/hash for reproducibility, but it is
@@ -63,10 +55,17 @@ not a proof.  The proof-relevant part must eventually be typed Lean data such
 as intervals, child certificates, and verified exclusion reasons. -/
 structure CoverageCert where
   name : String
+  targetLo : Nat
+  targetHi : Nat
   intervals : List CoverageInterval
   auditId : String
 
-axiom ChecksCoverageCert : CoverageCert → Prop
+/-- Concrete coverage claim represented by a `CoverageCert`.
+
+`auditId` remains metadata only; the proof-relevant content is the target
+interval and the typed interval list. -/
+def ChecksCoverageCert (cert : CoverageCert) : Prop :=
+  CoversClosedTarget cert.intervals cert.targetLo cert.targetHi
 
 /-- Schematic modular-gcd certificate attached to a terminal row.
 

@@ -21,11 +21,20 @@ python3 Qab_Lean_v4/scripts/coverage_csv_to_lean.py intervals.csv \
 The generated file defines:
 
 - `<name>Intervals : List Qab.CoverageInterval`;
-- `<name>Cert : Qab.CoverageCert`, with `auditId` as metadata only;
-- `<name>Covers : Qab.CoversClosedTarget <name>Intervals lo hi`, proved by
-  `Qab.checkCoverage_sound (by native_decide)`.
+- `<name>AuditId : String`, with `auditId` as metadata only;
+- `<name>Check`, a Lean-checked Boolean coverage computation;
+- `<name>Covers : Qab.CoversClosedTarget <name>Intervals lo hi`, proved from
+  the checker soundness theorem.
 
 Rows are sorted by `(lo, hi)` before emission unless `--preserve-order` is
 passed.  Large files are emitted as chunks of 1000 intervals by default; use
-`--chunk-size 0` for a single list.  The proof-relevant check is always the
-Lean checker, not the CSV order, filename, hash, or audit id.
+`--chunk-size 0` for a single list.  For chunked output, the generator emits
+per-chunk `Qab.advanceFrom` checks and then stitches them with
+`Qab.checkCoverageViaAdvance_sound`, so each expensive computation is local to
+one chunk.
+
+Before writing Lean, the script runs a non-trusted Python sweep that mirrors the
+Lean checker and reports the first uncovered target point.  This is only a
+diagnostic; the proof-relevant check is always the Lean checker, not the Python
+preflight, CSV order, filename, hash, or audit id.  Use `--skip-preflight` only
+when deliberately emitting a file that may fail to build.

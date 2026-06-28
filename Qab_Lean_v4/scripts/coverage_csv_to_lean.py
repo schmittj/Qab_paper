@@ -4,9 +4,10 @@
 The generated Lean imports ``Qab.Certificates.Coverage`` and defines:
 
 * ``<name>Intervals : List Qab.CoverageInterval``;
-* ``<name>Cert : Qab.CoverageCert`` for metadata only;
-* ``<name>Covers`` proving ``Qab.CoversClosedTarget`` by running the pure
-  coverage checker.
+* ``<name>AuditId : String`` for metadata only;
+* ``<name>Check`` proving the Boolean checker result;
+* ``<name>Covers`` proving ``Qab.CoversClosedTarget`` from the pure coverage
+  checker soundness theorem.
 
 By default rows are sorted by ``(lo, hi)`` before emission.  Use
 ``--preserve-order`` when auditing the exact CSV order; the Lean checker is
@@ -25,6 +26,7 @@ from typing import Iterable, TextIO
 
 
 IDENT_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_']*")
+NAT_RE = re.compile(r"[0-9]+")
 
 
 @dataclass(frozen=True, order=True)
@@ -35,15 +37,9 @@ class Interval:
 
 def parse_nat(text: str, *, field: str) -> int:
     value = text.strip()
-    if not value:
-        raise ValueError(f"{field}: expected a natural number, got an empty string")
-    try:
-        parsed = int(value, 10)
-    except ValueError as exc:
-        raise ValueError(f"{field}: expected a natural number, got {text!r}") from exc
-    if parsed < 0:
-        raise ValueError(f"{field}: expected a natural number, got {parsed}")
-    return parsed
+    if not NAT_RE.fullmatch(value):
+        raise ValueError(f"{field}: expected an ASCII natural-number literal, got {text!r}")
+    return int(value, 10)
 
 
 def require_identifier(name: str, *, what: str) -> str:
@@ -66,6 +62,7 @@ def lean_string(text: str) -> str:
         text.replace("\\", "\\\\")
         .replace("\"", "\\\"")
         .replace("\n", "\\n")
+        .replace("\r", "\\r")
         .replace("\t", "\\t")
     )
     return f"\"{escaped}\""
@@ -88,8 +85,14 @@ def read_intervals(
             fields = ", ".join(reader.fieldnames)
             raise ValueError(f"{path}: missing columns {missing}; available columns: {fields}")
         for row_number, row in enumerate(reader, start=2):
-            lo = parse_nat(row[lo_column], field=f"{path}:{row_number}:{lo_column}")
-            hi = parse_nat(row[hi_column], field=f"{path}:{row_number}:{hi_column}")
+            raw_lo = row.get(lo_column)
+            raw_hi = row.get(hi_column)
+            if raw_lo is None:
+                raise ValueError(f"{path}:{row_number}:{lo_column}: missing value")
+            if raw_hi is None:
+                raise ValueError(f"{path}:{row_number}:{hi_column}: missing value")
+            lo = parse_nat(raw_lo, field=f"{path}:{row_number}:{lo_column}")
+            hi = parse_nat(raw_hi, field=f"{path}:{row_number}:{hi_column}")
             if not allow_empty_intervals and lo > hi:
                 raise ValueError(
                     f"{path}:{row_number}: empty interval [{lo}, {hi}] "
@@ -97,6 +100,37 @@ def read_intervals(
                 )
             intervals.append(Interval(lo=lo, hi=hi))
     return intervals
+
+
+def advance_from(next_point: int, target_hi: int, intervals: list[Interval]) -> int | None:
+    """Mirror ``Qab.advanceFrom`` for diagnostics and generated chunk seams."""
+    for interval in intervals:
+        if target_hi < next_point:
+            return next_point
+        if interval.hi < next_point:
+            continue
+        if next_point < interval.lo:
+            return None
+        next_point = interval.hi + 1
+    return next_point
+
+
+def first_coverage_gap(
+    intervals: list[Interval], *, target_lo: int, target_hi: int
+) -> int | None:
+    """Return the first uncovered point, or ``None`` when the target is covered."""
+    next_point = target_lo
+    if target_hi < next_point:
+        return None
+    for interval in intervals:
+        if target_hi < next_point:
+            return None
+        if interval.hi < next_point:
+            continue
+        if next_point < interval.lo:
+            return next_point
+        next_point = interval.hi + 1
+    return None if target_hi < next_point else next_point
 
 
 def chunks(items: list[Interval], size: int) -> Iterable[tuple[int, list[Interval]]]:
@@ -118,6 +152,16 @@ def emit_interval_list(handle: TextIO, name: str, intervals: list[Interval]) -> 
     handle.write("  ]\n\n")
 
 
+def emit_simp_list(handle: TextIO, names: list[str], *, indent: str = "  ") -> None:
+    if not names:
+        handle.write(f"{indent}simp\n")
+        return
+    handle.write(f"{indent}simp [\n")
+    for item in names:
+        handle.write(f"{indent}  {item},\n")
+    handle.write(f"{indent}]\n")
+
+
 def emit_lean(
     handle: TextIO,
     *,
@@ -131,7 +175,8 @@ def emit_lean(
     emit_theorem: bool,
 ) -> None:
     intervals_name = f"{name}Intervals"
-    cert_name = f"{name}Cert"
+    audit_name = f"{name}AuditId"
+    check_name = f"{name}Check"
     theorem_name = f"{name}Covers"
 
     handle.write("import Qab.Certificates.Coverage\n\n")
@@ -141,9 +186,10 @@ def emit_lean(
         handle.write("\n")
 
     chunked = chunk_size > 0 and len(intervals) > chunk_size
+    chunk_parts = list(chunks(intervals, chunk_size)) if chunked else []
     if chunked:
         chunk_names: list[str] = []
-        for index, part in chunks(intervals, chunk_size):
+        for index, part in chunk_parts:
             chunk_name = f"{intervals_name}_{index}"
             chunk_names.append(chunk_name)
             emit_interval_list(handle, chunk_name, part)
@@ -152,17 +198,58 @@ def emit_lean(
     else:
         emit_interval_list(handle, intervals_name, intervals)
 
-    handle.write(f"def {cert_name} : Qab.CoverageCert where\n")
-    handle.write(f"  name := {lean_string(name)}\n")
-    handle.write(f"  intervals := {intervals_name}\n")
-    handle.write(f"  auditId := {lean_string(audit_id)}\n\n")
+    handle.write("/-- Metadata only; coverage evidence is the theorem below. -/\n")
+    handle.write(f"def {audit_name} : String := {lean_string(audit_id)}\n\n")
 
     if emit_theorem:
-        handle.write(
-            f"theorem {theorem_name} : "
-            f"Qab.CoversClosedTarget {intervals_name} {target_lo} {target_hi} := by\n"
-        )
-        handle.write("  exact Qab.checkCoverage_sound (by native_decide)\n\n")
+        if chunked:
+            next_point = target_lo
+            advance_names: list[str] = []
+            for index, part in chunk_parts:
+                chunk_name = f"{intervals_name}_{index}"
+                advance_name = f"{chunk_name}Advance"
+                next_out = advance_from(next_point, target_hi, part)
+                if next_out is None:
+                    raise ValueError(
+                        f"internal error: chunk {index} does not advance from {next_point}"
+                    )
+                handle.write(
+                    f"theorem {advance_name} : "
+                    f"Qab.advanceFrom {next_point} {target_hi} {chunk_name} = some {next_out} := by\n"
+                )
+                handle.write("  native_decide\n\n")
+                advance_names.append(advance_name)
+                next_point = next_out
+
+            handle.write(
+                f"theorem {check_name} : "
+                f"Qab.checkCoverageViaAdvance {intervals_name} {target_lo} {target_hi} = true := by\n"
+            )
+            simp_items = [
+                "Qab.checkCoverageViaAdvance",
+                "Qab.checkFromViaAdvance",
+                intervals_name,
+                "Qab.advanceFrom_append",
+                *advance_names,
+            ]
+            emit_simp_list(handle, simp_items)
+            handle.write("\n")
+            handle.write(
+                f"theorem {theorem_name} : "
+                f"Qab.CoversClosedTarget {intervals_name} {target_lo} {target_hi} := by\n"
+            )
+            handle.write(f"  exact Qab.checkCoverageViaAdvance_sound {check_name}\n\n")
+        else:
+            handle.write(
+                f"theorem {check_name} : "
+                f"Qab.checkCoverage {intervals_name} {target_lo} {target_hi} = true := by\n"
+            )
+            handle.write("  native_decide\n\n")
+            handle.write(
+                f"theorem {theorem_name} : "
+                f"Qab.CoversClosedTarget {intervals_name} {target_lo} {target_hi} := by\n"
+            )
+            handle.write(f"  exact Qab.checkCoverage_sound {check_name}\n\n")
     else:
         handle.write(f"#guard Qab.checkCoverage {intervals_name} {target_lo} {target_hi}\n\n")
 
@@ -179,11 +266,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--lo-column", default="lo", help="CSV column holding closed lower endpoints")
     parser.add_argument("--hi-column", default="hi", help="CSV column holding closed upper endpoints")
     parser.add_argument("--namespace", default="Qab.GeneratedCoverage")
-    parser.add_argument("--audit-id", default="", help="Metadata string for the generated CoverageCert")
+    parser.add_argument("--audit-id", default="", help="metadata string emitted as <name>AuditId")
     parser.add_argument("--chunk-size", type=int, default=1000, help="rows per generated list chunk; 0 disables chunking")
     parser.add_argument("--preserve-order", action="store_true", help="emit rows in CSV order instead of sorting by (lo, hi)")
     parser.add_argument("--allow-empty-intervals", action="store_true", help="allow rows with lo > hi")
     parser.add_argument("--no-theorem", action="store_true", help="emit a #guard instead of a named coverage theorem")
+    parser.add_argument("--skip-preflight", action="store_true", help="skip the non-trusted Python coverage diagnostic")
     parser.add_argument("--output", type=Path, help="write Lean output to this path instead of stdout")
     return parser
 
@@ -205,6 +293,21 @@ def main(argv: list[str] | None = None) -> int:
         )
         if not args.preserve_order:
             intervals = sorted(intervals)
+        if args.target_hi < args.target_lo:
+            print(
+                "coverage_csv_to_lean.py: warning: target interval is empty "
+                f"[{args.target_lo}, {args.target_hi}]",
+                file=sys.stderr,
+            )
+        if not args.skip_preflight:
+            gap = first_coverage_gap(
+                intervals, target_lo=args.target_lo, target_hi=args.target_hi
+            )
+            if gap is not None:
+                raise ValueError(
+                    f"intervals do not cover closed target "
+                    f"[{args.target_lo}, {args.target_hi}]; first uncovered point is {gap}"
+                )
 
         if args.output is None:
             emit_lean(
