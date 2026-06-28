@@ -54,6 +54,33 @@ light verifier rebuilds the main C++ tools and checks the constants,
 two-nonunit rows, one-nonunit `D >= 16584` rows, the residual manifest, the
 unit-branch manifest, and small regression oracles.
 
+## Lean Formalization
+
+The conditional Lean scaffold lives in `Qab_Lean_v4/`.  Use the central local
+Mathlib installation rather than cloning a new copy into this repository.  The
+current central dependency is:
+
+```text
+/home/jo314/lean/mathlib4-central
+```
+
+It is pinned at Mathlib tag `v4.31.0`, commit
+`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`, with the corresponding
+`leanprover/lean4:v4.31.0` toolchain installed through `elan`.
+`Qab_Lean_v4/lakefile.lean` points to that package by absolute local path, so
+the normal check is:
+
+```bash
+cd Qab_Lean_v4
+lake build
+```
+
+Do not run `lake exe cache get`, `lake update`, or change the Mathlib source
+inside `Qab_Lean_v4`; run cache/update commands in `/home/jo314/lean/mathlib4-central`
+when the central dependency itself is intentionally refreshed.  If the Lean or
+Mathlib version is changed, update `lean-toolchain`, `lakefile.lean`, and
+`Qab_Lean_v4/CHANGELOG.md` together.
+
 ## Development Notes
 
 Prefer preserving the existing proof-artifact style: C++ generators/pair

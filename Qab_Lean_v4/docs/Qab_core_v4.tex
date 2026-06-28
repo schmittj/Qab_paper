@@ -1,0 +1,420 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible,breaklines=true,
+  literate={∀}{{$\forall$}}1 {∃}{{$\exists$}}1 {→}{{$\to$}}1 {¬}{{$\neg$}}1
+           {≤}{{$\leq$}}1 {≥}{{$\geq$}}1 {∧}{{$\wedge$}}1 {∨}{{$\vee$}}1
+           {ℚ}{{$\mathbb{Q}$}}1 {ℤ}{{$\mathbb{Z}$}}1 {∣}{{$\mid$}}1}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\title{A Lean-oriented core for the $Q_{a,b}$ package-coprimality proof\\
+       Version 4: worker handoff and polished assumption boundary}
+\author{Draft blueprint for review}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note extracts a Lean-oriented core from the current proof of the
+$Q_{a,b}$ package-coprimality theorem.  It is not intended to replace the full
+manuscript.  Its purpose is to define a conditional formalization target with
+explicit theorem packs that are generous enough for a first Lean
+implementation, but narrow enough that later phases can open the packs and
+formalize their contents down to Mathlib and Lean-checkable certificates.
+
+Version 4 incorporates the final polish review of the v3 package.  The residual
+witness name is made Lean-friendly, the certificate interfaces no longer import
+the core proof, the lower-box hypothesis is passed explicitly to the lower
+finite eliminators, and the phase-1 polynomial semantics now distinguish
+primitive orientations, full imprimitive orientations, reciprocal package
+products, and orientation-level versus product-level sharing.
+\end{abstract}
+
+\section{Purpose and scope}
+
+The full manuscript contains discovery scaffolding and auxiliary finiteness
+arguments that are not needed in the shortest Lean validation path.  The core
+retained here is the following:
+\[
+\begin{gathered}
+\text{package sharing}
+\Rightarrow \text{normalized counterexample},\\
+D\leq 175{,}394{,}637,\\
+D\geq 6{,}816{,}242 \Rightarrow \text{upper unit-normalized contradiction},\\
+D\leq 6{,}816{,}241 \Rightarrow \text{admissible lower state},\\
+\text{unit/both-nonunit/one-nonunit branch eliminations},\\
+\text{residual one-nonunit envelope and terminal certificates}.
+\end{gathered}
+\]
+The top-level Lean theorem will be conditional on named theorem packs.  The
+computational eliminations should ultimately be discharged by Lean-checkable
+certificates rather than by trusting external loops.
+
+The following ingredients are deliberately absent from the top-level core:
+ASZ-style unlikely-intersection boundedness, Beukers--Schlickewei S-unit
+finiteness, density-one isolation side results, and most sign/phase/Schur
+scaffolding.  These may remain in the human manuscript as explanation or
+independent checks, but they are not part of the shortest Lean proof spine.
+
+\section{Constants and normalized counterexamples}
+
+We write
+\[
+B_0=175{,}394{,}637,
+\qquad
+B_1=6{,}816{,}241,
+\qquad
+B_1^+=6{,}816{,}242,
+\]
+\[
+R=16{,}583,
+\qquad
+R^+=16{,}584,
+\qquad
+E_R=2601.
+\]
+Here $B_0$ is the global height--degree--Mahler bound, $B_1^+$ is the first
+upper-range value, $B_1$ is the lower-box cutoff, $R^+$ is the start of the
+large one-nonunit branch, $R$ is the residual cutoff, and $E_R$ is the residual
+degree bound.
+
+\begin{definition}[Normalized counterexample record]
+A Lean record \verb|NormCE| contains natural numbers
+\[
+ m<n,
+ \qquad p<q,
+ \qquad D,d,U,V_0,
+\]
+with $m,p,d,U,V_0>0$, together with
+\[
+D=\max\{m,n,p,q\},
+\qquad
+\gcd(\gcd(m,n),\gcd(p,q))=1,
+\]
+and a proof that the two normalized shapes are not the same up to swapping.
+Here $d$ is the degree of the selected primitive minimal polynomial, and
+$U,V_0$ are the absolute endpoint coefficients used in the finite branch
+analysis.
+\end{definition}
+
+Define
+\[
+\begin{aligned}
+\operatorname{Unit}(ce)&:\Longleftrightarrow U=1\text{ and }V_0=1,\\
+\operatorname{BothNonunit}(ce)&:\Longleftrightarrow 2\leq U\text{ and }2\leq V_0,\\
+\operatorname{OneNonunit}(ce)&:\Longleftrightarrow
+   (U=1\text{ and }2\leq V_0)\text{ or }(2\leq U\text{ and }V_0=1).
+\end{aligned}
+\]
+Because $U,V_0>0$, the trichotomy
+\[
+\operatorname{Unit}(ce)\vee \operatorname{BothNonunit}(ce)\vee
+\operatorname{OneNonunit}(ce)
+\]
+is elementary arithmetic.  It is proved directly in Lean and is not part of the
+local p-adic theorem pack.
+
+\section{Opaque selected counterexamples}
+
+The selected counterexample predicate is
+\[
+\texttt{FromShare}(P,Q,ce).
+\]
+For the first conditional formalization it is an opaque predicate.  It must not
+be defined as \verb|True|.  Otherwise broad finite-elimination assumptions would
+apply to arbitrary dummy records and could make the development inconsistent.
+
+In a later phase, \verb|FromShare| should become a structure containing the
+actual selected orientations, an off-unit-circle common root, the primitive
+minimal polynomial, degree and endpoint-coefficient data, and divisibility by
+the selected package polynomials.
+
+\section{Package polynomial semantics}
+
+The first concrete replacement for opaque \verb|PackageShare| must be careful
+about primitive versus imprimitive pairs.  The coefficient formula below is for
+the primitive orientation polynomial only.  For coprime positive $A,B$, define
+\[
+Q^{\rm prim}_{A,B}(x)=
+\sum_{0\leq j<A} B(j+1)x^j+
+\sum_{A\leq j\leq A+B-2} A(A+B-j-1)x^j.
+\]
+For a nonprimitive pair $a=gA$, $b=gB$, with $g=\gcd(a,b)$, the full orientation
+polynomial should use the manuscript convention
+\[
+Q_{a,b}(x)=g Q^{\rm prim}_{A,B}(x^g).
+\]
+The reciprocal package product is
+\[
+P_{a,b}(x)=Q_{a,b}(x)Q_{b,a}(x).
+\]
+Thus the Lean development should keep separate names:
+\[
+\texttt{qPrimZ},\quad
+\texttt{qOrientZ},\quad
+\texttt{qPackageProdZ},\quad
+\texttt{OrientationShare},\quad
+\texttt{PackageShare}.
+\]
+Product-level \verb|PackageShare| is closest to the theorem statement.  If the
+collision dictionary uses orientation-level sharing, it should prove a separate
+bridge from product sharing to an orientation share for some reciprocal-choice
+of orientations.
+
+\section{The theorem packs}
+
+\subsection{Collision pack}
+
+\begin{lstlisting}[language={}]
+structure CollisionPack where
+  share_to_normCE :
+    ∀ {P Q : PosPair},
+      P.unequal → Q.unequal → ¬ P.sameUnordered Q →
+      PackageShare P Q → ∃ ce : NormCE, FromShare P Q ce
+\end{lstlisting}
+
+This pack should eventually be opened by formalizing the package polynomial
+layer, product-to-orientation sharing, the collision dictionary, removal of
+forced cyclotomic roots, reciprocal orientation handling, no-three
+compatibility, and primitive normalization.
+
+\subsection{Global height pack}
+
+\begin{lstlisting}[language={}]
+structure GlobalHeightPack where
+  absolute_bound :
+    ∀ {P Q : PosPair} {ce : NormCE},
+      FromShare P Q ce → ce.D ≤ 175394637
+\end{lstlisting}
+It packages the height of a collision root, the rank-two torus/isolation degree
+bound, the Mahler/Smyth gap or replacement, and the exact constant arithmetic.
+It is the part of the proof that makes the infinite family finite.
+
+\subsection{Upper normalization and upper elimination}
+
+\begin{lstlisting}[language={}]
+structure UpperNormalizationPack where
+  upper_unit_normalized :
+    ∀ {P Q : PosPair} {ce : NormCE},
+      FromShare P Q ce → 6816242 ≤ ce.D → ce.UnitCoeff
+
+structure UpperRangePack where
+  no_upper_unit_counterexample :
+    ∀ {P Q : PosPair} {ce : NormCE},
+      FromShare P Q ce → ce.UnitCoeff →
+      6816242 ≤ ce.D → ce.D ≤ 175394637 → False
+\end{lstlisting}
+This split reflects the proof more faithfully than a single broad upper-range
+contradiction.  Later, the second pack can be replaced by coverage certificates
+and terminal row exclusions.
+
+\subsection{Local lower-state extraction}
+
+\begin{lstlisting}[language={}]
+structure LowerState where
+  rowId : Nat
+
+constant Encodes : NormCE → LowerState → Prop
+constant AdmissibleLowerState : LowerState → Prop
+
+structure LocalPacketPack where
+  to_lower_state :
+    ∀ {P Q : PosPair} {ce : NormCE},
+      FromShare P Q ce → ce.D ≤ 6816241 →
+      ∃ st : LowerState, Encodes ce st ∧ AdmissibleLowerState st
+\end{lstlisting}
+In later phases, \verb|LowerState| should expose primitive shapes, scales,
+extraction degrees, endpoint coefficients, slope signatures, packet
+occupancies, deficient-prime data, total-radical constraints, and row IDs.
+
+\subsection{Residual envelope}
+
+For the residual one-nonunit branch, the local pack also exposes reciprocal
+normalization and the exact residual envelope:
+\[
+D\leq16{,}583,
+\qquad
+V_0=1,
+\qquad
+2\leq U\leq D,
+\qquad
+d\leq2601.
+\]
+In Lean:
+\begin{lstlisting}[language={}]
+def ResidualEnvelope (ce : NormCE) : Prop :=
+  ce.D ≤ 16583 ∧
+  ce.Vabs = 1 ∧
+  2 ≤ ce.U ∧ ce.U ≤ ce.D ∧
+  ce.d ≤ 2601
+
+structure ResidualWitness (ce : NormCE) where
+  ce' : NormCE
+  st : ResidualState
+  recnorm : ReciprocalNormalize ce ce'
+  envelope : ResidualEnvelope ce'
+  encodes : EncodesResidual ce' st
+  admissible : AdmissibleResidualState st
+\end{lstlisting}
+This prevents the residual eliminator from hiding the reductions to $|V|=1$,
+$2\leq U\leq D$, and $d\leq2601$.
+
+\subsection{Finite lower eliminations}
+
+\begin{lstlisting}[language={}]
+structure FiniteLowerPack where
+  no_lower_unit :
+    ∀ {ce : NormCE} {st : LowerState},
+      Encodes ce st → AdmissibleLowerState st →
+      ce.D ≤ lowerMax → ce.UnitCoeff → False
+
+  no_both_nonunit :
+    ∀ {ce : NormCE} {st : LowerState},
+      Encodes ce st → AdmissibleLowerState st →
+      ce.D ≤ lowerMax → ce.BothNonunit → False
+
+  no_one_nonunit_large :
+    ∀ {ce : NormCE} {st : LowerState},
+      Encodes ce st → AdmissibleLowerState st → ce.OneNonunit →
+      16584 ≤ ce.D → ce.D ≤ 6816241 → False
+\end{lstlisting}
+The explicit lower-box argument in the first two fields is deliberate.  The
+state should also encode the lower box eventually, but the core proof already
+has the bound and passes it to make the finite-pack boundary auditable.
+
+\subsection{Residual finite elimination}
+
+\begin{lstlisting}[language={}]
+structure FiniteResidualPack where
+  no_residual_state :
+    ∀ {ce ce' : NormCE} {st : ResidualState},
+      ReciprocalNormalize ce ce' →
+      ResidualEnvelope ce' →
+      EncodesResidual ce' st →
+      AdmissibleResidualState st →
+      False
+\end{lstlisting}
+The first concrete certificate milestone should target this pack.
+
+\section{Core conditional theorem}
+
+\begin{theorem}[Core assembly theorem]
+Assume the seven theorem packs above.  Then package sharing cannot occur
+between two distinct nontrivial reciprocal packages.
+\end{theorem}
+
+\begin{proof}
+Assume a package share between two distinct nontrivial packages.  The collision
+pack gives a normalized counterexample $ce$ with \verb|FromShare P Q ce|.  The
+global height pack gives $D\leq B_0$.
+
+If $D\geq B_1^+$, upper normalization gives unit endpoint coefficients, and the
+upper-range pack gives a contradiction.
+
+Thus $D\leq B_1$.  The local packet pack gives an admissible lower state
+encoding $ce$.  By the arithmetic endpoint trichotomy, $ce$ is either unit,
+both-nonunit, or one-nonunit.  The first two cases are eliminated by the lower
+finite pack using the explicit hypothesis $D\leq B_1$.
+
+In the one-nonunit case, if $D\geq R^+$, the large one-nonunit eliminator gives
+a contradiction.  Otherwise $D\leq R$.  The local residual theorem supplies a
+reciprocally normalized residual witness satisfying
+$D\leq R$, $V_0=1$, $2\leq U\leq D$, and $d\leq E_R$.  The residual finite pack
+eliminates this state.  Hence no normalized counterexample exists, and the
+original package share was impossible.
+\end{proof}
+
+\section{Certificate strategy}
+
+The computational part should ultimately be Lean-checked by certificates, not
+trusted external loops.  The certificate order should be:
+\begin{enumerate}[label=(\arabic*)]
+\item implement canonical primitive and imprimitive package polynomial
+      constructors;
+\item formalize a good-reduction theorem for primitive common factors;
+\item check the residual terminal modular gcd certificates over
+      $\mathbf F_{1009}$;
+\item add residual coverage certificates for the state generator and pair
+      sieve;
+\item extend the same pattern to the both-nonunit, one-nonunit-large, and unit
+      branches.
+\end{enumerate}
+
+The schematic certificate interface now includes a terminal-row well-formedness
+predicate, an \verb|exactGcdDegree| field, and a tag specifying whether the
+certificate checks divided package polynomials or undivided collision
+trinomials.  For modular gcd certificates, the proof must specify which family
+is checked.  If the certificate reports modular gcd degree $2$ for collision
+trinomials, the degree $2$ must be explicitly accounted for by the forced
+double root at $x=1$.
+
+\section{Implementation phases}
+
+\begin{enumerate}[label=\textbf{Phase \arabic*.},leftmargin=*]
+\item \textbf{Compile the conditional scaffold.}  Build the Lake project, fix
+minor API drift, and keep the core theorem pack-parametric.
+
+\item \textbf{Define package polynomials and package sharing.}  Implement the
+primitive coefficient polynomial, the full imprimitive orientation polynomial,
+the reciprocal product, and product-level \verb|PackageShare|.
+
+\item \textbf{Open the residual terminal certificates.}  Encode the small
+terminal residual rows and the modular gcd certificates over $\mathbf F_{1009}$.
+
+\item \textbf{Open residual coverage.}  Expand \verb|ResidualState|, define row
+predicates, and verify coverage of the residual generator and pair sieve.
+
+\item \textbf{Open lower nonunit branches.}  Formalize the both-nonunit and
+large one-nonunit finite-state eliminations.
+
+\item \textbf{Open the unit branch.}  Formalize the full-Kummer terminal
+certificates and decide whether the Kummer-defect branch remains a narrow
+isolation axiom or is replaced by direct finite certificates.
+
+\item \textbf{Open the collision pack.}  Replace \verb|FromShare| by real
+selected-root data and prove collision extraction.
+
+\item \textbf{Open the height and local theorem packs.}  Formalize or narrowly
+axiomatize the height--degree--Mahler argument, Borisov/Newton consequences,
+and Kummer extraction-degree control.
+\end{enumerate}
+
+\section{Open mathematical review questions}
+
+\begin{enumerate}[label=(\arabic*)]
+\item Should the unit Kummer-defect branch keep a narrow global-isolation axiom
+for the 46 irreducible shapes, or should it be replaced by direct finite
+certificates?
+\item Should terminal modular gcd certificates be attached to divided package
+polynomials or to undivided collision trinomials?
+\item Should the upper-range final rows be excluded by the same-shape degree
+contradiction or by terminal modular certificates?
+\item What is the best eventual representation of \verb|FromShare|: explicit
+field/root data, minimal-polynomial data, or divisibility-only data?
+\end{enumerate}
+
+\section{Acceptance criterion for the first Lean milestone}
+
+The first milestone is complete when:
+\begin{enumerate}[label=(\arabic*)]
+\item \verb|lake build| succeeds;
+\item \verb|package_coprimality_from_packs| compiles;
+\item \verb|FromShare| is opaque or a genuine structure, not \verb|True|;
+\item all broad temporary assumptions live only in \verb|BroadAxioms.lean|;
+\item \verb|Qab.lean| does not import \verb|BroadAxioms.lean|;
+\item the README explicitly says the project is conditional on theorem packs;
+\item the core proof file remains a short assembly theorem.
+\end{enumerate}
+
+\end{document}
