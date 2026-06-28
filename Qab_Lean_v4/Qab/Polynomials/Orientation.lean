@@ -95,6 +95,67 @@ noncomputable def qOrientNumeratorZ (P : PosPair) : Polynomial Int :=
   Polynomial.C (P.gcd : Int) *
     Polynomial.expand Int P.gcd (qNumeratorZ P.primitivePart)
 
+lemma qOrientNumeratorZ_eq_qNumeratorZ (P : PosPair) :
+    qOrientNumeratorZ P = qNumeratorZ P := by
+  let A : Int := ((P.a / P.gcd : Nat) : Int)
+  let B : Int := ((P.b / P.gcd : Nat) : Int)
+  have haNat : P.gcd * (P.a / P.gcd) = P.a := by
+    simpa [PosPair.primitivePart] using P.gcd_mul_primitivePart_a
+  have hbNat : P.gcd * (P.b / P.gcd) = P.b := by
+    simpa [PosPair.primitivePart] using P.gcd_mul_primitivePart_b
+  have hsumNat : P.gcd * (P.a / P.gcd + P.b / P.gcd) = P.a + P.b := by
+    simpa [PosPair.primitivePart] using P.gcd_mul_primitivePart_sum
+  have hpow_total :
+      (Polynomial.X ^ P.gcd : Polynomial Int) ^
+          (P.a / P.gcd + P.b / P.gcd) =
+        Polynomial.X ^ (P.a + P.b) := by
+    rw [← pow_mul, hsumNat]
+  have hpow_a :
+      (Polynomial.X ^ P.gcd : Polynomial Int) ^ (P.a / P.gcd) =
+        Polynomial.X ^ P.a := by
+    rw [← pow_mul, haNat]
+  have ha : (P.gcd : Int) * A = (P.a : Int) := by
+    dsimp [A]
+    exact_mod_cast haNat
+  have hb : (P.gcd : Int) * B = (P.b : Int) := by
+    dsimp [B]
+    exact_mod_cast hbNat
+  simp [qOrientNumeratorZ, qNumeratorZ, hpow_total, hpow_a, Nat.cast_add]
+  calc
+    ((P.gcd : Int) : Polynomial Int) *
+        (((A : Int) : Polynomial Int) *
+            (Polynomial.X : Polynomial Int) ^ (P.a + P.b) -
+          (((A : Int) : Polynomial Int) + ((B : Int) : Polynomial Int)) *
+            Polynomial.X ^ P.a +
+          ((B : Int) : Polynomial Int))
+        = (((P.gcd : Int) * A : Int) : Polynomial Int) *
+            Polynomial.X ^ (P.a + P.b) -
+            ((((P.gcd : Int) * A + (P.gcd : Int) * B : Int) : Polynomial Int)) *
+            Polynomial.X ^ P.a +
+            (((P.gcd : Int) * B : Int) : Polynomial Int) := by
+          simp [Int.cast_mul, Int.cast_add]
+          ring_nf
+    _ = ((P.a : Int) : Polynomial Int) * Polynomial.X ^ (P.a + P.b) -
+          (((P.a : Int) + (P.b : Int) : Int) : Polynomial Int) *
+            Polynomial.X ^ P.a +
+          ((P.b : Int) : Polynomial Int) := by
+          rw [ha, hb]
+    _ = ((P.a : Int) : Polynomial Int) * Polynomial.X ^ (P.a + P.b) -
+          (((P.a : Int) : Polynomial Int) + ((P.b : Int) : Polynomial Int)) *
+            Polynomial.X ^ P.a +
+          ((P.b : Int) : Polynomial Int) := by
+          simp [Int.cast_add]
+
+@[simp]
+lemma qOrientNumeratorZ_natDegree (P : PosPair) :
+    (qOrientNumeratorZ P).natDegree = P.a + P.b := by
+  rw [qOrientNumeratorZ_eq_qNumeratorZ, qNumeratorZ_natDegree]
+
+@[simp]
+lemma qOrientNumeratorZ_leadingCoeff (P : PosPair) :
+    (qOrientNumeratorZ P).leadingCoeff = (P.a : Int) := by
+  rw [qOrientNumeratorZ_eq_qNumeratorZ, qNumeratorZ_leadingCoeff]
+
 /--
 Closed form for the full orientation polynomial after clearing the
 imprimitive double root at every `gcd a b`-th root of unity.

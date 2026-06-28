@@ -356,3 +356,22 @@
   - `python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json`;
   - `PYTHONPYCACHEPREFIX=/tmp/qab_pycache python3 -m py_compile Qab_Lean_v4/scripts/coverage_csv_to_lean.py`;
   - `git diff --check`.
+
+## 2026-06-28T19:28:44+02:00
+
+- Added bridge-prep polynomial API requested by the integrated reviews:
+  - `qOrientNumeratorZ_eq_qNumeratorZ`;
+  - `qOrientNumeratorZ_natDegree`;
+  - `qOrientNumeratorZ_leadingCoeff`;
+  - `collisionTriZ_natDegree_of_low_lt_total`;
+  - `collisionTriZ_leadingCoeff_of_low_lt_total`;
+  - `collisionTriZ_ne_zero_of_low_lt_total`;
+  - `collisionTriZ_X_sub_one_sq_dvd_of_low_lt_total`.
+- Moved the low/total forced-factor wrapper out of the certificate checker and
+  into `Qab.Polynomials.Collision`; `ZModGcd` now reuses the polynomial fact.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`;
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Collision`;
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.ZModGcd Qab.Certificates.ResidualZMod1009`;
+  - `cd Qab_Lean_v4 && lake build`;
+  - `git diff --check`.

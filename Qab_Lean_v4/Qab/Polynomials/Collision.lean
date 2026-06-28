@@ -39,6 +39,64 @@ lemma collisionTriZ_eq_expand_qNumeratorZ (scale : Nat) (P : PosPair) :
     rw [pow_mul]
   simp [collisionTriZ, qNumeratorZ, hpow_total, hpow_low]
 
+lemma collisionTriZ_natDegree_of_low_lt_total
+    {scale low total : Nat} (hlo : 0 < low) (hlt : low < total) :
+    (collisionTriZ scale low total).natDegree = scale * total := by
+  let P : PosPair :=
+    { a := low
+      b := total - low
+      ha_pos := hlo
+      hb_pos := Nat.sub_pos_of_lt hlt }
+  have hsum : P.a + P.b = total := by
+    dsimp [P]
+    omega
+  have htri :
+      collisionTriZ scale low total =
+        Polynomial.expand Int scale (qNumeratorZ P) := by
+    simpa [P, hsum] using collisionTriZ_eq_expand_qNumeratorZ scale P
+  calc
+    (collisionTriZ scale low total).natDegree
+        = (Polynomial.expand Int scale (qNumeratorZ P)).natDegree := by
+          rw [htri]
+    _ = (qNumeratorZ P).natDegree * scale := by
+          rw [natDegree_expand]
+    _ = total * scale := by
+          rw [qNumeratorZ_natDegree, hsum]
+    _ = scale * total := by
+          rw [Nat.mul_comm]
+
+lemma collisionTriZ_leadingCoeff_of_low_lt_total
+    {scale low total : Nat} (hscale : 0 < scale) (hlo : 0 < low)
+    (hlt : low < total) :
+    (collisionTriZ scale low total).leadingCoeff = (low : Int) := by
+  let P : PosPair :=
+    { a := low
+      b := total - low
+      ha_pos := hlo
+      hb_pos := Nat.sub_pos_of_lt hlt }
+  have hsum : P.a + P.b = total := by
+    dsimp [P]
+    omega
+  have htri :
+      collisionTriZ scale low total =
+        Polynomial.expand Int scale (qNumeratorZ P) := by
+    simpa [P, hsum] using collisionTriZ_eq_expand_qNumeratorZ scale P
+  rw [htri, leadingCoeff_expand hscale, qNumeratorZ_leadingCoeff]
+
+lemma collisionTriZ_ne_zero_of_low_lt_total
+    {scale low total : Nat} (hscale : 0 < scale) (hlo : 0 < low)
+    (hlt : low < total) :
+    collisionTriZ scale low total ≠ 0 := by
+  intro hzero
+  have hlead :=
+    collisionTriZ_leadingCoeff_of_low_lt_total
+      (scale := scale) (low := low) (total := total) hscale hlo hlt
+  have hlow_ne : (low : Int) ≠ 0 := by
+    exact_mod_cast Nat.ne_of_gt hlo
+  have hzero_lc : (0 : Int) = low := by
+    simpa [hzero] using hlead
+  exact hlow_ne hzero_lc.symm
+
 lemma collisionQuotZ_closed_form (scale : Nat) (P : PosPair) :
     ((Polynomial.X ^ scale - 1 : Polynomial Int) ^ 2) *
         collisionQuotZ scale P =
@@ -66,5 +124,21 @@ lemma collisionTriZ_X_sub_one_sq_dvd (scale : Nat) (P : PosPair) :
     simpa using h
   exact (pow_dvd_pow_of_dvd hX 2).trans
     (collisionTriZ_cyclotomic_sq_dvd scale P)
+
+/-- Version of `collisionTriZ_X_sub_one_sq_dvd` expressed only with
+`0 < low` and `low < total`. -/
+lemma collisionTriZ_X_sub_one_sq_dvd_of_low_lt_total
+    {scale low total : Nat} (hlo : 0 < low) (hlt : low < total) :
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) ∣
+      collisionTriZ scale low total := by
+  let P : PosPair :=
+    { a := low
+      b := total - low
+      ha_pos := hlo
+      hb_pos := Nat.sub_pos_of_lt hlt }
+  have hsum : P.a + P.b = total := by
+    dsimp [P]
+    omega
+  simpa [P, hsum] using collisionTriZ_X_sub_one_sq_dvd scale P
 
 end Qab

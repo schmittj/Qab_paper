@@ -43,21 +43,6 @@ lemma collisionHMod_eq_sparse (scale low total : Nat) :
         Polynomial.C ((total - low : Nat) : F1009) := by
   simp [collisionHMod, collisionTriZ]
 
-/-- Version of the shared forced-factor lemma expressed only with `low < total`. -/
-lemma collisionTriZ_X_sub_one_sq_dvd_of_low_lt_total
-    {scale low total : Nat} (hlo : 0 < low) (hlt : low < total) :
-    ((Polynomial.X - 1 : Polynomial Int) ^ 2) ∣
-      collisionTriZ scale low total := by
-  let P : PosPair :=
-    { a := low
-      b := total - low
-      ha_pos := hlo
-      hb_pos := Nat.sub_pos_of_lt hlt }
-  have hsum : P.a + P.b = total := by
-    dsimp [P]
-    omega
-  simpa [P, hsum] using collisionTriZ_X_sub_one_sq_dvd scale P
-
 /--
 The forced double root at `X = 1` survives reduction modulo 1009.
 
@@ -68,7 +53,7 @@ lemma collisionHMod_X_sub_one_sq_dvd_of_low_lt_total
     {scale low total : Nat} (hlo : 0 < low) (hlt : low < total) :
     ((Polynomial.X - 1 : Polynomial F1009) ^ 2) ∣
       collisionHMod scale low total := by
-  rcases collisionTriZ_X_sub_one_sq_dvd_of_low_lt_total
+  rcases Qab.collisionTriZ_X_sub_one_sq_dvd_of_low_lt_total
     (scale := scale) (low := low) (total := total) hlo hlt with ⟨q, hq⟩
   refine ⟨q.map (Int.castRingHom F1009), ?_⟩
   simpa [collisionHMod] using
