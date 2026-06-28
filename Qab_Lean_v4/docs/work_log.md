@@ -335,3 +335,24 @@
   - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`;
   - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Collision`;
   - `cd Qab_Lean_v4 && lake build`.
+
+## 2026-06-28T19:08:39+02:00
+
+- Responded to the integrated OpenAI/Claude review cleanup items after merging
+  the coverage, residual `ZMod 1009`, and good-reduction branches.
+- Added `Qab.AxiomAudit`, a guarded `#print axioms` regression check for
+  `package_coprimality_from_packs`, to catch accidental broad-axiom imports.
+- Strengthened residual certificate checking:
+  - `CollisionCertificate.wellFormed` now requires coprime residual scales;
+  - residual rows now check primitive additive triples and the residual degree
+    bound against `residualMax`;
+  - docs now name the remaining dense-gcd-to-Mathlib-gcd trust contract.
+- Clarified the schematic `ModGcdCert` interface as a placeholder superseded by
+  the axiom-free `CollisionCertificate` for the current `collisionH` path.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.AxiomAudit`;
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.ResidualZMod1009 Qab.Certificates.ZModGcd Qab.Certificates.Interfaces`;
+  - `cd Qab_Lean_v4 && lake build`;
+  - `python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json`;
+  - `PYTHONPYCACHEPREFIX=/tmp/qab_pycache python3 -m py_compile Qab_Lean_v4/scripts/coverage_csv_to_lean.py`;
+  - `git diff --check`.

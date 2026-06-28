@@ -66,6 +66,11 @@ The eventual concrete checker should include:
 * a Bezout or Euclidean certificate for the claimed gcd degree;
 * an accounting of forced cyclotomic factors, especially the double root at
   `x = 1` when the target is `PolynomialCheckTarget.collisionH`.
+
+For the current concrete `collisionH` path, prefer the axiom-free executable
+checker `Qab.Certificates.ZModGcd.CollisionCertificate`.  This schematic
+interface remains only as a placeholder for theorem-pack contracts that have
+not yet been opened.
 -/
 structure ModGcdCert (row : TerminalRow) where
   prime : Nat

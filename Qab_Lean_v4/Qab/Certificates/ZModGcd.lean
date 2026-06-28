@@ -12,9 +12,15 @@ namespace Certificates.ZModGcd
 /-!
 A small executable modular-gcd checker for collision trinomials.
 
-The checker uses dense coefficient lists over the prime field with 1009
+The checker uses dense coefficient lists over the prime field with `1009`
 elements.  Its target constructor is the same trinomial as
 `Qab.Polynomials.Collision.collisionTriZ`, reduced modulo 1009.
+
+Current trust boundary: `denseToPoly_collisionDense_eq_collisionHMod` connects
+the executable operands to Mathlib polynomials, but this module does not yet
+prove that `polyGcd` computes Mathlib's `Polynomial.gcd`.  A later bridge should
+either prove that soundness theorem or replace the dense gcd recomputation by
+generated Bezout/cofactor certificates over `Polynomial F1009`.
 -/
 
 /-- The Phase 2 residual checker currently uses the prime 1009. -/
@@ -68,7 +74,11 @@ lemma collisionHMod_X_sub_one_sq_dvd_of_low_lt_total
   simpa [collisionHMod] using
     congrArg (fun f : Polynomial Int => f.map (Int.castRingHom F1009)) hq
 
-/-- The residual undivided collision target always has a forced degree-2 part. -/
+/--
+The residual undivided collision target has a common forced degree-2 part when
+the two residual scales are coprime.  `CollisionCertificate.wellFormed` checks
+that coprimality before this degree is used for certificate accounting.
+-/
 def forcedDoubleRootDegree : Nat := 2
 
 def modReduce (a : Nat) : Nat := a % modulus
@@ -243,6 +253,7 @@ structure CollisionCertificate where
   scale₂ : Nat
   low₂ : Nat
   total₂ : Nat
+  /-- Manifest field only; this checker is specialized to `modulus = 1009`. -/
   prime : Nat
   target : PolynomialCheckTarget
   exactGcdDegree : Nat
@@ -254,6 +265,7 @@ namespace CollisionCertificate
 def wellFormed (cert : CollisionCertificate) : Bool :=
   cert.prime = modulus &&
     decide (cert.target = PolynomialCheckTarget.collisionH) &&
+    Nat.gcd cert.scale₁ cert.scale₂ = 1 &&
     0 < cert.scale₁ && 0 < cert.scale₂ &&
     0 < cert.low₁ && cert.low₁ < cert.total₁ &&
     0 < cert.low₂ && cert.low₂ < cert.total₂

@@ -133,6 +133,11 @@ Remaining bridge contracts for downstream certificate branches:
    `(C * h)` (or an equivalent divided-target factor) into the modular gcd
    target, yielding a lower bound `2 + h.natDegree ≤ gcdDegree` under the
    appropriate coprimality/nonvanishing hypotheses.
+3. The current residual dense checker also needs a named gcd-soundness bridge
+   before it can be used semantically: either prove that the executable
+   `polyGcd` degree agrees with the Mathlib `Polynomial.gcd` degree for the
+   mapped collision targets, or replace the dense gcd recomputation by generated
+   Euclidean/Bezout certificates over `Polynomial (ZMod 1009)`.
 
 Those bridges should live in a module importing both
 `Qab.Certificates.GoodReduction` and the relevant polynomial constructors, not

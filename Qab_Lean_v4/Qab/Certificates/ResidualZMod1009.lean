@@ -1,4 +1,5 @@
 import Qab.Certificates.ZModGcd
+import Qab.Constants
 
 namespace Qab
 
@@ -88,7 +89,10 @@ def artifactConsistent (pairs : List ResidualPair) (row : ResidualCertificateRow
     row.orientation < 4 &&
     row.a + row.b = row.n &&
     row.c + row.f = row.m &&
+    Nat.gcd row.a row.b = 1 &&
+    Nat.gcd row.c row.f = 1 &&
     Nat.gcd row.r row.s = 1 &&
+    max (row.r * row.n) (row.s * row.m) ≤ residualMax &&
     row.low1 = row.expectedLow1 &&
     row.low2 = row.expectedLow2 &&
     row.prime = modulus &&

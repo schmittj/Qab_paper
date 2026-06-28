@@ -60,3 +60,7 @@
   row counts, renamed listed pair/orientation coverage, and proved
   `denseToPoly_collisionDense_eq_collisionHMod` to connect the executable dense
   target to mapped `collisionTriZ`.
+- Recorded the remaining residual checker trust contract explicitly: the dense
+  executable gcd degree must be connected to Mathlib `Polynomial.gcd`, or
+  replaced by generated Euclidean/Bezout certificates, before the residual rows
+  can serve as mathematical terminal exclusions.

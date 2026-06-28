@@ -32,7 +32,8 @@ by `denseToPoly_collisionDense_eq_collisionHMod`, which proves that
 
 The checker does not treat an undivided gcd degree of `2` as an exclusion by
 itself.  It records `forcedDoubleRootDegree = 2`, checks coprime residual
-scales in the typed row data, and
+scales both in the generic `CollisionCertificate.wellFormed` predicate and in
+the typed row data, and
 `CollisionCertificate.checks` requires
 
 ```text
@@ -63,6 +64,7 @@ orientation-pair rows and eight orientation certificates from
 - every certificate row matches its indexed orientation-pair row;
 - the orientation low terms agree with the CSV convention;
 - the additive triples hold;
+- the primitive additive triples and residual degree bound hold;
 - the two residual scales are coprime;
 - the reduction prime is `1009` and is not a bad-reduction prime for row data;
 - the executable collision-gcd degree is exactly `2`;
@@ -80,7 +82,12 @@ This is intentionally a first useful executable Lean certificate, not the final
 large-scale format and not yet a proved `Polynomial.gcd` theorem.  The dense
 Euclidean checker is simple and transparent, and its input target is now proved
 to denote the mapped `collisionTriZ`; the Euclidean algorithm itself remains a
-small bespoke executable checker.  For larger data, the likely next step is
-generated Euclidean or Bezout certificates with a checker that verifies division
-identities over `Polynomial (ZMod 1009)`, rather than recomputing long dense
-gcds from scratch.
+small bespoke executable checker.
+
+Named remaining contract: before these rows are used as a mathematical terminal
+exclusion, the project must either prove that the dense `polyGcd` degree agrees
+with the corresponding Mathlib `Polynomial.gcd` degree, or replace this dense
+gcd recomputation by generated Euclidean/Bezout certificates over
+`Polynomial (ZMod 1009)` whose identities are checked directly.  The latter is
+currently the preferred path because it also reduces reliance on
+`native_decide`.
