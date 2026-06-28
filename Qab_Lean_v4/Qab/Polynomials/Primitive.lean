@@ -171,6 +171,10 @@ lemma qPrimZ_coeff_zero_ne_zero (P : PosPair) :
   rw [qPrimZ_coeff_zero]
   exact_mod_cast (Nat.ne_of_gt P.hb_pos)
 
+lemma qPrimZ_ne_zero (P : PosPair) : qPrimZ P ≠ 0 := by
+  intro h
+  exact qPrimZ_coeff_zero_ne_zero P (by simp [h])
+
 lemma qPrimZ_coeff_top_ne_zero (P : PosPair) :
     (qPrimZ P).coeff (P.a + P.b - 2) ≠ 0 := by
   rw [qPrimZ_coeff_top]
@@ -181,6 +185,11 @@ lemma qPrimZ_natDegree (P : PosPair) :
     (qPrimZ P).natDegree = P.a + P.b - 2 := by
   exact natDegree_eq_of_le_of_coeff_ne_zero
     (qPrimZ_natDegree_le P) (qPrimZ_coeff_top_ne_zero P)
+
+@[simp]
+lemma qPrimZ_leadingCoeff (P : PosPair) :
+    (qPrimZ P).leadingCoeff = (P.a : Int) := by
+  rw [leadingCoeff, qPrimZ_natDegree, qPrimZ_coeff_top]
 
 /-- Primitive orientation polynomial mapped to `ℚ[x]`. -/
 noncomputable def qPrimQ (P : PosPair) : Polynomial Rat :=

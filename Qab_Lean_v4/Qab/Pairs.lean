@@ -32,6 +32,17 @@ def swap (P : PosPair) : PosPair where
   ha_pos := P.hb_pos
   hb_pos := P.ha_pos
 
+@[simp]
+theorem swap_a (P : PosPair) : P.swap.a = P.b := rfl
+
+@[simp]
+theorem swap_b (P : PosPair) : P.swap.b = P.a := rfl
+
+@[simp]
+theorem swap_swap (P : PosPair) : P.swap.swap = P := by
+  cases P
+  rfl
+
 end PosPair
 
 end Qab

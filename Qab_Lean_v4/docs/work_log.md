@@ -108,3 +108,22 @@
 - Verified:
   - `cd Qab_Lean_v4 && lake build`;
   - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+
+## 2026-06-28T14:29:57+02:00
+
+- Extended `Qab.Pairs` with simp lemmas for `swap.a`, `swap.b`, and
+  `swap.swap`.
+- Extended `Qab.Polynomials.Primitive` with `qPrimZ_ne_zero` and
+  `qPrimZ_leadingCoeff`.
+- Extended `Qab.Polynomials.Orientation` with:
+  - coefficient transport for exponents divisible by `gcd a b`;
+  - coefficient vanishing for exponents not divisible by `gcd a b`;
+  - nonzero, exact `natDegree`, leading coefficient, and top-coefficient facts
+    for `qOrientZ`;
+  - rational constant coefficient for `qOrientQ`;
+  - nonzero, exact `natDegree`, leading coefficient, and swap invariance for
+    `qPackageProdZ`;
+  - swap invariance for `qPackageProdQ`.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.

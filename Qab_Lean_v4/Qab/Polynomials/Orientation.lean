@@ -51,6 +51,11 @@ lemma gcd_mul_primitivePart_b (P : PosPair) : P.gcd * P.primitivePart.b = P.b :=
   rw [Nat.mul_comm]
   exact P.primitivePart_b_mul_gcd
 
+lemma primitivePart_degree_mul_gcd (P : PosPair) :
+    (P.primitivePart.a + P.primitivePart.b - 2) * P.gcd =
+      P.a + P.b - 2 * P.gcd := by
+  rw [Nat.sub_mul, Nat.add_mul, P.primitivePart_a_mul_gcd, P.primitivePart_b_mul_gcd]
+
 @[simp]
 lemma swap_gcd (P : PosPair) : P.swap.gcd = P.gcd := by
   simp [gcd, swap, Nat.gcd_comm]
@@ -76,17 +81,106 @@ lemma qOrientZ_coeff_zero (P : PosPair) :
     qPrimZ_coeff_zero]
   exact_mod_cast hb
 
+lemma qOrientZ_coeff_zero_ne_zero (P : PosPair) :
+    (qOrientZ P).coeff 0 ≠ 0 := by
+  rw [qOrientZ_coeff_zero]
+  exact_mod_cast (Nat.ne_of_gt P.hb_pos)
+
+lemma qOrientZ_coeff_mul_gcd (P : PosPair) (n : Nat) :
+    (qOrientZ P).coeff (n * P.gcd) =
+      (P.gcd : Int) * qPrimCoeffZ P.primitivePart n := by
+  rw [qOrientZ, coeff_C_mul, coeff_expand P.gcd_pos, if_pos (dvd_mul_left P.gcd n),
+    Nat.mul_div_left n P.gcd_pos, qPrimZ_coeff]
+
+lemma qOrientZ_coeff_of_not_dvd_gcd {P : PosPair} {j : Nat} (hj : ¬ P.gcd ∣ j) :
+    (qOrientZ P).coeff j = 0 := by
+  rw [qOrientZ, coeff_C_mul, coeff_expand P.gcd_pos, if_neg hj, mul_zero]
+
+lemma qOrientZ_ne_zero (P : PosPair) : qOrientZ P ≠ 0 := by
+  intro h
+  exact qOrientZ_coeff_zero_ne_zero P (by simp [h])
+
+@[simp]
+lemma qOrientZ_natDegree (P : PosPair) :
+    (qOrientZ P).natDegree = P.a + P.b - 2 * P.gcd := by
+  have hg_ne : (P.gcd : Int) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt P.gcd_pos)
+  calc
+    (qOrientZ P).natDegree
+        =
+          (Polynomial.expand Int P.gcd (qPrimZ P.primitivePart)).natDegree := by
+            rw [qOrientZ, natDegree_C_mul hg_ne]
+    _ = (P.primitivePart.a + P.primitivePart.b - 2) * P.gcd := by
+            rw [natDegree_expand, qPrimZ_natDegree]
+    _ = P.a + P.b - 2 * P.gcd := P.primitivePart_degree_mul_gcd
+
+@[simp]
+lemma qOrientZ_leadingCoeff (P : PosPair) :
+    (qOrientZ P).leadingCoeff = (P.a : Int) := by
+  have hg_ne : (P.gcd : Int) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt P.gcd_pos)
+  let E : Polynomial Int := Polynomial.expand Int P.gcd (qPrimZ P.primitivePart)
+  have hleadE : E.leadingCoeff = (P.primitivePart.a : Int) := by
+    dsimp [E]
+    rw [leadingCoeff_expand P.gcd_pos]
+    exact qPrimZ_leadingCoeff P.primitivePart
+  have hmul : (P.gcd : Int) * E.leadingCoeff ≠ 0 := by
+    rw [hleadE]
+    exact mul_ne_zero hg_ne (by exact_mod_cast (Nat.ne_of_gt P.primitivePart.ha_pos))
+  rw [qOrientZ]
+  change (Polynomial.C (P.gcd : Int) * E).leadingCoeff = (P.a : Int)
+  rw [leadingCoeff, natDegree_C_mul_of_mul_ne_zero hmul, coeff_C_mul, ← leadingCoeff,
+    hleadE]
+  exact_mod_cast P.gcd_mul_primitivePart_a
+
+@[simp]
+lemma qOrientZ_coeff_natDegree (P : PosPair) :
+    (qOrientZ P).coeff (P.a + P.b - 2 * P.gcd) = (P.a : Int) := by
+  rw [← qOrientZ_natDegree, ← leadingCoeff, qOrientZ_leadingCoeff]
+
 /-- Full orientation polynomial mapped to `ℚ[x]`. -/
 noncomputable def qOrientQ (P : PosPair) : Polynomial Rat :=
   (qOrientZ P).map (Int.castRingHom Rat)
+
+@[simp]
+lemma qOrientQ_coeff_zero (P : PosPair) :
+    (qOrientQ P).coeff 0 = (P.b : Rat) := by
+  simp [qOrientQ]
 
 /-- Reciprocal package product over `ℤ`. -/
 noncomputable def qPackageProdZ (P : PosPair) : Polynomial Int :=
   qOrientZ P * qOrientZ P.swap
 
+lemma qPackageProdZ_ne_zero (P : PosPair) : qPackageProdZ P ≠ 0 := by
+  rw [qPackageProdZ]
+  exact mul_ne_zero (qOrientZ_ne_zero P) (qOrientZ_ne_zero P.swap)
+
+@[simp]
+lemma qPackageProdZ_natDegree (P : PosPair) :
+    (qPackageProdZ P).natDegree = 2 * (P.a + P.b - 2 * P.gcd) := by
+  rw [qPackageProdZ, natDegree_mul (qOrientZ_ne_zero P) (qOrientZ_ne_zero P.swap)]
+  simp
+  omega
+
+@[simp]
+lemma qPackageProdZ_leadingCoeff (P : PosPair) :
+    (qPackageProdZ P).leadingCoeff = (P.a : Int) * (P.b : Int) := by
+  rw [qPackageProdZ, leadingCoeff_mul]
+  simp [PosPair.swap]
+
+@[simp]
+lemma qPackageProdZ_swap (P : PosPair) :
+    qPackageProdZ P.swap = qPackageProdZ P := by
+  simp [qPackageProdZ, mul_comm]
+
 /-- Reciprocal package product over `ℚ[x]`. -/
 noncomputable def qPackageProdQ (P : PosPair) : Polynomial Rat :=
   (qPackageProdZ P).map (Int.castRingHom Rat)
+
+@[simp]
+lemma qPackageProdQ_swap (P : PosPair) :
+    qPackageProdQ P.swap = qPackageProdQ P := by
+  simp [qPackageProdQ]
 
 /-- A nonconstant rational polynomial factor. -/
 def NonconstantFactorQ (h : Polynomial Rat) : Prop :=

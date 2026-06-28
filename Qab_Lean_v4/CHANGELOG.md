@@ -22,5 +22,8 @@
 - Added `Qab.Polynomials.Orientation` with primitive reduction, the full
   imprimitive orientation polynomial `qOrientZ`, package products over `ℤ` and
   `ℚ`, separate concrete sharing predicates, and `qOrientZ_coeff_zero`.
+- Added orientation and package-product endpoint infrastructure: coefficient
+  transport through `Polynomial.expand`, exact `natDegree`, leading
+  coefficient, nonzero, and swap-invariance lemmas.
 - Recorded the first OpenAI background review digest in
   `docs/reviews/openai_phase1_review_20260628.md`.
