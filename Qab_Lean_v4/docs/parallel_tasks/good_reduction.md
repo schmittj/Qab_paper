@@ -74,3 +74,31 @@ OpenAI / Claude should be asked to review:
 - whether the proof should use Mathlib gcd directly or a degree-lower-bound
   formulation for modular certificates.
 
+## Implemented Contract
+
+This branch records the reusable lemmas in
+`Qab.Certificates.GoodReduction`.  The theorem family is deliberately
+project-data-free: it only mentions `h F G : Polynomial Int`, rational
+divisibility after mapping to `Rat[X]`, and reductions to an arbitrary field or
+to `ZMod p`.
+
+Chosen hypotheses:
+
+- `h.IsPrimitive`, plus `0 < h.natDegree` for the positive-degree
+  certificate corollary.
+- `h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat)` and the same for
+  `G`.
+- No primitivity or content hypothesis on `F` or `G`; the denominator-clearing
+  lemma passes through `Polynomial.primPart`, so target content is handled
+  internally.
+- For degree bounds after reduction, `(Int.castRingHom K) h.leadingCoeff ≠ 0`
+  (or `(h.leadingCoeff : ZMod p) ≠ 0`) preserves the degree of `h`.
+- For degree bounds, at least one reduced target is nonzero:
+  `reduceInt K F ≠ 0 ∨ reduceInt K G ≠ 0`.  Certificate checkers may prove
+  this from content or leading-coefficient checks, but the lemma takes the
+  Mathlib-shaped nonvanishing condition directly.
+
+The main divisibility lemma has no good-prime hypothesis: if a bad prime
+collapses the factor, divisibility of the collapsed reduction still holds.  The
+good-prime assumptions enter exactly where a modular gcd degree obstruction is
+claimed.
