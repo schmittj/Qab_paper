@@ -64,3 +64,47 @@
 - Submitted corrected OpenAI background Responses review:
   - response id: `resp_06c8c1492ced2df4006a410d462c14819da27571b1bcd31b45`;
   - uploaded bundle file id: `file-XR6yWVmTkTJSgPh4GRWwKg`.
+
+## 2026-06-28T14:09:24+02:00
+
+- Extended `Qab.Polynomials.Primitive` with the initial support and endpoint
+  facts from the phase-1 checklist:
+  - top primitive coefficient `qPrimCoeffZ_top`;
+  - coefficient vanishing above `A+B-2`;
+  - `natDegree` upper bound and exact `natDegree`;
+  - nonzero constant and top coefficients.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build`;
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Primitive`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+- Polled corrected OpenAI background response
+  `resp_06c8c1492ced2df4006a410d462c14819da27571b1bcd31b45`; status was
+  still `in_progress`.
+- Attempted to read Claude background-agent logs for `0d872b98`; the local
+  Claude daemon socket returned `ECONNREFUSED`, so the Claude review is not
+  currently recoverable from this shell session.
+
+## 2026-06-28T14:15:15+02:00
+
+- OpenAI background response
+  `resp_06c8c1492ced2df4006a410d462c14819da27571b1bcd31b45` completed.
+- Added a concise review digest at
+  `Qab_Lean_v4/docs/reviews/openai_phase1_review_20260628.md`.
+- Acted on the main structural recommendation:
+  - added `Qab.Pairs`;
+  - moved `PosPair`, `PosPair.unequal`, `PosPair.sameUnordered`, and
+    `PosPair.swap` out of `Qab.Basic`;
+  - changed `Qab.Polynomials.Primitive` to import `Qab.Pairs` instead of
+    `Qab.Basic`, avoiding a future cycle when concrete product sharing is
+    wired into `Basic.lean`.
+- Added `Qab.Polynomials.Orientation` with primitive reduction, `qOrientZ`,
+  `qOrientQ`, `qPackageProdZ`, `qPackageProdQ`, `OrientationShare`, and
+  `PackageProductShare`.
+- Proved `qOrientZ_coeff_zero`.
+- Added general coefficient lemmas `qPrimZ_coeff` and `qPrimQ_coeff`.
+- Tested the review suggestion to remove `noncomputable` from `qPrimZ` and
+  `qPrimQ`; Lean v4.31.0 rejected this because the current polynomial
+  semiring/map API is noncomputable, so the annotations were restored.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.

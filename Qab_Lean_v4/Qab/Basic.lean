@@ -1,4 +1,5 @@
 import Qab.Constants
+import Qab.Pairs
 
 namespace Qab
 
@@ -17,32 +18,6 @@ imprimitive pair must use the manuscript convention
 `Q_{a,b}(x) = g * Q_{A,B}(x^g)`.  Keep the later names separate:
 `qPrimZ`, `qOrientZ`, `qPackageProdZ`, `OrientationShare`, `PackageShare`.
 -/
-
-/-- A positive ordered pair `(a,b)`.  The mathematical package also contains
-both reciprocal orientations, so unordered equality is tracked separately. -/
-structure PosPair where
-  a : Nat
-  b : Nat
-  ha_pos : 0 < a
-  hb_pos : 0 < b
-
-namespace PosPair
-
-/-- The nontrivial package condition used in the theorem statement. -/
-def unequal (P : PosPair) : Prop := P.a ≠ P.b
-
-/-- Equality after allowing the reciprocal swap. -/
-def sameUnordered (P Q : PosPair) : Prop :=
-  (P.a = Q.a ∧ P.b = Q.b) ∨ (P.a = Q.b ∧ P.b = Q.a)
-
-/-- Swapped orientation helper, useful when the polynomial layer is opened. -/
-def swap (P : PosPair) : PosPair where
-  a := P.b
-  b := P.a
-  ha_pos := P.hb_pos
-  hb_pos := P.ha_pos
-
-end PosPair
 
 /--
 Opaque phase-0 sharing predicate.  Phase 1 should replace this by something
