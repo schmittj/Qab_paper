@@ -397,3 +397,49 @@
   - `cd Qab_Lean_v4 && lake build`;
   - `python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json`;
   - `git diff --check`.
+
+## 2026-06-28T20:11:39+02:00
+
+- Added the Phase 2 residual terminal-exclusion API:
+  - `Qab.Certificates.ResidualTerminalExclusion.NonforcedMod1009`;
+  - integer and rational divisibility theorems showing that checked residual
+    Bezout certificates force any common factor reduction to divide
+    `(X - 1)^2`;
+  - `ExcludesNonforcedRatCommonFactor`, the conditional terminal-row exclusion
+    predicate;
+  - `ResidualRows.residualTerminalExclusionSet`, packaging the exclusion for
+    all eight generated residual terminal certificates together with the
+    row-matching check.
+- Updated `docs/residual_zmod1009_checker.md` to mark the generated Bezout
+  path, rather than the dense gcd checker, as the mathematical trust boundary
+  for the current residual terminal rows.
+- Verified so far:
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.ResidualTerminalExclusion`.
+
+## 2026-06-28T20:35:15+02:00
+
+- Launched and inspected Phase 2 terminal-exclusion reviews:
+  - OpenAI response `resp_0110e26e9c0b5493006a41644b7b60819293a99474ae461ac9`;
+  - Claude receipt
+    `/tmp/qab_phase2_terminal_review/artifacts/ai_reviews/20260628_201515_claude_receipt.json`
+    from a sanitized copy with `secrets.env`, `.git`, build artifacts, and
+    local agent metadata excluded.
+- Addressed the shared review findings:
+  - split artifact-only residual row checks from the retained dense-gcd replay;
+  - added `ResidualTerminalSemanticAudit`;
+  - added `ResidualRows.excludes_of_mem_residualTerminalCertificates`;
+  - added `forcedSquare_ne_zero`, `forcedSquare_natDegree`, and
+    `nonforcedMod1009_of_natDegree_gt_two`;
+  - pinned the generated row-set theorem's `native_decide`/artifact-check
+    axiom footprint in `Qab.AxiomAudit`;
+  - included `Qab_Lean_v4/scripts/**/*.py` in future OpenAI review bundles.
+- Remaining contracts are documented as Phase 3/package-integration work:
+  primitive rational divisibility into the two collision targets,
+  `NonforcedMod1009` for the extracted factor, and global residual-state
+  coverage.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.ResidualZMod1009 Qab.Certificates.ResidualTerminalExclusion Qab.AxiomAudit`;
+  - `cd Qab_Lean_v4 && lake build`;
+  - `PYTHONPYCACHEPREFIX=/tmp/qab_pycache python3 -m py_compile Qab_Lean_v4/scripts/residual_bezout_to_lean.py tools/ai_review/openai_review.py`;
+  - `python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json`;
+  - `git diff --check`.

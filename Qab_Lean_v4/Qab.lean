@@ -9,6 +9,7 @@ import Qab.Certificates.ZModGcd
 import Qab.Certificates.CollisionBezout
 import Qab.Certificates.ResidualZMod1009
 import Qab.Certificates.ResidualBezout1009
+import Qab.Certificates.ResidualTerminalExclusion
 import Qab.Polynomials.Primitive
 import Qab.Polynomials.Orientation
 import Qab.Polynomials.Collision

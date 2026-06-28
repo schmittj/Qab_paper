@@ -16,11 +16,13 @@ The checker uses dense coefficient lists over the prime field with `1009`
 elements.  Its target constructor is the same trinomial as
 `Qab.Polynomials.Collision.collisionTriZ`, reduced modulo 1009.
 
-Current trust boundary: `denseToPoly_collisionDense_eq_collisionHMod` connects
-the executable operands to Mathlib polynomials, but this module does not yet
-prove that `polyGcd` computes Mathlib's `Polynomial.gcd`.  A later bridge should
-either prove that soundness theorem or replace the dense gcd recomputation by
-generated Bezout/cofactor certificates over `Polynomial F1009`.
+Trust boundary: `denseToPoly_collisionDense_eq_collisionHMod` connects the
+executable operands to Mathlib polynomials, but this module does not prove that
+`polyGcd` computes Mathlib's `Polynomial.gcd`.  The current semantic terminal
+path for the residual rows is instead supplied by
+`Qab.Certificates.CollisionBezout` and
+`Qab.Certificates.ResidualTerminalExclusion`, which check generated Bezout
+identities over the mapped collision polynomials.
 -/
 
 /-- The Phase 2 residual checker currently uses the prime 1009. -/

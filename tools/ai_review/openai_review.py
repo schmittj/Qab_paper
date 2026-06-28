@@ -50,6 +50,7 @@ DEFAULT_FILE_GLOBS = [
     "Qab_Lean_v4/README.md",
     "Qab_Lean_v4/CODEX_START_HERE.md",
     "Qab_Lean_v4/CHANGELOG.md",
+    "Qab_Lean_v4/scripts/**/*.py",
     "Qab_Lean_v4/docs/**/*.md",
     "Qab_Lean_v4/docs/**/*.tex",
     "Qab_Lean_v4/docs/**/*.pdf",

@@ -72,3 +72,13 @@
   `scripts/residual_bezout_to_lean.py`; the generated module checks Bezout
   identities for all eight current residual terminal rows and matches them
   against the typed residual CSV rows.
+- Added `Qab.Certificates.ResidualTerminalExclusion`, the Phase 2
+  terminal-exclusion API: primitive rational common factors of a checked
+  residual collision pair reduce modulo `1009` to divisors of `(X - 1)^2`,
+  so every factor satisfying the conditional `NonforcedMod1009` predicate is
+  excluded for all eight generated residual terminal rows.
+- Refined the terminal-exclusion API after review:
+  split residual artifact-only row checks from the retained dense-gcd replay
+  check, added a list-membership exclusion theorem and artifact-only semantic
+  audit theorem, added `nonforcedMod1009_of_natDegree_gt_two`, and pinned the
+  generated row-set theorem's `native_decide` footprint in `Qab.AxiomAudit`.

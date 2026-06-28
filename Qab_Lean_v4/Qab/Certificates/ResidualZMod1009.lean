@@ -161,8 +161,25 @@ def listedCountsMatchManifest : Bool :=
 def allRowsCheck : Bool :=
   residualCertificateRows.all fun row => row.checks residualPairs
 
+def allRowsArtifactConsistent : Bool :=
+  residualCertificateRows.all fun row => row.artifactConsistent residualPairs
+
+def allRowsDenseGcdCheck : Bool :=
+  residualCertificateRows.all fun row => row.toCollisionCertificate.checks
+
 /-- All residual `ZMod 1009` certificate rows pass the executable checker. -/
 theorem allRowsCheck_eq_true : allRowsCheck = true := by
+  native_decide
+
+/--
+All residual rows pass the artifact-only checks needed by the semantic Bezout
+terminal-exclusion path.
+-/
+theorem allRowsArtifactConsistent_eq_true : allRowsArtifactConsistent = true := by
+  native_decide
+
+/-- All residual rows pass the retained dense-gcd replay checker. -/
+theorem allRowsDenseGcdCheck_eq_true : allRowsDenseGcdCheck = true := by
   native_decide
 
 /-- The typed residual rows cover every listed pair/orientation task exactly once. -/
@@ -180,6 +197,18 @@ theorem residualZMod1009CertificateSetChecks :
       listedPairOrientationCoverageComplete = true ∧
       listedCountsMatchManifest = true := by
   exact ⟨allRowsCheck_eq_true, listedPairOrientationCoverageComplete_eq_true,
+    listedCountsMatchManifest_eq_true⟩
+
+/--
+Artifact-only audit theorem for the semantic terminal-exclusion path.  The
+dense-gcd replay remains available separately as `allRowsDenseGcdCheck_eq_true`.
+-/
+theorem residualRowsArtifactSetChecks :
+    allRowsArtifactConsistent = true ∧
+      listedPairOrientationCoverageComplete = true ∧
+      listedCountsMatchManifest = true := by
+  exact ⟨allRowsArtifactConsistent_eq_true,
+    listedPairOrientationCoverageComplete_eq_true,
     listedCountsMatchManifest_eq_true⟩
 
 end Certificates.ResidualZMod1009

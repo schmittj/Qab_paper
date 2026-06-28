@@ -1,9 +1,13 @@
 # Residual ZMod 1009 Checker
 
-This branch adds the first Phase 2 residual modular-gcd checker:
+This branch adds the first Phase 2 residual modular-gcd checker and its
+semantic terminal-exclusion bridge:
 
 - `Qab.Certificates.ZModGcd`
 - `Qab.Certificates.ResidualZMod1009`
+- `Qab.Certificates.CollisionBezout`
+- `Qab.Certificates.ResidualBezout1009`
+- `Qab.Certificates.ResidualTerminalExclusion`
 
 `Qab.Certificates.Targets` contains the shared `PolynomialCheckTarget` enum, so
 the concrete checker does not import the schematic certificate axioms from
@@ -76,18 +80,54 @@ once.  `ResidualZMod1009.listedCountsMatchManifest_eq_true` records the current
 manifest-level counts: two listed residual orientation pairs and eight listed
 orientation certificates.
 
+## Semantic Bezout Bridge
+
+The executable dense gcd checker is retained as a useful audit/replay path, but
+the mathematical terminal-exclusion path now uses generated Bezout identities.
+`Qab.Certificates.CollisionBezout` proves a dense-arithmetic kernel sound
+against Mathlib polynomials: a checked identity
+
+```text
+u * collisionH₁ + v * collisionH₂ = (X - 1)^2
+```
+
+implies that every common divisor of the two mapped collision trinomials
+divides the forced double root.  `Qab.Certificates.ResidualBezout1009` contains
+the generated witnesses for the eight current residual terminal rows and checks
+them by `native_decide`; it is regenerated from the CSV artifact by
+`Qab_Lean_v4/scripts/residual_bezout_to_lean.py`.
+
+`Qab.Certificates.ResidualTerminalExclusion` is the Phase 2 theorem layer.  It
+defines the conditional predicate
+
+```text
+NonforcedMod1009 h := ¬ reduceZMod 1009 h ∣ (X - 1)^2
+```
+
+for primitive integer representatives of rational factors.  Using
+`GoodReduction.int_dvd_of_rat_dvd`, it proves that any primitive rational common
+factor of a checked residual collision pair reduces modulo `1009` to a divisor
+of `(X - 1)^2`; hence every factor satisfying `NonforcedMod1009` is excluded.
+The theorem `ResidualRows.residualTerminalExclusionSet` packages this exclusion
+for all eight generated residual certificates and records that they match the
+typed residual rows.
+
 ## Scaling Notes
 
-This is intentionally a first useful executable Lean certificate, not the final
-large-scale format and not yet a proved `Polynomial.gcd` theorem.  The dense
-Euclidean checker is simple and transparent, and its input target is now proved
-to denote the mapped `collisionTriZ`; the Euclidean algorithm itself remains a
-small bespoke executable checker.
+The dense Euclidean checker is intentionally still present because it mirrors
+the original verifier and is useful for row auditing.  It is no longer the
+mathematical trust boundary for the current eight residual terminal rows; the
+semantic path is the generated Bezout identity plus
+`ResidualTerminalExclusion`.
 
-Named remaining contract: before these rows are used as a mathematical terminal
-exclusion, the project must either prove that the dense `polyGcd` degree agrees
-with the corresponding Mathlib `Polynomial.gcd` degree, or replace this dense
-gcd recomputation by generated Euclidean/Bezout certificates over
-`Polynomial (ZMod 1009)` whose identities are checked directly.  The latter is
-currently the preferred path because it also reduces reliance on
-`native_decide`.
+The remaining contracts now sit outside Phase 2 terminal certificates:
+
+- later package/orientation integration must produce a primitive integer
+  representative `h` of the rational common factor and prove divisibility of
+  `h.map ℚ` into both relevant `collisionTriZ` targets;
+- the same integration layer must prove `NonforcedMod1009 h` for that factor
+  (for example via the degree helper
+  `nonforcedMod1009_of_natDegree_gt_two`, or a later low-degree forced-factor
+  classifier);
+- Phase 3 residual-state coverage must prove that every residual counterexample
+  reaches one of the terminal rows.
