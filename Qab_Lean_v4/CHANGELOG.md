@@ -36,3 +36,7 @@
   return budget unlimited by default for long review/guidance runs.
 - Proved the primitive closed-form identity
   `qPrimZ_mul_X_sub_one_sq`, clearing the double root at `1`.
+- Added the named primitive trinomial numerator `qNumeratorZ`, with endpoint,
+  degree, leading-coefficient, evaluation, and derivative-evaluation lemmas.
+- Proved the imprimitive orientation closed form `qOrientZ_closed_form` as
+  `C (gcd a b) * expand (gcd a b) (qNumeratorZ primitivePart)`.

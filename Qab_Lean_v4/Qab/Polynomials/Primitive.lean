@@ -1,5 +1,6 @@
 import Mathlib.Algebra.Polynomial.Coeff
 import Mathlib.Algebra.Polynomial.Degree.Lemmas
+import Mathlib.Algebra.Polynomial.Derivative
 import Qab.Pairs
 
 namespace Qab
@@ -200,6 +201,74 @@ lemma qPrimQ_coeff (P : PosPair) (j : Nat) :
     (qPrimQ P).coeff j = (qPrimCoeffZ P j : Rat) := by
   simp [qPrimQ, qPrimZ_coeff]
 
+/--
+The trinomial numerator obtained from the primitive orientation polynomial
+after clearing the double root at `1`.
+-/
+noncomputable def qNumeratorZ (P : PosPair) : Polynomial Int :=
+  Polynomial.C (P.a : Int) * Polynomial.X ^ (P.a + P.b) -
+    Polynomial.C (((P.a + P.b : Nat) : Int)) * Polynomial.X ^ P.a +
+    Polynomial.C (P.b : Int)
+
+@[simp]
+lemma qNumeratorZ_coeff_zero (P : PosPair) :
+    (qNumeratorZ P).coeff 0 = (P.b : Int) := by
+  have hA : 0 ≠ P.a := (Nat.ne_of_gt P.ha_pos).symm
+  have hTop : 0 ≠ P.a + P.b := (Nat.ne_of_gt (Nat.add_pos_left P.ha_pos P.b)).symm
+  rw [qNumeratorZ, coeff_add, coeff_sub, coeff_C_mul_X_pow,
+    coeff_C_mul_X_pow, coeff_C]
+  simp [hA, hTop]
+
+@[simp]
+lemma qNumeratorZ_coeff_top (P : PosPair) :
+    (qNumeratorZ P).coeff (P.a + P.b) = (P.a : Int) := by
+  have hA : P.a ≠ 0 := Nat.ne_of_gt P.ha_pos
+  have hB : P.b ≠ 0 := Nat.ne_of_gt P.hb_pos
+  rw [qNumeratorZ, coeff_add, coeff_sub, coeff_C_mul_X_pow,
+    coeff_C_mul_X_pow, coeff_C]
+  simp [hA, hB]
+
+lemma qNumeratorZ_natDegree_le (P : PosPair) :
+    (qNumeratorZ P).natDegree ≤ P.a + P.b := by
+  rw [natDegree_le_iff_coeff_eq_zero]
+  intro j hj
+  have hTop : j ≠ P.a + P.b := by omega
+  have hMid : j ≠ P.a := by omega
+  have hZero : j ≠ 0 := by omega
+  rw [qNumeratorZ, coeff_add, coeff_sub, coeff_C_mul_X_pow,
+    coeff_C_mul_X_pow, coeff_C]
+  simp [hTop, hMid, hZero]
+
+lemma qNumeratorZ_coeff_top_ne_zero (P : PosPair) :
+    (qNumeratorZ P).coeff (P.a + P.b) ≠ 0 := by
+  rw [qNumeratorZ_coeff_top]
+  exact_mod_cast (Nat.ne_of_gt P.ha_pos)
+
+@[simp]
+lemma qNumeratorZ_natDegree (P : PosPair) :
+    (qNumeratorZ P).natDegree = P.a + P.b := by
+  exact natDegree_eq_of_le_of_coeff_ne_zero
+    (qNumeratorZ_natDegree_le P) (qNumeratorZ_coeff_top_ne_zero P)
+
+@[simp]
+lemma qNumeratorZ_leadingCoeff (P : PosPair) :
+    (qNumeratorZ P).leadingCoeff = (P.a : Int) := by
+  rw [leadingCoeff, qNumeratorZ_natDegree, qNumeratorZ_coeff_top]
+
+@[simp]
+lemma qNumeratorZ_eval_one (P : PosPair) :
+    Polynomial.eval (1 : Int) (qNumeratorZ P) = 0 := by
+  simp [qNumeratorZ, Nat.cast_add]
+
+@[simp]
+lemma qNumeratorZ_derivative_eval_one (P : PosPair) :
+    Polynomial.eval (1 : Int) (Polynomial.derivative (qNumeratorZ P)) = 0 := by
+  simp only [qNumeratorZ, derivative_add, derivative_sub, derivative_C_mul_X_pow,
+    derivative_C, eval_add, eval_sub, eval_mul, eval_C, eval_X_pow, one_pow,
+    mul_one, eval_zero]
+  norm_num [Nat.cast_add]
+  ring
+
 /-
 Triangular-sum helpers for the closed form of the primitive orientation
 polynomial.  They are kept private because the exported object is the final
@@ -370,5 +439,11 @@ lemma qPrimZ_mul_X_sub_one_sq (P : PosPair) :
             rw [hBpred, hBpredCast]
             norm_num [Nat.cast_add, Nat.cast_one]
             ring_nf
+
+/-- Closed form for the primitive orientation polynomial using the named
+trinomial numerator. -/
+lemma qPrimZ_closed_form (P : PosPair) :
+    ((Polynomial.X - 1 : Polynomial Int) ^ 2) * qPrimZ P = qNumeratorZ P := by
+  simpa [qNumeratorZ] using qPrimZ_mul_X_sub_one_sq P
 
 end Qab

@@ -43,6 +43,10 @@ lemma primitivePart_a_mul_gcd (P : PosPair) : P.primitivePart.a * P.gcd = P.a :=
 lemma primitivePart_b_mul_gcd (P : PosPair) : P.primitivePart.b * P.gcd = P.b := by
   simpa [primitivePart, gcd] using Nat.div_mul_cancel (Nat.gcd_dvd_right P.a P.b)
 
+lemma primitivePart_sum_mul_gcd (P : PosPair) :
+    (P.primitivePart.a + P.primitivePart.b) * P.gcd = P.a + P.b := by
+  rw [Nat.add_mul, P.primitivePart_a_mul_gcd, P.primitivePart_b_mul_gcd]
+
 lemma gcd_mul_primitivePart_a (P : PosPair) : P.gcd * P.primitivePart.a = P.a := by
   rw [Nat.mul_comm]
   exact P.primitivePart_a_mul_gcd
@@ -50,6 +54,10 @@ lemma gcd_mul_primitivePart_a (P : PosPair) : P.gcd * P.primitivePart.a = P.a :=
 lemma gcd_mul_primitivePart_b (P : PosPair) : P.gcd * P.primitivePart.b = P.b := by
   rw [Nat.mul_comm]
   exact P.primitivePart_b_mul_gcd
+
+lemma gcd_mul_primitivePart_sum (P : PosPair) :
+    P.gcd * (P.primitivePart.a + P.primitivePart.b) = P.a + P.b := by
+  rw [Nat.mul_comm, P.primitivePart_sum_mul_gcd]
 
 lemma primitivePart_degree_mul_gcd (P : PosPair) :
     (P.primitivePart.a + P.primitivePart.b - 2) * P.gcd =
@@ -71,6 +79,18 @@ composition with `x ↦ x^g`.
 -/
 noncomputable def qOrientZ (P : PosPair) : Polynomial Int :=
   Polynomial.C (P.gcd : Int) * Polynomial.expand Int P.gcd (qPrimZ P.primitivePart)
+
+/--
+Closed form for the full orientation polynomial after clearing the
+imprimitive double root at every `gcd a b`-th root of unity.
+-/
+lemma qOrientZ_closed_form (P : PosPair) :
+    ((Polynomial.X ^ P.gcd - 1 : Polynomial Int) ^ 2) * qOrientZ P =
+      Polynomial.C (P.gcd : Int) *
+        Polynomial.expand Int P.gcd (qNumeratorZ P.primitivePart) := by
+  rw [qOrientZ, ← qPrimZ_closed_form P.primitivePart]
+  simp only [map_mul, map_pow, map_sub, expand_X, map_one]
+  ring
 
 @[simp]
 lemma qOrientZ_coeff_zero (P : PosPair) :

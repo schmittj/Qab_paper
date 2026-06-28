@@ -239,3 +239,14 @@
 - Main conclusion before the next implementation step: keep the current
   triangular-sum proof, name the numerator/trinomial, build the imprimitive
   `qOrientZ` identity next, and defer concretizing `PackageShare`.
+
+## 2026-06-28T15:29:58+02:00
+
+- Added the named primitive numerator trinomial `qNumeratorZ`.
+- Proved numerator endpoint facts, exact `natDegree`, leading coefficient,
+  evaluation at `1`, and derivative evaluation at `1`.
+- Added primitive-part sum transport lemmas through `gcd a b`.
+- Proved `qOrientZ_closed_form`:
+  `((X ^ gcd a b - 1)^2) * qOrientZ P =
+  C (gcd a b) * expand (gcd a b) (qNumeratorZ P.primitivePart)`.
+- Verified `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`.
