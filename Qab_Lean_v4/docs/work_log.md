@@ -289,3 +289,28 @@
 - Verified `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
 - Rebuilt `Qab_Lean_v4/docs/Qab_core_v4.pdf` with
   `cd Qab_Lean_v4/docs && latexmk -pdf Qab_core_v4.tex`.
+
+## 2026-06-28T16:08:51+02:00
+
+- Hardened the Phase 1 polynomial API:
+  - proved `qPrimZ_isPrimitive` and `qPrimZ_content_eq_one` for primitive
+    positive pairs;
+  - exported primitive-part versions for `qPrimZ P.primitivePart`;
+  - named the imprimitive numerator `qOrientNumeratorZ` and its rational image
+    `qOrientNumeratorQ`;
+  - proved explicit divisibility of the orientation numerator by
+    `(X ^ gcd a b - 1)^2` over both `ℤ[x]` and `ℚ[x]`.
+- Added nonzero facts for `qOrientQ`, `qPackageProdQ`, and their gcds.
+- Added gcd/coprimality interfaces:
+  - `OrientationShare_iff_gcd_natDegree_pos`;
+  - `OrientationShare_iff_not_isCoprime`;
+  - `PackageProductShare_iff_gcd_natDegree_pos`;
+  - `PackageProductShare_iff_not_isCoprime`;
+  - `PackageShare_iff_gcd_natDegree_pos`;
+  - `PackageShare_iff_not_isCoprime`.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Primitive`;
+  - `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`;
+  - `cd Qab_Lean_v4 && lake build Qab.Basic`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`;
+  - `cd Qab_Lean_v4 && lake build`.

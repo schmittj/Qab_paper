@@ -38,6 +38,14 @@ lemma PackageShare_iff_reciprocalOrientationShare (P Q : PosPair) :
     PackageShare P Q ↔ ReciprocalOrientationShare P Q := by
   simpa [PackageShare] using packageProductShare_iff_reciprocalOrientationShare P Q
 
+lemma PackageShare_iff_gcd_natDegree_pos (P Q : PosPair) :
+    PackageShare P Q ↔ 0 < (packageGcdQ P Q).natDegree := by
+  simpa [PackageShare] using PackageProductShare_iff_gcd_natDegree_pos P Q
+
+lemma PackageShare_iff_not_isCoprime (P Q : PosPair) :
+    PackageShare P Q ↔ ¬ IsCoprime (qPackageProdQ P) (qPackageProdQ Q) := by
+  simpa [PackageShare] using PackageProductShare_iff_not_isCoprime P Q
+
 lemma PackageShare_comm (P Q : PosPair) :
     PackageShare P Q ↔ PackageShare Q P := by
   simpa [PackageShare] using PackageProductShare_comm P Q

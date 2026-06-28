@@ -1,6 +1,8 @@
 import Mathlib.Algebra.Polynomial.Coeff
 import Mathlib.Algebra.Polynomial.Degree.Lemmas
 import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Data.Int.Order.Units
+import Mathlib.RingTheory.Polynomial.Content
 import Qab.Pairs
 
 namespace Qab
@@ -190,6 +192,25 @@ lemma qPrimZ_natDegree (P : PosPair) :
 lemma qPrimZ_leadingCoeff (P : PosPair) :
     (qPrimZ P).leadingCoeff = (P.a : Int) := by
   rw [leadingCoeff, qPrimZ_natDegree, qPrimZ_coeff_top]
+
+lemma qPrimZ_isPrimitive (P : PosPair) (hP : P.Primitive) :
+    (qPrimZ P).IsPrimitive := by
+  rw [Polynomial.isPrimitive_iff_isUnit_of_C_dvd]
+  intro r hr
+  rw [Polynomial.C_dvd_iff_dvd_coeff] at hr
+  have hrb : r ∣ (P.b : Int) := by
+    simpa using hr 0
+  have hra : r ∣ (P.a : Int) := by
+    simpa using hr (P.a + P.b - 2)
+  have hrNatB : r.natAbs ∣ P.b := Int.dvd_natCast.mp hrb
+  have hrNatA : r.natAbs ∣ P.a := Int.dvd_natCast.mp hra
+  have hnat : r.natAbs = 1 :=
+    Nat.eq_one_of_dvd_coprimes hP hrNatA hrNatB
+  exact Int.isUnit_iff_natAbs_eq.mpr hnat
+
+lemma qPrimZ_content_eq_one (P : PosPair) (hP : P.Primitive) :
+    (qPrimZ P).content = 1 :=
+  (qPrimZ_isPrimitive P hP).content_eq_one
 
 /-- Primitive orientation polynomial mapped to `ℚ[x]`. -/
 noncomputable def qPrimQ (P : PosPair) : Polynomial Rat :=
