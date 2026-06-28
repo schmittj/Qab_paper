@@ -40,3 +40,8 @@
   degree, leading-coefficient, evaluation, and derivative-evaluation lemmas.
 - Proved the imprimitive orientation closed form `qOrientZ_closed_form` as
   `C (gcd a b) * expand (gcd a b) (qNumeratorZ primitivePart)`.
+- Added the product-sharing comparison API:
+  `qPackageProdQ_eq_orient_mul`, orientation-factor divisibility into package
+  products, `OrientationShare.toPackageProductShare`,
+  `ReciprocalOrientationShare`, and
+  `packageProductShare_iff_reciprocalOrientationShare`.

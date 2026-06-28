@@ -250,3 +250,22 @@
   `((X ^ gcd a b - 1)^2) * qOrientZ P =
   C (gcd a b) * expand (gcd a b) (qNumeratorZ P.primitivePart)`.
 - Verified `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`.
+
+## 2026-06-28T15:40:41+02:00
+
+- Extended the product-sharing API without changing the opaque theorem-boundary
+  `PackageShare`.
+- Proved the rational package product expansion
+  `qPackageProdQ P = qOrientQ P * qOrientQ P.swap`.
+- Proved both orientation factors divide the package product and that
+  `OrientationShare P Q` implies `PackageProductShare P Q`.
+- Added `ReciprocalOrientationShare P Q`, covering the four reciprocal
+  orientation choices.
+- Proved `PackageProductShare.toReciprocalOrientationShare` by replacing a
+  reducible product-level common factor with an irreducible factor and using
+  primality to split divisibility across the package-product factors.
+- Proved the comparison theorem
+  `packageProductShare_iff_reciprocalOrientationShare`.
+- Verified `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`.
+- Verified `cd Qab_Lean_v4 && lake build`.
+- Verified `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.

@@ -1,4 +1,6 @@
 import Mathlib.Algebra.Polynomial.Expand
+import Mathlib.Algebra.Polynomial.FieldDivision
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Qab.Polynomials.Primitive
 
 namespace Qab
@@ -197,6 +199,20 @@ lemma qPackageProdZ_swap (P : PosPair) :
 noncomputable def qPackageProdQ (P : PosPair) : Polynomial Rat :=
   (qPackageProdZ P).map (Int.castRingHom Rat)
 
+lemma qPackageProdQ_eq_orient_mul (P : PosPair) :
+    qPackageProdQ P = qOrientQ P * qOrientQ P.swap := by
+  simp [qPackageProdQ, qPackageProdZ, qOrientQ]
+
+lemma qOrientQ_dvd_qPackageProdQ (P : PosPair) :
+    qOrientQ P ∣ qPackageProdQ P := by
+  rw [qPackageProdQ_eq_orient_mul]
+  exact ⟨qOrientQ P.swap, rfl⟩
+
+lemma qOrientQ_swap_dvd_qPackageProdQ (P : PosPair) :
+    qOrientQ P.swap ∣ qPackageProdQ P := by
+  rw [qPackageProdQ_eq_orient_mul]
+  exact ⟨qOrientQ P, by rw [mul_comm]⟩
+
 @[simp]
 lemma qPackageProdQ_swap (P : PosPair) :
     qPackageProdQ P.swap = qPackageProdQ P := by
@@ -210,12 +226,26 @@ def NonconstantFactorQ (h : Polynomial Rat) : Prop :=
 def OrientationShare (P Q : PosPair) : Prop :=
   ∃ h : Polynomial Rat, NonconstantFactorQ h ∧ h ∣ qOrientQ P ∧ h ∣ qOrientQ Q
 
+lemma OrientationShare_comm (P Q : PosPair) :
+    OrientationShare P Q ↔ OrientationShare Q P := by
+  constructor
+  · rintro ⟨h, hnc, hP, hQ⟩
+    exact ⟨h, hnc, hQ, hP⟩
+  · rintro ⟨h, hnc, hQ, hP⟩
+    exact ⟨h, hnc, hP, hQ⟩
+
 /--
 Concrete product-level sharing predicate for the eventual replacement of the
 opaque phase-0 `PackageShare`.
 -/
 def PackageProductShare (P Q : PosPair) : Prop :=
   ∃ h : Polynomial Rat, NonconstantFactorQ h ∧ h ∣ qPackageProdQ P ∧ h ∣ qPackageProdQ Q
+
+lemma OrientationShare.toPackageProductShare {P Q : PosPair}
+    (hPQ : OrientationShare P Q) : PackageProductShare P Q := by
+  rcases hPQ with ⟨h, hnc, hP, hQ⟩
+  exact ⟨h, hnc, dvd_trans hP (qOrientQ_dvd_qPackageProdQ P),
+    dvd_trans hQ (qOrientQ_dvd_qPackageProdQ Q)⟩
 
 lemma PackageProductShare_comm (P Q : PosPair) :
     PackageProductShare P Q ↔ PackageProductShare Q P := by
@@ -234,5 +264,47 @@ lemma PackageProductShare_swap_left (P Q : PosPair) :
 lemma PackageProductShare_swap_right (P Q : PosPair) :
     PackageProductShare P Q.swap ↔ PackageProductShare P Q := by
   simp [PackageProductShare]
+
+/--
+Product-level sharing decomposes through one of the four reciprocal
+orientation choices.  This is the comparison theorem that keeps reducible
+common factors honest: the product-level witness is first replaced by an
+irreducible factor, then primality splits divisibility across the two product
+factors.
+-/
+def ReciprocalOrientationShare (P Q : PosPair) : Prop :=
+  OrientationShare P Q ∨ OrientationShare P.swap Q ∨
+    OrientationShare P Q.swap ∨ OrientationShare P.swap Q.swap
+
+lemma ReciprocalOrientationShare.toPackageProductShare {P Q : PosPair}
+    (hPQ : ReciprocalOrientationShare P Q) : PackageProductShare P Q := by
+  rcases hPQ with hPQ | hPQ | hPQ | hPQ
+  · exact hPQ.toPackageProductShare
+  · simpa using hPQ.toPackageProductShare
+  · simpa using hPQ.toPackageProductShare
+  · simpa using hPQ.toPackageProductShare
+
+lemma PackageProductShare.toReciprocalOrientationShare {P Q : PosPair}
+    (hPQ : PackageProductShare P Q) : ReciprocalOrientationShare P Q := by
+  rcases hPQ with ⟨h, hnc, hPprod, hQprod⟩
+  obtain ⟨r, hrIrred, hrh⟩ := Polynomial.exists_irreducible_of_natDegree_pos
+    (f := h) hnc
+  have hrNc : NonconstantFactorQ r := hrIrred.natDegree_pos
+  have hrPrime : Prime r := UniqueFactorizationMonoid.irreducible_iff_prime.mp hrIrred
+  have hrPprod : r ∣ qPackageProdQ P := dvd_trans hrh hPprod
+  have hrQprod : r ∣ qPackageProdQ Q := dvd_trans hrh hQprod
+  rw [qPackageProdQ_eq_orient_mul] at hrPprod hrQprod
+  rcases hrPrime.dvd_or_dvd hrPprod with hP | hPswap
+  · rcases hrPrime.dvd_or_dvd hrQprod with hQ | hQswap
+    · exact Or.inl ⟨r, hrNc, hP, hQ⟩
+    · exact Or.inr (Or.inr (Or.inl ⟨r, hrNc, hP, hQswap⟩))
+  · rcases hrPrime.dvd_or_dvd hrQprod with hQ | hQswap
+    · exact Or.inr (Or.inl ⟨r, hrNc, hPswap, hQ⟩)
+    · exact Or.inr (Or.inr (Or.inr ⟨r, hrNc, hPswap, hQswap⟩))
+
+lemma packageProductShare_iff_reciprocalOrientationShare (P Q : PosPair) :
+    PackageProductShare P Q ↔ ReciprocalOrientationShare P Q := by
+  exact ⟨PackageProductShare.toReciprocalOrientationShare,
+    ReciprocalOrientationShare.toPackageProductShare⟩
 
 end Qab
