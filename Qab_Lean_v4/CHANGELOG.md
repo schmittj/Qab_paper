@@ -64,3 +64,11 @@
   executable gcd degree must be connected to Mathlib `Polynomial.gcd`, or
   replaced by generated Euclidean/Bezout certificates, before the residual rows
   can serve as mathematical terminal exclusions.
+- Added `Qab.Certificates.CollisionBezout`, a semantic dense-arithmetic
+  Bezout checker proving that a checked identity
+  `uF + vG = (X - 1)^2` over `ZMod 1009` forces every common divisor of the
+  two mapped collision polynomials to divide the forced double root.
+- Added `Qab.Certificates.ResidualBezout1009` and the generator
+  `scripts/residual_bezout_to_lean.py`; the generated module checks Bezout
+  identities for all eight current residual terminal rows and matches them
+  against the typed residual CSV rows.

@@ -6,7 +6,9 @@ import Qab.Certificates.Interfaces
 import Qab.Certificates.Coverage
 import Qab.Certificates.GoodReduction
 import Qab.Certificates.ZModGcd
+import Qab.Certificates.CollisionBezout
 import Qab.Certificates.ResidualZMod1009
+import Qab.Certificates.ResidualBezout1009
 import Qab.Polynomials.Primitive
 import Qab.Polynomials.Orientation
 import Qab.Polynomials.Collision

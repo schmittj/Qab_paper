@@ -375,3 +375,25 @@
   - `cd Qab_Lean_v4 && lake build Qab.Certificates.ZModGcd Qab.Certificates.ResidualZMod1009`;
   - `cd Qab_Lean_v4 && lake build`;
   - `git diff --check`.
+
+## 2026-06-28T19:58:53+02:00
+
+- Added semantic residual Bezout certificates for Phase 2:
+  - `Qab.Certificates.CollisionBezout` defines the dense add/scale/shift
+    checker, proves its Mathlib polynomial soundness, and proves that a
+    checked identity `uF + vG = (X - 1)^2` makes every common divisor divide
+    the forced double root;
+  - `Qab_Lean_v4/scripts/residual_bezout_to_lean.py` recomputes the
+    `ZMod 1009` Euclidean witnesses from
+    `data/qab12/one_nonunit_residual_modular_certificates.csv`;
+  - `Qab.Certificates.ResidualBezout1009` contains the generated witnesses for
+    all eight residual terminal rows, row-matching checks against
+    `ResidualZMod1009`, and per-row `native_decide` proofs.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.CollisionBezout`;
+  - `PYTHONPYCACHEPREFIX=/tmp/qab_pycache python3 -m py_compile Qab_Lean_v4/scripts/residual_bezout_to_lean.py`;
+  - `python3 Qab_Lean_v4/scripts/residual_bezout_to_lean.py`;
+  - `cd Qab_Lean_v4 && lake build Qab.Certificates.CollisionBezout Qab.Certificates.ResidualBezout1009`;
+  - `cd Qab_Lean_v4 && lake build`;
+  - `python3 code/qab12/verify_one_nonunit_residual.py --check-manifest data/qab12/one_nonunit_residual_manifest.json`;
+  - `git diff --check`.
