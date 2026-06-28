@@ -35,10 +35,16 @@ Defaults:
 - reasoning effort: `xhigh`
 - `background: true`
 - tools: `web_search` and `code_interpreter`
+- output token budget: no `max_output_tokens` cap is sent
+- web-search return budget: `unlimited`
 - file handling: upload the generated zip with purpose `user_data` and mount it
   in the code-interpreter container.  The Responses API does not accept `.zip`
   files as direct context-stuffing `input_file` items, so the model is asked to
   inspect the mounted archive with Python.
+
+Do not add a response-token cap for substantive Lean reviews.  A previous
+focused request with `max_output_tokens=12000` ended as `incomplete` before
+returning usable guidance.
 
 Useful environment overrides:
 

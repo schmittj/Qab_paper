@@ -32,3 +32,5 @@
 - Fixed and documented the Claude review helper: stdin prompts, self-managed
   background reviews, polling/cancellation receipts, and captured review
   artifacts.
+- Removed OpenAI review response-token caps from the helper and made web-search
+  return budget unlimited by default for long review/guidance runs.

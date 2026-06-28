@@ -85,6 +85,9 @@ Mathlib version is changed, update `lean-toolchain`, `lakefile.lean`, and
 
 To solicit a fresh-perspective review or a targeted question from another model,
 use the helpers in `tools/ai_review/` (see `tools/ai_review/README.md`).
+OpenAI review calls should be launched without a `max_output_tokens` cap; the
+helper deliberately omits that field and uses unlimited web-search return
+budget so long reviews can finish with usable output.
 
 For a Claude review, prefer the background + poll flow so you can keep working:
 

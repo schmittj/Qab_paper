@@ -312,9 +312,8 @@ def submit(args: argparse.Namespace) -> int:
         web_tool: dict[str, Any] = {
             "type": "web_search",
             "search_context_size": args.search_context_size,
+            "return_token_budget": "unlimited",
         }
-        if args.unlimited_web:
-            web_tool["return_token_budget"] = "unlimited"
         tools.append(web_tool)
         include.append("web_search_call.action.sources")
     if not args.no_code_interpreter:
@@ -361,9 +360,6 @@ def submit(args: argparse.Namespace) -> int:
         payload["tool_choice"] = "auto"
     if include:
         payload["include"] = include
-    if args.max_output_tokens:
-        payload["max_output_tokens"] = args.max_output_tokens
-
     response = openai_json_request(api_key, "POST", "/responses", payload)
     stamp = time.strftime("%Y%m%d_%H%M%S")
     result_path = ARTIFACT_DIR / f"{stamp}_openai_response.json"
@@ -421,10 +417,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--foreground", action="store_true", help="set background=false")
     parser.add_argument("--no-web-search", action="store_true")
     parser.add_argument("--no-code-interpreter", action="store_true")
-    parser.add_argument("--unlimited-web", action="store_true", help="set web_search return_token_budget=unlimited")
+    parser.add_argument(
+        "--unlimited-web",
+        action="store_true",
+        help="deprecated no-op; web_search return_token_budget is always unlimited",
+    )
     parser.add_argument("--search-context-size", default="high", choices=["low", "medium", "high"])
     parser.add_argument("--container-memory", default="4g", choices=["1g", "4g", "16g", "64g"])
-    parser.add_argument("--max-output-tokens", type=int)
     parser.add_argument("--poll", metavar="RESPONSE_ID", help="retrieve an existing response")
     parser.add_argument("--cancel", metavar="RESPONSE_ID", help="cancel an existing background response")
     return parser.parse_args()

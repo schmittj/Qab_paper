@@ -161,3 +161,14 @@
     `artifacts/ai_reviews/20260628_144748_claude_receipt.json`.
 - The helper now supports stdin prompts, self-managed background workers,
   `--poll`, `--cancel`, and review capture under `artifacts/ai_reviews/`.
+
+## 2026-06-28T14:57:50+02:00
+
+- Tightened the OpenAI review helper after the focused primitive-identity
+  request returned `status: incomplete` with
+  `incomplete_details.reason = "max_output_tokens"`.
+- Removed the `max_output_tokens` request field from
+  `tools/ai_review/openai_review.py`; substantive review calls are now
+  uncapped by this helper.
+- Made the web-search tool request `return_token_budget = "unlimited"` by
+  default and documented this in `AGENTS.md` and `tools/ai_review/README.md`.
