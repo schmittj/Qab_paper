@@ -3,6 +3,7 @@ import Qab.CoreProof
 import Qab.Certificates.Targets
 import Qab.Certificates.Interfaces
 import Qab.Certificates.Coverage
+import Qab.Certificates.GoodReduction
 import Qab.Certificates.ZModGcd
 import Qab.Certificates.ResidualZMod1009
 import Qab.Polynomials.Primitive
