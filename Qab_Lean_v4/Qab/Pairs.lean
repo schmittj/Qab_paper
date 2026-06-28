@@ -4,8 +4,8 @@ namespace Qab
 Pair-level package objects.
 
 These definitions are kept below `Qab.Basic` in the import graph so the
-polynomial layer can use positive pairs without depending on the temporary
-opaque `PackageShare` predicate.
+polynomial layer can use positive pairs without depending on the package-level
+theorem statement.
 -/
 
 /-- A positive ordered pair `(a,b)`.  The mathematical package also contains

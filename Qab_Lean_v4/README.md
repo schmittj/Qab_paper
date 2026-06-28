@@ -60,7 +60,10 @@ The canonical design document is `docs/Qab_Lean_Roadmap_v4.md`. The reviewer-fac
 
 ## Phase-1 polynomial semantics
 
-Do **not** replace `PackageShare` by a naive coefficient polynomial for arbitrary pairs. The primitive coefficient formula defines `Q_{A,B}` only after primitive reduction. Phase 1 must separate:
+`PackageShare` is now concrete, but it is deliberately product-level rather
+than a naive coefficient polynomial for arbitrary pairs. The primitive
+coefficient formula defines `Q_{A,B}` only after primitive reduction. The
+formalization separates:
 
 ```lean
 qPrimZ        -- primitive orientation polynomial Q_{A,B}
@@ -71,14 +74,19 @@ PackageShare
 ```
 
 For nonprimitive pairs, the intended relation is `a = g*A`, `b = g*B`, `gcd A B = 1`, and `Q_{a,b}(x) = g * Q_{A,B}(x^g)`. Product-level `PackageShare` should refer to common nonconstant factors of `qPackageProdQ`; orientation-level sharing, if introduced, should be a separate predicate with a theorem selecting compatible orientations from product-level sharing.
+This is implemented through `PackageProductShare`,
+`ReciprocalOrientationShare`, and
+`packageProductShare_iff_reciprocalOrientationShare`.
 
 ## Suggested first tasks
 
 1. Run `lake build` and fix any syntax/API drift.
 2. Keep `Qab/CoreProof.lean` short and pack-parametric.
 3. Confirm `BroadAxioms.lean` compiles but remains unimported by `Qab.lean`.
-4. Start phase 1 by defining `qPrimZ`, `qOrientZ`, and `qPackageProdZ` carefully before changing `PackageShare`.
-5. Add a small residual-terminal certificate checker over `ZMod 1009` only after the polynomial constructors are stable.
+4. Continue hardening the polynomial layer as needed, but do not change the
+   collision-to-counterexample boundary without review.
+5. Add a small residual-terminal certificate checker over `ZMod 1009` only after
+   the polynomial constructors are stable.
 6. Convert broad pack fields into narrower theorem packs one at a time.
 
 ## Included reference files

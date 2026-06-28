@@ -269,3 +269,23 @@
 - Verified `cd Qab_Lean_v4 && lake build Qab.Polynomials.Orientation`.
 - Verified `cd Qab_Lean_v4 && lake build`.
 - Verified `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+
+## 2026-06-28T15:48:53+02:00
+
+- Concretized `Basic.PackageShare` as the product-level polynomial predicate
+  `PackageProductShare`.
+- Added theorem-boundary bridge lemmas:
+  - `PackageShare_iff_packageProductShare`;
+  - `PackageShare_iff_reciprocalOrientationShare`;
+  - `PackageShare_comm`;
+  - `PackageShare_swap_left`;
+  - `PackageShare_swap_right`.
+- Confirmed the import direction is acceptable: `Basic` imports
+  `Qab.Polynomials.Orientation`, while the polynomial layer still depends only
+  on `Pairs` and lower polynomial modules.
+- Verified `cd Qab_Lean_v4 && lake build Qab.Basic`.
+- Verified `cd Qab_Lean_v4 && lake build Qab.CoreProof`.
+- Verified `cd Qab_Lean_v4 && lake build`.
+- Verified `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+- Rebuilt `Qab_Lean_v4/docs/Qab_core_v4.pdf` with
+  `cd Qab_Lean_v4/docs && latexmk -pdf Qab_core_v4.tex`.

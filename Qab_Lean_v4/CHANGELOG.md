@@ -45,3 +45,6 @@
   products, `OrientationShare.toPackageProductShare`,
   `ReciprocalOrientationShare`, and
   `packageProductShare_iff_reciprocalOrientationShare`.
+- Replaced the opaque `Basic.PackageShare` axiom by the concrete
+  product-level predicate `PackageProductShare`, with bridge lemmas to
+  `PackageProductShare` and `ReciprocalOrientationShare`.

@@ -142,9 +142,10 @@ the selected package polynomials.
 
 \section{Package polynomial semantics}
 
-The first concrete replacement for opaque \verb|PackageShare| must be careful
-about primitive versus imprimitive pairs.  The coefficient formula below is for
-the primitive orientation polynomial only.  For coprime positive $A,B$, define
+The Lean definition of \verb|PackageShare| is now product-level sharing of the
+reciprocal package products.  This replacement is deliberately careful about
+primitive versus imprimitive pairs.  The coefficient formula below is for the
+primitive orientation polynomial only.  For coprime positive $A,B$, define
 \[
 Q^{\rm prim}_{A,B}(x)=
 \sum_{0\leq j<A} B(j+1)x^j+
@@ -170,7 +171,8 @@ Thus the Lean development should keep separate names:
 Product-level \verb|PackageShare| is closest to the theorem statement.  If the
 collision dictionary uses orientation-level sharing, it should prove a separate
 bridge from product sharing to an orientation share for some reciprocal-choice
-of orientations.
+of orientations.  The current Lean API proves this bridge by passing to an
+irreducible factor of the common product-level witness.
 
 \section{The theorem packs}
 

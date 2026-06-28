@@ -1,16 +1,16 @@
 import Qab.Constants
 import Qab.Pairs
+import Qab.Polynomials.Orientation
 
 namespace Qab
 
 /-!
 Basic package-level objects.
 
-This phase deliberately keeps `PackageShare` opaque.  The first concrete
-opening should replace it by the existence of a nonconstant common factor of
-the canonical reciprocal package products over `ℚ[x]`.  Until then, no theorem
-in this repository should manufacture a `PackageShare` proof except via
-explicit assumptions.
+`PackageShare` is now the concrete product-level sharing predicate: existence
+of a nonconstant common factor of the canonical reciprocal package products
+over `ℚ[x]`.  The collision-to-counterexample bridge remains conditional and
+is represented by the `CollisionPack` interface.
 
 Phase-1 warning: the primitive coefficient formula defines only the primitive
 orientation polynomial `qPrimZ`.  The full orientation polynomial for an
@@ -20,17 +20,37 @@ imprimitive pair must use the manuscript convention
 -/
 
 /--
-Opaque phase-0 sharing predicate.  Phase 1 should replace this by something
-like
+Concrete product-level package sharing:
 
 ```
 ∃ h : Polynomial ℚ,
   0 < h.natDegree ∧ h ∣ qPackageProdQ P ∧ h ∣ qPackageProdQ Q
 ```
-
-after `qPrimZ`, `qOrientZ`, and `qPackageProdZ` have been added.
 -/
-axiom PackageShare : PosPair → PosPair → Prop
+def PackageShare (P Q : PosPair) : Prop :=
+  PackageProductShare P Q
+
+lemma PackageShare_iff_packageProductShare (P Q : PosPair) :
+    PackageShare P Q ↔ PackageProductShare P Q := by
+  rfl
+
+lemma PackageShare_iff_reciprocalOrientationShare (P Q : PosPair) :
+    PackageShare P Q ↔ ReciprocalOrientationShare P Q := by
+  simpa [PackageShare] using packageProductShare_iff_reciprocalOrientationShare P Q
+
+lemma PackageShare_comm (P Q : PosPair) :
+    PackageShare P Q ↔ PackageShare Q P := by
+  simpa [PackageShare] using PackageProductShare_comm P Q
+
+@[simp]
+lemma PackageShare_swap_left (P Q : PosPair) :
+    PackageShare P.swap Q ↔ PackageShare P Q := by
+  simp [PackageShare]
+
+@[simp]
+lemma PackageShare_swap_right (P Q : PosPair) :
+    PackageShare P Q.swap ↔ PackageShare P Q := by
+  simp [PackageShare]
 
 /-- Final theorem target at package level. -/
 def ReciprocalPackageCoprimality : Prop :=

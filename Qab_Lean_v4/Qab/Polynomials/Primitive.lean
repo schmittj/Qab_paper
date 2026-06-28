@@ -11,11 +11,10 @@ open scoped BigOperators
 /-!
 Primitive orientation polynomials.
 
-This module starts Phase 1 without changing the phase-0 theorem statement.
 The coefficient formula here is only the primitive orientation formula from
 the roadmap.  It must not be used directly as the full imprimitive
-`Q_{a,b}` when `gcd a b > 1`; the later `qOrientZ` layer will perform
-primitive reduction and composition with `x ↦ x^g`.
+`Q_{a,b}` when `gcd a b > 1`; the `qOrientZ` layer performs primitive
+reduction and composition with `x ↦ x^g`.
 -/
 
 namespace PosPair

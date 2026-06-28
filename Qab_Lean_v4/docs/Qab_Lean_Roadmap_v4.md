@@ -144,7 +144,9 @@ The boundary lemmas in `Constants.lean` should remain the only arithmetic needed
 
 ## 4. Basic objects
 
-`PosPair` is a positive ordered pair. `PosPair.sameUnordered` tracks equality up to reciprocal swap. `PackageShare` is opaque in phase 0.
+`PosPair` is a positive ordered pair. `PosPair.sameUnordered` tracks equality
+up to reciprocal swap. `PackageShare` is now concrete product-level sharing;
+`FromShare` remains the opaque selected-counterexample predicate.
 
 Important phase-1 warning: the theorem is about reciprocal package products, but the coefficient formula is for primitive orientation polynomials only. Keep the names separate:
 
@@ -156,7 +158,7 @@ OrientationShare
 PackageShare   -- product-level sharing
 ```
 
-The eventual product-level definition should be close to:
+The product-level theorem-boundary definition is:
 
 ```lean
 def PackageShare (P Q : PosPair) : Prop :=
@@ -173,6 +175,9 @@ def OrientationShare (P Q : PosPair) : Prop :=
 ```
 
 If the theorem uses product-level `PackageShare`, prove a separate bridge from product sharing to orientation sharing for some choice of reciprocal orientations.
+The current API provides this as
+`packageProductShare_iff_reciprocalOrientationShare`, via an irreducible factor
+of a product-level common factor.
 
 ## 5. Canonical package polynomials: phase-1 target
 
@@ -228,7 +233,8 @@ Initial lemmas:
 7. map-to-`ℚ[x]` lemmas;
 8. product-level divisibility lemmas for `qPackageProdZ`.
 
-Only after these definitions and lemmas are stable should opaque `PackageShare` be replaced.
+These definitions and lemmas are now stable enough that `PackageShare` has been
+replaced by the product-level predicate in `Qab.Basic`.
 
 ## 6. Normalized counterexamples and `FromShare`
 
@@ -449,8 +455,11 @@ Tasks:
 5. Define and compare `OrientationShare` and product-level `PackageShare`.
 6. Map these polynomials to `ℚ[x]`.
 7. Prove support, degree, constant coefficient, leading coefficient, imprimitive-composition, and primitive/content facts.
-8. Define `PackageShare` concretely.
-9. Prove package-level gcd/coprimality equivalences.
+8. Define `PackageShare` concretely.  (Done: it aliases
+   `PackageProductShare`.)
+9. Prove package-level gcd/coprimality equivalences and related bridges.
+   (The product-to-reciprocal-orientation bridge is done; future work should
+   connect this to selected-root collision data.)
 
 Expected work: 1--3 weeks depending on Mathlib polynomial API familiarity.
 

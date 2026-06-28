@@ -235,8 +235,8 @@ lemma OrientationShare_comm (P Q : PosPair) :
     exact ⟨h, hnc, hP, hQ⟩
 
 /--
-Concrete product-level sharing predicate for the eventual replacement of the
-opaque phase-0 `PackageShare`.
+Underlying product-level sharing predicate used by the package-level
+`PackageShare` definition.
 -/
 def PackageProductShare (P Q : PosPair) : Prop :=
   ∃ h : Polynomial Rat, NonconstantFactorQ h ∧ h ∣ qPackageProdQ P ∧ h ∣ qPackageProdQ Q

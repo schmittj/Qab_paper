@@ -58,7 +58,7 @@ Phase 0 is complete when:
 
 ## Phase-1 polynomial semantics
 
-Before making `PackageShare` concrete, distinguish these objects.
+`PackageShare` is concrete and product-level.  Keep these objects distinct.
 
 ```lean
 qPrimZ         -- primitive orientation polynomial Q_{A,B}
@@ -101,6 +101,8 @@ def OrientationShare (P Q : PosPair) : Prop :=
 ```
 
 If `OrientationShare` is used, prove a separate bridge that package-product sharing gives orientation sharing for some reciprocal-orientation choice.
+The current API provides this bridge as
+`packageProductShare_iff_reciprocalOrientationShare`.
 
 ## Suggested phase-1 proof order
 
@@ -108,7 +110,8 @@ If `OrientationShare` is used, prove a separate bridge that package-product shar
 2. Prove coefficient support, constant coefficient, leading coefficient, and degree lemmas.
 3. Define `qOrientZ` using primitive reduction and composition `x |-> x^g`.
 4. Define `qPackageProdZ` as `qOrientZ P * qOrientZ P.swap` after adding a `PosPair.swap` helper.
-5. Define `PackageShare` over `ℚ[x]` and prove the basic gcd/coprimality equivalence.
+5. Use `PackageShare_iff_packageProductShare` and
+   `PackageShare_iff_reciprocalOrientationShare` for theorem-boundary work.
 6. Only then begin the residual `ZMod 1009` certificate checker.
 
 ## Certificate trust boundary
