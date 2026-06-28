@@ -27,3 +27,20 @@
     `CoverageInterval`.
 - Verified `cd Qab_Lean_v4 && lake build`.
 - Verified `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+
+## 2026-06-28T13:53:49+02:00
+
+- Added AI review helpers under `tools/ai_review/`.
+- Verified dry-run bundle creation for OpenAI and Claude review helpers; the
+  default bundle currently contains 78 files and is about 1.5 MB.
+- Reworked Claude reviews to launch as background agents instead of blocking
+  the main development session.
+- Launched Claude background review:
+  - agent id: `0d872b98`;
+  - name: `qab-lean-review-20260628-135309`;
+  - status/log commands: `claude agents`, `claude logs 0d872b98`.
+- Submitted OpenAI background Responses review:
+  - model: `gpt-5.5-pro-2026-04-23`;
+  - reasoning effort: `xhigh`;
+  - response id: `resp_0b52a9a0c6658cab006a410b4282b081a19778c01751af0e7d`;
+  - uploaded bundle file id: `file-ERrPYPJY9xKmNLCMRavobZ`.
