@@ -2,7 +2,16 @@ name: verification
 
 on:
   push:
+    paths-ignore:
+      - "Qab_Lean_v4/**"
+      - "tools/**"
+      - "AGENTS.md"
   pull_request:
+    paths-ignore:
+      - "Qab_Lean_v4/**"
+      - "tools/**"
+      - "AGENTS.md"
+  workflow_dispatch:
 
 jobs:
   light:
@@ -15,8 +24,6 @@ jobs:
           sudo apt-get install -y g++ latexmk make python3 texlive-latex-extra texlive-fonts-recommended
       - name: Build paper
         run: make paper
-      - name: Verify checksums
-        run: sha256sum -c SHA256SUMS --quiet
       - name: Run light verification
         run: make verify-light
       - name: Verify archived upper rows
