@@ -16,7 +16,8 @@ The main contract is:
 * no primitivity hypothesis is imposed on the certificate targets `F` and `G`.
   The proof clears their content by passing through `Polynomial.primPart`;
 * for degree lower bounds, the good prime must preserve the leading
-  coefficient of `h`, and at least one modular target must be nonzero.
+  coefficient of `h`, either directly or via a surviving target leading
+  coefficient.
 -/
 
 namespace Qab
@@ -67,6 +68,25 @@ theorem int_dvd_of_rat_dvd {h F : Polynomial Int} (hh : h.IsPrimitive)
       ⟨Polynomial.C F.content, by
         rw [mul_comm, ← F.eq_C_content_mul_primPart]⟩
 
+/-- Divisibility survives reduction along the canonical map from `Int`. -/
+theorem reduceInt_dvd_of_int_dvd {K : Type*} [Ring K]
+    {h F : Polynomial Int} (hF : h ∣ F) :
+    reduceInt K h ∣ reduceInt K F := by
+  rcases hF with ⟨A, hA⟩
+  exact ⟨reduceInt K A, by
+    simp [reduceInt, hA, Polynomial.map_mul]⟩
+
+/--
+If an integer factor divides both integer targets, its reduction divides the
+modular gcd target.  This is the primitive reusable core; the rational
+divisibility versions below only add the Gauss-clearing step.
+-/
+theorem reduceInt_dvd_modularGCD_of_int_dvd {K : Type*} [Field K] [DecidableEq K]
+    {h F G : Polynomial Int} (hF : h ∣ F) (hG : h ∣ G) :
+    reduceInt K h ∣ modularGCD K F G :=
+  dvd_gcd (reduceInt_dvd_of_int_dvd (K := K) hF)
+    (reduceInt_dvd_of_int_dvd (K := K) hG)
+
 /--
 The reusable good-reduction divisibility statement.
 
@@ -82,15 +102,35 @@ theorem reduceInt_dvd_modularGCD {K : Type*} [Field K] [DecidableEq K]
     reduceInt K h ∣ modularGCD K F G := by
   have hF_int : h ∣ F := int_dvd_of_rat_dvd hh hF
   have hG_int : h ∣ G := int_dvd_of_rat_dvd hh hG
-  have hF_mod : reduceInt K h ∣ reduceInt K F := by
-    rcases hF_int with ⟨A, hA⟩
-    exact ⟨reduceInt K A, by
-      simp [reduceInt, hA, Polynomial.map_mul]⟩
-  have hG_mod : reduceInt K h ∣ reduceInt K G := by
-    rcases hG_int with ⟨A, hA⟩
-    exact ⟨reduceInt K A, by
-      simp [reduceInt, hA, Polynomial.map_mul]⟩
-  exact dvd_gcd hF_mod hG_mod
+  exact reduceInt_dvd_modularGCD_of_int_dvd (K := K) hF_int hG_int
+
+/--
+A nonzero reduced leading coefficient makes the reduced polynomial nonzero.
+Certificate checkers often prove this directly from a sparse top coefficient.
+-/
+theorem reduceInt_ne_zero_of_leadingCoeff_ne_zero {K : Type*} [Ring K]
+    {F : Polynomial Int} (hF_lc : (Int.castRingHom K) F.leadingCoeff ≠ 0) :
+    reduceInt K F ≠ 0 := by
+  intro hzero
+  apply hF_lc
+  change (Int.castRingHom K) (F.coeff F.natDegree) = 0
+  rw [← coeff_map]
+  change (reduceInt K F).coeff F.natDegree = 0
+  rw [hzero]
+  simp
+
+/--
+If `h ∣ F` over `Int[X]` and the leading coefficient of `F` survives in the
+target ring, then the leading coefficient of `h` survives too.
+-/
+theorem leadingCoeff_map_ne_zero_of_dvd_of_target_lc_ne_zero
+    {K : Type*} [Ring K] {h F : Polynomial Int}
+    (hF : h ∣ F) (hF_lc : (Int.castRingHom K) F.leadingCoeff ≠ 0) :
+    (Int.castRingHom K) h.leadingCoeff ≠ 0 := by
+  intro hh_lc
+  rcases Polynomial.leadingCoeff_dvd_leadingCoeff hF with ⟨c, hc⟩
+  apply hF_lc
+  rw [hc, map_mul, hh_lc, zero_mul]
 
 theorem modularGCD_ne_zero_of_left {K : Type*} [Field K] [DecidableEq K]
     {F G : Polynomial Int} (hF : reduceInt K F ≠ 0) :
@@ -139,6 +179,43 @@ theorem natDegree_le_modularGCD_of_rat_dvd {K : Type*} [Field K] [DecidableEq K]
       Polynomial.natDegree_le_of_dvd h_dvd h_gcd_ne
 
 /--
+Certificate-friendly left-target variant.  It derives the hidden factor's
+leading-coefficient hypothesis and the gcd target nonvanishing from the single
+check that `F.leadingCoeff` survives reduction.
+-/
+theorem natDegree_le_modularGCD_of_rat_dvd_of_left_lc
+    {K : Type*} [Field K] [DecidableEq K]
+    {h F G : Polynomial Int} (hh : h.IsPrimitive)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hF_lc : (Int.castRingHom K) F.leadingCoeff ≠ 0) :
+    h.natDegree ≤ (modularGCD K F G).natDegree := by
+  have hF_int : h ∣ F := int_dvd_of_rat_dvd hh hF
+  exact natDegree_le_modularGCD_of_rat_dvd (K := K) hh hF hG
+    (leadingCoeff_map_ne_zero_of_dvd_of_target_lc_ne_zero
+      (K := K) hF_int hF_lc)
+    (Or.inl (reduceInt_ne_zero_of_leadingCoeff_ne_zero
+      (K := K) hF_lc))
+
+/--
+Certificate-friendly right-target variant.  It is the same lower bound as
+`natDegree_le_modularGCD_of_rat_dvd_of_left_lc`, using `G.leadingCoeff`.
+-/
+theorem natDegree_le_modularGCD_of_rat_dvd_of_right_lc
+    {K : Type*} [Field K] [DecidableEq K]
+    {h F G : Polynomial Int} (hh : h.IsPrimitive)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hG_lc : (Int.castRingHom K) G.leadingCoeff ≠ 0) :
+    h.natDegree ≤ (modularGCD K F G).natDegree := by
+  have hG_int : h ∣ G := int_dvd_of_rat_dvd hh hG
+  exact natDegree_le_modularGCD_of_rat_dvd (K := K) hh hF hG
+    (leadingCoeff_map_ne_zero_of_dvd_of_target_lc_ne_zero
+      (K := K) hG_int hG_lc)
+    (Or.inr (reduceInt_ne_zero_of_leadingCoeff_ne_zero
+      (K := K) hG_lc))
+
+/--
 Contrapositive-friendly positive-degree form: a nonconstant rational common
 factor whose leading coefficient survives reduction forces the modular gcd
 target to have positive degree.
@@ -154,6 +231,28 @@ theorem modularGCD_natDegree_pos_of_rat_common_factor {K : Type*}
   h_pos.trans_le
     (natDegree_le_modularGCD_of_rat_dvd
       (K := K) hh hF hG h_lc h_target_ne)
+
+theorem modularGCD_natDegree_pos_of_rat_common_factor_of_left_lc
+    {K : Type*} [Field K] [DecidableEq K] {h F G : Polynomial Int}
+    (hh : h.IsPrimitive) (h_pos : 0 < h.natDegree)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hF_lc : (Int.castRingHom K) F.leadingCoeff ≠ 0) :
+    0 < (modularGCD K F G).natDegree :=
+  h_pos.trans_le
+    (natDegree_le_modularGCD_of_rat_dvd_of_left_lc
+      (K := K) hh hF hG hF_lc)
+
+theorem modularGCD_natDegree_pos_of_rat_common_factor_of_right_lc
+    {K : Type*} [Field K] [DecidableEq K] {h F G : Polynomial Int}
+    (hh : h.IsPrimitive) (h_pos : 0 < h.natDegree)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hG_lc : (Int.castRingHom K) G.leadingCoeff ≠ 0) :
+    0 < (modularGCD K F G).natDegree :=
+  h_pos.trans_le
+    (natDegree_le_modularGCD_of_rat_dvd_of_right_lc
+      (K := K) hh hF hG hG_lc)
 
 /-- Integer-polynomial reduction modulo `p`. -/
 def reduceZMod (p : Nat) (F : Polynomial Int) : Polynomial (ZMod p) :=
@@ -173,6 +272,13 @@ theorem reduceZMod_dvd_modularGCDZMod {p : Nat} [Fact p.Prime]
   change reduceInt (ZMod p) h ∣ modularGCD (ZMod p) F G
   exact reduceInt_dvd_modularGCD (K := ZMod p) hh hF hG
 
+/-- `ZMod p` specialization of `reduceInt_dvd_modularGCD_of_int_dvd`. -/
+theorem reduceZMod_dvd_modularGCDZMod_of_int_dvd {p : Nat} [Fact p.Prime]
+    {h F G : Polynomial Int} (hF : h ∣ F) (hG : h ∣ G) :
+    reduceZMod p h ∣ modularGCDZMod p F G := by
+  change reduceInt (ZMod p) h ∣ modularGCD (ZMod p) F G
+  exact reduceInt_dvd_modularGCD_of_int_dvd (K := ZMod p) hF hG
+
 /-- `ZMod p` specialization of the degree lower bound. -/
 theorem natDegree_le_modularGCDZMod_of_rat_dvd {p : Nat} [Fact p.Prime]
     {h F G : Polynomial Int} (hh : h.IsPrimitive)
@@ -184,6 +290,30 @@ theorem natDegree_le_modularGCDZMod_of_rat_dvd {p : Nat} [Fact p.Prime]
   change h.natDegree ≤ (modularGCD (ZMod p) F G).natDegree
   exact natDegree_le_modularGCD_of_rat_dvd
     (K := ZMod p) hh hF hG (by simpa using h_lc) h_target_ne
+
+/-- `ZMod p` specialization using the left target's leading coefficient. -/
+theorem natDegree_le_modularGCDZMod_of_rat_dvd_of_left_lc
+    {p : Nat} [Fact p.Prime] {h F G : Polynomial Int}
+    (hh : h.IsPrimitive)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hF_lc : (F.leadingCoeff : ZMod p) ≠ 0) :
+    h.natDegree ≤ (modularGCDZMod p F G).natDegree := by
+  change h.natDegree ≤ (modularGCD (ZMod p) F G).natDegree
+  exact natDegree_le_modularGCD_of_rat_dvd_of_left_lc
+    (K := ZMod p) hh hF hG (by simpa using hF_lc)
+
+/-- `ZMod p` specialization using the right target's leading coefficient. -/
+theorem natDegree_le_modularGCDZMod_of_rat_dvd_of_right_lc
+    {p : Nat} [Fact p.Prime] {h F G : Polynomial Int}
+    (hh : h.IsPrimitive)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hG_lc : (G.leadingCoeff : ZMod p) ≠ 0) :
+    h.natDegree ≤ (modularGCDZMod p F G).natDegree := by
+  change h.natDegree ≤ (modularGCD (ZMod p) F G).natDegree
+  exact natDegree_le_modularGCD_of_rat_dvd_of_right_lc
+    (K := ZMod p) hh hF hG (by simpa using hG_lc)
 
 /-- Positive-degree `ZMod p` specialization for exact-gcd-degree certificates. -/
 theorem modularGCDZMod_natDegree_pos_of_rat_common_factor
@@ -197,6 +327,28 @@ theorem modularGCDZMod_natDegree_pos_of_rat_common_factor
   change 0 < (modularGCD (ZMod p) F G).natDegree
   exact modularGCD_natDegree_pos_of_rat_common_factor
     (K := ZMod p) hh h_pos hF hG (by simpa using h_lc) h_target_ne
+
+theorem modularGCDZMod_natDegree_pos_of_rat_common_factor_of_left_lc
+    {p : Nat} [Fact p.Prime] {h F G : Polynomial Int} (hh : h.IsPrimitive)
+    (h_pos : 0 < h.natDegree)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hF_lc : (F.leadingCoeff : ZMod p) ≠ 0) :
+    0 < (modularGCDZMod p F G).natDegree := by
+  change 0 < (modularGCD (ZMod p) F G).natDegree
+  exact modularGCD_natDegree_pos_of_rat_common_factor_of_left_lc
+    (K := ZMod p) hh h_pos hF hG (by simpa using hF_lc)
+
+theorem modularGCDZMod_natDegree_pos_of_rat_common_factor_of_right_lc
+    {p : Nat} [Fact p.Prime] {h F G : Polynomial Int} (hh : h.IsPrimitive)
+    (h_pos : 0 < h.natDegree)
+    (hF : h.map (Int.castRingHom Rat) ∣ F.map (Int.castRingHom Rat))
+    (hG : h.map (Int.castRingHom Rat) ∣ G.map (Int.castRingHom Rat))
+    (hG_lc : (G.leadingCoeff : ZMod p) ≠ 0) :
+    0 < (modularGCDZMod p F G).natDegree := by
+  change 0 < (modularGCD (ZMod p) F G).natDegree
+  exact modularGCD_natDegree_pos_of_rat_common_factor_of_right_lc
+    (K := ZMod p) hh h_pos hF hG (by simpa using hG_lc)
 
 end
 

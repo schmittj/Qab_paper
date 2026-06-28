@@ -102,3 +102,38 @@ The main divisibility lemma has no good-prime hypothesis: if a bad prime
 collapses the factor, divisibility of the collapsed reduction still holds.  The
 good-prime assumptions enter exactly where a modular gcd degree obstruction is
 claimed.
+
+## Post-Review Revision
+
+The review follow-up keeps `GoodReduction.lean` data-free and adds two
+certificate-facing refinements:
+
+- `reduceInt_dvd_modularGCD_of_int_dvd` splits the pure integral-divisibility
+  core from the Gauss-clearing wrapper.  Callers that already know `h ∣ F` and
+  `h ∣ G` no longer need to route through rational divisibility.
+- `natDegree_le_modularGCD_of_rat_dvd_of_left_lc` and
+  `natDegree_le_modularGCD_of_rat_dvd_of_right_lc`, plus the positive-degree
+  and `ZMod p` wrappers, derive the hidden factor's leading-coefficient
+  hypothesis and target nonvanishing from one surviving target leading
+  coefficient.  This matches the sparse-collision-certificate workflow where a
+  top coefficient is checked nonzero modulo `1009`.
+
+Remaining bridge contracts for downstream certificate branches:
+
+1. A rational-factor normalization bridge should turn a common
+   `hQ : Polynomial Rat` of integer targets into a primitive
+   `hZ : Polynomial Int` with `0 < hZ.natDegree` and
+   `hZ.map (Int.castRingHom Rat)` dividing the same rational targets.  This is
+   the contract needed to connect `PackageShare`/`OrientationShare` witnesses to
+   this module without adding project-specific assumptions.
+2. The undivided collision-trinomial checker still needs forced-factor
+   accounting outside this module.  For
+   `C = (Polynomial.X - 1 : Polynomial Int) ^ 2`, a collision-specific bridge
+   should show that an extra noncyclotomic common factor `h` forces
+   `(C * h)` (or an equivalent divided-target factor) into the modular gcd
+   target, yielding a lower bound `2 + h.natDegree ≤ gcdDegree` under the
+   appropriate coprimality/nonvanishing hypotheses.
+
+Those bridges should live in a module importing both
+`Qab.Certificates.GoodReduction` and the relevant polynomial constructors, not
+in `GoodReduction.lean` itself.
