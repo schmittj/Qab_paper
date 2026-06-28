@@ -48,3 +48,9 @@
 - Replaced the opaque `Basic.PackageShare` axiom by the concrete
   product-level predicate `PackageProductShare`, with bridge lemmas to
   `PackageProductShare` and `ReciprocalOrientationShare`.
+- Added the first residual Phase 2 modular-gcd checker over `ZMod 1009`:
+  `Qab.Certificates.ZModGcd` defines the executable dense collision-gcd
+  checker and forced double-root accounting, and
+  `Qab.Certificates.ResidualZMod1009` checks the two residual terminal
+  orientation rows and eight orientation certificates from the bundled CSV
+  artifacts.
