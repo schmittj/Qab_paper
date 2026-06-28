@@ -54,3 +54,9 @@
   `Qab.Certificates.ResidualZMod1009` checks the two residual terminal
   orientation rows and eight orientation certificates from the bundled CSV
   artifacts.
+- Hardened the residual checker after review: split the axiom-free
+  `Qab.Certificates.Targets` module out of the schematic interfaces, required
+  exact forced-degree equality, checked coprime residual scales and manifest
+  row counts, renamed listed pair/orientation coverage, and proved
+  `denseToPoly_collisionDense_eq_collisionHMod` to connect the executable dense
+  target to mapped `collisionTriZ`.

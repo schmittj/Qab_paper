@@ -5,6 +5,10 @@ This branch adds the first Phase 2 residual modular-gcd checker:
 - `Qab.Certificates.ZModGcd`
 - `Qab.Certificates.ResidualZMod1009`
 
+`Qab.Certificates.Targets` contains the shared `PolynomialCheckTarget` enum, so
+the concrete checker does not import the schematic certificate axioms from
+`Qab.Certificates.Interfaces`.
+
 ## Target
 
 The checked target is `PolynomialCheckTarget.collisionH`, the undivided
@@ -19,14 +23,20 @@ low * X^(scale * total) - total * X^(scale * low) + (total - low).
 `collisionHMod_eq_sparse` records that this is the sparse trinomial used by the
 executable dense checker.
 
+The dense executable representation is also connected to this polynomial target
+by `denseToPoly_collisionDense_eq_collisionHMod`, which proves that
+`denseToPoly (collisionDense scale low total)` denotes the mapped
+`collisionTriZ` target.
+
 ## Forced Factor Accounting
 
 The checker does not treat an undivided gcd degree of `2` as an exclusion by
-itself.  It records `forcedDoubleRootDegree = 2`, and
+itself.  It records `forcedDoubleRootDegree = 2`, checks coprime residual
+scales in the typed row data, and
 `CollisionCertificate.checks` requires
 
 ```text
-exactGcdDegree <= forcedCyclotomicDegree.
+exactGcdDegree = forcedCyclotomicDegree.
 ```
 
 The forced factor is linked back to the shared prelude by
@@ -53,18 +63,24 @@ orientation-pair rows and eight orientation certificates from
 - every certificate row matches its indexed orientation-pair row;
 - the orientation low terms agree with the CSV convention;
 - the additive triples hold;
+- the two residual scales are coprime;
 - the reduction prime is `1009` and is not a bad-reduction prime for row data;
 - the executable collision-gcd degree is exactly `2`;
 - the forced degree is exactly `2`, so there is no noncyclotomic room.
 
-`ResidualZMod1009.coverageComplete_eq_true` separately checks that the typed
-data covers each listed pair/orientation task exactly once.
+`ResidualZMod1009.listedPairOrientationCoverageComplete_eq_true` separately
+checks that the typed data covers each listed pair/orientation task exactly
+once.  `ResidualZMod1009.listedCountsMatchManifest_eq_true` records the current
+manifest-level counts: two listed residual orientation pairs and eight listed
+orientation certificates.
 
 ## Scaling Notes
 
-This is intentionally a first useful kernel-checked certificate, not the final
-large-scale format.  The dense Euclidean checker is simple and transparent but
-would become expensive if the residual artifact grows by orders of magnitude.
-For larger data, the likely next step is generated Euclidean or Bezout
-certificates with a checker that verifies division identities, rather than
-recomputing long dense gcds from scratch.
+This is intentionally a first useful executable Lean certificate, not the final
+large-scale format and not yet a proved `Polynomial.gcd` theorem.  The dense
+Euclidean checker is simple and transparent, and its input target is now proved
+to denote the mapped `collisionTriZ`; the Euclidean algorithm itself remains a
+small bespoke executable checker.  For larger data, the likely next step is
+generated Euclidean or Bezout certificates with a checker that verifies division
+identities over `Polynomial (ZMod 1009)`, rather than recomputing long dense
+gcds from scratch.

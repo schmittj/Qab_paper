@@ -88,6 +88,7 @@ def artifactConsistent (pairs : List ResidualPair) (row : ResidualCertificateRow
     row.orientation < 4 &&
     row.a + row.b = row.n &&
     row.c + row.f = row.m &&
+    Nat.gcd row.r row.s = 1 &&
     row.low1 = row.expectedLow1 &&
     row.low2 = row.expectedLow2 &&
     row.prime = modulus &&
@@ -145,10 +146,13 @@ def taskCount (pairIndex orientation : Nat) : Nat :=
   (residualCertificateRows.filter fun row =>
     row.pairIndex = pairIndex && row.orientation = orientation).length
 
-def coverageComplete : Bool :=
+def listedPairOrientationCoverageComplete : Bool :=
   (List.range residualPairs.length).all fun pairIndex =>
     (List.range 4).all fun orientation =>
       taskCount pairIndex orientation = 1
+
+def listedCountsMatchManifest : Bool :=
+  residualPairs.length = 2 && residualCertificateRows.length = 8
 
 def allRowsCheck : Bool :=
   residualCertificateRows.all fun row => row.checks residualPairs
@@ -158,13 +162,21 @@ theorem allRowsCheck_eq_true : allRowsCheck = true := by
   native_decide
 
 /-- The typed residual rows cover every listed pair/orientation task exactly once. -/
-theorem coverageComplete_eq_true : coverageComplete = true := by
+theorem listedPairOrientationCoverageComplete_eq_true :
+    listedPairOrientationCoverageComplete = true := by
+  native_decide
+
+/-- The typed residual data has the current manifest-level residual task counts. -/
+theorem listedCountsMatchManifest_eq_true : listedCountsMatchManifest = true := by
   native_decide
 
 /-- Combined theorem used by the branch-level build target. -/
 theorem residualZMod1009CertificateSetChecks :
-    allRowsCheck = true ∧ coverageComplete = true := by
-  exact ⟨allRowsCheck_eq_true, coverageComplete_eq_true⟩
+    allRowsCheck = true ∧
+      listedPairOrientationCoverageComplete = true ∧
+      listedCountsMatchManifest = true := by
+  exact ⟨allRowsCheck_eq_true, listedPairOrientationCoverageComplete_eq_true,
+    listedCountsMatchManifest_eq_true⟩
 
 end Certificates.ResidualZMod1009
 

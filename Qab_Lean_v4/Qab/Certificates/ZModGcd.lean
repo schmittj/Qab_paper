@@ -1,4 +1,4 @@
-import Qab.Certificates.Interfaces
+import Qab.Certificates.Targets
 import Qab.Polynomials.Collision
 import Mathlib.Data.ZMod.Basic
 import Mathlib.Tactic
@@ -84,10 +84,57 @@ def modMul (a b : Nat) : Nat := (a * b) % modulus
 def invMod (a : Nat) : Nat :=
   ((List.range modulus).find? fun b => (a % modulus * b) % modulus = 1).getD 0
 
-def trim (f : List Nat) : List Nat :=
-  match (f.reverse.dropWhile fun a => a = 0).reverse with
+def trim : List Nat → List Nat
   | [] => [0]
-  | g => g
+  | a :: rest =>
+      match trim rest with
+      | [0] => if a = 0 then [0] else [a]
+      | g => a :: g
+
+noncomputable def denseToPoly : List Nat → Polynomial F1009
+  | [] => 0
+  | a :: rest => Polynomial.C (a : F1009) + Polynomial.X * denseToPoly rest
+
+@[simp]
+lemma natCast_modulus_mod (a : Nat) : ((a % modulus : Nat) : F1009) = (a : F1009) := by
+  simp [F1009, ZMod.natCast_mod]
+
+@[simp]
+lemma natCast_modReduce (a : Nat) : ((modReduce a : Nat) : F1009) = (a : F1009) := by
+  simp [modReduce]
+
+@[simp]
+lemma natCast_modAdd (a b : Nat) :
+    ((modAdd a b : Nat) : F1009) = (a : F1009) + (b : F1009) := by
+  simp [modAdd, Nat.cast_add]
+
+@[simp]
+lemma natCast_modNeg (a : Nat) : ((modNeg a : Nat) : F1009) = - (a : F1009) := by
+  have hle : a % modulus ≤ modulus :=
+    (Nat.mod_lt a (by norm_num [modulus])).le
+  rw [modNeg, natCast_modulus_mod, Nat.cast_sub hle]
+  change ((1009 : Nat) : ZMod 1009) - ((a % 1009 : Nat) : ZMod 1009) =
+    -((a : Nat) : ZMod 1009)
+  rw [ZMod.natCast_mod]
+  rw [ZMod.natCast_self]
+  simp
+
+lemma denseToPoly_trim (f : List Nat) : denseToPoly (trim f) = denseToPoly f := by
+  induction f with
+  | nil =>
+      simp [trim, denseToPoly]
+  | cons a rest ih =>
+      simp only [trim, denseToPoly]
+      split
+      · next h =>
+        have hrest : denseToPoly rest = 0 := by
+          rw [← ih, h]
+          simp [denseToPoly]
+        by_cases ha : a = 0
+        · simp [ha, hrest, denseToPoly]
+        · simp [ha, hrest, denseToPoly]
+      · next h =>
+        rw [denseToPoly, ih]
 
 def lastD : List Nat → Nat
   | [] => 0
@@ -101,6 +148,24 @@ def addCoeff : List Nat → Nat → Nat → List Nat
   | [], i + 1, c => 0 :: addCoeff [] i c
   | a :: rest, 0, c => modAdd a c :: rest
   | a :: rest, i + 1, c => a :: addCoeff rest i c
+
+lemma denseToPoly_addCoeff (f : List Nat) (i c : Nat) :
+    denseToPoly (addCoeff f i c) =
+      denseToPoly f + Polynomial.monomial i (c : F1009) := by
+  induction f generalizing i with
+  | nil =>
+      induction i with
+      | zero =>
+          simp [addCoeff, denseToPoly]
+      | succ i ih =>
+          simp [addCoeff, denseToPoly, ih, Polynomial.X_mul_monomial]
+  | cons a rest ih =>
+      cases i with
+      | zero =>
+          simp [addCoeff, denseToPoly, add_comm, add_assoc]
+      | succ i =>
+          simp [addCoeff, denseToPoly, ih, Polynomial.X_mul_monomial, add_assoc,
+            left_distrib]
 
 def subScaledPrefix : List Nat → Nat → List Nat → List Nat
   | f, _, [] => f
@@ -154,6 +219,16 @@ def collisionDense (scale low total : Nat) : List Nat :=
         (scale * low) (modNeg total))
       0 (total - low)
 
+/-- The executable dense target denotes the mapped `collisionTriZ` polynomial. -/
+lemma denseToPoly_collisionDense_eq_collisionHMod (scale low total : Nat) :
+    denseToPoly (collisionDense scale low total) =
+      collisionHMod scale low total := by
+  rw [collisionDense, denseToPoly_trim]
+  rw [denseToPoly_addCoeff, denseToPoly_addCoeff, denseToPoly_addCoeff]
+  rw [collisionHMod_eq_sparse]
+  simp [denseToPoly, sub_eq_add_neg, ← Polynomial.C_mul_X_pow_eq_monomial,
+    add_assoc]
+
 def collisionGcdDegree
     (scale₁ low₁ total₁ scale₂ low₂ total₂ : Nat) : Nat :=
   degree <| polyGcd
@@ -191,14 +266,15 @@ def computedGcdDegree (cert : CollisionCertificate) : Nat :=
 /--
 Executable check for an undivided collision-gcd certificate.
 
-The final inequality is the forced-factor accounting: an exact degree equal to
-the forced degree leaves no noncyclotomic common factor.
+The final equality is the forced-factor accounting for these residual
+`collisionH` rows: the undivided gcd degree is exactly the forced double root
+degree, leaving no noncyclotomic common factor.
 -/
 def checks (cert : CollisionCertificate) : Bool :=
   cert.wellFormed &&
     cert.computedGcdDegree = cert.exactGcdDegree &&
     cert.forcedCyclotomicDegree = forcedDoubleRootDegree &&
-    cert.exactGcdDegree ≤ cert.forcedCyclotomicDegree
+    cert.exactGcdDegree = cert.forcedCyclotomicDegree
 
 end CollisionCertificate
 

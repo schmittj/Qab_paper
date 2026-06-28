@@ -1,5 +1,6 @@
 import Qab.Pairs
 import Qab.CoreProof
+import Qab.Certificates.Targets
 import Qab.Certificates.Interfaces
 import Qab.Certificates.ZModGcd
 import Qab.Certificates.ResidualZMod1009
