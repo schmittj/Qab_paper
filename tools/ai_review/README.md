@@ -49,31 +49,71 @@ OPENAI_REVIEW_EFFORT=xhigh
 
 ## Claude review
 
-The Claude helper calls the local Claude Code CLI in non-interactive print mode
-with max effort.
+The Claude helper calls the local Claude Code CLI (`claude -p`, non-interactive
+print mode) and lets Claude read the repository directly with the read-only
+Read/Grep/Glob tools.  The prompt is delivered over **stdin** and the helper
+manages its own backgrounding; it does **not** use `claude --bg`.
+
+Preview the prompt and command without calling Claude:
 
 ```bash
-python3 tools/ai_review/claude_review.py --dry-run
+python3 tools/ai_review/claude_review.py --dry-run \
+  --task "Review the Lean scaffold and theorem-pack boundary."
+```
+
+Run a synchronous review (blocks, prints, and saves the review):
+
+```bash
 python3 tools/ai_review/claude_review.py \
   --task "Review the Lean scaffold and theorem-pack boundary."
 ```
 
-Launch as a Claude Code background agent and continue other work:
+Run a detached background review and poll for the result:
 
 ```bash
+# Returns immediately with a receipt path:
 python3 tools/ai_review/claude_review.py --background \
   --task "Review the Lean scaffold and theorem-pack boundary."
 
-claude agents
+# Check status / fetch the review when done (re-run until status: done):
+python3 tools/ai_review/claude_review.py --poll \
+  artifacts/ai_reviews/<stamp>_claude_receipt.json
+
+# Stop a running background review:
+python3 tools/ai_review/claude_review.py --cancel \
+  artifacts/ai_reviews/<stamp>_claude_receipt.json
 ```
 
 Defaults:
 
-- model: `opus` unless `CLAUDE_REVIEW_MODEL` is set;
-- effort: `max`;
-- permissions: read-only tool set (`Read,Grep,Glob`);
-- output: `artifacts/ai_reviews/*_claude_review.txt`.
-- background launch receipts: `artifacts/ai_reviews/*_claude_background.json`.
+- model: `opus` (override with `--model` or `CLAUDE_REVIEW_MODEL`);
+- effort: `max` (override with `--effort` or `CLAUDE_REVIEW_EFFORT`);
+- tools: read-only `Read,Grep,Glob` (`--allow-bash` adds `Bash`);
+- output format: `text` (`--output-format json` returns the structured CLI
+  result with `result`, `is_error`, and `total_cost_usd`);
+- timeout: `3600` s (`--timeout`);
+- synchronous output: `artifacts/ai_reviews/<stamp>_claude_review.{txt,json}`;
+- background artifacts: `<stamp>_claude_receipt.json` (status + metadata),
+  `<stamp>_claude_prompt.txt`, and `<stamp>_claude_review.{txt,json}`.
+
+Optionally pass `--max-budget-usd N` to cap CLI spend.
+
+### Design notes / why not `claude --bg`
+
+Two failure modes in the first iteration are fixed here:
+
+1. **Swallowed prompt.** The CLI's `--tools`/`--add-dir` options are *variadic*
+   (`<tools...>`); a positional prompt placed after them is consumed as an extra
+   option value, leaving "Input must be provided ...".  This helper always feeds
+   the prompt on **stdin**, and keeps `--tools` last in the argv.
+
+2. **Background-agent daemon.** `claude --bg` depends on a background-agent
+   daemon whose socket is not guaranteed to be up for a non-interactive caller
+   (it returned `ECONNREFUSED` in practice) and provides no built-in way to
+   capture the review text.  Instead, `--background` forks a self-managed,
+   fully detached worker (the same script, `start_new_session=True`) that runs
+   the ordinary synchronous review, writes the review file, and records progress
+   in the receipt JSON that `--poll` reads back.  No daemon involved.
 
 Set `CLAUDE_REVIEW_MODEL` to a full installed model name if the local CLI
 requires one, for example a future Opus snapshot.

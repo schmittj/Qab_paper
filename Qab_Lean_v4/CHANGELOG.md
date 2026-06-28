@@ -29,3 +29,6 @@
   invariance.
 - Recorded the first OpenAI background review digest in
   `docs/reviews/openai_phase1_review_20260628.md`.
+- Fixed and documented the Claude review helper: stdin prompts, self-managed
+  background reviews, polling/cancellation receipts, and captured review
+  artifacts.

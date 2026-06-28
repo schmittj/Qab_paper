@@ -81,6 +81,27 @@ when the central dependency itself is intentionally refreshed.  If the Lean or
 Mathlib version is changed, update `lean-toolchain`, `lakefile.lean`, and
 `Qab_Lean_v4/CHANGELOG.md` together.
 
+## AI Review Helpers
+
+To solicit a fresh-perspective review or a targeted question from another model,
+use the helpers in `tools/ai_review/` (see `tools/ai_review/README.md`).
+
+For a Claude review, prefer the background + poll flow so you can keep working:
+
+```bash
+python3 tools/ai_review/claude_review.py --background \
+  --task "<your specific review question>"
+# then, until status: done
+python3 tools/ai_review/claude_review.py --poll \
+  artifacts/ai_reviews/<stamp>_claude_receipt.json
+```
+
+The helper drives `claude -p` (read-only Read/Grep/Glob over the repo root),
+delivers the prompt via stdin, and self-manages a detached worker — it does not
+use the `claude --bg` background-agent daemon.  Use `--dry-run` to preview the
+prompt, `--model`/`--effort` to tune cost, and `--cancel <receipt>` to stop a
+run.  Review artifacts land in `artifacts/ai_reviews/` (gitignored).
+
 ## Development Notes
 
 Prefer preserving the existing proof-artifact style: C++ generators/pair

@@ -142,3 +142,22 @@
 - Verified:
   - `cd Qab_Lean_v4 && lake build`;
   - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+
+## 2026-06-28T14:49:26+02:00
+
+- Validated the repaired Claude review helper after the external Claude Code
+  session rewrote `tools/ai_review/claude_review.py`.
+- Added a small robustness patch before committing:
+  - poll/cancel receipts now print `python3 tools/ai_review/claude_review.py`
+    instead of the ambiguous bare script name;
+  - `--poll` no longer reports a fresh running receipt as crashed merely
+    because PID liveness is unreliable from this shell context.
+- Verified:
+  - `python3 -m py_compile tools/ai_review/claude_review.py`;
+  - `python3 tools/ai_review/claude_review.py --dry-run --model haiku --effort low --task ...`;
+  - synchronous `haiku`/`low` smoke review with captured output;
+  - detached background `haiku`/`low` smoke review, including an immediate
+    `running` poll and later `done` poll for receipt
+    `artifacts/ai_reviews/20260628_144748_claude_receipt.json`.
+- The helper now supports stdin prompts, self-managed background workers,
+  `--poll`, `--cancel`, and review capture under `artifacts/ai_reviews/`.
