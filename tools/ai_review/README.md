@@ -35,8 +35,10 @@ Defaults:
 - reasoning effort: `xhigh`
 - `background: true`
 - tools: `web_search` and `code_interpreter`
-- file handling: upload the generated zip with purpose `user_data`, attach it as
-  an `input_file`, and also mount it in the code-interpreter container.
+- file handling: upload the generated zip with purpose `user_data` and mount it
+  in the code-interpreter container.  The Responses API does not accept `.zip`
+  files as direct context-stuffing `input_file` items, so the model is asked to
+  inspect the mounted archive with Python.
 
 Useful environment overrides:
 

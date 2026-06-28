@@ -44,3 +44,23 @@
   - reasoning effort: `xhigh`;
   - response id: `resp_0b52a9a0c6658cab006a410b4282b081a19778c01751af0e7d`;
   - uploaded bundle file id: `file-ERrPYPJY9xKmNLCMRavobZ`.
+
+## 2026-06-28T14:02:21+02:00
+
+- Added `Qab.Polynomials.Primitive` and imported it from `Qab.lean`.
+- Defined:
+  - `PosPair.Primitive`;
+  - `qPrimCoeffZ`;
+  - `qPrimZ`;
+  - `qPrimQ`.
+- Proved `qPrimCoeffZ` branch simp lemmas and `qPrimZ_coeff_zero`.
+- Verified `cd Qab_Lean_v4 && lake build`.
+- Polled OpenAI response
+  `resp_0b52a9a0c6658cab006a410b4282b081a19778c01751af0e7d`; it failed
+  because `.zip` is not a supported direct `input_file` context format.
+- Updated `tools/ai_review/openai_review.py` to mount zip bundles in the
+  code-interpreter container instead of attaching them as direct `input_file`
+  items.
+- Submitted corrected OpenAI background Responses review:
+  - response id: `resp_06c8c1492ced2df4006a410d462c14819da27571b1bcd31b45`;
+  - uploaded bundle file id: `file-XR6yWVmTkTJSgPh4GRWwKg`.

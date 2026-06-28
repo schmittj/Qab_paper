@@ -3,8 +3,9 @@
 
 The script intentionally avoids an SDK dependency.  It builds a zip containing
 the Lean scaffold, blueprint docs, manuscript TeX/PDF, and deterministic
-verification source code; uploads that zip with purpose ``user_data``; and
-starts a background Responses request with web search and code interpreter.
+verification source code; uploads that zip with purpose ``user_data``; mounts
+it in a code-interpreter container; and starts a background Responses request
+with web search and code interpreter.
 """
 
 from __future__ import annotations
@@ -290,6 +291,11 @@ def submit(args: argparse.Namespace) -> int:
 
     if args.dry_run:
         return 0
+    if args.no_code_interpreter:
+        raise SystemExit(
+            "--no-code-interpreter is incompatible with zip review bundles; "
+            "the Responses API does not accept .zip as a direct input_file."
+        )
 
     api_key = require_api_key()
     uploaded = multipart_request(
@@ -324,6 +330,13 @@ def submit(args: argparse.Namespace) -> int:
         )
         include.append("code_interpreter_call.outputs")
 
+    mounted_prompt = (
+        f"The review bundle `{bundle.path.name}` has been uploaded as `{file_id}` "
+        "and mounted in the code-interpreter container.  Use Python's zipfile "
+        "module to inspect the archive before reviewing the Lean/materials.\n\n"
+        + prompt
+    )
+
     payload: dict[str, Any] = {
         "model": args.model,
         "background": not args.foreground,
@@ -333,8 +346,7 @@ def submit(args: argparse.Namespace) -> int:
             {
                 "role": "user",
                 "content": [
-                    {"type": "input_file", "file_id": file_id},
-                    {"type": "input_text", "text": prompt},
+                    {"type": "input_text", "text": mounted_prompt},
                 ],
             }
         ],

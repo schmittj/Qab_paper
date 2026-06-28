@@ -11,3 +11,6 @@
   declarations by `axiom` declarations for opaque predicates and expanded
   grouped structure fields used by dependent later fields.
 - Verified `lake build` and `lake build Qab.Packs.BroadAxioms`.
+- Added `Qab.Polynomials.Primitive` with the primitive-pair predicate,
+  primitive coefficient function, `qPrimZ`, `qPrimQ`, and the constant
+  coefficient lemma for `qPrimZ`.
