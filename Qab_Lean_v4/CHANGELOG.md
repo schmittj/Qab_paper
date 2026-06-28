@@ -25,5 +25,7 @@
 - Added orientation and package-product endpoint infrastructure: coefficient
   transport through `Polynomial.expand`, exact `natDegree`, leading
   coefficient, nonzero, and swap-invariance lemmas.
+- Added basic product-sharing predicate lemmas for symmetry and reciprocal-swap
+  invariance.
 - Recorded the first OpenAI background review digest in
   `docs/reviews/openai_phase1_review_20260628.md`.

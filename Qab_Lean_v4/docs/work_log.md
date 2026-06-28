@@ -127,3 +127,18 @@
 - Verified:
   - `cd Qab_Lean_v4 && lake build`;
   - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.
+
+## 2026-06-28T14:32:30+02:00
+
+- Submitted a focused OpenAI background request for proof guidance on the
+  primitive closed-form identity:
+  - response id: `resp_0a1c8e51b793fdee006a41142a9c88819cbd8c73ddcc56b622`;
+  - uploaded bundle file id: `file-WCscFS1uwETcV57fUQEeuC`;
+  - first poll status: `in_progress`.
+- Added product-sharing predicate lemmas:
+  - `PackageProductShare_comm`;
+  - `PackageProductShare_swap_left`;
+  - `PackageProductShare_swap_right`.
+- Verified:
+  - `cd Qab_Lean_v4 && lake build`;
+  - `cd Qab_Lean_v4 && lake build Qab.Packs.BroadAxioms`.

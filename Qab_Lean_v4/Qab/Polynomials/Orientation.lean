@@ -197,4 +197,22 @@ opaque phase-0 `PackageShare`.
 def PackageProductShare (P Q : PosPair) : Prop :=
   ∃ h : Polynomial Rat, NonconstantFactorQ h ∧ h ∣ qPackageProdQ P ∧ h ∣ qPackageProdQ Q
 
+lemma PackageProductShare_comm (P Q : PosPair) :
+    PackageProductShare P Q ↔ PackageProductShare Q P := by
+  constructor
+  · rintro ⟨h, hnc, hP, hQ⟩
+    exact ⟨h, hnc, hQ, hP⟩
+  · rintro ⟨h, hnc, hQ, hP⟩
+    exact ⟨h, hnc, hP, hQ⟩
+
+@[simp]
+lemma PackageProductShare_swap_left (P Q : PosPair) :
+    PackageProductShare P.swap Q ↔ PackageProductShare P Q := by
+  simp [PackageProductShare]
+
+@[simp]
+lemma PackageProductShare_swap_right (P Q : PosPair) :
+    PackageProductShare P Q.swap ↔ PackageProductShare P Q := by
+  simp [PackageProductShare]
+
 end Qab
